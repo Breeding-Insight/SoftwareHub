@@ -1,0 +1,154 @@
+---
+title: "Install R for BIGr"
+description: "Install R 4.4 or newer, optionally add RStudio Desktop, and verify that BIGr is ready to use."
+categories:
+  - Getting Started
+  - Genotype Data
+image: ../assets/card-bigr.svg
+image-alt: "BIGr logo on a blue and green geometric background."
+order: 5
+learning-type: Guide
+software:
+  - BIGr
+level: Beginner
+keywords:
+  - R
+  - installation
+  - RStudio
+  - package setup
+execute:
+  enabled: false
+---
+
+## What you will install
+
+BIGr requires **R 4.4.0 or newer**. R is the software that runs the analysis. RStudio Desktop is an optional editor that can make it easier to write scripts, run code, inspect objects, and view plots; it does not replace R and is not required by BIGr.
+
+::: {.callout-important title="Install R before RStudio"}
+Install R first. If you choose to use RStudio Desktop, install it only after R is working.
+:::
+
+## 1. Install R 4.4 or newer
+
+Choose your operating system and follow the official CRAN instructions.
+
+| Operating system | Official installer | What to choose |
+|---|---|---|
+| Windows | [Download R for Windows](https://cran.r-project.org/bin/windows/base/) | Download the current base installer and accept the standard options. |
+| macOS | [Download R for macOS](https://cran.r-project.org/bin/macosx/) | Choose the installer that matches Apple silicon or Intel and your macOS version. |
+| Linux | [R binaries for Linux](https://cran.r-project.org/bin/linux/) | Open the instructions for your distribution, such as Debian, Fedora, Red Hat, SUSE, or Ubuntu. |
+
+When installation finishes, open R itself or a terminal and start R. At the `>` prompt, run:
+
+```r
+R.version.string
+getRversion() >= "4.4.0"
+```
+
+A successful check ends with:
+
+```text
+[1] TRUE
+```
+
+The version text on the first line will depend on the current R release and your operating system.
+
+::: {.callout-warning title="If the result is FALSE"}
+Install a current R release from the CRAN link for your operating system, restart R, and run the check again. BIGr will not install on R versions older than 4.4.0.
+:::
+
+## 2. Optionally install RStudio Desktop
+
+If you want a graphical editor, [download RStudio Desktop from Posit](https://posit.co/download/rstudio-desktop/). Choose the free open-source RStudio Desktop installer for your operating system.
+
+After installation, open RStudio. Its **Console** pane should show the R version that it found. Run the same version check there:
+
+```r
+getRversion() >= "4.4.0"
+```
+
+RStudio is only an interface. The commands in Software Hub tutorials also work in the standard R console or in an R script run with `Rscript`.
+
+## 3. Check basic R commands
+
+Run these commands one line at a time:
+
+```r
+2 + 2
+mean(c(10, 12, 14))
+```
+
+Expected output:
+
+```text
+[1] 4
+[1] 12
+```
+
+If both commands work, R can evaluate expressions and create a numeric vector.
+
+## 4. Install BIGr
+
+BIGr uses packages from both CRAN and Bioconductor. `BiocManager` configures those repositories and installs the required dependencies. The introductory tutorial also uses `ggplot2` to make a plot, so install both packages together.
+
+```r
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+  install.packages("BiocManager")
+}
+
+BiocManager::install(
+  c("BIGr", "ggplot2"),
+  ask = FALSE,
+  update = FALSE
+)
+```
+
+Installation requires an internet connection and can take several minutes. You normally run these installation commands only once for each R library.
+
+::: {.callout-tip title="Package installation is different from loading"}
+`BiocManager::install()` puts packages on your computer. `library(BIGr)` loads BIGr into the current R session. You need to load BIGr again whenever you start a new session and want to use it.
+:::
+
+## 5. Verify BIGr and its example data
+
+Restart R, then run:
+
+```r
+library(BIGr)
+
+packageVersion("BIGr")
+
+vcf_file <- system.file(
+  "iris_DArT_VCF.vcf.gz",
+  package = "BIGr"
+)
+
+file.exists(vcf_file)
+requireNamespace("ggplot2", quietly = TRUE)
+```
+
+The package version will depend on when you install BIGr. The final two commands should each return:
+
+```text
+[1] TRUE
+```
+
+That result confirms that R can load BIGr and find the VCF file used in the introductory tutorial.
+
+## Troubleshooting
+
+### RStudio reports an older R version
+
+Close RStudio, install a current R release, and reopen RStudio. If more than one R version is installed, use RStudio's R version setting to select R 4.4.0 or newer.
+
+### A package is unavailable for this version of R
+
+First confirm that `getRversion() >= "4.4.0"` returns `TRUE`. Then restart R and run the BIGr installation block again. Copy the complete error message if you need to ask for help; the last line alone often omits the dependency that failed.
+
+### A package cannot be updated
+
+Restart R so the package is not in use, then repeat the installation. On a managed computer, you may need help from your system administrator to write to the R library directory.
+
+## Next step
+
+[Get started with genomic data in R](get-started-genomic-data-r.qmd){.btn-bi-primary}

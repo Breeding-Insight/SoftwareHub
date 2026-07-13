@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Core genomic analysis functions for diploid and polyploid breeding programs.">
+<meta name="keywords" content="R, installation, RStudio, package setup">
+<meta name="description" content="Install R 4.4 or newer, optionally add RStudio Desktop, and verify that BIGr is ready to use.">
 
-<title>BIGr – Breeding Insight Software</title>
+<title>Install R for BIGr – Breeding Insight Software</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -112,13 +113,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <style>html{ scroll-behavior: smooth; }</style>
 
 
-<meta property="og:title" content="BIGr – Breeding Insight Software">
-<meta property="og:description" content="Core genomic analysis functions for diploid and polyploid breeding programs.">
-<meta property="og:image" content="https://breeding-insight.github.io/software/assets/software-bigr.png">
+<meta property="og:title" content="Install R for BIGr – Breeding Insight Software">
+<meta property="og:description" content="Install R 4.4 or newer, optionally add RStudio Desktop, and verify that BIGr is ready to use.">
+<meta property="og:image" content="https://breeding-insight.github.io/software/assets/card-bigr.svg">
 <meta property="og:site_name" content="Breeding Insight Software">
-<meta property="og:image:height" content="1022">
-<meta property="og:image:width" content="1223">
-<meta property="og:image:alt" content="BIGr hexagonal logo.">
+<meta property="og:image:alt" content="BIGr logo on a blue and green geometric background.">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -185,30 +184,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#start-here" id="toc-start-here" class="nav-link active" data-scroll-target="#start-here">Start here</a></li>
-  <li><a href="#good-fit-for" id="toc-good-fit-for" class="nav-link" data-scroll-target="#good-fit-for">Good fit for</a></li>
-  <li><a href="#related-learning" id="toc-related-learning" class="nav-link" data-scroll-target="#related-learning">Related learning</a></li>
+  <li><a href="#what-you-will-install" id="toc-what-you-will-install" class="nav-link active" data-scroll-target="#what-you-will-install">What you will install</a></li>
+  <li><a href="#install-r-4.4-or-newer" id="toc-install-r-4.4-or-newer" class="nav-link" data-scroll-target="#install-r-4.4-or-newer">1. Install R 4.4 or newer</a></li>
+  <li><a href="#optionally-install-rstudio-desktop" id="toc-optionally-install-rstudio-desktop" class="nav-link" data-scroll-target="#optionally-install-rstudio-desktop">2. Optionally install RStudio Desktop</a></li>
+  <li><a href="#check-basic-r-commands" id="toc-check-basic-r-commands" class="nav-link" data-scroll-target="#check-basic-r-commands">3. Check basic R commands</a></li>
+  <li><a href="#install-bigr" id="toc-install-bigr" class="nav-link" data-scroll-target="#install-bigr">4. Install BIGr</a></li>
+  <li><a href="#verify-bigr-and-its-example-data" id="toc-verify-bigr-and-its-example-data" class="nav-link" data-scroll-target="#verify-bigr-and-its-example-data">5. Verify BIGr and its example data</a></li>
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a>
+  <ul class="collapse">
+  <li><a href="#rstudio-reports-an-older-r-version" id="toc-rstudio-reports-an-older-r-version" class="nav-link" data-scroll-target="#rstudio-reports-an-older-r-version">RStudio reports an older R version</a></li>
+  <li><a href="#a-package-is-unavailable-for-this-version-of-r" id="toc-a-package-is-unavailable-for-this-version-of-r" class="nav-link" data-scroll-target="#a-package-is-unavailable-for-this-version-of-r">A package is unavailable for this version of R</a></li>
+  <li><a href="#a-package-cannot-be-updated" id="toc-a-package-cannot-be-updated" class="nav-link" data-scroll-target="#a-package-cannot-be-updated">A package cannot be updated</a></li>
+  </ul></li>
+  <li><a href="#next-step" id="toc-next-step" class="nav-link" data-scroll-target="#next-step">Next step</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/software/bigr.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/learn/install-r.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">BIGr</h1>
+<h1 class="title">Install R for BIGr</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">R package</div>
-    <div class="quarto-category">Genomics</div>
-    <div class="quarto-category">GWAS</div>
-    <div class="quarto-category">Genomic selection</div>
-    <div class="quarto-category">Polyploid</div>
+    <div class="quarto-category">Getting Started</div>
+    <div class="quarto-category">Genotype Data</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Core genomic analysis functions for diploid and polyploid breeding programs.
+    Install R 4.4 or newer, optionally add RStudio Desktop, and verify that BIGr is ready to use.
   </div>
 </div>
 
@@ -221,40 +227,162 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>R, installation, RStudio, package setup</p>
+  </div>
+</div>
 
 </header>
 
 
-<div class="software-header">
-<div>
-<p>BIGr provides genomic and pedigree analysis functions designed for diploid and polyploid breeding programs. It also serves as a computational foundation for workflows exposed through BIGapp.</p>
-<div class="meta-row">
-<span class="pill">R package</span><span class="pill">Diploid + polyploid</span><span class="pill">CRAN</span>
+<section id="what-you-will-install" class="level2">
+<h2 class="anchored" data-anchor-id="what-you-will-install">What you will install</h2>
+<p>BIGr requires <strong>R 4.4.0 or newer</strong>. R is the software that runs the analysis. RStudio Desktop is an optional editor that can make it easier to write scripts, run code, inspect objects, and view plots; it does not replace R and is not required by BIGr.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Install R before RStudio">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Install R before RStudio
 </div>
 </div>
-<p><img class="software-logo" src="../assets/software-bigr.png" alt="BIGr logo"></p>
+<div class="callout-body-container callout-body">
+<p>Install R first. If you choose to use RStudio Desktop, install it only after R is working.</p>
 </div>
-<section id="start-here" class="level2">
-<h2 class="anchored" data-anchor-id="start-here">Start here</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"BIGr"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(BIGr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="https://breeding-insight.github.io/BIGr_documentation/" class="btn-bi-primary">Documentation</a> <a href="https://github.com/Breeding-Insight/BIGr" class="btn-bi-secondary">Source code</a> <a href="https://cran.r-project.org/package=BIGr" class="btn-bi-secondary">CRAN</a></p>
+</div>
 </section>
-<section id="good-fit-for" class="level2">
-<h2 class="anchored" data-anchor-id="good-fit-for">Good fit for</h2>
-<ul>
-<li>Genotype processing and format conversion</li>
-<li>Diploid and polyploid genomic analyses</li>
-<li>Workflows that also feed BIGapp</li>
-</ul>
+<section id="install-r-4.4-or-newer" class="level2">
+<h2 class="anchored" data-anchor-id="install-r-4.4-or-newer">1. Install R 4.4 or newer</h2>
+<p>Choose your operating system and follow the official CRAN instructions.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Operating system</th>
+<th>Official installer</th>
+<th>What to choose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Windows</td>
+<td><a href="https://cran.r-project.org/bin/windows/base/">Download R for Windows</a></td>
+<td>Download the current base installer and accept the standard options.</td>
+</tr>
+<tr class="even">
+<td>macOS</td>
+<td><a href="https://cran.r-project.org/bin/macosx/">Download R for macOS</a></td>
+<td>Choose the installer that matches Apple silicon or Intel and your macOS version.</td>
+</tr>
+<tr class="odd">
+<td>Linux</td>
+<td><a href="https://cran.r-project.org/bin/linux/">R binaries for Linux</a></td>
+<td>Open the instructions for your distribution, such as Debian, Fedora, Red Hat, SUSE, or Ubuntu.</td>
+</tr>
+</tbody>
+</table>
+<p>When installation finishes, open R itself or a terminal and start R. At the <code>&gt;</code> prompt, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>R.version.string</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getRversion</span>() <span class="sc">&gt;=</span> <span class="st">"4.4.0"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A successful check ends with:</p>
+<pre class="text"><code>[1] TRUE</code></pre>
+<p>The version text on the first line will depend on the current R release and your operating system.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="If the result is FALSE">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>If the result is FALSE
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Install a current R release from the CRAN link for your operating system, restart R, and run the check again. BIGr will not install on R versions older than 4.4.0.</p>
+</div>
+</div>
 </section>
-<section id="related-learning" class="level2">
-<h2 class="anchored" data-anchor-id="related-learning">Related learning</h2>
-<ul>
-<li><a href="../learn/install-r.html">Install R for BIGr</a></li>
-<li><a href="../learn/get-started-genomic-data-r.html">Get started with genomic data in R</a></li>
-<li><a href="../learn/madc-to-vcf.html">Process MADC genotype data</a></li>
-</ul>
+<section id="optionally-install-rstudio-desktop" class="level2">
+<h2 class="anchored" data-anchor-id="optionally-install-rstudio-desktop">2. Optionally install RStudio Desktop</h2>
+<p>If you want a graphical editor, <a href="https://posit.co/download/rstudio-desktop/">download RStudio Desktop from Posit</a>. Choose the free open-source RStudio Desktop installer for your operating system.</p>
+<p>After installation, open RStudio. Its <strong>Console</strong> pane should show the R version that it found. Run the same version check there:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getRversion</span>() <span class="sc">&gt;=</span> <span class="st">"4.4.0"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>RStudio is only an interface. The commands in Software Hub tutorials also work in the standard R console or in an R script run with <code>Rscript</code>.</p>
+</section>
+<section id="check-basic-r-commands" class="level2">
+<h2 class="anchored" data-anchor-id="check-basic-r-commands">3. Check basic R commands</h2>
+<p>Run these commands one line at a time:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">14</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Expected output:</p>
+<pre class="text"><code>[1] 4
+[1] 12</code></pre>
+<p>If both commands work, R can evaluate expressions and create a numeric vector.</p>
+</section>
+<section id="install-bigr" class="level2">
+<h2 class="anchored" data-anchor-id="install-bigr">4. Install BIGr</h2>
+<p>BIGr uses packages from both CRAN and Bioconductor. <code>BiocManager</code> configures those repositories and installs the required dependencies. The introductory tutorial also uses <code>ggplot2</code> to make a plot, so install both packages together.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"BiocManager"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"BIGr"</span>, <span class="st">"ggplot2"</span>),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ask =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">update =</span> <span class="cn">FALSE</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Installation requires an internet connection and can take several minutes. You normally run these installation commands only once for each R library.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Package installation is different from loading">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Package installation is different from loading
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>BiocManager::install()</code> puts packages on your computer. <code>library(BIGr)</code> loads BIGr into the current R session. You need to load BIGr again whenever you start a new session and want to use it.</p>
+</div>
+</div>
+</section>
+<section id="verify-bigr-and-its-example-data" class="level2">
+<h2 class="anchored" data-anchor-id="verify-bigr-and-its-example-data">5. Verify BIGr and its example data</h2>
+<p>Restart R, then run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(BIGr)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"BIGr"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>vcf_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"iris_DArT_VCF.vcf.gz"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">"BIGr"</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">file.exists</span>(vcf_file)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">"ggplot2"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The package version will depend on when you install BIGr. The final two commands should each return:</p>
+<pre class="text"><code>[1] TRUE</code></pre>
+<p>That result confirms that R can load BIGr and find the VCF file used in the introductory tutorial.</p>
+</section>
+<section id="troubleshooting" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
+<section id="rstudio-reports-an-older-r-version" class="level3">
+<h3 class="anchored" data-anchor-id="rstudio-reports-an-older-r-version">RStudio reports an older R version</h3>
+<p>Close RStudio, install a current R release, and reopen RStudio. If more than one R version is installed, use RStudio’s R version setting to select R 4.4.0 or newer.</p>
+</section>
+<section id="a-package-is-unavailable-for-this-version-of-r" class="level3">
+<h3 class="anchored" data-anchor-id="a-package-is-unavailable-for-this-version-of-r">A package is unavailable for this version of R</h3>
+<p>First confirm that <code>getRversion() &gt;= "4.4.0"</code> returns <code>TRUE</code>. Then restart R and run the BIGr installation block again. Copy the complete error message if you need to ask for help; the last line alone often omits the dependency that failed.</p>
+</section>
+<section id="a-package-cannot-be-updated" class="level3">
+<h3 class="anchored" data-anchor-id="a-package-cannot-be-updated">A package cannot be updated</h3>
+<p>Restart R so the package is not in use, then repeat the installation. On a managed computer, you may need help from your system administrator to write to the R library directory.</p>
+</section>
+</section>
+<section id="next-step" class="level2">
+<h2 class="anchored" data-anchor-id="next-step">Next step</h2>
+<p><a href="../learn/get-started-genomic-data-r.html" class="btn-bi-primary">Get started with genomic data in R</a></p>
 
 
 </section>
@@ -673,7 +801,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/software/bigr.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/learn/install-r.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">

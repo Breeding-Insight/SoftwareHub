@@ -57,7 +57,9 @@ Examples:
 - `BIGr`
 - `BIGapp`
 - `Qploidy2`
-- `DeltaBreed`
+- `Familia`
+- `AlloMate`
+- `BIGpopA`
 
 A cross-package workflow may list several tools.
 
