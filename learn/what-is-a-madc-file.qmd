@@ -1,0 +1,169 @@
+---
+title: "What is a MADC file?"
+description: "Understand how DArT MADC files represent microhaplotype read counts and how BIGr turns those counts into variant data."
+categories:
+  - Genotype Data
+  - File Formats
+image: ../assets/concept-madc.svg
+image-alt: "A MADC table with fixed allele IDs and per-sample read counts."
+order: 19
+learning-type: Concept
+software:
+  - BIGr
+level: Beginner
+keywords:
+  - DArT
+  - DArTag
+  - MADC
+  - microhaplotype
+  - read counts
+  - VCF
+  - fixed allele IDs
+execute:
+  enabled: false
+---
+
+::: {.concept-definition}
+A **MADC file** is a comma-separated **Missing Allele Discovery Counts** report from DArT targeted sequencing. It records the read count for each observed microhaplotype in each sample; it does not contain genotype calls.
+:::
+
+A microhaplotype is a short amplified genomic segment containing one or more tightly linked variants. Because the variants are observed together on the same sequencing read, a microhaplotype can represent more than two alleles at one targeted region. DArTag returns raw FASTQ reads and a semi-processed MADC report that summarizes this sequence-level evidence ([Zhao et al. 2026](https://doi.org/10.21203/rs.3.rs-9292361/v1)).
+
+## Where MADC fits
+
+::: {.madc-workflow-figure}
+```{mermaid}
+%%| fig-alt: "Targeted genotype sequencing produces a raw MADC file. HapApp assigns fixed allele IDs and resolves problematic microhaplotypes. The processed MADC can then be used for a kinship matrix or converted by BIGr into a read-count VCF, called with Updog, and written as a genotype-called VCF."
+%%| fig-cap: "MADC data move through preparation before relationship analysis or genotype calling."
+%%{init: {"flowchart": {"rankSpacing": 32, "nodeSpacing": 60, "curve": "basis"}}}%%
+flowchart TB
+  accTitle: MADC processing and genotype-calling workflow
+  accDescr: Targeted genotype sequencing produces a raw MADC file. HapApp assigns fixed allele IDs and resolves problematic microhaplotypes. The processed MADC can then be used for a kinship matrix or converted by BIGr into a read-count VCF, called with Updog, and written as a genotype-called VCF.
+
+  A([Targeted<br/>sequencing]) --> B[/Raw MADC<br/>read counts/]
+  B --> C{{HapApp<br/>processing}}
+  C --> D[(Processed MADC<br/>fixed allele IDs)]
+  D -->|relationship analysis| E([Kinship<br/>matrix])
+  D -->|variant recovery| F[/BIGr<br/>read-count VCF/]
+  F --> G{{Updog<br/>dosage model}}
+  G --> H([Genotype-called<br/>VCF])
+
+  classDef source fill:#EAF5F7,stroke:#2A6576,stroke-width:2px,color:#173D47
+  classDef raw fill:#FFF7E8,stroke:#C98B2E,stroke-width:2px,color:#674615
+  classDef process fill:#EEF8F0,stroke:#319B42,stroke-width:2px,color:#1E5D28
+  classDef data fill:#EDF6F8,stroke:#48A9C5,stroke-width:2px,color:#214F5C
+  classDef result fill:#F3EFF9,stroke:#765C9E,stroke-width:2px,color:#493566
+
+  class A source
+  class B raw
+  class C,G process
+  class D,F data
+  class E,H result
+```
+:::
+
+The raw report can include duplicate, ambiguous, or poor-quality microhaplotypes. Breeding Insight processes it with HapApp before BIGr conversion so that allele identities remain stable across files and analyses. The standardized IDs support marker tracking and cross-project comparison rather than merely recording the order in which alleles appeared in one report.
+
+## Read one MADC row
+
+Every row describes one observed allele sequence. The first three columns identify that sequence; the remaining columns give its read count in each sample.
+
+::: {.table-responsive}
+| Column | Meaning |
+|---|---|
+| `AlleleID` | Marker ID, allele role, and fixed allele number, such as `chr1.1_000194324|Ref_0001` |
+| `CloneID` | Target-region identifier, commonly encoded as chromosome and position |
+| `AlleleSequence` | Amplicon or microhaplotype sequence observed for that allele |
+| Sample columns | Non-negative read counts for that allele in each named sample |
+:::
+
+The following accessible excerpt is based on `example_MADC_FixedAlleleID.csv`, which is bundled with BIGr. Sequences are shortened only for display.
+
+::: {.table-responsive}
+| `AlleleID` | `CloneID` | `AlleleSequence` excerpt | `Sample_1` | `Sample_2` |
+|---|---|---|---:|---:|
+| <code>chr1.1_000194324&#124;AltMatch_0001</code> | `chr1.1_000194324` | `CGAAATAA…GACAAC` | 0 | 139 |
+| <code>chr1.1_000194324&#124;Alt_0002</code> | `chr1.1_000194324` | `CGAAATAA…AAGTAA` | 44 | 1 |
+| <code>chr1.1_000194324&#124;Ref_0001</code> | `chr1.1_000194324` | `CGAAATAA…AAGTAA` | 152 | 171 |
+| <code>chr1.1_000309952&#124;AltMatch_0001</code> | `chr1.1_000309952` | `TGGTATTG…ATATTCA` | 43 | 82 |
+:::
+
+Rows that share a `CloneID` belong to the same targeted region. To obtain the total evidence at a variant, BIGr reconciles the sequences, their strand orientation, and the bases they carry at each polymorphic position.
+
+## Ref, Alt, Match, and Other alleles
+
+The MADC's four core classes are Ref, Alt, RefMatch, and AltMatch. The part of `AlleleID` after the vertical bar describes how a microhaplotype relates to the designed marker.
+
+::: {.table-responsive}
+| Label | Interpretation |
+|---|---|
+| `Ref` | The designated reference microhaplotype at the target polymorphism |
+| `Alt` | The designated alternate microhaplotype at the target polymorphism |
+| `RefMatch` | A discovered microhaplotype that carries the target reference state but differs elsewhere in the amplicon |
+| `AltMatch` | A discovered microhaplotype that carries the target alternate state but differs elsewhere in the amplicon |
+| `Other` | An additional sequence label recognized by current BIGr outside the four core MADC classes; verify its provenance in the HapApp output and panel database |
+:::
+
+A **target allele** is defined at the polymorphism for which the probe was designed. An **off-target allele** arises from another polymorphic position discovered within the same amplified sequence. A Match or Other microhaplotype can therefore contribute read evidence at the target and can also reveal off-target SNPs.
+
+Current `madc2vcf_all()` behavior is more capable than the original MADC description:
+
+- `Other` alleles can be included in off-target discovery and filtered by sequence difference or indel status;
+- an `Other` allele carrying a third base at the target can make that target multiallelic;
+- multiallelic sites can be removed or evaluated with read-depth and sample-count thresholds; and
+- target indels are supported when the required marker information is supplied, although off-target sites from an indel-containing tag are not extracted.
+
+The [Updog conversion workflow](madc-to-vcf.qmd) deliberately removes multiallelic SNPs because its two count matrices represent one reference and one alternate allele.
+
+## Why fixed allele IDs matter
+
+The suffixes in `Ref_0001`, `Alt_0002`, and Match labels are fixed identifiers assigned against a haplotype database. They prevent a sequence from changing identity merely because a different batch contains a different set or order of observed haplotypes.
+
+BIGr requires fixed IDs for its MADC-to-VCF functions. A raw DArT report may use unfixed labels such as `|Ref` and `|Alt`, include seven placeholder rows, or contain ambiguous sequences. Renaming those labels by hand is not equivalent to HapApp processing. The standardized workflow cleans and filters sequences, matches previously cataloged alleles, assigns new IDs to qualifying novel alleles, writes those IDs back to the MADC, and updates the haplotype database when new alleles are found ([Zhao et al. 2026](https://doi.org/10.21203/rs.3.rs-9292361/v1)).
+
+::: {.callout-warning title="Do not send a raw MADC directly to dosage calling"}
+A raw MADC has neither stable allele identities nor called genotypes. Process it with HapApp, validate it with `check_madc_sanity()`, and convert its read evidence to a biallelic read-count VCF before using Updog.
+:::
+
+## The supporting files
+
+MADC conversion may require files that supply information not safely inferable from the count table alone.
+
+::: {.table-responsive}
+| File | What BIGr uses it for |
+|---|---|
+| `.botloci` | Lists tags designed from the bottom strand so BIGr can reverse-complement them and recover the correct genomic orientation |
+| Haplotype FASTA | Provides the panel's known allele sequences and can recover a missing Ref or Alt sequence |
+| Marker-information CSV | Supplies marker coordinates or authoritative REF/ALT details when `CloneID` is not in `Chromosome_Position` form; target indels additionally require the documented indel fields |
+:::
+
+Current BIGr writes conversion provenance and parameters into VCF metadata. It can also remap nonstandard marker IDs with a marker-information file. Consult the [current BIGr reference manual](https://cran.r-project.org/web/packages/BIGr/BIGr.pdf) for the columns required by the function and data type you use.
+
+Paralogous microhaplotypes require context. Curated databases may retain and flag them so that recurring sequences can be recognized in later projects, while a breeding analysis may remove likely paralogous markers before genotype calling. A very large number of microhaplotypes or extreme depth at one locus can indicate unintended amplification of duplicated genomic regions, but high allelic diversity alone is not proof of paralogy ([Zhao et al. 2026](https://doi.org/10.21203/rs.3.rs-9292361/v1)).
+
+## MADC counts are not VCF genotypes
+
+::: {.table-responsive}
+| Data state | What the sample values mean | Genotypes present? |
+|---|---|---|
+| Processed MADC | One read count per microhaplotype row | No |
+| Read-count VCF | Reference-allele depth, alternate-allele depth, and total depth at each biallelic variant | No |
+| Genotype-called VCF | Allele depths plus a model-based dosage/genotype and its uncertainty | Yes |
+:::
+
+A read fraction is not itself an allele dosage. Allele bias, sequencing error, overdispersion, depth, and population information all affect how strongly the reads support a dosage class. See [What is allele dosage?](what-is-allele-dosage.qmd) before interpreting a called polyploid VCF.
+
+## Practical takeaway
+
+::: {.bi-callout}
+Treat MADC as **sequence-level count evidence**. Fixed allele IDs establish what each row represents; `.botloci`, FASTA, and marker information establish orientation and variant identity; a dosage caller turns the resulting biallelic counts into uncertain genotype calls.
+:::
+
+## Continue to the workflow
+
+[Convert MADC data to a genotype-called VCF](madc-to-vcf.qmd){.btn-bi-primary}
+[Get started with genomic data in R](get-started-genomic-data-r.qmd){.btn-bi-secondary}
+
+## Attribution
+
+This page adapts [“MADC File Format”](https://breeding-insight.github.io/BIGr_documentation/posts/madc-file-format/) by Alexander M. Sandercock and Cristiane H. Taniguti. The source and this adaptation are licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).

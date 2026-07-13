@@ -817,6 +817,29 @@ h2.section-heading {
   margin-bottom: .42rem;
 }
 
+.madc-workflow-figure svg.mermaid-js {
+  display: block;
+  margin-inline: auto;
+}
+
+.madc-workflow-figure figcaption {
+  max-width: 38rem;
+  margin: .8rem auto 0;
+  padding: .65rem .85rem;
+  border-left: 4px solid $bi-teal;
+  border-radius: .25rem;
+  background: rgba($bi-teal-light, .18);
+  color: $bi-charcoal;
+  font-size: .9rem;
+  line-height: 1.45;
+}
+
+.madc-workflow-figure figcaption::before {
+  content: "Figure · ";
+  color: $bi-teal-dark;
+  font-weight: 700;
+}
+
 @media (max-width: 980px) {
   .learn-listing-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));

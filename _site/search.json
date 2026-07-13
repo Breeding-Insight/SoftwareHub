@@ -182,312 +182,95 @@
     "text": "Migration principle\nDo not copy reference material into multiple places. Migrate durable teaching content, then link back to the package’s canonical reference documentation. Redirect old URLs when pages move so existing workshop handouts and publications do not break."
   },
   {
-    "objectID": "learn/snp-filtering-polyploids.html",
-    "href": "learn/snp-filtering-polyploids.html",
-    "title": "SNP filtering in polyploids",
+    "objectID": "learn/what-is-a-madc-file.html",
+    "href": "learn/what-is-a-madc-file.html",
+    "title": "What is a MADC file?",
     "section": "",
-    "text": "Polyploid SNP filtering is not just diploid filtering with a different ploidy value. A useful strategy must account for multiple dosage classes, genotype uncertainty, allele bias, duplicated genomic regions, and the assumptions of the downstream analysis."
+    "text": "A MADC file is a comma-separated Missing Allele Discovery Counts report from DArT targeted sequencing. It records the read count for each observed microhaplotype in each sample; it does not contain genotype calls.\nA microhaplotype is a short amplified genomic segment containing one or more tightly linked variants. Because the variants are observed together on the same sequencing read, a microhaplotype can represent more than two alleles at one targeted region. DArTag returns raw FASTQ reads and a semi-processed MADC report that summarizes this sequence-level evidence (Zhao et al. 2026)."
   },
   {
-    "objectID": "learn/snp-filtering-polyploids.html#why-polyploid-filtering-is-harder",
-    "href": "learn/snp-filtering-polyploids.html#why-polyploid-filtering-is-harder",
-    "title": "SNP filtering in polyploids",
-    "section": "Why polyploid filtering is harder",
-    "text": "Why polyploid filtering is harder\nAt a biallelic tetraploid locus, five dosage states are possible rather than three diploid genotype states. As ploidy increases, neighboring expected allele fractions become closer together, so sequencing depth and model fit become increasingly important for distinguishing dosage classes.\nPolyploid genomes can also contain highly similar duplicated regions. Reads from paralogs or homoeologs may map to the same reference location, producing:\n\nexcess read depth;\napparent heterozygosity across nearly every sample;\ndistorted allele ratios;\npoor segregation;\nvariants that look polymorphic but do not behave like a single Mendelian locus."
+    "objectID": "learn/what-is-a-madc-file.html#where-madc-fits",
+    "href": "learn/what-is-a-madc-file.html#where-madc-fits",
+    "title": "What is a MADC file?",
+    "section": "Where MADC fits",
+    "text": "Where MADC fits\n\n\n\n\n\n\n%%{init: {\"flowchart\": {\"rankSpacing\": 32, \"nodeSpacing\": 60, \"curve\": \"basis\"}}}%%\nflowchart TB\n  accTitle: MADC processing and genotype-calling workflow\n  accDescr: Targeted genotype sequencing produces a raw MADC file. HapApp assigns fixed allele IDs and resolves problematic microhaplotypes. The processed MADC can then be used for a kinship matrix or converted by BIGr into a read-count VCF, called with Updog, and written as a genotype-called VCF.\n\n  A([Targeted&lt;br/&gt;sequencing]) --&gt; B[/Raw MADC&lt;br/&gt;read counts/]\n  B --&gt; C{{HapApp&lt;br/&gt;processing}}\n  C --&gt; D[(Processed MADC&lt;br/&gt;fixed allele IDs)]\n  D --&gt;|relationship analysis| E([Kinship&lt;br/&gt;matrix])\n  D --&gt;|variant recovery| F[/BIGr&lt;br/&gt;read-count VCF/]\n  F --&gt; G{{Updog&lt;br/&gt;dosage model}}\n  G --&gt; H([Genotype-called&lt;br/&gt;VCF])\n\n  classDef source fill:#EAF5F7,stroke:#2A6576,stroke-width:2px,color:#173D47\n  classDef raw fill:#FFF7E8,stroke:#C98B2E,stroke-width:2px,color:#674615\n  classDef process fill:#EEF8F0,stroke:#319B42,stroke-width:2px,color:#1E5D28\n  classDef data fill:#EDF6F8,stroke:#48A9C5,stroke-width:2px,color:#214F5C\n  classDef result fill:#F3EFF9,stroke:#765C9E,stroke-width:2px,color:#493566\n\n  class A source\n  class B raw\n  class C,G process\n  class D,F data\n  class E,H result\n\n\n MADC data move through preparation before relationship analysis or genotype calling. \n\n\n\n\nThe raw report can include duplicate, ambiguous, or poor-quality microhaplotypes. Breeding Insight processes it with HapApp before BIGr conversion so that allele identities remain stable across files and analyses. The standardized IDs support marker tracking and cross-project comparison rather than merely recording the order in which alleles appeared in one report."
   },
   {
-    "objectID": "learn/snp-filtering-polyploids.html#think-in-layers",
-    "href": "learn/snp-filtering-polyploids.html#think-in-layers",
-    "title": "SNP filtering in polyploids",
-    "section": "Think in layers",
-    "text": "Think in layers\nA defensible workflow usually filters several kinds of evidence in sequence.\n\n1. Sequence and locus evidence\nBefore trusting a genotype call, evaluate whether the site itself is credible.\nDepending on the platform and caller, relevant metrics can include:\n\nmapping quality;\nbase quality;\nstrand or positional bias;\nminimum and maximum depth;\nlocal alignment problems near indels;\nduplicate or invalid coordinates;\nuniquely mappable sequence;\nunexpectedly high depth consistent with collapsed repeats or duplicated loci.\n\n\n\n\n\n\n\nWarningHigh depth is not always high confidence\n\n\n\nIn a duplicated genome, an extreme depth outlier can indicate that reads from several genomic copies are collapsing onto one reference position. A minimum-depth filter alone will not detect that problem.\n\n\n\n\n2. Dosage-call quality\nFor sequencing-based dosage calls, inspect more than the final integer genotype.\nUseful signals include:\n\nposterior probability of the selected dosage;\nseparation among dosage clusters;\nestimated allele bias;\noverdispersion;\nsequencing-error parameters;\noutlier flags;\noverall model fit.\n\nA site with many confident hard calls can still be problematic if the fitted model requires extreme bias or produces implausible cluster structure.\n\n\n3. Sample and marker missingness\nRemove globally poor samples and unreliable markers in a deliberate order. Then re-calculate missingness because removing failed samples can rescue otherwise useful loci.\nRead: Choosing a missing-data threshold\n\n\n4. Frequency and informativeness\nMinor-allele-frequency filters should match the analysis and sample size.\nA rare allele may be:\n\nbiologically real but too sparse for a stable association test;\nuseful in a large genomic prediction population;\ndifficult to distinguish from error in shallow sequencing;\nabsent from one family but informative in another.\n\nDo not apply a MAF threshold simply because it is conventional. Record the value, the number of loci removed, and the reason the downstream method needs it.\n\n\n5. Mendelian or segregation behavior—when appropriate\nFamily information can reveal loci that do not behave as expected. However, the expected segregation pattern depends on:\n\nploidy;\ninheritance mode;\npairing behavior;\npopulation design;\ndouble reduction;\nnull alleles;\naneuploidy or copy-number variation.\n\nA diploid Hardy–Weinberg or segregation filter should not be transferred blindly to a polyploid dataset.\n\n\n6. Analysis-specific filtering\nThe final marker set should reflect the actual question.\n\n\nPCA or population structure\nConsider missingness, linkage disequilibrium, uneven marker density, and whether technical structure aligns with biological groups.\n\n\nGWAS\nConsider allele frequency, genotype uncertainty, population structure, marker redundancy, and whether the association model accepts dosage directly.\n\n\nGenomic prediction\nAggressive LD pruning is often not automatically desirable because genome-wide marker information is the signal used for prediction. Validate filtering choices by prediction scenario.\n\n\nLinkage and QTL mapping\nSegregation behavior, parental dosage, family structure, and mapping-model assumptions become central."
+    "objectID": "learn/what-is-a-madc-file.html#read-one-madc-row",
+    "href": "learn/what-is-a-madc-file.html#read-one-madc-row",
+    "title": "What is a MADC file?",
+    "section": "Read one MADC row",
+    "text": "Read one MADC row\nEvery row describes one observed allele sequence. The first three columns identify that sequence; the remaining columns give its read count in each sample.\n\n\n\n\n\n\n\n\nColumn\nMeaning\n\n\n\n\nAlleleID\nMarker ID, allele role, and fixed allele number, such as chr1.1_000194324|Ref_0001\n\n\nCloneID\nTarget-region identifier, commonly encoded as chromosome and position\n\n\nAlleleSequence\nAmplicon or microhaplotype sequence observed for that allele\n\n\nSample columns\nNon-negative read counts for that allele in each named sample\n\n\n\n\nThe following accessible excerpt is based on example_MADC_FixedAlleleID.csv, which is bundled with BIGr. Sequences are shortened only for display.\n\n\n\n\n\n\n\n\n\n\n\nAlleleID\nCloneID\nAlleleSequence excerpt\nSample_1\nSample_2\n\n\n\n\nchr1.1_000194324|AltMatch_0001\nchr1.1_000194324\nCGAAATAA…GACAAC\n0\n139\n\n\nchr1.1_000194324|Alt_0002\nchr1.1_000194324\nCGAAATAA…AAGTAA\n44\n1\n\n\nchr1.1_000194324|Ref_0001\nchr1.1_000194324\nCGAAATAA…AAGTAA\n152\n171\n\n\nchr1.1_000309952|AltMatch_0001\nchr1.1_000309952\nTGGTATTG…ATATTCA\n43\n82\n\n\n\n\nRows that share a CloneID belong to the same targeted region. To obtain the total evidence at a variant, BIGr reconciles the sequences, their strand orientation, and the bases they carry at each polymorphic position."
   },
   {
-    "objectID": "learn/snp-filtering-polyploids.html#a-practical-order-of-operations",
-    "href": "learn/snp-filtering-polyploids.html#a-practical-order-of-operations",
-    "title": "SNP filtering in polyploids",
-    "section": "A practical order of operations",
-    "text": "A practical order of operations\nA useful starting sequence is:\n\nvalidate sample identity and gross sample quality;\nremove technically invalid or clearly unreliable sites;\ncall dosage with a polyploid-aware model;\nfilter low-confidence genotype calls or loci using caller diagnostics;\nre-calculate sample and marker missingness;\nevaluate depth extremes and duplicated-locus behavior;\napply analysis-specific frequency, LD, or segregation filters;\ncompare key outputs across reasonable alternative filter settings.\n\nThe exact order can change with the technology. For example, a targeted MADC workflow and low-depth GBS workflow do not generate the same evidence or failure modes."
+    "objectID": "learn/what-is-a-madc-file.html#ref-alt-match-and-other-alleles",
+    "href": "learn/what-is-a-madc-file.html#ref-alt-match-and-other-alleles",
+    "title": "What is a MADC file?",
+    "section": "Ref, Alt, Match, and Other alleles",
+    "text": "Ref, Alt, Match, and Other alleles\nThe MADC’s four core classes are Ref, Alt, RefMatch, and AltMatch. The part of AlleleID after the vertical bar describes how a microhaplotype relates to the designed marker.\n\n\n\n\n\n\n\n\nLabel\nInterpretation\n\n\n\n\nRef\nThe designated reference microhaplotype at the target polymorphism\n\n\nAlt\nThe designated alternate microhaplotype at the target polymorphism\n\n\nRefMatch\nA discovered microhaplotype that carries the target reference state but differs elsewhere in the amplicon\n\n\nAltMatch\nA discovered microhaplotype that carries the target alternate state but differs elsewhere in the amplicon\n\n\nOther\nAn additional sequence label recognized by current BIGr outside the four core MADC classes; verify its provenance in the HapApp output and panel database\n\n\n\n\nA target allele is defined at the polymorphism for which the probe was designed. An off-target allele arises from another polymorphic position discovered within the same amplified sequence. A Match or Other microhaplotype can therefore contribute read evidence at the target and can also reveal off-target SNPs.\nCurrent madc2vcf_all() behavior is more capable than the original MADC description:\n\nOther alleles can be included in off-target discovery and filtered by sequence difference or indel status;\nan Other allele carrying a third base at the target can make that target multiallelic;\nmultiallelic sites can be removed or evaluated with read-depth and sample-count thresholds; and\ntarget indels are supported when the required marker information is supplied, although off-target sites from an indel-containing tag are not extracted.\n\nThe Updog conversion workflow deliberately removes multiallelic SNPs because its two count matrices represent one reference and one alternate allele."
   },
   {
-    "objectID": "learn/snp-filtering-polyploids.html#what-to-report",
-    "href": "learn/snp-filtering-polyploids.html#what-to-report",
-    "title": "SNP filtering in polyploids",
-    "section": "What to report",
-    "text": "What to report\n\n\norganism and modeled ploidy;\nreference assembly and mapping strategy;\nsite-level sequence filters;\ndosage caller and model;\ngenotype-confidence threshold;\nsample and marker missingness rules;\ndepth limits;\nallele-frequency rule;\nLD pruning, if used;\nfamily/segregation filters, if used;\nmarker counts after each major step."
+    "objectID": "learn/what-is-a-madc-file.html#why-fixed-allele-ids-matter",
+    "href": "learn/what-is-a-madc-file.html#why-fixed-allele-ids-matter",
+    "title": "What is a MADC file?",
+    "section": "Why fixed allele IDs matter",
+    "text": "Why fixed allele IDs matter\nThe suffixes in Ref_0001, Alt_0002, and Match labels are fixed identifiers assigned against a haplotype database. They prevent a sequence from changing identity merely because a different batch contains a different set or order of observed haplotypes.\nBIGr requires fixed IDs for its MADC-to-VCF functions. A raw DArT report may use unfixed labels such as |Ref and |Alt, include seven placeholder rows, or contain ambiguous sequences. Renaming those labels by hand is not equivalent to HapApp processing. The standardized workflow cleans and filters sequences, matches previously cataloged alleles, assigns new IDs to qualifying novel alleles, writes those IDs back to the MADC, and updates the haplotype database when new alleles are found (Zhao et al. 2026).\n\n\n\n\n\n\nWarningDo not send a raw MADC directly to dosage calling\n\n\n\nA raw MADC has neither stable allele identities nor called genotypes. Process it with HapApp, validate it with check_madc_sanity(), and convert its read evidence to a biallelic read-count VCF before using Updog."
   },
   {
-    "objectID": "learn/snp-filtering-polyploids.html#practical-takeaway",
-    "href": "learn/snp-filtering-polyploids.html#practical-takeaway",
-    "title": "SNP filtering in polyploids",
+    "objectID": "learn/what-is-a-madc-file.html#the-supporting-files",
+    "href": "learn/what-is-a-madc-file.html#the-supporting-files",
+    "title": "What is a MADC file?",
+    "section": "The supporting files",
+    "text": "The supporting files\nMADC conversion may require files that supply information not safely inferable from the count table alone.\n\n\n\n\n\n\n\n\nFile\nWhat BIGr uses it for\n\n\n\n\n.botloci\nLists tags designed from the bottom strand so BIGr can reverse-complement them and recover the correct genomic orientation\n\n\nHaplotype FASTA\nProvides the panel’s known allele sequences and can recover a missing Ref or Alt sequence\n\n\nMarker-information CSV\nSupplies marker coordinates or authoritative REF/ALT details when CloneID is not in Chromosome_Position form; target indels additionally require the documented indel fields\n\n\n\n\nCurrent BIGr writes conversion provenance and parameters into VCF metadata. It can also remap nonstandard marker IDs with a marker-information file. Consult the current BIGr reference manual for the columns required by the function and data type you use.\nParalogous microhaplotypes require context. Curated databases may retain and flag them so that recurring sequences can be recognized in later projects, while a breeding analysis may remove likely paralogous markers before genotype calling. A very large number of microhaplotypes or extreme depth at one locus can indicate unintended amplification of duplicated genomic regions, but high allelic diversity alone is not proof of paralogy (Zhao et al. 2026)."
+  },
+  {
+    "objectID": "learn/what-is-a-madc-file.html#madc-counts-are-not-vcf-genotypes",
+    "href": "learn/what-is-a-madc-file.html#madc-counts-are-not-vcf-genotypes",
+    "title": "What is a MADC file?",
+    "section": "MADC counts are not VCF genotypes",
+    "text": "MADC counts are not VCF genotypes\n\n\n\n\n\n\n\n\n\nData state\nWhat the sample values mean\nGenotypes present?\n\n\n\n\nProcessed MADC\nOne read count per microhaplotype row\nNo\n\n\nRead-count VCF\nReference-allele depth, alternate-allele depth, and total depth at each biallelic variant\nNo\n\n\nGenotype-called VCF\nAllele depths plus a model-based dosage/genotype and its uncertainty\nYes\n\n\n\n\nA read fraction is not itself an allele dosage. Allele bias, sequencing error, overdispersion, depth, and population information all affect how strongly the reads support a dosage class. See What is allele dosage? before interpreting a called polyploid VCF."
+  },
+  {
+    "objectID": "learn/what-is-a-madc-file.html#practical-takeaway",
+    "href": "learn/what-is-a-madc-file.html#practical-takeaway",
+    "title": "What is a MADC file?",
     "section": "Practical takeaway",
-    "text": "Practical takeaway\n\nFilter polyploid SNPs as a chain of evidence: credible locus → credible dosage model → credible genotype calls → credible dataset → fit for the downstream analysis. Avoid relying on one hard-call matrix and one universal threshold."
+    "text": "Practical takeaway\n\nTreat MADC as sequence-level count evidence. Fixed allele IDs establish what each row represents; .botloci, FASTA, and marker information establish orientation and variant identity; a dosage caller turns the resulting biallelic counts into uncertain genotype calls."
   },
   {
-    "objectID": "learn/snp-filtering-polyploids.html#continue-learning",
-    "href": "learn/snp-filtering-polyploids.html#continue-learning",
-    "title": "SNP filtering in polyploids",
-    "section": "Continue learning",
-    "text": "Continue learning\nWhat is allele dosage? Process MADC genotype data"
+    "objectID": "learn/what-is-a-madc-file.html#continue-to-the-workflow",
+    "href": "learn/what-is-a-madc-file.html#continue-to-the-workflow",
+    "title": "What is a MADC file?",
+    "section": "Continue to the workflow",
+    "text": "Continue to the workflow\nConvert MADC data to a genotype-called VCF Get started with genomic data in R"
   },
   {
-    "objectID": "learn/snp-filtering-polyploids.html#further-reading",
-    "href": "learn/snp-filtering-polyploids.html#further-reading",
-    "title": "SNP filtering in polyploids",
-    "section": "Further reading",
-    "text": "Further reading\n\nGerard D, Ferrão LFV, Garcia AAF, Stephens M. 2018. Genotyping Polyploids from Messy Sequencing Data. Genetics 210:789–807. doi:10.1534/genetics.118.301468\nGemenet DC et al. 2020. Sequencing depth and genotype quality: accuracy and breeding operation considerations for genomic selection applications in autopolyploid crops. Theoretical and Applied Genetics 133:3345–3363. doi:10.1007/s00122-020-03673-2\nClark LV, Mays W, Lipka AE, Sacks EJ. 2022. A population-level statistic for assessing Mendelian behavior of genotyping-by-sequencing data from highly duplicated genomes. BMC Bioinformatics 23:101. doi:10.1186/s12859-022-04635-9"
+    "objectID": "learn/what-is-a-madc-file.html#attribution",
+    "href": "learn/what-is-a-madc-file.html#attribution",
+    "title": "What is a MADC file?",
+    "section": "Attribution",
+    "text": "Attribution\nThis page adapts “MADC File Format” by Alexander M. Sandercock and Cristiane H. Taniguti. The source and this adaptation are licensed under the Creative Commons Attribution 4.0 International License."
   },
   {
-    "objectID": "learn/madc-to-vcf.html",
-    "href": "learn/madc-to-vcf.html",
-    "title": "Process MADC genotype data",
+    "objectID": "learn/qploidy-alfalfa.html",
+    "href": "learn/qploidy-alfalfa.html",
+    "title": "Estimate copy number in alfalfa with Qploidy2",
     "section": "",
-    "text": "Turn MADC-format targeted genotyping data into a clean representation suitable for downstream genomic analysis."
+    "text": "Estimate large-scale copy number in an alfalfa mapping population using DArTag genotyping data.\nThe existing collaborator tutorial is a strong model for long-form technical instruction: it has a clear biological use case, a floating table of contents, visible code, and a complete analysis narrative.\nOpen the current full tutorial Explore Qploidy2"
   },
   {
-    "objectID": "learn/madc-to-vcf.html#goal",
-    "href": "learn/madc-to-vcf.html#goal",
-    "title": "Process MADC genotype data",
+    "objectID": "learn/qploidy-alfalfa.html#goal",
+    "href": "learn/qploidy-alfalfa.html#goal",
+    "title": "Estimate copy number in alfalfa with Qploidy2",
     "section": "",
-    "text": "Turn MADC-format targeted genotyping data into a clean representation suitable for downstream genomic analysis."
+    "text": "Estimate large-scale copy number in an alfalfa mapping population using DArTag genotyping data.\nThe existing collaborator tutorial is a strong model for long-form technical instruction: it has a clear biological use case, a floating table of contents, visible code, and a complete analysis narrative.\nOpen the current full tutorial Explore Qploidy2"
   },
   {
-    "objectID": "learn/madc-to-vcf.html#why-this-belongs-in-the-portal",
-    "href": "learn/madc-to-vcf.html#why-this-belongs-in-the-portal",
-    "title": "Process MADC genotype data",
-    "section": "Why this belongs in the portal",
-    "text": "Why this belongs in the portal\nThis is a durable workflow rather than merely a function reference. Users need to understand quality filtering, dosage conventions, coordinate validity, sorting, and VCF expectations as a connected process.\nOpen the current BIGr tutorial Explore BIGr"
-  },
-  {
-    "objectID": "learn/madc-to-vcf.html#proposed-migrated-outline",
-    "href": "learn/madc-to-vcf.html#proposed-migrated-outline",
-    "title": "Process MADC genotype data",
-    "section": "Proposed migrated outline",
-    "text": "Proposed migrated outline\n\nInspect the MADC file and identify required metadata.\nFilter low-quality loci and samples.\nStandardize genotype/dosage conventions.\nValidate chromosome and position fields.\nWrite, sort, compress, and index the VCF.\nRun checkpoints before downstream analysis.\nContinue to PCA, GWAS, genomic prediction, or other analyses."
-  },
-  {
-    "objectID": "learn/genomics-path.html",
-    "href": "learn/genomics-path.html",
-    "title": "Choose a genomic analysis path",
-    "section": "",
-    "text": "A unified portal should help users choose tools without requiring them to know package names first.\n\n\n\nGoal\nRecommended starting point\n\n\n\n\nProcess and transform genotype data\nBIGr\n\n\nUse an interactive genomic analysis interface\nBIGapp\n\n\nEstimate ploidy, aneuploidy, or large CNV\nQploidy2\n\n\nValidate pedigrees and assess ancestry\nFamilia\n\n\nOptimize mate allocation and genetic gain\nAlloMate\n\n\nAssign parentage and estimate breed or line composition\nBIGpopA"
-  },
-  {
-    "objectID": "learn/genomics-path.html#start-with-the-question",
-    "href": "learn/genomics-path.html#start-with-the-question",
-    "title": "Choose a genomic analysis path",
-    "section": "",
-    "text": "A unified portal should help users choose tools without requiring them to know package names first.\n\n\n\nGoal\nRecommended starting point\n\n\n\n\nProcess and transform genotype data\nBIGr\n\n\nUse an interactive genomic analysis interface\nBIGapp\n\n\nEstimate ploidy, aneuploidy, or large CNV\nQploidy2\n\n\nValidate pedigrees and assess ancestry\nFamilia\n\n\nOptimize mate allocation and genetic gain\nAlloMate\n\n\nAssign parentage and estimate breed or line composition\nBIGpopA"
-  },
-  {
-    "objectID": "learn/genomics-path.html#example-path",
-    "href": "learn/genomics-path.html#example-path",
-    "title": "Choose a genomic analysis path",
-    "section": "Example path",
-    "text": "Example path\nTargeted genotyping data → quality control → analysis-ready VCF → population structure → GWAS or genomic prediction\nThe value of the portal is that this sequence can link across packages while preserving each package’s canonical reference documentation."
-  },
-  {
-    "objectID": "learn/choosing-missing-data-threshold.html",
-    "href": "learn/choosing-missing-data-threshold.html",
-    "title": "Choosing a missing-data threshold",
-    "section": "",
-    "text": "There is no universal missing-data threshold that is correct for every genotype dataset. A useful threshold removes unreliable data without discarding so much information that the downstream analysis becomes weaker or less representative."
-  },
-  {
-    "objectID": "learn/choosing-missing-data-threshold.html#first-separate-two-different-filters",
-    "href": "learn/choosing-missing-data-threshold.html#first-separate-two-different-filters",
-    "title": "Choosing a missing-data threshold",
-    "section": "First separate two different filters",
-    "text": "First separate two different filters\nMissingness is usually evaluated in two directions.\n\n\nMarker missingness\nFor each SNP or locus: what proportion of samples lack a usable genotype?\nA marker with 30% missingness has calls for roughly 70% of retained samples.\n\n\nSample missingness\nFor each individual: what proportion of retained markers lack a usable genotype?\nA sample with unusually high missingness may reflect poor DNA, low coverage, library failure, or assay mismatch.\n\n\nDo not treat these as the same decision. A few globally poor samples can make many otherwise useful markers appear incomplete, so sample-level diagnostics often deserve attention before final marker filtering."
-  },
-  {
-    "objectID": "learn/choosing-missing-data-threshold.html#why-a-fixed-rule-can-fail",
-    "href": "learn/choosing-missing-data-threshold.html#why-a-fixed-rule-can-fail",
-    "title": "Choosing a missing-data threshold",
-    "section": "Why a fixed rule can fail",
-    "text": "Why a fixed rule can fail\nThe same numerical threshold can behave very differently across datasets.\nA 20% marker-missingness limit might be:\n\nunnecessarily strict for a sparse sequencing dataset followed by validated imputation;\ntoo permissive for a targeted assay where most loci are expected to genotype nearly every sample;\nacceptable for one exploratory population analysis but problematic for a method that requires a nearly complete matrix;\nmisleading when missingness is concentrated in one family, population, sequencing batch, or taxon.\n\nThe central question is not simply “how much is missing?” It is also “why is it missing, and where?”"
-  },
-  {
-    "objectID": "learn/choosing-missing-data-threshold.html#a-defensible-workflow",
-    "href": "learn/choosing-missing-data-threshold.html#a-defensible-workflow",
-    "title": "Choosing a missing-data threshold",
-    "section": "A defensible workflow",
-    "text": "A defensible workflow\n\n1. Diagnose before filtering\nPlot or summarize:\n\nmissingness per sample;\nmissingness per marker;\nmissingness by sequencing batch, plate, library, family, population, or species;\nread depth or genotype confidence against missingness;\nthe number of samples and markers retained across candidate thresholds.\n\nA bimodal distribution is especially informative. For example, a subset of samples with 70–90% missingness may indicate failed samples rather than a reason to loosen the marker threshold for everyone.\n\n\n2. Define the downstream objective\n\n\nTargeted genotyping\nHigh missingness can indicate assay failure or off-target behavior. Investigate the locus or sample before assuming imputation will rescue it.\n\n\nPopulation analysis\nMissingness that differs among populations can create or distort structure. Check whether filtering changes PCA, distances, differentiation, or clustering.\n\n\nGenomic prediction\nA more permissive marker set may be useful when imputation is accurate, but imputation should be validated under a design that matches deployment. Outcome information from validation samples must not leak into preprocessing.\n\n\nLinkage or QTL analysis\nGenotyping errors and missing parental or progeny calls can disrupt segregation and map construction. The relevant tolerance depends on the population and mapping model.\n\n\n\n\n3. Compare candidate thresholds\nInstead of choosing one value by habit, run a small sensitivity analysis. For example, compare several candidate marker filters spanning stricter to more permissive settings.\n\n\n\n\n\n\nNoteIllustrative sensitivity grid—not universal recommendations\n\n\n\nA project might compare maximum marker missingness of 5%, 10%, 20%, and 50%, then track retained marker count, retained sample count, allele-frequency distribution, imputation performance, and the stability of the biological conclusion. The useful values for a particular dataset may be entirely different.\n\n\n\n\n4. Evaluate the consequence, not only the retained count\nFor each candidate threshold, ask:\n\nHow many markers and samples remain?\nAre certain families or populations disproportionately removed?\nDoes marker density become uneven across the genome?\nDo PCA or relationship patterns change materially?\nDoes prediction performance change under a realistic validation design?\nIf imputing, how accurate are masked genotypes at the relevant allele frequencies and dosage states?\n\nA threshold is easier to defend when the main conclusion is stable across a reasonable range of settings."
-  },
-  {
-    "objectID": "learn/choosing-missing-data-threshold.html#missingness-can-be-informative",
-    "href": "learn/choosing-missing-data-threshold.html#missingness-can-be-informative",
-    "title": "Choosing a missing-data threshold",
-    "section": "Missingness can be informative",
-    "text": "Missingness can be informative\nMissing data are not always random. They may correlate with:\n\nsequence divergence from the reference;\nrestriction-site polymorphism in GBS/RAD-seq;\nlow DNA quality;\nbatch effects;\nallele-specific assay performance;\nparalogous or homoeologous mapping problems;\nspecies or population membership.\n\nThat means aggressive filtering can sometimes remove a biologically non-random subset of the dataset. Conversely, retaining systematic missingness can also bias inference."
-  },
-  {
-    "objectID": "learn/choosing-missing-data-threshold.html#special-caution-for-polyploids",
-    "href": "learn/choosing-missing-data-threshold.html#special-caution-for-polyploids",
-    "title": "Choosing a missing-data threshold",
-    "section": "Special caution for polyploids",
-    "text": "Special caution for polyploids\nIn polyploid data, a genotype may be technically non-missing but still highly uncertain. A hard dosage call with weak posterior support is not equivalent to a confident call.\nMissing-data filtering should therefore be considered alongside:\n\nread depth;\nposterior genotype probability;\nallelic bias;\noverdispersion;\nunexpected ploidy or copy number;\nlocus behavior consistent with paralogous or homoeologous sequence."
-  },
-  {
-    "objectID": "learn/choosing-missing-data-threshold.html#practical-takeaway",
-    "href": "learn/choosing-missing-data-threshold.html#practical-takeaway",
-    "title": "Choosing a missing-data threshold",
-    "section": "Practical takeaway",
-    "text": "Practical takeaway\n\nChoose a missing-data threshold by combining data diagnostics + downstream requirements + sensitivity analysis. Report both sample- and marker-level rules, and document whether missing genotypes were imputed."
-  },
-  {
-    "objectID": "learn/choosing-missing-data-threshold.html#continue-learning",
-    "href": "learn/choosing-missing-data-threshold.html#continue-learning",
-    "title": "Choosing a missing-data threshold",
-    "section": "Continue learning",
-    "text": "Continue learning\nProcess MADC genotype data Choose a genomic analysis path"
-  },
-  {
-    "objectID": "learn/choosing-missing-data-threshold.html#further-reading",
-    "href": "learn/choosing-missing-data-threshold.html#further-reading",
-    "title": "Choosing a missing-data threshold",
-    "section": "Further reading",
-    "text": "Further reading\n\nNazareno AG, Knowles LL. 2021. There Is No “Rule of Thumb”: Genomic Filter Settings for a Small Plant Population to Obtain Unbiased Gene Flow Estimates. Frontiers in Plant Science 12:677009. doi:10.3389/fpls.2021.677009\nFu Y-B. 2014. Genetic Diversity Analysis of Highly Incomplete SNP Genotype Data with Imputations: An Empirical Assessment. G3 4:891–900. doi:10.1534/g3.114.010942\nTorkamaneh D, Belzile F. 2015. Scanning and Filling: Ultra-Dense SNP Genotyping Combining Genotyping-By-Sequencing, SNP Array and Whole-Genome Resequencing Data. PLOS ONE 10:e0131533. doi:10.1371/journal.pone.0131533"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Breeding Insight Software",
-    "section": "",
-    "text": "Breeding Insight software\n\n\n\nBrowse open-source tools for breeding data and genomics, then find the tutorials and workshop materials that support your work.\n\nExplore software Start learning"
-  },
-  {
-    "objectID": "index.html#find-what-you-need",
-    "href": "index.html#find-what-you-need",
-    "title": "Breeding Insight Software",
-    "section": "Find what you need",
-    "text": "Find what you need\nChoose a tool, follow a practical workflow, or return to material from a training event.\n\n\n\n01\n\n\nBrowse software\nCompare packages and applications by task, data type, language, and analysis area.\nView all software\n\n\n\n\n02\n\n\nFollow a workflow\nWork through practical tutorials that may span more than one package, from raw genotype data to analysis-ready outputs.\nBrowse tutorials\n\n\n\n\n03\n\n\nRevisit a workshop\nFind setup instructions, slides, exercises, example data, and recordings from Breeding Insight training events.\nView workshops"
-  },
-  {
-    "objectID": "index.html#featured-software",
-    "href": "index.html#featured-software",
-    "title": "Breeding Insight Software",
-    "section": "Featured software",
-    "text": "Featured software\nCompare packages and applications, then go directly to installation instructions, documentation, source code, and related tutorials.\n\n\n\n\nBIGr\nCore genomic analysis functions for diploid and polyploid breeding programs.\n\nR packageGenomics\n\nExplore BIGr\n\n\n\n\n\nBIGapp\nA user-friendly Shiny application for genomic analysis without requiring command-line workflows.\n\nR ShinyGWAS + GS\n\nExplore BIGapp\n\n\n\n\n\nQploidy2\nPloidy, aneuploidy, and large-scale copy-number estimation from genotyping data.\n\nR packagePloidy + CNV\n\nExplore Qploidy2"
-  },
-  {
-    "objectID": "index.html#task-based-learning",
-    "href": "index.html#task-based-learning",
-    "title": "Breeding Insight Software",
-    "section": "Task-based learning",
-    "text": "Task-based learning\nTutorials follow complete tasks, from preparing raw data to interpreting results. When a workflow uses several packages, the steps stay together in one guide.\nBrowse all learning materials"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About this portal",
-    "section": "",
-    "text": "This site is a unified entry point for open-source software, practical tutorials, workshops, and documentation developed by Breeding Insight.\nThe architecture separates discovery and learning from package API reference. Individual packages remain responsible for their canonical function documentation and release information, while the portal explains how tools fit together in real breeding workflows.\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "learn.html",
-    "href": "learn.html",
-    "title": "Learn",
-    "section": "",
-    "text": "Learning library\n\n\n\nStart with the task you need to complete, or search by software, data type, and analysis method.\n\nBrowse all materials View workshops"
-  },
-  {
-    "objectID": "learn.html#what-do-you-want-to-do",
-    "href": "learn.html#what-do-you-want-to-do",
-    "title": "Learn",
-    "section": "What do you want to do?",
-    "text": "What do you want to do?\nChoose a goal to see the most relevant guides and tutorials.\n\n\n01\n\nPrepare genotype data\n\n\nImport, transform, standardize, and export genotype or variant data for downstream analysis.\n\nView tutorials\n\n\n02\n\nImprove data quality\n\n\nFilter markers and samples, diagnose missingness, and validate analysis-ready datasets.\n\nView tutorials\n\n\n03\n\nAnalyze polyploids\n\n\nWork with allele dosage, ploidy, aneuploidy, and large-scale copy-number variation.\n\nView tutorials\n\n\n04\n\nUnderstand populations\n\n\nExplore structure, diversity, relatedness, and other population-level patterns.\n\nView tutorials\n\n\n05\n\nMap traits\n\n\nMove from curated genotype and phenotype data toward GWAS, QTL, and association analyses.\n\nView tutorials\n\n\n06\n\nPredict performance\n\n\nPrepare data, fit genomic prediction models, and evaluate prediction accuracy.\n\nView tutorials"
-  },
-  {
-    "objectID": "learn.html#browse-by-topic",
-    "href": "learn.html#browse-by-topic",
-    "title": "Learn",
-    "section": "Browse by topic",
-    "text": "Browse by topic\nUse a broad topic to narrow the list. The search also recognizes terms such as MADC, VCF, DArTag, GWAS, and PCA.\n\nGetting Started Genotype Data Data Quality Ploidy & Dosage Population Analysis Trait Mapping Genomic Prediction All topics"
-  },
-  {
-    "objectID": "learn.html#all-learning-materials",
-    "href": "learn.html#all-learning-materials",
-    "title": "Learn",
-    "section": "All learning materials",
-    "text": "All learning materials\nSearch by topic, software name, data type, or analysis method.\n\n\n    \n      \n      \n    \n\n\n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Guide\n        \n        Uses BIGr\n        \n        Uses BIGapp\n        \n        Uses Qploidy2\n        \n        Uses Familia\n        \n        Uses AlloMate\n        \n        Uses BIGpopA\n        \n        \n        Beginner\n        \n      \n\n      \n        Choose a genomic analysis path\n      \n\n      \n      Start from the breeding question and identify the appropriate Breeding Insight tool or workflow.\n      \n\n      \n      \n        \n        Getting Started\n        \n      \n      \n\n      Open guide →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Tutorial\n        \n        Uses BIGr\n        \n        \n        Beginner\n        \n      \n\n      \n        Get started with genomic data in R\n      \n\n      \n      Set up R, then load, inspect, filter, and visualize a VCF with diploid- and polyploid-aware checkpoints.\n      \n\n      \n      \n        \n        Getting Started\n        \n        Genotype Data\n        \n      \n      \n\n      Open tutorial →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Workflow\n        \n        Uses BIGr\n        \n        \n        Intermediate\n        \n      \n\n      \n        Process MADC genotype data\n      \n\n      \n      Use BIGr to filter targeted sequencing data and convert it into an analysis-ready VCF workflow.\n      \n\n      \n      \n        \n        Genotype Data\n        \n        Data Quality\n        \n        Ploidy & Dosage\n        \n      \n      \n\n      Open workflow →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Tutorial\n        \n        Uses Qploidy2\n        \n        \n        Intermediate\n        \n      \n\n      \n        Estimate copy number in alfalfa with Qploidy2\n      \n\n      \n      Use Qploidy2 with DArTag data to estimate ploidy, aneuploidy, and large-scale copy-number variation.\n      \n\n      \n      \n        \n        Ploidy & Dosage\n        \n        Genotype Data\n        \n      \n      \n\n      Open tutorial →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Concept\n        \n        Uses BIGr\n        \n        Uses Qploidy2\n        \n        \n        Beginner\n        \n      \n\n      \n        What is allele dosage?\n      \n\n      \n      Understand what allele dosage represents in diploids and polyploids, how it differs from read fraction, and why dosage uncertainty matters.\n      \n\n      \n      \n        \n        Genotype Data\n        \n        Ploidy & Dosage\n        \n      \n      \n\n      Open concept →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Concept\n        \n        Uses BIGr\n        \n        Uses BIGapp\n        \n        \n        Intermediate\n        \n      \n\n      \n        Choosing a missing-data threshold\n      \n\n      \n      Choose marker and sample missingness thresholds by diagnosing the data source, matching the downstream analysis, and testing sensitivity.\n      \n\n      \n      \n        \n        Genotype Data\n        \n        Data Quality\n        \n      \n      \n\n      Open concept →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Concept\n        \n        Uses BIGr\n        \n        Uses BIGapp\n        \n        Uses Qploidy2\n        \n        \n        Intermediate\n        \n      \n\n      \n        SNP filtering in polyploids\n      \n\n      \n      Build a polyploid-aware SNP filtering strategy that considers sequence evidence, dosage uncertainty, duplicated genomes, and downstream goals.\n      \n\n      \n      \n        \n        Genotype Data\n        \n        Data Quality\n        \n        Ploidy & Dosage\n        \n      \n      \n\n      Open concept →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Concept\n        \n        Uses BIGapp\n        \n        \n        Beginner\n        \n      \n\n      \n        What does cross-validation accuracy mean?\n      \n\n      \n      Interpret cross-validation results in genomic prediction without confusing predictive ability, selection accuracy, and the realism of the validation design.\n      \n\n      \n      \n        \n        Genomic Prediction\n        \n        Data Quality\n        \n      \n      \n\n      Open concept →\n    \n  \n\n\nNo matching items"
-  },
-  {
-    "objectID": "learn/cross-validation-accuracy.html",
-    "href": "learn/cross-validation-accuracy.html",
-    "title": "What does cross-validation accuracy mean?",
-    "section": "",
-    "text": "In genomic prediction, cross-validation asks: how well does a model predict records that were withheld from model fitting under a particular validation design? The answer is specific to the population, trait, phenotype definition, and split strategy that were tested."
-  },
-  {
-    "objectID": "learn/cross-validation-accuracy.html#the-basic-idea",
-    "href": "learn/cross-validation-accuracy.html#the-basic-idea",
-    "title": "What does cross-validation accuracy mean?",
-    "section": "The basic idea",
-    "text": "The basic idea\nIn \\(k\\)-fold cross-validation:\n\ndivide individuals or records into \\(k\\) groups;\nfit the model using \\(k-1\\) groups;\npredict the withheld group;\nrepeat until every group has been withheld;\nsummarize agreement between predictions and observations;\noften repeat the entire partitioning process several times.\n\nThe important phrase is withheld from model fitting. Any preprocessing step that learns from the validation phenotypes can leak information and make performance look better than it really is."
-  },
-  {
-    "objectID": "learn/cross-validation-accuracy.html#what-number-is-commonly-reported",
-    "href": "learn/cross-validation-accuracy.html#what-number-is-commonly-reported",
-    "title": "What does cross-validation accuracy mean?",
-    "section": "What number is commonly reported?",
-    "text": "What number is commonly reported?\nA common statistic is the Pearson correlation between predicted values and observed phenotypes—or adjusted phenotype estimates—in the held-out data:\n\\[\nr = \\mathrm{cor}(\\widehat{y}, y)\n\\]\nThis is often called prediction accuracy in applied papers. More precisely, when the observed quantity is a phenotype rather than the unknown true breeding value, predictive ability is usually the clearer term.\n\n\n\n\n\n\nImportantAccuracy and predictive ability are not always the same\n\n\n\nTrue selection accuracy is conceptually the correlation between a predicted breeding value and the true breeding value. The true breeding value is usually unobserved. A correlation with held-out phenotype or entry mean therefore measures a related but different quantity.\n\n\nSome analyses scale a phenotype-based correlation by a measure related to heritability to approximate accuracy. That can be useful under specific assumptions, but the exact formula and phenotype definition must be reported. Do not mix scaled and unscaled correlations in the same comparison."
-  },
-  {
-    "objectID": "learn/cross-validation-accuracy.html#how-should-i-interpret-a-correlation",
-    "href": "learn/cross-validation-accuracy.html#how-should-i-interpret-a-correlation",
-    "title": "What does cross-validation accuracy mean?",
-    "section": "How should I interpret a correlation?",
-    "text": "How should I interpret a correlation?\nSuppose cross-validation returns \\(r = 0.50\\).\nThat does not mean:\n\n50% of individuals were predicted correctly;\nthe model is “50% accurate” in a classification sense;\n50% of genetic variance was explained.\n\nIt means that, in the tested held-out records, predicted and observed values had a moderate positive linear association.\nAlso remember:\n\ncorrelation measures ranking/association, not calibration;\na model can correlate well but systematically over- or under-predict;\n\\(r^2\\) is not automatically the proportion of genetic variance explained;\na single mean correlation hides variation among folds or repetitions."
-  },
-  {
-    "objectID": "learn/cross-validation-accuracy.html#the-validation-design-defines-the-question",
-    "href": "learn/cross-validation-accuracy.html#the-validation-design-defines-the-question",
-    "title": "What does cross-validation accuracy mean?",
-    "section": "The validation design defines the question",
-    "text": "The validation design defines the question\nThis is the most important point on the page.\n\n\nRandom k-fold\nQuestion: Can the model predict other individuals drawn from a similar, intermixed population?\nClose relatives can appear in both training and validation folds.\n\n\nLeave-family-out\nQuestion: Can the model predict a family not represented in training?\nUsually more difficult and often more realistic for across-family transfer.\n\n\nLeave-year-out\nQuestion: Can historical data predict a future or separate year?\nThis begins to test temporal transfer and genotype-by-environment effects.\n\n\nNew genotype × environment scenario\nQuestion: Can the model predict untested genotypes, environments, or both?\nThe split must mirror the intended deployment scenario.\n\n\nA model can therefore have several legitimate cross-validation results, each answering a different operational question."
-  },
-  {
-    "objectID": "learn/cross-validation-accuracy.html#why-random-cross-validation-can-look-too-good",
-    "href": "learn/cross-validation-accuracy.html#why-random-cross-validation-can-look-too-good",
-    "title": "What does cross-validation accuracy mean?",
-    "section": "Why random cross-validation can look too good",
-    "text": "Why random cross-validation can look too good\nBreeding populations often contain strong family or population structure. If close relatives occur in both the training and validation sets, a model can predict family means or population membership very well even when its ability to distinguish the best individuals within a family is modest.\nThis does not make random cross-validation “wrong.” It means the result estimates performance for that random-split scenario, not necessarily the harder scenario the breeding program intends to deploy."
-  },
-  {
-    "objectID": "learn/cross-validation-accuracy.html#compare-models-fairly",
-    "href": "learn/cross-validation-accuracy.html#compare-models-fairly",
-    "title": "What does cross-validation accuracy mean?",
-    "section": "Compare models fairly",
-    "text": "Compare models fairly\nWhen comparing two genomic prediction models:\n\nuse the same folds for both models;\nrepeat partitioning when random splits are used;\nsummarize the distribution across folds/repeats, not only one mean;\nkeep preprocessing inside the resampling workflow when it uses outcome information;\nchoose the validation design before looking for the most favorable result.\n\nPaired folds are especially valuable because both models face the same training and validation records in each comparison."
-  },
-  {
-    "objectID": "learn/cross-validation-accuracy.html#a-reporting-checklist",
-    "href": "learn/cross-validation-accuracy.html#a-reporting-checklist",
-    "title": "What does cross-validation accuracy mean?",
-    "section": "A reporting checklist",
-    "text": "A reporting checklist\n\n\nWhat exactly was predicted: phenotype, BLUE, BLUP, breeding value, or another quantity?\nWhat statistic was reported: correlation, RMSE, MAE, \\(R^2\\), or a scaled measure?\nHow were folds constructed?\nWere families, years, sites, or populations separated?\nHow many folds and repeats were used?\nWere the same folds used across models?\nWas hyperparameter tuning nested inside the validation procedure?\nHow related were training and target individuals?\nIs this the scenario in which the breeding program will actually use the model?"
-  },
-  {
-    "objectID": "learn/cross-validation-accuracy.html#practical-takeaway",
-    "href": "learn/cross-validation-accuracy.html#practical-takeaway",
-    "title": "What does cross-validation accuracy mean?",
-    "section": "Practical takeaway",
-    "text": "Practical takeaway\n\nA cross-validation number is not an intrinsic property of a genomic prediction model. Interpret it as: performance under this exact prediction scenario, in this population, for this trait, using this response and this split design."
-  },
-  {
-    "objectID": "learn/cross-validation-accuracy.html#continue-learning",
-    "href": "learn/cross-validation-accuracy.html#continue-learning",
-    "title": "What does cross-validation accuracy mean?",
-    "section": "Continue learning",
-    "text": "Continue learning\nChoose a genomic analysis path Browse genomic prediction materials"
-  },
-  {
-    "objectID": "learn/cross-validation-accuracy.html#further-reading",
-    "href": "learn/cross-validation-accuracy.html#further-reading",
-    "title": "What does cross-validation accuracy mean?",
-    "section": "Further reading",
-    "text": "Further reading\n\nWerner CR et al. 2020. How Population Structure Impacts Genomic Selection Accuracy in Cross-Validation: Implications for Practical Breeding. Frontiers in Plant Science 11:592977. doi:10.3389/fpls.2020.592977\nRuncie DE, Cheng H. 2019. Pitfalls and Remedies for Cross Validation with Multi-trait Genomic Prediction Methods. G3 9:3727–3741. doi:10.1534/g3.119.400598"
+    "objectID": "learn/qploidy-alfalfa.html#migration-recommendation",
+    "href": "learn/qploidy-alfalfa.html#migration-recommendation",
+    "title": "Estimate copy number in alfalfa with Qploidy2",
+    "section": "Migration recommendation",
+    "text": "Migration recommendation\nConvert the source R Markdown to Quarto, keep executable R chunks, and use the shared BI brand file. Preserve the detailed workflow while adding:\n\nan explicit prerequisites block,\na workflow map near the top,\ncheckpoints after each major modeling stage,\na short troubleshooting section,\nlinks to the Qploidy2 package landing page and source repository."
   },
   {
     "objectID": "learn/get-started-genomic-data-r.html",
@@ -581,25 +364,410 @@
     "text": "Summary and next steps\nYou used the same core operations needed for both diploid and polyploid VCFs: load the file, inspect its structure, extract declared fields, examine depth and uncertainty, visualize a quality distribution, and test a filtering rule. You also identified the ploidy-aware decisions that cannot be copied blindly: genotype and dosage encoding, expected allele fractions, sufficient depth, frequency calculations, and downstream interpretation.\nContinue with the path that matches your goal:\n\nWhat is allele dosage? explains dosage in diploids and polyploids.\nEstimate copy number in alfalfa with Qploidy2 points polyploid learners to the Qploidy2 workflow.\nExplore Qploidy2 describes tools for ploidy, aneuploidy, and copy-number estimation.\nProcess MADC genotype data continues into BIGr data preparation and VCF generation."
   },
   {
-    "objectID": "learn/qploidy-alfalfa.html",
-    "href": "learn/qploidy-alfalfa.html",
-    "title": "Estimate copy number in alfalfa with Qploidy2",
+    "objectID": "learn/cross-validation-accuracy.html",
+    "href": "learn/cross-validation-accuracy.html",
+    "title": "What does cross-validation accuracy mean?",
     "section": "",
-    "text": "Estimate large-scale copy number in an alfalfa mapping population using DArTag genotyping data.\nThe existing collaborator tutorial is a strong model for long-form technical instruction: it has a clear biological use case, a floating table of contents, visible code, and a complete analysis narrative.\nOpen the current full tutorial Explore Qploidy2"
+    "text": "In genomic prediction, cross-validation asks: how well does a model predict records that were withheld from model fitting under a particular validation design? The answer is specific to the population, trait, phenotype definition, and split strategy that were tested."
   },
   {
-    "objectID": "learn/qploidy-alfalfa.html#goal",
-    "href": "learn/qploidy-alfalfa.html#goal",
-    "title": "Estimate copy number in alfalfa with Qploidy2",
-    "section": "",
-    "text": "Estimate large-scale copy number in an alfalfa mapping population using DArTag genotyping data.\nThe existing collaborator tutorial is a strong model for long-form technical instruction: it has a clear biological use case, a floating table of contents, visible code, and a complete analysis narrative.\nOpen the current full tutorial Explore Qploidy2"
+    "objectID": "learn/cross-validation-accuracy.html#the-basic-idea",
+    "href": "learn/cross-validation-accuracy.html#the-basic-idea",
+    "title": "What does cross-validation accuracy mean?",
+    "section": "The basic idea",
+    "text": "The basic idea\nIn \\(k\\)-fold cross-validation:\n\ndivide individuals or records into \\(k\\) groups;\nfit the model using \\(k-1\\) groups;\npredict the withheld group;\nrepeat until every group has been withheld;\nsummarize agreement between predictions and observations;\noften repeat the entire partitioning process several times.\n\nThe important phrase is withheld from model fitting. Any preprocessing step that learns from the validation phenotypes can leak information and make performance look better than it really is."
   },
   {
-    "objectID": "learn/qploidy-alfalfa.html#migration-recommendation",
-    "href": "learn/qploidy-alfalfa.html#migration-recommendation",
-    "title": "Estimate copy number in alfalfa with Qploidy2",
-    "section": "Migration recommendation",
-    "text": "Migration recommendation\nConvert the source R Markdown to Quarto, keep executable R chunks, and use the shared BI brand file. Preserve the detailed workflow while adding:\n\nan explicit prerequisites block,\na workflow map near the top,\ncheckpoints after each major modeling stage,\na short troubleshooting section,\nlinks to the Qploidy2 package landing page and source repository."
+    "objectID": "learn/cross-validation-accuracy.html#what-number-is-commonly-reported",
+    "href": "learn/cross-validation-accuracy.html#what-number-is-commonly-reported",
+    "title": "What does cross-validation accuracy mean?",
+    "section": "What number is commonly reported?",
+    "text": "What number is commonly reported?\nA common statistic is the Pearson correlation between predicted values and observed phenotypes—or adjusted phenotype estimates—in the held-out data:\n\\[\nr = \\mathrm{cor}(\\widehat{y}, y)\n\\]\nThis is often called prediction accuracy in applied papers. More precisely, when the observed quantity is a phenotype rather than the unknown true breeding value, predictive ability is usually the clearer term.\n\n\n\n\n\n\nImportantAccuracy and predictive ability are not always the same\n\n\n\nTrue selection accuracy is conceptually the correlation between a predicted breeding value and the true breeding value. The true breeding value is usually unobserved. A correlation with held-out phenotype or entry mean therefore measures a related but different quantity.\n\n\nSome analyses scale a phenotype-based correlation by a measure related to heritability to approximate accuracy. That can be useful under specific assumptions, but the exact formula and phenotype definition must be reported. Do not mix scaled and unscaled correlations in the same comparison."
+  },
+  {
+    "objectID": "learn/cross-validation-accuracy.html#how-should-i-interpret-a-correlation",
+    "href": "learn/cross-validation-accuracy.html#how-should-i-interpret-a-correlation",
+    "title": "What does cross-validation accuracy mean?",
+    "section": "How should I interpret a correlation?",
+    "text": "How should I interpret a correlation?\nSuppose cross-validation returns \\(r = 0.50\\).\nThat does not mean:\n\n50% of individuals were predicted correctly;\nthe model is “50% accurate” in a classification sense;\n50% of genetic variance was explained.\n\nIt means that, in the tested held-out records, predicted and observed values had a moderate positive linear association.\nAlso remember:\n\ncorrelation measures ranking/association, not calibration;\na model can correlate well but systematically over- or under-predict;\n\\(r^2\\) is not automatically the proportion of genetic variance explained;\na single mean correlation hides variation among folds or repetitions."
+  },
+  {
+    "objectID": "learn/cross-validation-accuracy.html#the-validation-design-defines-the-question",
+    "href": "learn/cross-validation-accuracy.html#the-validation-design-defines-the-question",
+    "title": "What does cross-validation accuracy mean?",
+    "section": "The validation design defines the question",
+    "text": "The validation design defines the question\nThis is the most important point on the page.\n\n\nRandom k-fold\nQuestion: Can the model predict other individuals drawn from a similar, intermixed population?\nClose relatives can appear in both training and validation folds.\n\n\nLeave-family-out\nQuestion: Can the model predict a family not represented in training?\nUsually more difficult and often more realistic for across-family transfer.\n\n\nLeave-year-out\nQuestion: Can historical data predict a future or separate year?\nThis begins to test temporal transfer and genotype-by-environment effects.\n\n\nNew genotype × environment scenario\nQuestion: Can the model predict untested genotypes, environments, or both?\nThe split must mirror the intended deployment scenario.\n\n\nA model can therefore have several legitimate cross-validation results, each answering a different operational question."
+  },
+  {
+    "objectID": "learn/cross-validation-accuracy.html#why-random-cross-validation-can-look-too-good",
+    "href": "learn/cross-validation-accuracy.html#why-random-cross-validation-can-look-too-good",
+    "title": "What does cross-validation accuracy mean?",
+    "section": "Why random cross-validation can look too good",
+    "text": "Why random cross-validation can look too good\nBreeding populations often contain strong family or population structure. If close relatives occur in both the training and validation sets, a model can predict family means or population membership very well even when its ability to distinguish the best individuals within a family is modest.\nThis does not make random cross-validation “wrong.” It means the result estimates performance for that random-split scenario, not necessarily the harder scenario the breeding program intends to deploy."
+  },
+  {
+    "objectID": "learn/cross-validation-accuracy.html#compare-models-fairly",
+    "href": "learn/cross-validation-accuracy.html#compare-models-fairly",
+    "title": "What does cross-validation accuracy mean?",
+    "section": "Compare models fairly",
+    "text": "Compare models fairly\nWhen comparing two genomic prediction models:\n\nuse the same folds for both models;\nrepeat partitioning when random splits are used;\nsummarize the distribution across folds/repeats, not only one mean;\nkeep preprocessing inside the resampling workflow when it uses outcome information;\nchoose the validation design before looking for the most favorable result.\n\nPaired folds are especially valuable because both models face the same training and validation records in each comparison."
+  },
+  {
+    "objectID": "learn/cross-validation-accuracy.html#a-reporting-checklist",
+    "href": "learn/cross-validation-accuracy.html#a-reporting-checklist",
+    "title": "What does cross-validation accuracy mean?",
+    "section": "A reporting checklist",
+    "text": "A reporting checklist\n\n\nWhat exactly was predicted: phenotype, BLUE, BLUP, breeding value, or another quantity?\nWhat statistic was reported: correlation, RMSE, MAE, \\(R^2\\), or a scaled measure?\nHow were folds constructed?\nWere families, years, sites, or populations separated?\nHow many folds and repeats were used?\nWere the same folds used across models?\nWas hyperparameter tuning nested inside the validation procedure?\nHow related were training and target individuals?\nIs this the scenario in which the breeding program will actually use the model?"
+  },
+  {
+    "objectID": "learn/cross-validation-accuracy.html#practical-takeaway",
+    "href": "learn/cross-validation-accuracy.html#practical-takeaway",
+    "title": "What does cross-validation accuracy mean?",
+    "section": "Practical takeaway",
+    "text": "Practical takeaway\n\nA cross-validation number is not an intrinsic property of a genomic prediction model. Interpret it as: performance under this exact prediction scenario, in this population, for this trait, using this response and this split design."
+  },
+  {
+    "objectID": "learn/cross-validation-accuracy.html#continue-learning",
+    "href": "learn/cross-validation-accuracy.html#continue-learning",
+    "title": "What does cross-validation accuracy mean?",
+    "section": "Continue learning",
+    "text": "Continue learning\nChoose a genomic analysis path Browse genomic prediction materials"
+  },
+  {
+    "objectID": "learn/cross-validation-accuracy.html#further-reading",
+    "href": "learn/cross-validation-accuracy.html#further-reading",
+    "title": "What does cross-validation accuracy mean?",
+    "section": "Further reading",
+    "text": "Further reading\n\nWerner CR et al. 2020. How Population Structure Impacts Genomic Selection Accuracy in Cross-Validation: Implications for Practical Breeding. Frontiers in Plant Science 11:592977. doi:10.3389/fpls.2020.592977\nRuncie DE, Cheng H. 2019. Pitfalls and Remedies for Cross Validation with Multi-trait Genomic Prediction Methods. G3 9:3727–3741. doi:10.1534/g3.119.400598"
+  },
+  {
+    "objectID": "learn.html",
+    "href": "learn.html",
+    "title": "Learn",
+    "section": "",
+    "text": "Learning library\n\n\n\nStart with the task you need to complete, or search by software, data type, and analysis method.\n\nBrowse all materials View workshops"
+  },
+  {
+    "objectID": "learn.html#what-do-you-want-to-do",
+    "href": "learn.html#what-do-you-want-to-do",
+    "title": "Learn",
+    "section": "What do you want to do?",
+    "text": "What do you want to do?\nChoose a goal to see the most relevant guides and tutorials.\n\n\n01\n\nPrepare genotype data\n\n\nImport, transform, standardize, and export genotype or variant data for downstream analysis.\n\nView tutorials\n\n\n02\n\nImprove data quality\n\n\nFilter markers and samples, diagnose missingness, and validate analysis-ready datasets.\n\nView tutorials\n\n\n03\n\nAnalyze polyploids\n\n\nWork with allele dosage, ploidy, aneuploidy, and large-scale copy-number variation.\n\nView tutorials\n\n\n04\n\nUnderstand populations\n\n\nExplore structure, diversity, relatedness, and other population-level patterns.\n\nView tutorials\n\n\n05\n\nMap traits\n\n\nMove from curated genotype and phenotype data toward GWAS, QTL, and association analyses.\n\nView tutorials\n\n\n06\n\nPredict performance\n\n\nPrepare data, fit genomic prediction models, and evaluate prediction accuracy.\n\nView tutorials"
+  },
+  {
+    "objectID": "learn.html#browse-by-topic",
+    "href": "learn.html#browse-by-topic",
+    "title": "Learn",
+    "section": "Browse by topic",
+    "text": "Browse by topic\nUse a broad topic to narrow the list. The search also recognizes terms such as MADC, VCF, DArTag, GWAS, and PCA.\n\nGetting Started Genotype Data Data Quality Ploidy & Dosage Population Analysis Trait Mapping Genomic Prediction All topics"
+  },
+  {
+    "objectID": "learn.html#all-learning-materials",
+    "href": "learn.html#all-learning-materials",
+    "title": "Learn",
+    "section": "All learning materials",
+    "text": "All learning materials\nSearch by topic, software name, data type, or analysis method.\n\n\n    \n      \n      \n    \n\n\n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Guide\n        \n        Uses BIGr\n        \n        Uses BIGapp\n        \n        Uses Qploidy2\n        \n        Uses Familia\n        \n        Uses AlloMate\n        \n        Uses BIGpopA\n        \n        \n        Beginner\n        \n      \n\n      \n        Choose a genomic analysis path\n      \n\n      \n      Start from the breeding question and identify the appropriate Breeding Insight tool or workflow.\n      \n\n      \n      \n        \n        Getting Started\n        \n      \n      \n\n      Open guide →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Tutorial\n        \n        Uses BIGr\n        \n        \n        Beginner\n        \n      \n\n      \n        Get started with genomic data in R\n      \n\n      \n      Set up R, then load, inspect, filter, and visualize a VCF with diploid- and polyploid-aware checkpoints.\n      \n\n      \n      \n        \n        Getting Started\n        \n        Genotype Data\n        \n      \n      \n\n      Open tutorial →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Concept\n        \n        Uses BIGr\n        \n        \n        Beginner\n        \n      \n\n      \n        What is a MADC file?\n      \n\n      \n      Understand how DArT MADC files represent microhaplotype read counts and how BIGr turns those counts into variant data.\n      \n\n      \n      \n        \n        Genotype Data\n        \n        File Formats\n        \n      \n      \n\n      Open concept →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Workflow\n        \n        Uses BIGr\n        \n        \n        Intermediate\n        \n      \n\n      \n        Convert MADC data to a genotype-called VCF\n      \n\n      \n      Use BIGr to recover biallelic read counts, call diploid or polyploid genotypes with Updog, and filter a validated VCF.\n      \n\n      \n      \n        \n        Genotype Data\n        \n        Data Quality\n        \n        Ploidy & Dosage\n        \n      \n      \n\n      Open workflow →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Tutorial\n        \n        Uses Qploidy2\n        \n        \n        Intermediate\n        \n      \n\n      \n        Estimate copy number in alfalfa with Qploidy2\n      \n\n      \n      Use Qploidy2 with DArTag data to estimate ploidy, aneuploidy, and large-scale copy-number variation.\n      \n\n      \n      \n        \n        Ploidy & Dosage\n        \n        Genotype Data\n        \n      \n      \n\n      Open tutorial →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Concept\n        \n        Uses BIGr\n        \n        Uses Qploidy2\n        \n        \n        Beginner\n        \n      \n\n      \n        What is allele dosage?\n      \n\n      \n      Understand what allele dosage represents in diploids and polyploids, how it differs from read fraction, and why dosage uncertainty matters.\n      \n\n      \n      \n        \n        Genotype Data\n        \n        Ploidy & Dosage\n        \n      \n      \n\n      Open concept →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Concept\n        \n        Uses BIGr\n        \n        Uses BIGapp\n        \n        \n        Intermediate\n        \n      \n\n      \n        Choosing a missing-data threshold\n      \n\n      \n      Choose marker and sample missingness thresholds by diagnosing the data source, matching the downstream analysis, and testing sensitivity.\n      \n\n      \n      \n        \n        Genotype Data\n        \n        Data Quality\n        \n      \n      \n\n      Open concept →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Concept\n        \n        Uses BIGr\n        \n        Uses BIGapp\n        \n        Uses Qploidy2\n        \n        \n        Intermediate\n        \n      \n\n      \n        SNP filtering in polyploids\n      \n\n      \n      Build a polyploid-aware SNP filtering strategy that considers sequence evidence, dosage uncertainty, duplicated genomes, and downstream goals.\n      \n\n      \n      \n        \n        Genotype Data\n        \n        Data Quality\n        \n        Ploidy & Dosage\n        \n      \n      \n\n      Open concept →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Concept\n        \n        Uses BIGapp\n        \n        \n        Beginner\n        \n      \n\n      \n        What does cross-validation accuracy mean?\n      \n\n      \n      Interpret cross-validation results in genomic prediction without confusing predictive ability, selection accuracy, and the realism of the validation design.\n      \n\n      \n      \n        \n        Genomic Prediction\n        \n        Data Quality\n        \n      \n      \n\n      Open concept →\n    \n  \n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About this portal",
+    "section": "",
+    "text": "This site is a unified entry point for open-source software, practical tutorials, workshops, and documentation developed by Breeding Insight.\nThe architecture separates discovery and learning from package API reference. Individual packages remain responsible for their canonical function documentation and release information, while the portal explains how tools fit together in real breeding workflows.\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Breeding Insight Software",
+    "section": "",
+    "text": "Breeding Insight software\n\n\n\nBrowse open-source tools for breeding data and genomics, then find the tutorials and workshop materials that support your work.\n\nExplore software Start learning"
+  },
+  {
+    "objectID": "index.html#find-what-you-need",
+    "href": "index.html#find-what-you-need",
+    "title": "Breeding Insight Software",
+    "section": "Find what you need",
+    "text": "Find what you need\nChoose a tool, follow a practical workflow, or return to material from a training event.\n\n\n\n01\n\n\nBrowse software\nCompare packages and applications by task, data type, language, and analysis area.\nView all software\n\n\n\n\n02\n\n\nFollow a workflow\nWork through practical tutorials that may span more than one package, from raw genotype data to analysis-ready outputs.\nBrowse tutorials\n\n\n\n\n03\n\n\nRevisit a workshop\nFind setup instructions, slides, exercises, example data, and recordings from Breeding Insight training events.\nView workshops"
+  },
+  {
+    "objectID": "index.html#featured-software",
+    "href": "index.html#featured-software",
+    "title": "Breeding Insight Software",
+    "section": "Featured software",
+    "text": "Featured software\nCompare packages and applications, then go directly to installation instructions, documentation, source code, and related tutorials.\n\n\n\n\nBIGr\nCore genomic analysis functions for diploid and polyploid breeding programs.\n\nR packageGenomics\n\nExplore BIGr\n\n\n\n\n\nBIGapp\nA user-friendly Shiny application for genomic analysis without requiring command-line workflows.\n\nR ShinyGWAS + GS\n\nExplore BIGapp\n\n\n\n\n\nQploidy2\nPloidy, aneuploidy, and large-scale copy-number estimation from genotyping data.\n\nR packagePloidy + CNV\n\nExplore Qploidy2"
+  },
+  {
+    "objectID": "index.html#task-based-learning",
+    "href": "index.html#task-based-learning",
+    "title": "Breeding Insight Software",
+    "section": "Task-based learning",
+    "text": "Task-based learning\nTutorials follow complete tasks, from preparing raw data to interpreting results. When a workflow uses several packages, the steps stay together in one guide.\nBrowse all learning materials"
+  },
+  {
+    "objectID": "learn/choosing-missing-data-threshold.html",
+    "href": "learn/choosing-missing-data-threshold.html",
+    "title": "Choosing a missing-data threshold",
+    "section": "",
+    "text": "There is no universal missing-data threshold that is correct for every genotype dataset. A useful threshold removes unreliable data without discarding so much information that the downstream analysis becomes weaker or less representative."
+  },
+  {
+    "objectID": "learn/choosing-missing-data-threshold.html#first-separate-two-different-filters",
+    "href": "learn/choosing-missing-data-threshold.html#first-separate-two-different-filters",
+    "title": "Choosing a missing-data threshold",
+    "section": "First separate two different filters",
+    "text": "First separate two different filters\nMissingness is usually evaluated in two directions.\n\n\nMarker missingness\nFor each SNP or locus: what proportion of samples lack a usable genotype?\nA marker with 30% missingness has calls for roughly 70% of retained samples.\n\n\nSample missingness\nFor each individual: what proportion of retained markers lack a usable genotype?\nA sample with unusually high missingness may reflect poor DNA, low coverage, library failure, or assay mismatch.\n\n\nDo not treat these as the same decision. A few globally poor samples can make many otherwise useful markers appear incomplete, so sample-level diagnostics often deserve attention before final marker filtering."
+  },
+  {
+    "objectID": "learn/choosing-missing-data-threshold.html#why-a-fixed-rule-can-fail",
+    "href": "learn/choosing-missing-data-threshold.html#why-a-fixed-rule-can-fail",
+    "title": "Choosing a missing-data threshold",
+    "section": "Why a fixed rule can fail",
+    "text": "Why a fixed rule can fail\nThe same numerical threshold can behave very differently across datasets.\nA 20% marker-missingness limit might be:\n\nunnecessarily strict for a sparse sequencing dataset followed by validated imputation;\ntoo permissive for a targeted assay where most loci are expected to genotype nearly every sample;\nacceptable for one exploratory population analysis but problematic for a method that requires a nearly complete matrix;\nmisleading when missingness is concentrated in one family, population, sequencing batch, or taxon.\n\nThe central question is not simply “how much is missing?” It is also “why is it missing, and where?”"
+  },
+  {
+    "objectID": "learn/choosing-missing-data-threshold.html#a-defensible-workflow",
+    "href": "learn/choosing-missing-data-threshold.html#a-defensible-workflow",
+    "title": "Choosing a missing-data threshold",
+    "section": "A defensible workflow",
+    "text": "A defensible workflow\n\n1. Diagnose before filtering\nPlot or summarize:\n\nmissingness per sample;\nmissingness per marker;\nmissingness by sequencing batch, plate, library, family, population, or species;\nread depth or genotype confidence against missingness;\nthe number of samples and markers retained across candidate thresholds.\n\nA bimodal distribution is especially informative. For example, a subset of samples with 70–90% missingness may indicate failed samples rather than a reason to loosen the marker threshold for everyone.\n\n\n2. Define the downstream objective\n\n\nTargeted genotyping\nHigh missingness can indicate assay failure or off-target behavior. Investigate the locus or sample before assuming imputation will rescue it.\n\n\nPopulation analysis\nMissingness that differs among populations can create or distort structure. Check whether filtering changes PCA, distances, differentiation, or clustering.\n\n\nGenomic prediction\nA more permissive marker set may be useful when imputation is accurate, but imputation should be validated under a design that matches deployment. Outcome information from validation samples must not leak into preprocessing.\n\n\nLinkage or QTL analysis\nGenotyping errors and missing parental or progeny calls can disrupt segregation and map construction. The relevant tolerance depends on the population and mapping model.\n\n\n\n\n3. Compare candidate thresholds\nInstead of choosing one value by habit, run a small sensitivity analysis. For example, compare several candidate marker filters spanning stricter to more permissive settings.\n\n\n\n\n\n\nNoteIllustrative sensitivity grid—not universal recommendations\n\n\n\nA project might compare maximum marker missingness of 5%, 10%, 20%, and 50%, then track retained marker count, retained sample count, allele-frequency distribution, imputation performance, and the stability of the biological conclusion. The useful values for a particular dataset may be entirely different.\n\n\n\n\n4. Evaluate the consequence, not only the retained count\nFor each candidate threshold, ask:\n\nHow many markers and samples remain?\nAre certain families or populations disproportionately removed?\nDoes marker density become uneven across the genome?\nDo PCA or relationship patterns change materially?\nDoes prediction performance change under a realistic validation design?\nIf imputing, how accurate are masked genotypes at the relevant allele frequencies and dosage states?\n\nA threshold is easier to defend when the main conclusion is stable across a reasonable range of settings."
+  },
+  {
+    "objectID": "learn/choosing-missing-data-threshold.html#missingness-can-be-informative",
+    "href": "learn/choosing-missing-data-threshold.html#missingness-can-be-informative",
+    "title": "Choosing a missing-data threshold",
+    "section": "Missingness can be informative",
+    "text": "Missingness can be informative\nMissing data are not always random. They may correlate with:\n\nsequence divergence from the reference;\nrestriction-site polymorphism in GBS/RAD-seq;\nlow DNA quality;\nbatch effects;\nallele-specific assay performance;\nparalogous or homoeologous mapping problems;\nspecies or population membership.\n\nThat means aggressive filtering can sometimes remove a biologically non-random subset of the dataset. Conversely, retaining systematic missingness can also bias inference."
+  },
+  {
+    "objectID": "learn/choosing-missing-data-threshold.html#special-caution-for-polyploids",
+    "href": "learn/choosing-missing-data-threshold.html#special-caution-for-polyploids",
+    "title": "Choosing a missing-data threshold",
+    "section": "Special caution for polyploids",
+    "text": "Special caution for polyploids\nIn polyploid data, a genotype may be technically non-missing but still highly uncertain. A hard dosage call with weak posterior support is not equivalent to a confident call.\nMissing-data filtering should therefore be considered alongside:\n\nread depth;\nposterior genotype probability;\nallelic bias;\noverdispersion;\nunexpected ploidy or copy number;\nlocus behavior consistent with paralogous or homoeologous sequence."
+  },
+  {
+    "objectID": "learn/choosing-missing-data-threshold.html#practical-takeaway",
+    "href": "learn/choosing-missing-data-threshold.html#practical-takeaway",
+    "title": "Choosing a missing-data threshold",
+    "section": "Practical takeaway",
+    "text": "Practical takeaway\n\nChoose a missing-data threshold by combining data diagnostics + downstream requirements + sensitivity analysis. Report both sample- and marker-level rules, and document whether missing genotypes were imputed."
+  },
+  {
+    "objectID": "learn/choosing-missing-data-threshold.html#continue-learning",
+    "href": "learn/choosing-missing-data-threshold.html#continue-learning",
+    "title": "Choosing a missing-data threshold",
+    "section": "Continue learning",
+    "text": "Continue learning\nProcess MADC genotype data Choose a genomic analysis path"
+  },
+  {
+    "objectID": "learn/choosing-missing-data-threshold.html#further-reading",
+    "href": "learn/choosing-missing-data-threshold.html#further-reading",
+    "title": "Choosing a missing-data threshold",
+    "section": "Further reading",
+    "text": "Further reading\n\nNazareno AG, Knowles LL. 2021. There Is No “Rule of Thumb”: Genomic Filter Settings for a Small Plant Population to Obtain Unbiased Gene Flow Estimates. Frontiers in Plant Science 12:677009. doi:10.3389/fpls.2021.677009\nFu Y-B. 2014. Genetic Diversity Analysis of Highly Incomplete SNP Genotype Data with Imputations: An Empirical Assessment. G3 4:891–900. doi:10.1534/g3.114.010942\nTorkamaneh D, Belzile F. 2015. Scanning and Filling: Ultra-Dense SNP Genotyping Combining Genotyping-By-Sequencing, SNP Array and Whole-Genome Resequencing Data. PLOS ONE 10:e0131533. doi:10.1371/journal.pone.0131533"
+  },
+  {
+    "objectID": "learn/genomics-path.html",
+    "href": "learn/genomics-path.html",
+    "title": "Choose a genomic analysis path",
+    "section": "",
+    "text": "A unified portal should help users choose tools without requiring them to know package names first.\n\n\n\nGoal\nRecommended starting point\n\n\n\n\nProcess and transform genotype data\nBIGr\n\n\nUse an interactive genomic analysis interface\nBIGapp\n\n\nEstimate ploidy, aneuploidy, or large CNV\nQploidy2\n\n\nValidate pedigrees and assess ancestry\nFamilia\n\n\nOptimize mate allocation and genetic gain\nAlloMate\n\n\nAssign parentage and estimate breed or line composition\nBIGpopA"
+  },
+  {
+    "objectID": "learn/genomics-path.html#start-with-the-question",
+    "href": "learn/genomics-path.html#start-with-the-question",
+    "title": "Choose a genomic analysis path",
+    "section": "",
+    "text": "A unified portal should help users choose tools without requiring them to know package names first.\n\n\n\nGoal\nRecommended starting point\n\n\n\n\nProcess and transform genotype data\nBIGr\n\n\nUse an interactive genomic analysis interface\nBIGapp\n\n\nEstimate ploidy, aneuploidy, or large CNV\nQploidy2\n\n\nValidate pedigrees and assess ancestry\nFamilia\n\n\nOptimize mate allocation and genetic gain\nAlloMate\n\n\nAssign parentage and estimate breed or line composition\nBIGpopA"
+  },
+  {
+    "objectID": "learn/genomics-path.html#example-path",
+    "href": "learn/genomics-path.html#example-path",
+    "title": "Choose a genomic analysis path",
+    "section": "Example path",
+    "text": "Example path\nTargeted genotyping data → quality control → analysis-ready VCF → population structure → GWAS or genomic prediction\nThe value of the portal is that this sequence can link across packages while preserving each package’s canonical reference documentation."
+  },
+  {
+    "objectID": "learn/madc-to-vcf.html",
+    "href": "learn/madc-to-vcf.html",
+    "title": "Convert MADC data to a genotype-called VCF",
+    "section": "",
+    "text": "Convert a HapApp-processed DArT MADC file into a biallelic read-count VCF, call reference-allele dosage with Updog, convert those calls into a genotype-called VCF with BIGr, and apply documented quality filters.\nThis workflow supports both diploid and polyploid organisms. You must supply the correct ploidy and adjust the depth requirements, model evaluation, and filter interpretation to the number and separability of the expected dosage classes. If ploidy is uncertain, use the Qploidy2 tutorial and Qploidy2 software page before calling genotypes.\nBy the end, you will have validated:\n\nfixed allele IDs and sequence orientation;\nbiallelic REF/ALT recovery;\nmatching reference-count and total-depth matrices;\nUpdog dosage calls in the expected ploidy range; and\na filtered VCF that reopens with the expected samples, variants, and FORMAT fields."
+  },
+  {
+    "objectID": "learn/madc-to-vcf.html#goal",
+    "href": "learn/madc-to-vcf.html#goal",
+    "title": "Convert MADC data to a genotype-called VCF",
+    "section": "",
+    "text": "Convert a HapApp-processed DArT MADC file into a biallelic read-count VCF, call reference-allele dosage with Updog, convert those calls into a genotype-called VCF with BIGr, and apply documented quality filters.\nThis workflow supports both diploid and polyploid organisms. You must supply the correct ploidy and adjust the depth requirements, model evaluation, and filter interpretation to the number and separability of the expected dosage classes. If ploidy is uncertain, use the Qploidy2 tutorial and Qploidy2 software page before calling genotypes.\nBy the end, you will have validated:\n\nfixed allele IDs and sequence orientation;\nbiallelic REF/ALT recovery;\nmatching reference-count and total-depth matrices;\nUpdog dosage calls in the expected ploidy range; and\na filtered VCF that reopens with the expected samples, variants, and FORMAT fields."
+  },
+  {
+    "objectID": "learn/madc-to-vcf.html#prerequisite-process-raw-madc-data-with-hapapp",
+    "href": "learn/madc-to-vcf.html#prerequisite-process-raw-madc-data-with-hapapp",
+    "title": "Convert MADC data to a genotype-called VCF",
+    "section": "Prerequisite: process raw MADC data with HapApp",
+    "text": "Prerequisite: process raw MADC data with HapApp\n\n\n\n\n\n\nImportantThis tutorial starts from a processed MADC\n\n\n\nDo not use a raw DArT MADC file in the conversion step. Raw reports first require HapApp processing to assign fixed allele IDs and address duplicate, ambiguous, or poor-quality microhaplotypes.\n\n\nBreeding Insight provides the public HapApp_utils repository for this preparation. Users may also use Breeding Insight’s forthcoming online HapApp after it becomes publicly available, or contact Breeding Insight for support. No online HapApp link is provided here because that service is not yet public.\nThe HapApp workflow does more than rename rows: it applies initial sequence quality control, reconciles known alleles with the panel’s microhaplotype database, assigns standardized IDs to qualifying novel alleles, produces an updated fixed-ID MADC, and updates the FASTA database when new alleles are found (Zhao et al. 2026).\nPossible paralog filtering also occurs before this tutorial when the organism, panel, and marker evidence make it appropriate. HapApp commands and paralog-filtering code are outside this workflow’s scope. BIGr 0.7.2’s filterVCF() applies a minimum-depth mask; it does not provide a maximum-depth filter and is not a substitute for this upstream paralog screen. Review SNP filtering in polyploids for the biological reasons that duplicate loci can create extreme depth and distorted allele ratios.\nIf MADC terminology is new, first read What is a MADC file?. For VCF structure and R basics, use Get started with genomic data in R."
+  },
+  {
+    "objectID": "learn/madc-to-vcf.html#reproducible-example",
+    "href": "learn/madc-to-vcf.html#reproducible-example",
+    "title": "Convert MADC data to a genotype-called VCF",
+    "section": "Reproducible example",
+    "text": "Reproducible example\nCode execution is disabled during site builds. The displayed checkpoints were verified with:\n\n\n\n\nSetting\nVerified value\n\n\n\n\nR\n4.5.1\n\n\nBIGr\nCRAN 0.7.2\n\n\nUpdog\n2.1.7\n\n\nvcfR\n1.16.0\n\n\nRandom seed\n20260713\n\n\nBIGr workers\nn.cores = 1\n\n\nUpdog workers\nnc = 1\n\n\n\n\nOn the verification system, MADC conversion took about 10 seconds and Updog calling took under 1 second. Runtime varies with the number of loci and samples, available cores, and operating system."
+  },
+  {
+    "objectID": "learn/madc-to-vcf.html#install-and-load-the-packages",
+    "href": "learn/madc-to-vcf.html#install-and-load-the-packages",
+    "title": "Convert MADC data to a genotype-called VCF",
+    "section": "1. Install and load the packages",
+    "text": "1. Install and load the packages\nBIGr requires R 4.4.0 or newer. BiocManager installs BIGr together with its Bioconductor dependencies; Updog performs genotype calling, and vcfR reads and extracts VCF data.\nif (!requireNamespace(\"BiocManager\", quietly = TRUE)) {\n  install.packages(\"BiocManager\")\n}\n\nBiocManager::install(\n  c(\"BIGr\", \"updog\", \"vcfR\"),\n  ask = FALSE,\n  update = FALSE\n)\nRestart R, then load the packages and record their versions.\nlibrary(BIGr)\nlibrary(updog)\nlibrary(vcfR)\n\nstopifnot(getRversion() &gt;= \"4.4.0\")\n\nR.version.string\nsapply(c(\"BIGr\", \"updog\", \"vcfR\"), packageVersion)\nUpdog models allele bias, overdispersion, sequencing error, and genotype uncertainty rather than rounding read fractions. Its official package site introduces the package and its supported models (Gerard et al. 2018)."
+  },
+  {
+    "objectID": "learn/madc-to-vcf.html#locate-and-inspect-the-bundled-inputs",
+    "href": "learn/madc-to-vcf.html#locate-and-inspect-the-bundled-inputs",
+    "title": "Convert MADC data to a genotype-called VCF",
+    "section": "2. Locate and inspect the bundled inputs",
+    "text": "2. Locate and inspect the bundled inputs\nThis tutorial uses a small processed MADC, .botloci file, and haplotype FASTA bundled with BIGr. system.file() finds them without a machine-specific path.\nmadc_file &lt;- system.file(\n  \"example_MADC_FixedAlleleID.csv\",\n  package = \"BIGr\"\n)\n\nbotloci_file &lt;- system.file(\n  \"example_SNPs_DArTag-probe-design_f180bp.botloci\",\n  package = \"BIGr\"\n)\n\nhap_seq_file &lt;- system.file(\n  \"example_allele_db.fa\",\n  package = \"BIGr\"\n)\n\nstopifnot(\n  nzchar(madc_file), file.exists(madc_file),\n  nzchar(botloci_file), file.exists(botloci_file),\n  nzchar(hap_seq_file), file.exists(hap_seq_file)\n)\n\nmadc &lt;- read.csv(madc_file, check.names = FALSE)\ndim(madc)\nnames(madc)\nhead(madc[, c(1:3, 4:5)])\nExpected dimensions:\n[1] 51 13\nThe file contains 51 microhaplotype rows, three identifying columns, and 10 sample read-count columns. Confirm that AlleleID contains fixed suffixes such as _0001 and _0002.\nstopifnot(\n  all(c(\"AlleleID\", \"CloneID\", \"AlleleSequence\") %in% names(madc)),\n  any(grepl(\"_0001\", madc$AlleleID, fixed = TRUE)),\n  any(grepl(\"_0002\", madc$AlleleID, fixed = TRUE))\n)\n\nhead(readLines(botloci_file))\nhead(readLines(hap_seq_file))\n\n\n\n\n\n\nTipCheckpoint: fixed IDs and strand information\n\n\n\nThe processed MADC must have fixed allele IDs. The .botloci file identifies sequences that require reverse complementation; without correct strand orientation, recovered REF and ALT bases can be reversed or complemented incorrectly."
+  },
+  {
+    "objectID": "learn/madc-to-vcf.html#run-the-madc-sanity-checks",
+    "href": "learn/madc-to-vcf.html#run-the-madc-sanity-checks",
+    "title": "Convert MADC data to a genotype-called VCF",
+    "section": "3. Run the MADC sanity checks",
+    "text": "3. Run the MADC sanity checks\ncheck_madc_sanity() returns named checks rather than one overall pass/fail flag.\nsanity &lt;- BIGr::check_madc_sanity(madc)\n\ndata.frame(\n  check = names(sanity$checks),\n  result = unname(sanity$checks),\n  row.names = NULL\n)\nVerified results for the bundled file:\n\n\n\n\n\n\n\n\n\nCheck\nResult\nReadiness interpretation\n\n\n\n\nColumns\nTRUE\nRequired columns are present\n\n\nFixAlleleIDs\nTRUE\nHapApp-style fixed IDs are present\n\n\nIUPACcodes\nFALSE\nNo unsupported ambiguous bases were found\n\n\nLowerCase\nFALSE\nNo lowercase bases were found\n\n\nIndels\nFALSE\nThis example contains no detected target indels\n\n\nChromPos\nTRUE\nCloneID supplies chromosome and position\n\n\nallNAcol / allNArow\nFALSE\nNo empty row or column was found\n\n\nRefAltSeqs\nFALSE\nOne Alt sequence is absent from the MADC and will be recovered from FASTA\n\n\nOtherAlleles\nFALSE\nThe example has no Other rows\n\n\n\n\nSome names describe the presence of a condition, so FALSE can be the desired result. For conversion, required columns and fixed IDs must be TRUE, while IUPACcodes must be FALSE. A missing Ref or Alt can be acceptable for madc2vcf_all() when the supplied haplotype FASTA contains it; the verified run recovers one missing Alt sequence.\n\n\n\n\n\n\nWarningIndel and marker-metadata checkpoint\n\n\n\nCurrent BIGr supports target indels when you provide the required marker-information fields, including authoritative REF/ALT and indel position/length, together with .botloci. Off-target variants from that indel-containing tag are ignored. If CloneID does not encode chromosome and position, supply a marker-information CSV with compatible marker IDs, Chr, and Pos. Follow the BIGr reference manual for the exact current fields."
+  },
+  {
+    "objectID": "learn/madc-to-vcf.html#convert-madc-counts-to-a-biallelic-vcf",
+    "href": "learn/madc-to-vcf.html#convert-madc-counts-to-a-biallelic-vcf",
+    "title": "Convert MADC data to a genotype-called VCF",
+    "section": "4. Convert MADC counts to a biallelic VCF",
+    "text": "4. Convert MADC counts to a biallelic VCF\nCreate a project output directory and run madc2vcf_all(). Updog consumes one reference count and one total count per sample and locus, so this workflow removes multiallelic SNPs.\noutput_dir &lt;- \"madc_updog_output\"\ndir.create(output_dir, showWarnings = FALSE)\n\nread_count_vcf_file &lt;- file.path(\n  output_dir,\n  \"madc_read_counts.vcf\"\n)\n\nBIGr::madc2vcf_all(\n  madc = madc_file,\n  botloci_file = botloci_file,\n  hap_seq_file = hap_seq_file,\n  n.cores = 1,\n  rm_multiallelic_SNP = TRUE,\n  alignment_score_thr = 40,\n  add_others = TRUE,\n  others_max_snps = 5,\n  others_rm_with_indels = TRUE,\n  out_vcf = read_count_vcf_file,\n  verbose = TRUE\n)\nThe verified run recovers the missing Alt sequence from FASTA, finds one multiallelic off-target SNP, removes it, and writes 32 biallelic variants for 10 samples. It also writes the BIGr version and conversion parameters into VCF metadata.\n\n\n\n\n\n\nTipCheckpoint: orientation, REF/ALT, and biallelic output\n\n\n\nRead the conversion messages. Confirm that strand handling used the intended .botloci, missing sequences were recovered or deliberately discarded, REF and ALT are not ., and the number of removed multiallelic sites is understood. rm_multiallelic_SNP = TRUE is a deliberate Updog compatibility choice, not a statement that multiallelic biology is unimportant."
+  },
+  {
+    "objectID": "learn/madc-to-vcf.html#reopen-the-read-count-vcf-and-extract-matrices",
+    "href": "learn/madc-to-vcf.html#reopen-the-read-count-vcf-and-extract-matrices",
+    "title": "Convert MADC data to a genotype-called VCF",
+    "section": "5. Reopen the read-count VCF and extract matrices",
+    "text": "5. Reopen the read-count VCF and extract matrices\nUse vcfR to reopen the file, following the structure introduced in the official vcfR quick introduction (Knaus and Grünwald 2017).\nread_vcf &lt;- vcfR::read.vcfR(\n  read_count_vcf_file,\n  verbose = FALSE\n)\n\nc(\n  variants = nrow(read_vcf@fix),\n  samples = ncol(read_vcf@gt) - 1\n)\n\nunique(read_vcf@gt[, \"FORMAT\"])\nhead(read_vcf@fix[, c(\"CHROM\", \"POS\", \"ID\", \"REF\", \"ALT\")])\nExpected summary:\nvariants  samples\n      32       10\n\n[1] \"DP:RA:AD\"\nThis is a read-count VCF, not a genotype-called VCF. Its FORMAT values are total depth (DP), reference-allele depth (RA), and ordered reference/alternate depths (AD). It has no GT or dosage field yet.\nConfirm that the conversion produced only biallelic variants with explicit alleles.\nstopifnot(\n  !any(read_vcf@fix[, \"REF\"] == \".\"),\n  !any(read_vcf@fix[, \"ALT\"] == \".\"),\n  !any(grepl(\",\", read_vcf@fix[, \"ALT\"], fixed = TRUE))\n)\nExtract the matrices as described in the official vcfR matrix-extraction tutorial. BIGr 0.7.2 writes reference depth as RA; do not substitute RO unless your own VCF header actually defines it.\nref_matrix &lt;- vcfR::extract.gt(\n  read_vcf,\n  element = \"RA\",\n  as.numeric = TRUE\n)\n\nsize_matrix &lt;- vcfR::extract.gt(\n  read_vcf,\n  element = \"DP\",\n  as.numeric = TRUE\n)\nRows are variants and columns are samples, exactly as multidog() requires."
+  },
+  {
+    "objectID": "learn/madc-to-vcf.html#validate-and-prepare-the-count-matrices",
+    "href": "learn/madc-to-vcf.html#validate-and-prepare-the-count-matrices",
+    "title": "Convert MADC data to a genotype-called VCF",
+    "section": "6. Validate and prepare the count matrices",
+    "text": "6. Validate and prepare the count matrices\nDo not call genotypes until the matrix dimensions, names, and count relationships agree.\nstopifnot(\n  identical(dim(ref_matrix), dim(size_matrix)),\n  identical(dimnames(ref_matrix), dimnames(size_matrix)),\n  all(ref_matrix &gt;= 0, na.rm = TRUE),\n  all(size_matrix &gt;= 0, na.rm = TRUE),\n  all(ref_matrix &lt;= size_matrix, na.rm = TRUE),\n  identical(rownames(ref_matrix), read_vcf@fix[, \"ID\"])\n)\n\ndim(ref_matrix)\nrange(ref_matrix, na.rm = TRUE)\nrange(size_matrix, na.rm = TRUE)\nquantile(\n  size_matrix,\n  probs = c(0, 0.25, 0.5, 0.75, 1),\n  na.rm = TRUE\n)\nVerified results:\n[1] 32 10\n\nreference-count range: 0 to 1970\ntotal-depth range:     0 to 1972\ntotal-depth quartiles: 0, 28, 173, 311, 1972\nRemove variants with no reads across all samples before calling. Updog also removes all-zero loci, but doing it explicitly makes the change auditable.\nhas_reads &lt;- rowSums(size_matrix, na.rm = TRUE) &gt; 0\n\nref_matrix &lt;- ref_matrix[has_reads, , drop = FALSE]\nsize_matrix &lt;- size_matrix[has_reads, , drop = FALSE]\n\nstopifnot(\n  identical(dim(ref_matrix), dim(size_matrix)),\n  identical(dimnames(ref_matrix), dimnames(size_matrix))\n)\n\ndim(ref_matrix)\nExpected prepared dimensions:\n[1] 31 10\n\n\n\n\n\n\nWarningExpected-depth checkpoint\n\n\n\nThe example’s high depth does not establish a required depth for other data. Higher ploidy creates more dosage classes with closer expected allele fractions, so adequate depth and clear class separation become more important. Extreme depth may also signal duplicated sequence rather than confidence.\n\n\nThe official multidog() tutorial documents these matrix requirements and multi-locus calling steps."
+  },
+  {
+    "objectID": "learn/madc-to-vcf.html#call-genotypes-with-updog",
+    "href": "learn/madc-to-vcf.html#call-genotypes-with-updog",
+    "title": "Convert MADC data to a genotype-called VCF",
+    "section": "7. Call genotypes with Updog",
+    "text": "7. Call genotypes with Updog\nSet the organism’s biological ploidy explicitly. The bundled example is called as diploid for reproducibility; replace 2 only after establishing the correct ploidy for your samples.\nploidy &lt;- 2\nseed &lt;- 20260713\n\nstopifnot(\n  ploidy == as.integer(ploidy),\n  ploidy &gt;= 1\n)\n\nset.seed(seed)\n\nmout &lt;- updog::multidog(\n  refmat = ref_matrix,\n  sizemat = size_matrix,\n  ploidy = ploidy,\n  model = \"norm\",\n  nc = 1\n)\nmodel = \"norm\" uses a flexible normal prior on genotype distribution (Gerard and Ferrão 2020). Updog can accommodate different population structures, but norm is still a modeling choice rather than an automatic best model for every population. Use the official Updog worked example to compare model assumptions and interpret poor fits.\nSet nc no higher than the cores available to your R session. Keeping nc = 1 and a fixed seed makes this small example portable and reproducible."
+  },
+  {
+    "objectID": "learn/madc-to-vcf.html#inspect-updog-diagnostics",
+    "href": "learn/madc-to-vcf.html#inspect-updog-diagnostics",
+    "title": "Convert MADC data to a genotype-called VCF",
+    "section": "8. Inspect Updog diagnostics",
+    "text": "8. Inspect Updog diagnostics\nUpdog returns one table for locus-level estimates and another for sample-by-locus genotype results (Gerard et al. 2018).\ndim(mout$snpdf)\ndim(mout$inddf)\n\nsummary(mout$snpdf[, c(\n  \"bias\", \"seq\", \"od\", \"prop_mis\"\n)])\n\nsummary(mout$inddf[, c(\n  \"ref\", \"size\", \"geno\", \"maxpostprob\"\n)])\nInterpret the diagnostics together:\n\n\n\n\n\n\n\n\n\nDiagnostic\nWhat it represents\nWhat to examine\n\n\n\n\nAllele bias (bias)\nDeparture from equal sampling of reference and alternate alleles; values near 1 indicate little bias\nExtreme estimates and shifted dosage clusters\n\n\nOverdispersion (od)\nExtra variability beyond ordinary binomial read sampling\nLarge values and weak separation among dosage classes\n\n\nSequencing error (seq)\nEstimated probability that a read reports the wrong allele\nHigh estimates or fits at an imposed boundary\n\n\nExpected mis-genotyping (prop_mis)\nModel-estimated proportion of incorrectly classified individuals at the locus\nLoci with high expected error even when some individual calls look confident\n\n\nPosterior probability (maxpostprob)\nProbability assigned to the selected dosage for one sample and locus\nLow-confidence calls that should be set to missing\n\n\nDepth (size)\nTotal reads supporting one sample and locus\nLow evidence, extreme outliers, and ploidy-appropriate separation\n\n\n\n\nThe verified run returns 31 loci and 310 sample-by-locus records. Diploid reference dosage spans 0 through 2, and maximum posterior probability spans approximately 0.674 through 1. The diagnostic ranges are characteristics of this tiny example, not recommended cutoffs.\nstopifnot(\n  all(mout$snpdf$ploidy == ploidy),\n  all(mout$inddf$geno &gt;= 0, na.rm = TRUE),\n  all(mout$inddf$geno &lt;= ploidy, na.rm = TRUE),\n  all(mout$inddf$maxpostprob &gt;= 0, na.rm = TRUE),\n  all(mout$inddf$maxpostprob &lt;= 1, na.rm = TRUE)\n)\n\n\n\n\n\n\nTipPloidy and dosage-range checkpoint\n\n\n\nAt ploidy \\(P\\), Updog must return reference dosages from 0 through \\(P\\). A valid range does not by itself prove a good fit: inspect whether expected dosage classes are separable, depth is adequate, and bias, overdispersion, error, and posterior support are plausible."
+  },
+  {
+    "objectID": "learn/madc-to-vcf.html#convert-updog-output-to-a-called-vcf",
+    "href": "learn/madc-to-vcf.html#convert-updog-output-to-a-called-vcf",
+    "title": "Convert MADC data to a genotype-called VCF",
+    "section": "9. Convert Updog output to a called VCF",
+    "text": "9. Convert Updog output to a called VCF\nPreserve the authoritative REF and ALT bases from the read-count VCF. Subset them with the same has_reads mask used for the Updog matrices.\nref_alt &lt;- data.frame(\n  Chr = read_vcf@fix[has_reads, \"CHROM\"],\n  Pos = read_vcf@fix[has_reads, \"POS\"],\n  Ref = read_vcf@fix[has_reads, \"REF\"],\n  Alt = read_vcf@fix[has_reads, \"ALT\"]\n)\n\ncalled_vcf_base &lt;- file.path(\n  output_dir,\n  \"madc_updog_called\"\n)\n\nBIGr::updog2vcf(\n  multidog.object = mout,\n  output.file = called_vcf_base,\n  updog_version = as.character(packageVersion(\"updog\")),\n  RefAlt = ref_alt,\n  compress = TRUE\n)\n\ncalled_vcf_file &lt;- paste0(called_vcf_base, \".vcf.gz\")\nstopifnot(file.exists(called_vcf_file))\n\nUnderstand the dosage direction\nUpdog’s geno is reference-allele dosage. BIGr retains it in the called VCF’s UD field. Standard VCF GT uses allele index 0 for REF and 1 for ALT, so BIGr writes GT with:\n\\[\n\\text{alternate-allele dosage} = P - \\text{UD}\n\\]\nFor example, at ploidy 4, UD = 3 means three reference copies and one alternate copy, so GT is 0/0/0/1. This direction matters when comparing the VCF to a dosage matrix; see What is allele dosage?."
+  },
+  {
+    "objectID": "learn/madc-to-vcf.html#reopen-validate-and-filter-the-called-vcf",
+    "href": "learn/madc-to-vcf.html#reopen-validate-and-filter-the-called-vcf",
+    "title": "Convert MADC data to a genotype-called VCF",
+    "section": "10. Reopen, validate, and filter the called VCF",
+    "text": "10. Reopen, validate, and filter the called VCF\nReopen the compressed result and validate its core structure.\ncalled_vcf &lt;- vcfR::read.vcfR(\n  called_vcf_file,\n  verbose = FALSE\n)\n\nc(\n  variants = nrow(called_vcf@fix),\n  samples = ncol(called_vcf@gt) - 1\n)\n\nunique(called_vcf@gt[, \"FORMAT\"])\nExpected output:\nvariants  samples\n      31       10\n\n[1] \"GT:UD:DP:RA:AD:MPP\"\nCheck REF/ALT recovery, dosage range, and the relationship between reference dosage and GT alternate dosage.\ncalled_key &lt;- paste(\n  called_vcf@fix[, \"CHROM\"],\n  as.integer(called_vcf@fix[, \"POS\"]),\n  sep = \"_\"\n)\n\nsource_key &lt;- paste(\n  read_vcf@fix[, \"CHROM\"],\n  as.integer(read_vcf@fix[, \"POS\"]),\n  sep = \"_\"\n)\n\nsource_row &lt;- match(called_key, source_key)\n\nud &lt;- vcfR::extract.gt(\n  called_vcf,\n  element = \"UD\",\n  as.numeric = TRUE\n)\n\ngt &lt;- vcfR::extract.gt(\n  called_vcf,\n  element = \"GT\",\n  as.numeric = FALSE\n)\n\nalt_dosage &lt;- apply(gt, c(1, 2), function(x) {\n  if (is.na(x) || grepl(\"\\\\.\", x)) {\n    return(NA_real_)\n  }\n\n  sum(strsplit(x, \"[/|]\")[[1]] == \"1\")\n})\n\ncalled_dp &lt;- vcfR::extract.gt(\n  called_vcf,\n  element = \"DP\",\n  as.numeric = TRUE\n)\n\nstopifnot(\n  all(!is.na(source_row)),\n  identical(\n    called_vcf@fix[, \"REF\"],\n    read_vcf@fix[source_row, \"REF\"]\n  ),\n  identical(\n    called_vcf@fix[, \"ALT\"],\n    read_vcf@fix[source_row, \"ALT\"]\n  ),\n  all(ud &gt;= 0 & ud &lt;= ploidy, na.rm = TRUE),\n  all(ud + alt_dosage == ploidy, na.rm = TRUE),\n  all(called_dp &gt;= 0, na.rm = TRUE)\n)\nNo output means the VCF has matching variant identities, recovered alleles, valid diploid or polyploid dosage bounds, and consistent dosage direction.\n\nApply adjustable quality filters\nThe official vcfR filtering tutorial explains general VCF quality-control operations. The filters demonstrated here are implemented by BIGr, not by vcfR (Knaus and Grünwald 2017).\nThe following values are intentionally concrete so the example is reproducible, but they are not universal defaults. Apply the depth mask first. Updog fits a population model and can assign a dosage even when a sample has zero reads at a locus; that model-based call must not be retained as observed genotype evidence.\nmin_genotype_depth &lt;- 20\n\ncalled_gt_before_depth &lt;- vcfR::extract.gt(\n  called_vcf,\n  element = \"GT\",\n  as.numeric = FALSE\n)\n\ncalled_dp_before_depth &lt;- vcfR::extract.gt(\n  called_vcf,\n  element = \"DP\",\n  as.numeric = TRUE\n)\n\n# An absent DP must not accompany a retained genotype.\nstopifnot(\n  all(is.na(\n    called_gt_before_depth[is.na(called_dp_before_depth)]\n  ))\n)\n\nlow_depth_calls &lt;- !is.na(called_dp_before_depth) &\n  called_dp_before_depth &lt; min_genotype_depth\n\ndepth_filtered_vcf &lt;- BIGr::filterVCF(\n  vcf.file = called_vcf,\n  filter.DP = min_genotype_depth,\n  ploidy = ploidy,\n  output.file = NULL\n)\n\ngt_after_depth &lt;- vcfR::extract.gt(\n  depth_filtered_vcf,\n  element = \"GT\",\n  as.numeric = FALSE\n)\n\nud_after_depth &lt;- vcfR::extract.gt(\n  depth_filtered_vcf,\n  element = \"UD\",\n  as.numeric = TRUE\n)\n\ndp_after_depth &lt;- vcfR::extract.gt(\n  depth_filtered_vcf,\n  element = \"DP\",\n  as.numeric = TRUE\n)\n\nstopifnot(\n  all(is.na(gt_after_depth[low_depth_calls])),\n  all(is.na(ud_after_depth[low_depth_calls])),\n  all(is.na(dp_after_depth[low_depth_calls]))\n)\n\nsum(low_depth_calls)\nExpected result:\n[1] 49\nIn BIGr 0.7.2, filter.DP compares each original DP with the threshold using DP &lt; filter.DP. It converts the entire sample FORMAT entry to missing, not only GT; therefore GT, Updog’s reference dosage (UD), depth, allele counts, and posterior probability are all unavailable for the masked call. A zero-depth Updog call is included in this mask. The assertions above make that behavior visible and guard against accidentally retaining low-depth dosages.\nRun the remaining call-level and locus-level filters on depth_filtered_vcf so that MAF and missingness are calculated only after low-depth calls have been removed.\nfiltered_vcf_base &lt;- file.path(\n  output_dir,\n  \"madc_updog\"\n)\n\nBIGr::filterVCF(\n  vcf.file = depth_filtered_vcf,\n  filter.OD = 0.05,\n  filter.BIAS.min = 0.7,\n  filter.BIAS.max = 1.3,\n  filter.MPP = 0.80,\n  filter.PMC = 0.10,\n  filter.MAF = 0.05,\n  filter.SAMPLE.miss = 0.50,\n  filter.SNP.miss = 0.50,\n  ploidy = ploidy,\n  output.file = filtered_vcf_base\n)\n\nfiltered_vcf_file &lt;- paste0(\n  filtered_vcf_base,\n  \"_filtered.vcf.gz\"\n)\n\nfiltered_vcf &lt;- vcfR::read.vcfR(\n  filtered_vcf_file,\n  verbose = FALSE\n)\nThe second pass turns genotype entries below the posterior-probability threshold into missing calls, then filters on locus-level overdispersion, allele bias, expected mis-genotyping, missingness, and minor allele frequency (MAF). MAF measures how common the less frequent allele is; missingness records the fraction of unavailable genotype calls for a marker or sample.\n\n\n\n\n\n\nNoteChoose filters from evidence, not this example\n\n\n\nAt higher ploidy, adjacent dosage classes are closer together and may need more depth. Bias and overdispersion tolerances depend on model fit and the panel. MAF and missingness limits depend on sample size, population design, and downstream analysis. Compare reasonable settings and report the number of calls, loci, and samples removed at each stage.\n\n\nFor this 10-sample example, the displayed thresholds retain 3 variants and all 10 samples. Validate the written file one last time:\nrequired_format &lt;- c(\"GT\", \"UD\", \"DP\", \"RA\", \"AD\", \"MPP\")\nformat_fields &lt;- strsplit(\n  unique(filtered_vcf@gt[, \"FORMAT\"]),\n  \":\",\n  fixed = TRUE\n)[[1]]\n\nfiltered_ud &lt;- vcfR::extract.gt(\n  filtered_vcf,\n  element = \"UD\",\n  as.numeric = TRUE\n)\n\nstopifnot(\n  nrow(filtered_vcf@fix) &gt; 0,\n  ncol(filtered_vcf@gt) &gt; 1,\n  all(required_format %in% format_fields),\n  !any(grepl(\",\", filtered_vcf@fix[, \"ALT\"], fixed = TRUE)),\n  all(filtered_ud &gt;= 0 & filtered_ud &lt;= ploidy, na.rm = TRUE)\n)\n\nc(\n  variants = nrow(filtered_vcf@fix),\n  samples = ncol(filtered_vcf@gt) - 1\n)\nExpected output:\nvariants  samples\n       3       10"
+  },
+  {
+    "objectID": "learn/madc-to-vcf.html#alternative-retain-multiallelic-information-with-polyrad",
+    "href": "learn/madc-to-vcf.html#alternative-retain-multiallelic-information-with-polyrad",
+    "title": "Convert MADC data to a genotype-called VCF",
+    "section": "Alternative: retain multiallelic information with polyRAD",
+    "text": "Alternative: retain multiallelic information with polyRAD\nIf retaining multiallelic variants is central to the analysis, BIGr also provides madc2vcf_multi(), which uses polyRAD rather than the biallelic Updog path. Read the official polyRAD tutorial and the madc2vcf_multi() arguments in the BIGr reference manual before choosing that route (Clark, Lipka, and Sacks 2019).\nThis tutorial does not install or execute polyRAD. polyRAD can be substantially faster for large marker sets, but it can be more memory-intensive and requires an appropriate population model. The two workflows also make different choices about multiallelic evidence and diagnostics; select the path that matches the organism, panel, computing resources, and downstream goal."
+  },
+  {
+    "objectID": "learn/madc-to-vcf.html#troubleshooting-checkpoints",
+    "href": "learn/madc-to-vcf.html#troubleshooting-checkpoints",
+    "title": "Convert MADC data to a genotype-called VCF",
+    "section": "Troubleshooting checkpoints",
+    "text": "Troubleshooting checkpoints\n\n\n\n\n\n\n\n\nSymptom\nCheck first\n\n\n\n\nBIGr reports unfixed allele IDs\nStop and process the raw report with HapApp; do not rename suffixes manually\n\n\nREF/ALT bases look complemented or reversed\nConfirm that the .botloci file belongs to this panel and that marker coordinates use the expected strand\n\n\nREF or ALT is . in the called VCF\nPass the recovered REF/ALT table to updog2vcf() and match it by chromosome and position\n\n\nmultidog() reports all SNPs missing\nConfirm that the reference field is RA in this BIGr VCF, that DP is present, and that counts were extracted as numeric matrices\n\n\nMatrix dimensions or names differ\nStop; align the same variants and samples before calling\n\n\nA dosage is outside 0 through ploidy\nStop; verify ploidy and input orientation before conversion\n\n\nDosage appears reversed\nRemember that Updog/UD counts REF while VCF allele index 1 counts ALT\n\n\nDosage classes overlap\nReassess depth, ploidy, allele bias, overdispersion, sequencing error, and model choice\n\n\nAlmost every locus disappears\nInspect each threshold separately; this example’s values may be inappropriate for your data"
+  },
+  {
+    "objectID": "learn/madc-to-vcf.html#continue-learning",
+    "href": "learn/madc-to-vcf.html#continue-learning",
+    "title": "Convert MADC data to a genotype-called VCF",
+    "section": "Continue learning",
+    "text": "Continue learning\n\nWhat is allele dosage? explains dosage direction and uncertainty.\nSNP filtering in polyploids develops a ploidy-aware filtering strategy.\nChoosing a missing-data threshold shows how to evaluate missingness sensitivity.\nEstimate copy number in alfalfa with Qploidy2 addresses ploidy, aneuploidy, and large copy-number changes."
+  },
+  {
+    "objectID": "learn/madc-to-vcf.html#references",
+    "href": "learn/madc-to-vcf.html#references",
+    "title": "Convert MADC data to a genotype-called VCF",
+    "section": "References",
+    "text": "References\n\n Clark LV, Lipka AE, Sacks EJ. 2019. “polyRAD: Genotype Calling with Uncertainty from Sequencing Data in Polyploids and Diploids.” G3: Genes, Genomes, Genetics 9(3):663–673. doi:10.1534/g3.118.200913\n Gerard D, Ferrão LFV, Garcia AAF, Stephens M. 2018. “Genotyping Polyploids from Messy Sequencing Data.” Genetics 210(3):789–807. doi:10.1534/genetics.118.301468\n Gerard D, Ferrão LFV. 2020. “Priors for Genotyping Polyploids.” Bioinformatics 36(6):1795–1800. doi:10.1093/bioinformatics/btz852\n Knaus BJ, Grünwald NJ. 2017. “vcfR: A Package to Manipulate and Visualize Variant Call Format Data in R.” Molecular Ecology Resources 17(1):44–53. doi:10.1111/1755-0998.12549\n Sandercock AM, Peel M, Taniguti C, Chinchilla-Vargas J, Chen S, Sapkota M, Lin M, Zhao D, Ackerman A, Basnet B, Beil C, Sheehan M. 2025. “BIGapp: A User-Friendly Genomic Tool Kit Identified Quantitative Trait Loci for Creeping Rootedness in Alfalfa (Medicago sativa L.).” The Plant Genome 18(3):e70067. doi:10.1002/tpg2.70067\n Sandercock AM, Taniguti C, Chinchilla-Vargas J, Chen S, Sapkota M, Lin M, Zhao D, University C. 2025. BIGr: Breeding Insight Genomics Functions for Polyploid and Diploid Species. R package citation supplied with CRAN BIGr 0.7.2; the citation file reports package version 0.6.2. BIGr source repository\n Zhao D, Lin M, Taniguti CH, Sandercock AM, et al. 2026. “Development and Characterization of Microhaplotype Databases for Diverse Crop Species.” Research Square preprint. doi:10.21203/rs.3.rs-9292361/v1"
+  },
+  {
+    "objectID": "learn/snp-filtering-polyploids.html",
+    "href": "learn/snp-filtering-polyploids.html",
+    "title": "SNP filtering in polyploids",
+    "section": "",
+    "text": "Polyploid SNP filtering is not just diploid filtering with a different ploidy value. A useful strategy must account for multiple dosage classes, genotype uncertainty, allele bias, duplicated genomic regions, and the assumptions of the downstream analysis."
+  },
+  {
+    "objectID": "learn/snp-filtering-polyploids.html#why-polyploid-filtering-is-harder",
+    "href": "learn/snp-filtering-polyploids.html#why-polyploid-filtering-is-harder",
+    "title": "SNP filtering in polyploids",
+    "section": "Why polyploid filtering is harder",
+    "text": "Why polyploid filtering is harder\nAt a biallelic tetraploid locus, five dosage states are possible rather than three diploid genotype states. As ploidy increases, neighboring expected allele fractions become closer together, so sequencing depth and model fit become increasingly important for distinguishing dosage classes.\nPolyploid genomes can also contain highly similar duplicated regions. Reads from paralogs or homoeologs may map to the same reference location, producing:\n\nexcess read depth;\napparent heterozygosity across nearly every sample;\ndistorted allele ratios;\npoor segregation;\nvariants that look polymorphic but do not behave like a single Mendelian locus."
+  },
+  {
+    "objectID": "learn/snp-filtering-polyploids.html#think-in-layers",
+    "href": "learn/snp-filtering-polyploids.html#think-in-layers",
+    "title": "SNP filtering in polyploids",
+    "section": "Think in layers",
+    "text": "Think in layers\nA defensible workflow usually filters several kinds of evidence in sequence.\n\n1. Sequence and locus evidence\nBefore trusting a genotype call, evaluate whether the site itself is credible.\nDepending on the platform and caller, relevant metrics can include:\n\nmapping quality;\nbase quality;\nstrand or positional bias;\nminimum and maximum depth;\nlocal alignment problems near indels;\nduplicate or invalid coordinates;\nuniquely mappable sequence;\nunexpectedly high depth consistent with collapsed repeats or duplicated loci.\n\n\n\n\n\n\n\nWarningHigh depth is not always high confidence\n\n\n\nIn a duplicated genome, an extreme depth outlier can indicate that reads from several genomic copies are collapsing onto one reference position. A minimum-depth filter alone will not detect that problem.\n\n\n\n\n2. Dosage-call quality\nFor sequencing-based dosage calls, inspect more than the final integer genotype.\nUseful signals include:\n\nposterior probability of the selected dosage;\nseparation among dosage clusters;\nestimated allele bias;\noverdispersion;\nsequencing-error parameters;\noutlier flags;\noverall model fit.\n\nA site with many confident hard calls can still be problematic if the fitted model requires extreme bias or produces implausible cluster structure.\n\n\n3. Sample and marker missingness\nRemove globally poor samples and unreliable markers in a deliberate order. Then re-calculate missingness because removing failed samples can rescue otherwise useful loci.\nRead: Choosing a missing-data threshold\n\n\n4. Frequency and informativeness\nMinor-allele-frequency filters should match the analysis and sample size.\nA rare allele may be:\n\nbiologically real but too sparse for a stable association test;\nuseful in a large genomic prediction population;\ndifficult to distinguish from error in shallow sequencing;\nabsent from one family but informative in another.\n\nDo not apply a MAF threshold simply because it is conventional. Record the value, the number of loci removed, and the reason the downstream method needs it.\n\n\n5. Mendelian or segregation behavior—when appropriate\nFamily information can reveal loci that do not behave as expected. However, the expected segregation pattern depends on:\n\nploidy;\ninheritance mode;\npairing behavior;\npopulation design;\ndouble reduction;\nnull alleles;\naneuploidy or copy-number variation.\n\nA diploid Hardy–Weinberg or segregation filter should not be transferred blindly to a polyploid dataset.\n\n\n6. Analysis-specific filtering\nThe final marker set should reflect the actual question.\n\n\nPCA or population structure\nConsider missingness, linkage disequilibrium, uneven marker density, and whether technical structure aligns with biological groups.\n\n\nGWAS\nConsider allele frequency, genotype uncertainty, population structure, marker redundancy, and whether the association model accepts dosage directly.\n\n\nGenomic prediction\nAggressive LD pruning is often not automatically desirable because genome-wide marker information is the signal used for prediction. Validate filtering choices by prediction scenario.\n\n\nLinkage and QTL mapping\nSegregation behavior, parental dosage, family structure, and mapping-model assumptions become central."
+  },
+  {
+    "objectID": "learn/snp-filtering-polyploids.html#a-practical-order-of-operations",
+    "href": "learn/snp-filtering-polyploids.html#a-practical-order-of-operations",
+    "title": "SNP filtering in polyploids",
+    "section": "A practical order of operations",
+    "text": "A practical order of operations\nA useful starting sequence is:\n\nvalidate sample identity and gross sample quality;\nremove technically invalid or clearly unreliable sites;\ncall dosage with a polyploid-aware model;\nfilter low-confidence genotype calls or loci using caller diagnostics;\nre-calculate sample and marker missingness;\nevaluate depth extremes and duplicated-locus behavior;\napply analysis-specific frequency, LD, or segregation filters;\ncompare key outputs across reasonable alternative filter settings.\n\nThe exact order can change with the technology. For example, a targeted MADC workflow and low-depth GBS workflow do not generate the same evidence or failure modes."
+  },
+  {
+    "objectID": "learn/snp-filtering-polyploids.html#what-to-report",
+    "href": "learn/snp-filtering-polyploids.html#what-to-report",
+    "title": "SNP filtering in polyploids",
+    "section": "What to report",
+    "text": "What to report\n\n\norganism and modeled ploidy;\nreference assembly and mapping strategy;\nsite-level sequence filters;\ndosage caller and model;\ngenotype-confidence threshold;\nsample and marker missingness rules;\ndepth limits;\nallele-frequency rule;\nLD pruning, if used;\nfamily/segregation filters, if used;\nmarker counts after each major step."
+  },
+  {
+    "objectID": "learn/snp-filtering-polyploids.html#practical-takeaway",
+    "href": "learn/snp-filtering-polyploids.html#practical-takeaway",
+    "title": "SNP filtering in polyploids",
+    "section": "Practical takeaway",
+    "text": "Practical takeaway\n\nFilter polyploid SNPs as a chain of evidence: credible locus → credible dosage model → credible genotype calls → credible dataset → fit for the downstream analysis. Avoid relying on one hard-call matrix and one universal threshold."
+  },
+  {
+    "objectID": "learn/snp-filtering-polyploids.html#continue-learning",
+    "href": "learn/snp-filtering-polyploids.html#continue-learning",
+    "title": "SNP filtering in polyploids",
+    "section": "Continue learning",
+    "text": "Continue learning\nWhat is allele dosage? Process MADC genotype data"
+  },
+  {
+    "objectID": "learn/snp-filtering-polyploids.html#further-reading",
+    "href": "learn/snp-filtering-polyploids.html#further-reading",
+    "title": "SNP filtering in polyploids",
+    "section": "Further reading",
+    "text": "Further reading\n\nGerard D, Ferrão LFV, Garcia AAF, Stephens M. 2018. Genotyping Polyploids from Messy Sequencing Data. Genetics 210:789–807. doi:10.1534/genetics.118.301468\nGemenet DC et al. 2020. Sequencing depth and genotype quality: accuracy and breeding operation considerations for genomic selection applications in autopolyploid crops. Theoretical and Applied Genetics 133:3345–3363. doi:10.1007/s00122-020-03673-2\nClark LV, Mays W, Lipka AE, Sacks EJ. 2022. A population-level statistic for assessing Mendelian behavior of genotyping-by-sequencing data from highly duplicated genomes. BMC Bioinformatics 23:101. doi:10.1186/s12859-022-04635-9"
   },
   {
     "objectID": "learn/what-is-allele-dosage.html",

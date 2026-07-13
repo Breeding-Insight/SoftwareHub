@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="A user-friendly Shiny application for genomic analysis without command-line tools.">
+<meta name="keywords" content="DArT, DArTag, MADC, microhaplotype, read counts, VCF, fixed allele IDs">
+<meta name="description" content="Understand how DArT MADC files represent microhaplotype read counts and how BIGr turns those counts into variant data.">
 
-<title>BIGapp – Breeding Insight Software</title>
+<title>What is a MADC file? – Breeding Insight Software</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -75,15 +76,16 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
-<meta property="og:title" content="BIGapp – Breeding Insight Software">
-<meta property="og:description" content="A user-friendly Shiny application for genomic analysis without command-line tools.">
-<meta property="og:image" content="https://breeding-insight.github.io/software/assets/software-bigapp.png">
+<meta property="og:title" content="What is a MADC file? – Breeding Insight Software">
+<meta property="og:description" content="Understand how DArT MADC files represent microhaplotype read counts and how BIGr turns those counts into variant data.">
+<meta property="og:image" content="https://breeding-insight.github.io/software/assets/concept-madc.svg">
 <meta property="og:site_name" content="Breeding Insight Software">
-<meta property="og:image:height" content="1022">
-<meta property="og:image:width" content="1196">
-<meta property="og:image:alt" content="BIGapp hexagonal logo.">
+<meta property="og:image:alt" content="A MADC table with fixed allele IDs and per-sample read counts.">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -150,30 +152,33 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#start-here" id="toc-start-here" class="nav-link active" data-scroll-target="#start-here">Start here</a></li>
-  <li><a href="#good-fit-for" id="toc-good-fit-for" class="nav-link" data-scroll-target="#good-fit-for">Good fit for</a></li>
-  <li><a href="#related-learning" id="toc-related-learning" class="nav-link" data-scroll-target="#related-learning">Related learning</a></li>
+  <li><a href="#where-madc-fits" id="toc-where-madc-fits" class="nav-link active" data-scroll-target="#where-madc-fits">Where MADC fits</a></li>
+  <li><a href="#read-one-madc-row" id="toc-read-one-madc-row" class="nav-link" data-scroll-target="#read-one-madc-row">Read one MADC row</a></li>
+  <li><a href="#ref-alt-match-and-other-alleles" id="toc-ref-alt-match-and-other-alleles" class="nav-link" data-scroll-target="#ref-alt-match-and-other-alleles">Ref, Alt, Match, and Other alleles</a></li>
+  <li><a href="#why-fixed-allele-ids-matter" id="toc-why-fixed-allele-ids-matter" class="nav-link" data-scroll-target="#why-fixed-allele-ids-matter">Why fixed allele IDs matter</a></li>
+  <li><a href="#the-supporting-files" id="toc-the-supporting-files" class="nav-link" data-scroll-target="#the-supporting-files">The supporting files</a></li>
+  <li><a href="#madc-counts-are-not-vcf-genotypes" id="toc-madc-counts-are-not-vcf-genotypes" class="nav-link" data-scroll-target="#madc-counts-are-not-vcf-genotypes">MADC counts are not VCF genotypes</a></li>
+  <li><a href="#practical-takeaway" id="toc-practical-takeaway" class="nav-link" data-scroll-target="#practical-takeaway">Practical takeaway</a></li>
+  <li><a href="#continue-to-the-workflow" id="toc-continue-to-the-workflow" class="nav-link" data-scroll-target="#continue-to-the-workflow">Continue to the workflow</a></li>
+  <li><a href="#attribution" id="toc-attribution" class="nav-link" data-scroll-target="#attribution">Attribution</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/software/bigapp.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/learn/what-is-a-madc-file.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">BIGapp</h1>
+<h1 class="title">What is a MADC file?</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">R Shiny</div>
-    <div class="quarto-category">Genomics</div>
-    <div class="quarto-category">GWAS</div>
-    <div class="quarto-category">Genomic selection</div>
-    <div class="quarto-category">Visualization</div>
+    <div class="quarto-category">Genotype Data</div>
+    <div class="quarto-category">File Formats</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    A user-friendly Shiny application for genomic analysis without command-line tools.
+    Understand how DArT MADC files represent microhaplotype read counts and how BIGr turns those counts into variant data.
   </div>
 </div>
 
@@ -186,36 +191,300 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>DArT, DArTag, MADC, microhaplotype, read counts, VCF, fixed allele IDs</p>
+  </div>
+</div>
 
 </header>
 
 
-<div class="software-header">
+<div class="concept-definition">
+<p>A <strong>MADC file</strong> is a comma-separated <strong>Missing Allele Discovery Counts</strong> report from DArT targeted sequencing. It records the read count for each observed microhaplotype in each sample; it does not contain genotype calls.</p>
+</div>
+<p>A microhaplotype is a short amplified genomic segment containing one or more tightly linked variants. Because the variants are observed together on the same sequencing read, a microhaplotype can represent more than two alleles at one targeted region. DArTag returns raw FASTQ reads and a semi-processed MADC report that summarizes this sequence-level evidence (<a href="https://doi.org/10.21203/rs.3.rs-9292361/v1">Zhao et al.&nbsp;2026</a>).</p>
+<section id="where-madc-fits" class="level2">
+<h2 class="anchored" data-anchor-id="where-madc-fits">Where MADC fits</h2>
+<div class="madc-workflow-figure">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
 <div>
-<p>BIGapp provides a graphical interface for common genomic analyses, including workflows for population structure, association analysis, genomic prediction, and related tasks.</p>
-<div class="meta-row">
-<span class="pill">R Shiny</span><span class="pill">Interactive</span><span class="pill">Diploid + polyploid</span>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"flowchart": {"rankSpacing": 32, "nodeSpacing": 60, "curve": "basis"}}}%%
+flowchart TB
+  accTitle: MADC processing and genotype-calling workflow
+  accDescr: Targeted genotype sequencing produces a raw MADC file. HapApp assigns fixed allele IDs and resolves problematic microhaplotypes. The processed MADC can then be used for a kinship matrix or converted by BIGr into a read-count VCF, called with Updog, and written as a genotype-called VCF.
+
+  A([Targeted&lt;br/&gt;sequencing]) --&gt; B[/Raw MADC&lt;br/&gt;read counts/]
+  B --&gt; C{{HapApp&lt;br/&gt;processing}}
+  C --&gt; D[(Processed MADC&lt;br/&gt;fixed allele IDs)]
+  D --&gt;|relationship analysis| E([Kinship&lt;br/&gt;matrix])
+  D --&gt;|variant recovery| F[/BIGr&lt;br/&gt;read-count VCF/]
+  F --&gt; G{{Updog&lt;br/&gt;dosage model}}
+  G --&gt; H([Genotype-called&lt;br/&gt;VCF])
+
+  classDef source fill:#EAF5F7,stroke:#2A6576,stroke-width:2px,color:#173D47
+  classDef raw fill:#FFF7E8,stroke:#C98B2E,stroke-width:2px,color:#674615
+  classDef process fill:#EEF8F0,stroke:#319B42,stroke-width:2px,color:#1E5D28
+  classDef data fill:#EDF6F8,stroke:#48A9C5,stroke-width:2px,color:#214F5C
+  classDef result fill:#F3EFF9,stroke:#765C9E,stroke-width:2px,color:#493566
+
+  class A source
+  class B raw
+  class C,G process
+  class D,F data
+  class E,H result
+</pre>
+</div>
+<p></p><figcaption> MADC data move through preparation before relationship analysis or genotype calling.</figcaption> </figure><p></p>
 </div>
 </div>
-<p><img class="software-logo" src="../assets/software-bigapp.png" alt="BIGapp logo"></p>
 </div>
-<section id="start-here" class="level2">
-<h2 class="anchored" data-anchor-id="start-here">Start here</h2>
-<p><a href="https://github.com/Breeding-Insight/BIGapp" class="btn-bi-primary">Source code</a> <a href="https://breedinginsight.org/software/bigapp/" class="btn-bi-secondary">Breeding Insight software page</a></p>
+</div>
+<p>The raw report can include duplicate, ambiguous, or poor-quality microhaplotypes. Breeding Insight processes it with HapApp before BIGr conversion so that allele identities remain stable across files and analyses. The standardized IDs support marker tracking and cross-project comparison rather than merely recording the order in which alleles appeared in one report.</p>
 </section>
-<section id="good-fit-for" class="level2">
-<h2 class="anchored" data-anchor-id="good-fit-for">Good fit for</h2>
-<ul>
-<li>Users who prefer an interactive graphical workflow</li>
-<li>Teaching genomic analysis concepts without requiring command-line expertise</li>
-<li>Analyses supported by the BIGr/BIGapp ecosystem</li>
-</ul>
+<section id="read-one-madc-row" class="level2">
+<h2 class="anchored" data-anchor-id="read-one-madc-row">Read one MADC row</h2>
+<p>Every row describes one observed allele sequence. The first three columns identify that sequence; the remaining columns give its read count in each sample.</p>
+<div class="table-responsive">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>AlleleID</code></td>
+<td>Marker ID, allele role, and fixed allele number, such as <code>chr1.1_000194324|Ref_0001</code></td>
+</tr>
+<tr class="even">
+<td><code>CloneID</code></td>
+<td>Target-region identifier, commonly encoded as chromosome and position</td>
+</tr>
+<tr class="odd">
+<td><code>AlleleSequence</code></td>
+<td>Amplicon or microhaplotype sequence observed for that allele</td>
+</tr>
+<tr class="even">
+<td>Sample columns</td>
+<td>Non-negative read counts for that allele in each named sample</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The following accessible excerpt is based on <code>example_MADC_FixedAlleleID.csv</code>, which is bundled with BIGr. Sequences are shortened only for display.</p>
+<div class="table-responsive">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><code>AlleleID</code></th>
+<th><code>CloneID</code></th>
+<th><code>AlleleSequence</code> excerpt</th>
+<th style="text-align: right;"><code>Sample_1</code></th>
+<th style="text-align: right;"><code>Sample_2</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>chr1.1_000194324|AltMatch_0001</code></td>
+<td><code>chr1.1_000194324</code></td>
+<td><code>CGAAATAA…GACAAC</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">139</td>
+</tr>
+<tr class="even">
+<td><code>chr1.1_000194324|Alt_0002</code></td>
+<td><code>chr1.1_000194324</code></td>
+<td><code>CGAAATAA…AAGTAA</code></td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td><code>chr1.1_000194324|Ref_0001</code></td>
+<td><code>chr1.1_000194324</code></td>
+<td><code>CGAAATAA…AAGTAA</code></td>
+<td style="text-align: right;">152</td>
+<td style="text-align: right;">171</td>
+</tr>
+<tr class="even">
+<td><code>chr1.1_000309952|AltMatch_0001</code></td>
+<td><code>chr1.1_000309952</code></td>
+<td><code>TGGTATTG…ATATTCA</code></td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">82</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Rows that share a <code>CloneID</code> belong to the same targeted region. To obtain the total evidence at a variant, BIGr reconciles the sequences, their strand orientation, and the bases they carry at each polymorphic position.</p>
 </section>
-<section id="related-learning" class="level2">
-<h2 class="anchored" data-anchor-id="related-learning">Related learning</h2>
+<section id="ref-alt-match-and-other-alleles" class="level2">
+<h2 class="anchored" data-anchor-id="ref-alt-match-and-other-alleles">Ref, Alt, Match, and Other alleles</h2>
+<p>The MADC’s four core classes are Ref, Alt, RefMatch, and AltMatch. The part of <code>AlleleID</code> after the vertical bar describes how a microhaplotype relates to the designed marker.</p>
+<div class="table-responsive">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Label</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Ref</code></td>
+<td>The designated reference microhaplotype at the target polymorphism</td>
+</tr>
+<tr class="even">
+<td><code>Alt</code></td>
+<td>The designated alternate microhaplotype at the target polymorphism</td>
+</tr>
+<tr class="odd">
+<td><code>RefMatch</code></td>
+<td>A discovered microhaplotype that carries the target reference state but differs elsewhere in the amplicon</td>
+</tr>
+<tr class="even">
+<td><code>AltMatch</code></td>
+<td>A discovered microhaplotype that carries the target alternate state but differs elsewhere in the amplicon</td>
+</tr>
+<tr class="odd">
+<td><code>Other</code></td>
+<td>An additional sequence label recognized by current BIGr outside the four core MADC classes; verify its provenance in the HapApp output and panel database</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A <strong>target allele</strong> is defined at the polymorphism for which the probe was designed. An <strong>off-target allele</strong> arises from another polymorphic position discovered within the same amplified sequence. A Match or Other microhaplotype can therefore contribute read evidence at the target and can also reveal off-target SNPs.</p>
+<p>Current <code>madc2vcf_all()</code> behavior is more capable than the original MADC description:</p>
 <ul>
-<li><a href="../learn/genomics-path.html">Choose a genomic analysis path</a></li>
+<li><code>Other</code> alleles can be included in off-target discovery and filtered by sequence difference or indel status;</li>
+<li>an <code>Other</code> allele carrying a third base at the target can make that target multiallelic;</li>
+<li>multiallelic sites can be removed or evaluated with read-depth and sample-count thresholds; and</li>
+<li>target indels are supported when the required marker information is supplied, although off-target sites from an indel-containing tag are not extracted.</li>
 </ul>
+<p>The <a href="../learn/madc-to-vcf.html">Updog conversion workflow</a> deliberately removes multiallelic SNPs because its two count matrices represent one reference and one alternate allele.</p>
+</section>
+<section id="why-fixed-allele-ids-matter" class="level2">
+<h2 class="anchored" data-anchor-id="why-fixed-allele-ids-matter">Why fixed allele IDs matter</h2>
+<p>The suffixes in <code>Ref_0001</code>, <code>Alt_0002</code>, and Match labels are fixed identifiers assigned against a haplotype database. They prevent a sequence from changing identity merely because a different batch contains a different set or order of observed haplotypes.</p>
+<p>BIGr requires fixed IDs for its MADC-to-VCF functions. A raw DArT report may use unfixed labels such as <code>|Ref</code> and <code>|Alt</code>, include seven placeholder rows, or contain ambiguous sequences. Renaming those labels by hand is not equivalent to HapApp processing. The standardized workflow cleans and filters sequences, matches previously cataloged alleles, assigns new IDs to qualifying novel alleles, writes those IDs back to the MADC, and updates the haplotype database when new alleles are found (<a href="https://doi.org/10.21203/rs.3.rs-9292361/v1">Zhao et al.&nbsp;2026</a>).</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Do not send a raw MADC directly to dosage calling">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Do not send a raw MADC directly to dosage calling
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A raw MADC has neither stable allele identities nor called genotypes. Process it with HapApp, validate it with <code>check_madc_sanity()</code>, and convert its read evidence to a biallelic read-count VCF before using Updog.</p>
+</div>
+</div>
+</section>
+<section id="the-supporting-files" class="level2">
+<h2 class="anchored" data-anchor-id="the-supporting-files">The supporting files</h2>
+<p>MADC conversion may require files that supply information not safely inferable from the count table alone.</p>
+<div class="table-responsive">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>What BIGr uses it for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>.botloci</code></td>
+<td>Lists tags designed from the bottom strand so BIGr can reverse-complement them and recover the correct genomic orientation</td>
+</tr>
+<tr class="even">
+<td>Haplotype FASTA</td>
+<td>Provides the panel’s known allele sequences and can recover a missing Ref or Alt sequence</td>
+</tr>
+<tr class="odd">
+<td>Marker-information CSV</td>
+<td>Supplies marker coordinates or authoritative REF/ALT details when <code>CloneID</code> is not in <code>Chromosome_Position</code> form; target indels additionally require the documented indel fields</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Current BIGr writes conversion provenance and parameters into VCF metadata. It can also remap nonstandard marker IDs with a marker-information file. Consult the <a href="https://cran.r-project.org/web/packages/BIGr/BIGr.pdf">current BIGr reference manual</a> for the columns required by the function and data type you use.</p>
+<p>Paralogous microhaplotypes require context. Curated databases may retain and flag them so that recurring sequences can be recognized in later projects, while a breeding analysis may remove likely paralogous markers before genotype calling. A very large number of microhaplotypes or extreme depth at one locus can indicate unintended amplification of duplicated genomic regions, but high allelic diversity alone is not proof of paralogy (<a href="https://doi.org/10.21203/rs.3.rs-9292361/v1">Zhao et al.&nbsp;2026</a>).</p>
+</section>
+<section id="madc-counts-are-not-vcf-genotypes" class="level2">
+<h2 class="anchored" data-anchor-id="madc-counts-are-not-vcf-genotypes">MADC counts are not VCF genotypes</h2>
+<div class="table-responsive">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Data state</th>
+<th>What the sample values mean</th>
+<th>Genotypes present?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Processed MADC</td>
+<td>One read count per microhaplotype row</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>Read-count VCF</td>
+<td>Reference-allele depth, alternate-allele depth, and total depth at each biallelic variant</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>Genotype-called VCF</td>
+<td>Allele depths plus a model-based dosage/genotype and its uncertainty</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A read fraction is not itself an allele dosage. Allele bias, sequencing error, overdispersion, depth, and population information all affect how strongly the reads support a dosage class. See <a href="../learn/what-is-allele-dosage.html">What is allele dosage?</a> before interpreting a called polyploid VCF.</p>
+</section>
+<section id="practical-takeaway" class="level2">
+<h2 class="anchored" data-anchor-id="practical-takeaway">Practical takeaway</h2>
+<div class="bi-callout">
+<p>Treat MADC as <strong>sequence-level count evidence</strong>. Fixed allele IDs establish what each row represents; <code>.botloci</code>, FASTA, and marker information establish orientation and variant identity; a dosage caller turns the resulting biallelic counts into uncertain genotype calls.</p>
+</div>
+</section>
+<section id="continue-to-the-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="continue-to-the-workflow">Continue to the workflow</h2>
+<p><a href="../learn/madc-to-vcf.html" class="btn-bi-primary">Convert MADC data to a genotype-called VCF</a> <a href="../learn/get-started-genomic-data-r.html" class="btn-bi-secondary">Get started with genomic data in R</a></p>
+</section>
+<section id="attribution" class="level2">
+<h2 class="anchored" data-anchor-id="attribution">Attribution</h2>
+<p>This page adapts <a href="https://breeding-insight.github.io/BIGr_documentation/posts/madc-file-format/">“MADC File Format”</a> by Alexander M. Sandercock and Cristiane H. Taniguti. The source and this adaptation are licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
 
 
 </section>
@@ -634,7 +903,7 @@ ul.task-list li input[type="checkbox"] {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/software/bigapp.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/learn/what-is-a-madc-file.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
