@@ -1,0 +1,8 @@
+---
+title: "About this portal"
+toc: false
+---
+
+This site is a unified entry point for open-source software, practical tutorials, workshops, and documentation developed by Breeding Insight.
+
+The architecture separates **discovery and learning** from **package API reference**. Individual packages remain responsible for their canonical function documentation and release information, while the portal explains how tools fit together in real breeding workflows.

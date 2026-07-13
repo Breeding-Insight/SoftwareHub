@@ -1,0 +1,105 @@
+---
+title: "Breeding Insight Software"
+page-layout: full
+toc: false
+title-block-banner: false
+---
+
+::: {.hero}
+::: {.hero-inner}
+<div class="hero-kicker">Breeding Insight software</div>
+
+# Software and training for breeding programs
+
+Browse open-source tools for breeding data and genomics, then find the tutorials and workshop materials that support your work.
+
+::: {.hero-actions}
+[Explore software](software.qmd){.btn-bi-primary}
+[Start learning](learn.qmd){.btn-bi-secondary}
+:::
+:::
+:::
+
+## Find what you need {.section-heading}
+
+Choose a tool, follow a practical workflow, or return to material from a training event.
+
+::: {.path-grid}
+::: {.path-card}
+<div class="path-icon">01</div>
+
+### Browse software
+
+Compare packages and applications by task, data type, language, and analysis area.
+
+[View all software](software.qmd){.card-link}
+:::
+
+::: {.path-card}
+<div class="path-icon">02</div>
+
+### Follow a workflow
+
+Work through practical tutorials that may span more than one package, from raw genotype data to analysis-ready outputs.
+
+[Browse tutorials](learn.qmd){.card-link}
+:::
+
+::: {.path-card}
+<div class="path-icon">03</div>
+
+### Revisit a workshop
+
+Find setup instructions, slides, exercises, example data, and recordings from Breeding Insight training events.
+
+[View workshops](workshops.qmd){.card-link}
+:::
+:::
+
+## Featured software {.section-heading}
+
+Compare packages and applications, then go directly to installation instructions, documentation, source code, and related tutorials.
+
+::: {.package-grid}
+::: {.package-card}
+<div class="package-mark">BIGr</div>
+
+### BIGr
+
+Core genomic analysis functions for diploid and polyploid breeding programs.
+
+<div class="meta-row"><span class="pill">R package</span><span class="pill">Genomics</span></div>
+
+[Explore BIGr](software/bigr.qmd){.card-link}
+:::
+
+::: {.package-card}
+<div class="package-mark">BIG</div>
+
+### BIGapp
+
+A user-friendly Shiny application for genomic analysis without requiring command-line workflows.
+
+<div class="meta-row"><span class="pill">R Shiny</span><span class="pill">GWAS + GS</span></div>
+
+[Explore BIGapp](software/bigapp.qmd){.card-link}
+:::
+
+::: {.package-card}
+<div class="package-mark">Q2</div>
+
+### Qploidy2
+
+Ploidy, aneuploidy, and large-scale copy-number estimation from genotyping data.
+
+<div class="meta-row"><span class="pill">R package</span><span class="pill">Ploidy + CNV</span></div>
+
+[Explore Qploidy2](software/qploidy2.qmd){.card-link}
+:::
+:::
+
+## Task-based learning {.section-heading}
+
+Tutorials follow complete tasks, from preparing raw data to interpreting results. When a workflow uses several packages, the steps stay together in one guide.
+
+[Browse all learning materials](learn.qmd){.btn-bi-primary}

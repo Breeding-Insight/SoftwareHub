@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 425" role="img" aria-labelledby="title desc">
+  <title id="title">Cross-validation accuracy concept</title>
+  <desc id="desc">Repeated training and validation folds with predicted versus observed values.</desc>
+  <rect width="800" height="425" rx="28" fill="#F4F8F8"/>
+  <text x="52" y="72" fill="#2A6576" font-family="Arial" font-size="25" font-weight="700">CROSS-VALIDATION</text>
+  <text x="52" y="108" fill="#434544" font-family="Arial" font-size="18">A prediction result is only meaningful for the scenario you tested</text>
+  <g transform="translate(56 160)">
+    <text x="0" y="0" fill="#434544" font-family="Arial" font-size="16" font-weight="700">Repeated folds</text>
+    <g transform="translate(0 25)">
+      <rect width="320" height="34" rx="8" fill="#B5DDE8"/><rect x="255" width="65" height="34" rx="8" fill="#319B42"/>
+      <rect y="47" width="320" height="34" rx="8" fill="#B5DDE8"/><rect x="190" y="47" width="65" height="34" rx="8" fill="#319B42"/>
+      <rect y="94" width="320" height="34" rx="8" fill="#B5DDE8"/><rect x="125" y="94" width="65" height="34" rx="8" fill="#319B42"/>
+      <rect y="141" width="320" height="34" rx="8" fill="#B5DDE8"/><rect x="60" y="141" width="65" height="34" rx="8" fill="#319B42"/>
+      <text x="340" y="23" fill="#707372" font-family="Arial" font-size="13">validate</text><text x="340" y="70" fill="#707372" font-family="Arial" font-size="13">validate</text><text x="340" y="117" fill="#707372" font-family="Arial" font-size="13">validate</text><text x="340" y="164" fill="#707372" font-family="Arial" font-size="13">validate</text>
+    </g>
+  </g>
+  <g transform="translate(500 155)">
+    <text x="0" y="0" fill="#434544" font-family="Arial" font-size="16" font-weight="700">Held-out predictions</text>
+    <rect y="25" width="230" height="185" rx="15" fill="#fff" stroke="#B5DDE8" stroke-width="2"/>
+    <line x1="34" y1="182" x2="205" y2="50" stroke="#A3D9AC" stroke-width="4"/>
+    <g fill="#2A6576"><circle cx="47" cy="164" r="7"/><circle cx="72" cy="145" r="7"/><circle cx="95" cy="135" r="7"/><circle cx="116" cy="111" r="7"/><circle cx="146" cy="104" r="7"/><circle cx="174" cy="75" r="7"/><circle cx="193" cy="69" r="7"/></g>
+    <text x="115" y="238" text-anchor="middle" fill="#1E5D28" font-family="Arial" font-size="18" font-weight="700">r = correlation</text>
+  </g>
+</svg>

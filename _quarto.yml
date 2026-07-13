@@ -1,0 +1,63 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - "*.qmd"
+    - "software/*.qmd"
+    - "learn/*.qmd"
+    - "workshops/*.qmd"
+
+website:
+  title: "Breeding Insight Software"
+  site-url: "https://breeding-insight.github.io/software/"
+  description: "Software, tutorials, workshops, and documentation from Breeding Insight."
+  favicon: assets/bi-mark.png
+  open-graph: true
+  page-navigation: true
+  back-to-top-navigation: true
+  search:
+    location: navbar
+    type: overlay
+    limit: 30
+  navbar:
+    pinned: true
+    logo: assets/breeding-insight.png
+    logo-alt: "Breeding Insight"
+    left:
+      - text: Software
+        href: software.qmd
+      - text: Learn
+        href: learn.qmd
+      - text: Workshops
+        href: workshops.qmd
+      - text: Resources
+        href: resources.qmd
+    right:
+      - icon: github
+        href: https://github.com/Breeding-Insight
+        aria-label: Breeding Insight on GitHub
+      - text: Breeding Insight
+        href: https://breedinginsight.org/
+  page-footer:
+    left: |
+      **Breeding Insight** — open-source tools for public plant and animal breeding.
+    right:
+      - text: GitHub
+        href: https://github.com/Breeding-Insight
+      - text: Main website
+        href: https://breedinginsight.org/
+  repo-url: https://github.com/Breeding-Insight/software
+  repo-actions: [edit, issue]
+
+format:
+  html:
+    theme: [cosmo, styles.scss]
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    code-overflow: wrap
+    smooth-scroll: true
+    link-external-newwindow: true
+
+execute:
+  freeze: auto

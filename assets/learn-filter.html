@@ -1,0 +1,81 @@
+<script>
+(() => {
+  const FILTER_PARAM = "filter";
+  const LISTING_ANCHOR = "all-learning-materials";
+
+  function findListingFilter() {
+    const selectors = [
+      ".quarto-listing-filter input",
+      ".quarto-listing-filter input[type='search']",
+      "#listing-learning-materials-filter",
+      "input[id*='learning-materials'][type='search']",
+      ".quarto-listing-container input[type='search']"
+    ];
+
+    for (const selector of selectors) {
+      const input = document.querySelector(selector);
+      if (input) return input;
+    }
+    return null;
+  }
+
+  function applyFilter(value, scroll = true, attempt = 0) {
+    const input = findListingFilter();
+    const listing = window["quarto-listings"]?.["listing-learning-materials"];
+
+    // Quarto can initialize listing controls after the page DOM is ready.
+    if ((!input || !listing) && attempt < 20) {
+      window.setTimeout(() => applyFilter(value, scroll, attempt + 1), 75);
+      return;
+    }
+    if (!input || !listing) return;
+
+    listing.search();
+    if (value) {
+      const query = value.toLocaleLowerCase();
+      listing.filter((item) => item.elm.innerText.toLocaleLowerCase().includes(query));
+    } else {
+      listing.filter();
+    }
+    input.value = value;
+
+    document.querySelectorAll(".learn-filter-link").forEach((link) => {
+      link.classList.toggle("is-active", link.dataset.learnFilter === value && value !== "");
+      link.closest(".goal-card")?.classList.toggle(
+        "is-active",
+        link.dataset.learnFilter === value && value !== ""
+      );
+    });
+
+    if (scroll) {
+      document.getElementById(LISTING_ANCHOR)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  }
+
+  function updateUrl(value) {
+    const url = new URL(window.location.href);
+    if (value) url.searchParams.set(FILTER_PARAM, value);
+    else url.searchParams.delete(FILTER_PARAM);
+    url.hash = LISTING_ANCHOR;
+    window.history.replaceState({}, "", url);
+  }
+
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest(".learn-filter-link");
+    if (!link) return;
+
+    event.preventDefault();
+    const value = link.dataset.learnFilter || "";
+    updateUrl(value);
+    applyFilter(value, true);
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const value = new URLSearchParams(window.location.search).get(FILTER_PARAM);
+    if (value !== null) applyFilter(value, false);
+  });
+})();
+</script>
