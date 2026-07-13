@@ -2,7 +2,8 @@
 title: "BIGr"
 description: "Core genomic analysis functions for diploid and polyploid breeding programs."
 categories: [R package, Genomics, GWAS, Genomic selection, Polyploid]
-image: ../assets/card-bigr.svg
+image: ../assets/software-bigr.png
+image-alt: "BIGr hexagonal logo."
 ---
 
 ::: {.software-header}
@@ -11,7 +12,7 @@ BIGr provides genomic and pedigree analysis functions designed for diploid and p
 
 <div class="meta-row"><span class="pill">R package</span><span class="pill">Diploid + polyploid</span><span class="pill">CRAN</span></div>
 :::
-<div class="software-badge">BIGr</div>
+<img class="software-logo" src="../assets/software-bigr.png" alt="BIGr logo">
 :::
 
 ## Start here

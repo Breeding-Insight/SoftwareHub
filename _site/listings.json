@@ -14,9 +14,11 @@
   {
     "listing": "/software.html",
     "items": [
+      "/software/allomate.html",
       "/software/bigapp.html",
+      "/software/bigpopa.html",
       "/software/bigr.html",
-      "/software/deltabreed.html",
+      "/software/familia.html",
       "/software/qploidy2.html"
     ]
   }

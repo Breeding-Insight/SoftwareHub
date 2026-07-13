@@ -2,7 +2,8 @@
 title: "Qploidy2"
 description: "Ploidy, aneuploidy, and large-scale copy-number estimation from genotyping data."
 categories: [R package, Ploidy, Aneuploidy, CNV, DArTag]
-image: ../assets/card-qploidy2.svg
+image: ../assets/software-qploidy2.png
+image-alt: "Qploidy2 hexagonal logo."
 ---
 
 ::: {.software-header}
@@ -11,7 +12,7 @@ Qploidy2 is designed for large-scale copy-number variation, ploidy, and aneuploi
 
 <div class="meta-row"><span class="pill">R package</span><span class="pill">Ploidy + CNV</span><span class="pill">HMM</span></div>
 :::
-<div class="software-badge">Q2</div>
+<img class="software-logo" src="../assets/software-qploidy2.png" alt="Qploidy2 logo">
 :::
 
 ## Start here

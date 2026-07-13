@@ -2,7 +2,8 @@
 title: "BIGapp"
 description: "A user-friendly Shiny application for genomic analysis without command-line tools."
 categories: [R Shiny, Genomics, GWAS, Genomic selection, Visualization]
-image: ../assets/card-bigapp.svg
+image: ../assets/software-bigapp.png
+image-alt: "BIGapp hexagonal logo."
 ---
 
 ::: {.software-header}
@@ -11,7 +12,7 @@ BIGapp provides a graphical interface for common genomic analyses, including wor
 
 <div class="meta-row"><span class="pill">R Shiny</span><span class="pill">Interactive</span><span class="pill">Diploid + polyploid</span></div>
 :::
-<div class="software-badge">BIG</div>
+<img class="software-logo" src="../assets/software-bigapp.png" alt="BIGapp logo">
 :::
 
 ## Start here

@@ -10,7 +10,9 @@ software:
   - BIGr
   - BIGapp
   - Qploidy2
-  - DeltaBreed
+  - Familia
+  - AlloMate
+  - BIGpopA
 level: Beginner
 keywords:
   - genomics
@@ -28,7 +30,9 @@ A unified portal should help users choose tools without requiring them to know p
 | Process and transform genotype data | BIGr |
 | Use an interactive genomic analysis interface | BIGapp |
 | Estimate ploidy, aneuploidy, or large CNV | Qploidy2 |
-| Manage breeding program data | DeltaBreed |
+| Validate pedigrees and assess ancestry | Familia |
+| Optimize mate allocation and genetic gain | AlloMate |
+| Assign parentage and estimate breed or line composition | BIGpopA |
 
 ## Example path
 

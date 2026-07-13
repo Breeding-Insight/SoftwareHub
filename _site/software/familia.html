@@ -6,10 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="keywords" content="alfalfa, CNV, DArTag, copy number, aneuploidy">
-<meta name="description" content="Use Qploidy2 with DArTag data to estimate ploidy, aneuploidy, and large-scale copy-number variation.">
+<meta name="description" content="Pedigree validation, parentage assignment, and ancestry assessment for plant and animal populations.">
 
-<title>Estimate copy number in alfalfa with Qploidy2 – Breeding Insight Software</title>
+<title>Familia – Breeding Insight Software</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -24,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -78,10 +112,13 @@ ul.task-list li input[type="checkbox"] {
 <style>html{ scroll-behavior: smooth; }</style>
 
 
-<meta property="og:title" content="Estimate copy number in alfalfa with Qploidy2 – Breeding Insight Software">
-<meta property="og:description" content="Use Qploidy2 with DArTag data to estimate ploidy, aneuploidy, and large-scale copy-number variation.">
-<meta property="og:image" content="https://breeding-insight.github.io/software/assets/tutorial-qploidy.svg">
+<meta property="og:title" content="Familia – Breeding Insight Software">
+<meta property="og:description" content="Pedigree validation, parentage assignment, and ancestry assessment for plant and animal populations.">
+<meta property="og:image" content="https://breeding-insight.github.io/software/assets/software-familia.png">
 <meta property="og:site_name" content="Breeding Insight Software">
+<meta property="og:image:height" content="1411">
+<meta property="og:image:width" content="1219">
+<meta property="og:image:alt" content="Familia hexagonal logo.">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -148,26 +185,30 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#goal" id="toc-goal" class="nav-link active" data-scroll-target="#goal">Goal</a></li>
-  <li><a href="#migration-recommendation" id="toc-migration-recommendation" class="nav-link" data-scroll-target="#migration-recommendation">Migration recommendation</a></li>
+  <li><a href="#start-here" id="toc-start-here" class="nav-link active" data-scroll-target="#start-here">Start here</a></li>
+  <li><a href="#good-fit-for" id="toc-good-fit-for" class="nav-link" data-scroll-target="#good-fit-for">Good fit for</a></li>
+  <li><a href="#related-learning" id="toc-related-learning" class="nav-link" data-scroll-target="#related-learning">Related learning</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/learn/qploidy-alfalfa.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/software/familia.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Estimate copy number in alfalfa with Qploidy2</h1>
+<h1 class="title">Familia</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Ploidy &amp; Dosage</div>
-    <div class="quarto-category">Genotype Data</div>
+    <div class="quarto-category">R Shiny</div>
+    <div class="quarto-category">Pedigree</div>
+    <div class="quarto-category">Parentage</div>
+    <div class="quarto-category">Population structure</div>
+    <div class="quarto-category">Ancestry</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Use Qploidy2 with DArTag data to estimate ploidy, aneuploidy, and large-scale copy-number variation.
+    Pedigree validation, parentage assignment, and ancestry assessment for plant and animal populations.
   </div>
 </div>
 
@@ -180,31 +221,37 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
-<div>
-  <div class="keywords">
-    <div class="block-title">Keywords</div>
-    <p>alfalfa, CNV, DArTag, copy number, aneuploidy</p>
-  </div>
-</div>
 
 </header>
 
 
-<section id="goal" class="level2">
-<h2 class="anchored" data-anchor-id="goal">Goal</h2>
-<p>Estimate large-scale copy number in an alfalfa mapping population using DArTag genotyping data.</p>
-<p>The existing collaborator tutorial is a strong model for long-form technical instruction: it has a clear biological use case, a floating table of contents, visible code, and a complete analysis narrative.</p>
-<p><a href="https://breeding-insight.github.io/Qploidy2/Qploidy_alfalfa_tutorial.html" class="btn-bi-primary">Open the current full tutorial</a> <a href="../software/qploidy2.html" class="btn-bi-secondary">Explore Qploidy2</a></p>
+<div class="software-header">
+<div>
+<p>Familia is a Shiny application for validating pedigrees, assigning parentage, and assessing supervised or unsupervised ancestry in plant and animal breeding populations.</p>
+<div class="meta-row">
+<span class="pill">R Shiny</span><span class="pill">Pedigree</span><span class="pill">Ancestry</span>
+</div>
+</div>
+<p><img class="software-logo" src="../assets/software-familia.png" alt="Familia logo"></p>
+</div>
+<section id="start-here" class="level2">
+<h2 class="anchored" data-anchor-id="start-here">Start here</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"Breeding-Insight/Familia"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Familia<span class="sc">::</span><span class="fu">run_app</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://github.com/Breeding-Insight/Familia" class="btn-bi-primary">Source code</a> <a href="https://github.com/Breeding-Insight/Familia/releases" class="btn-bi-secondary">Releases</a></p>
 </section>
-<section id="migration-recommendation" class="level2">
-<h2 class="anchored" data-anchor-id="migration-recommendation">Migration recommendation</h2>
-<p>Convert the source R Markdown to Quarto, keep executable R chunks, and use the shared BI brand file. Preserve the detailed workflow while adding:</p>
+<section id="good-fit-for" class="level2">
+<h2 class="anchored" data-anchor-id="good-fit-for">Good fit for</h2>
 <ul>
-<li>an explicit prerequisites block,</li>
-<li>a workflow map near the top,</li>
-<li>checkpoints after each major modeling stage,</li>
-<li>a short troubleshooting section,</li>
-<li>links to the Qploidy2 package landing page and source repository.</li>
+<li>Pedigree cleaning and Mendelian error checks</li>
+<li>Parentage assignment from candidate parent pools</li>
+<li>Breed, line, and population ancestry assessment</li>
+</ul>
+</section>
+<section id="related-learning" class="level2">
+<h2 class="anchored" data-anchor-id="related-learning">Related learning</h2>
+<ul>
+<li><a href="../learn/genomics-path.html">Choose a genomic analysis path</a></li>
 </ul>
 
 
@@ -624,7 +671,7 @@ ul.task-list li input[type="checkbox"] {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/learn/qploidy-alfalfa.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/software/familia.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">

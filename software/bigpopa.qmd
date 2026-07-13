@@ -1,0 +1,36 @@
+---
+title: "BIGpopA"
+description: "Pedigree quality control, parentage assignment, and breed or line composition estimation."
+categories: [R package, Pedigree, Parentage, Population structure, Polyploid]
+image: ../assets/software-bigpopa.png
+image-alt: "BIGpopA hexagonal logo."
+---
+
+::: {.software-header}
+::: {}
+BIGpopA is an R package for pedigree quality control, parentage assignment from SNP data, and genomic breed or line composition estimation in diploid and polyploid populations.
+
+<div class="meta-row"><span class="pill">R package</span><span class="pill">Parentage</span><span class="pill">Population analysis</span></div>
+:::
+<img class="software-logo" src="../assets/software-bigpopa.png" alt="BIGpopA logo">
+:::
+
+## Start here
+
+```r
+remotes::install_github("Breeding-Insight/BIGpopA", dependencies = TRUE)
+library(BIGpopA)
+```
+
+[Source code](https://github.com/Breeding-Insight/BIGpopA){.btn-bi-primary}
+[Releases](https://github.com/Breeding-Insight/BIGpopA/releases){.btn-bi-secondary}
+
+## Good fit for
+
+- Detecting pedigree errors with SNP genotype data
+- Assigning parentage from candidate parents
+- Estimating breed or line composition in diploids and polyploids
+
+## Related learning
+
+- [Choose a genomic analysis path](../learn/genomics-path.qmd)

@@ -62,7 +62,7 @@ Compare packages and applications, then go directly to installation instructions
 
 ::: {.package-grid}
 ::: {.package-card}
-<div class="package-mark">BIGr</div>
+<img class="package-logo" src="assets/software-bigr.png" alt="BIGr logo">
 
 ### BIGr
 
@@ -74,7 +74,7 @@ Core genomic analysis functions for diploid and polyploid breeding programs.
 :::
 
 ::: {.package-card}
-<div class="package-mark">BIG</div>
+<img class="package-logo" src="assets/software-bigapp.png" alt="BIGapp logo">
 
 ### BIGapp
 
@@ -86,7 +86,7 @@ A user-friendly Shiny application for genomic analysis without requiring command
 :::
 
 ::: {.package-card}
-<div class="package-mark">Q2</div>
+<img class="package-logo" src="assets/software-qploidy2.png" alt="Qploidy2 logo">
 
 ### Qploidy2
 

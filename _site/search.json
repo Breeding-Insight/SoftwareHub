@@ -63,51 +63,86 @@
     "text": "Recommended workshop structure\n\nOverview — audience, prerequisites, learning objectives, instructors, and date.\nBefore the workshop — installation checks, accounts, data downloads, and a short validation exercise.\nModules — slides, live-code notes, exercises, and solutions.\nExample data — versioned and small enough for participants to reproduce the exercises.\nAfter the workshop — recordings, FAQ, updates, and links to maintained tutorials.\n\n\n\n\nA\n\n\nParticipant setup\nA reusable preflight page for R, package versions, command-line tools, and example data.\nOpen the setup template\n\n\n\n\nB\n\n\nWorkshop template\nA consistent structure for objectives, modules, exercises, solutions, and recordings.\nOpen the workshop template\n\n\n\n\nC\n\n\nTeaching conventions\nGuidance for code visibility, callouts, checkpoints, exercise blocks, and reproducibility.\nView resource standards"
   },
   {
-    "objectID": "software/deltabreed.html",
-    "href": "software/deltabreed.html",
-    "title": "DeltaBreed",
+    "objectID": "software/familia.html",
+    "href": "software/familia.html",
+    "title": "Familia",
     "section": "",
-    "text": "DeltaBreed is open-source data management software for specialty crop and animal breeders.\n\nWeb applicationBreeding informatics\n\n\n\nΔB"
+    "text": "Familia is a Shiny application for validating pedigrees, assigning parentage, and assessing supervised or unsupervised ancestry in plant and animal breeding populations.\n\nR ShinyPedigreeAncestry"
   },
   {
-    "objectID": "software/deltabreed.html#start-here",
-    "href": "software/deltabreed.html#start-here",
-    "title": "DeltaBreed",
+    "objectID": "software/familia.html#start-here",
+    "href": "software/familia.html#start-here",
+    "title": "Familia",
     "section": "Start here",
-    "text": "Start here\nSource code Breeding Insight software page"
+    "text": "Start here\nremotes::install_github(\"Breeding-Insight/Familia\")\nFamilia::run_app()\nSource code Releases"
   },
   {
-    "objectID": "software/deltabreed.html#good-fit-for",
-    "href": "software/deltabreed.html#good-fit-for",
-    "title": "DeltaBreed",
+    "objectID": "software/familia.html#good-fit-for",
+    "href": "software/familia.html#good-fit-for",
+    "title": "Familia",
     "section": "Good fit for",
-    "text": "Good fit for\n\nBreeding program data management\nOpen-source breeding informatics workflows\nConnecting field and program data with downstream analysis"
+    "text": "Good fit for\n\nPedigree cleaning and Mendelian error checks\nParentage assignment from candidate parent pools\nBreed, line, and population ancestry assessment"
   },
   {
-    "objectID": "software/bigapp.html",
-    "href": "software/bigapp.html",
-    "title": "BIGapp",
+    "objectID": "software/familia.html#related-learning",
+    "href": "software/familia.html#related-learning",
+    "title": "Familia",
+    "section": "Related learning",
+    "text": "Related learning\n\nChoose a genomic analysis path"
+  },
+  {
+    "objectID": "software/bigpopa.html",
+    "href": "software/bigpopa.html",
+    "title": "BIGpopA",
     "section": "",
-    "text": "BIGapp provides a graphical interface for common genomic analyses, including workflows for population structure, association analysis, genomic prediction, and related tasks.\n\nR ShinyInteractiveDiploid + polyploid\n\n\n\nBIG"
+    "text": "BIGpopA is an R package for pedigree quality control, parentage assignment from SNP data, and genomic breed or line composition estimation in diploid and polyploid populations.\n\nR packageParentagePopulation analysis"
   },
   {
-    "objectID": "software/bigapp.html#start-here",
-    "href": "software/bigapp.html#start-here",
-    "title": "BIGapp",
+    "objectID": "software/bigpopa.html#start-here",
+    "href": "software/bigpopa.html#start-here",
+    "title": "BIGpopA",
     "section": "Start here",
-    "text": "Start here\nSource code Breeding Insight software page"
+    "text": "Start here\nremotes::install_github(\"Breeding-Insight/BIGpopA\", dependencies = TRUE)\nlibrary(BIGpopA)\nSource code Releases"
   },
   {
-    "objectID": "software/bigapp.html#good-fit-for",
-    "href": "software/bigapp.html#good-fit-for",
-    "title": "BIGapp",
+    "objectID": "software/bigpopa.html#good-fit-for",
+    "href": "software/bigpopa.html#good-fit-for",
+    "title": "BIGpopA",
     "section": "Good fit for",
-    "text": "Good fit for\n\nUsers who prefer an interactive graphical workflow\nTeaching genomic analysis concepts without requiring command-line expertise\nAnalyses supported by the BIGr/BIGapp ecosystem"
+    "text": "Good fit for\n\nDetecting pedigree errors with SNP genotype data\nAssigning parentage from candidate parents\nEstimating breed or line composition in diploids and polyploids"
   },
   {
-    "objectID": "software/bigapp.html#related-learning",
-    "href": "software/bigapp.html#related-learning",
-    "title": "BIGapp",
+    "objectID": "software/bigpopa.html#related-learning",
+    "href": "software/bigpopa.html#related-learning",
+    "title": "BIGpopA",
+    "section": "Related learning",
+    "text": "Related learning\n\nChoose a genomic analysis path"
+  },
+  {
+    "objectID": "software/allomate.html",
+    "href": "software/allomate.html",
+    "title": "AlloMate",
+    "section": "",
+    "text": "AlloMate is a Shiny application for evaluating kinship, combining estimated breeding values, optimizing individual contributions, and producing mating plans under relatedness constraints.\n\nR ShinyMate allocationOCS"
+  },
+  {
+    "objectID": "software/allomate.html#start-here",
+    "href": "software/allomate.html#start-here",
+    "title": "AlloMate",
+    "section": "Start here",
+    "text": "Start here\nremotes::install_github(\"Breeding-Insight/AlloMate\")\nAlloMate::run_app()\nSource code Releases"
+  },
+  {
+    "objectID": "software/allomate.html#good-fit-for",
+    "href": "software/allomate.html#good-fit-for",
+    "title": "AlloMate",
+    "section": "Good fit for",
+    "text": "Good fit for\n\nPedigree-based kinship analysis\nMulti-trait selection with weighted breeding values\nOptimum Contribution Selection and constrained mating plans"
+  },
+  {
+    "objectID": "software/allomate.html#related-learning",
+    "href": "software/allomate.html#related-learning",
+    "title": "AlloMate",
     "section": "Related learning",
     "text": "Related learning\n\nChoose a genomic analysis path"
   },
@@ -333,7 +368,7 @@
     "href": "learn.html#all-learning-materials",
     "title": "Learn",
     "section": "All learning materials",
-    "text": "All learning materials\nSearch by topic, software name, data type, or analysis method.\n\n\n    \n      \n      \n    \n\n\n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Guide\n        \n        BIGr\n        \n        BIGapp\n        \n        Qploidy2\n        \n        DeltaBreed\n        \n        \n        Beginner\n        \n      \n\n      \n        Choose a genomic analysis path\n      \n\n      \n      Start from the breeding question and identify the appropriate Breeding Insight tool or workflow.\n      \n\n      \n      \n        \n        Getting Started\n        \n      \n      \n\n      Open guide →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Workflow\n        \n        BIGr\n        \n        \n        Intermediate\n        \n      \n\n      \n        Process MADC genotype data\n      \n\n      \n      Use BIGr to filter targeted sequencing data and convert it into an analysis-ready VCF workflow.\n      \n\n      \n      \n        \n        Genotype Data\n        \n        Data Quality\n        \n        Ploidy & Dosage\n        \n      \n      \n\n      Open workflow →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Tutorial\n        \n        Qploidy2\n        \n        \n        Intermediate\n        \n      \n\n      \n        Estimate copy number in alfalfa with Qploidy2\n      \n\n      \n      Use Qploidy2 with DArTag data to estimate ploidy, aneuploidy, and large-scale copy-number variation.\n      \n\n      \n      \n        \n        Ploidy & Dosage\n        \n        Genotype Data\n        \n      \n      \n\n      Open tutorial →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Concept\n        \n        BIGr\n        \n        Qploidy2\n        \n        \n        Beginner\n        \n      \n\n      \n        What is allele dosage?\n      \n\n      \n      Understand what allele dosage represents in diploids and polyploids, how it differs from read fraction, and why dosage uncertainty matters.\n      \n\n      \n      \n        \n        Genotype Data\n        \n        Ploidy & Dosage\n        \n      \n      \n\n      Open concept →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Concept\n        \n        BIGr\n        \n        BIGapp\n        \n        \n        Intermediate\n        \n      \n\n      \n        Choosing a missing-data threshold\n      \n\n      \n      Choose marker and sample missingness thresholds by diagnosing the data source, matching the downstream analysis, and testing sensitivity.\n      \n\n      \n      \n        \n        Genotype Data\n        \n        Data Quality\n        \n      \n      \n\n      Open concept →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Concept\n        \n        BIGr\n        \n        BIGapp\n        \n        Qploidy2\n        \n        \n        Intermediate\n        \n      \n\n      \n        SNP filtering in polyploids\n      \n\n      \n      Build a polyploid-aware SNP filtering strategy that considers sequence evidence, dosage uncertainty, duplicated genomes, and downstream goals.\n      \n\n      \n      \n        \n        Genotype Data\n        \n        Data Quality\n        \n        Ploidy & Dosage\n        \n      \n      \n\n      Open concept →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Concept\n        \n        BIGapp\n        \n        \n        Beginner\n        \n      \n\n      \n        What does cross-validation accuracy mean?\n      \n\n      \n      Interpret cross-validation results in genomic prediction without confusing predictive ability, selection accuracy, and the realism of the validation design.\n      \n\n      \n      \n        \n        Genomic Prediction\n        \n        Data Quality\n        \n      \n      \n\n      Open concept →\n    \n  \n\n\nNo matching items"
+    "text": "All learning materials\nSearch by topic, software name, data type, or analysis method.\n\n\n    \n      \n      \n    \n\n\n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Guide\n        \n        BIGr\n        \n        BIGapp\n        \n        Qploidy2\n        \n        Familia\n        \n        AlloMate\n        \n        BIGpopA\n        \n        \n        Beginner\n        \n      \n\n      \n        Choose a genomic analysis path\n      \n\n      \n      Start from the breeding question and identify the appropriate Breeding Insight tool or workflow.\n      \n\n      \n      \n        \n        Getting Started\n        \n      \n      \n\n      Open guide →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Workflow\n        \n        BIGr\n        \n        \n        Intermediate\n        \n      \n\n      \n        Process MADC genotype data\n      \n\n      \n      Use BIGr to filter targeted sequencing data and convert it into an analysis-ready VCF workflow.\n      \n\n      \n      \n        \n        Genotype Data\n        \n        Data Quality\n        \n        Ploidy & Dosage\n        \n      \n      \n\n      Open workflow →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Tutorial\n        \n        Qploidy2\n        \n        \n        Intermediate\n        \n      \n\n      \n        Estimate copy number in alfalfa with Qploidy2\n      \n\n      \n      Use Qploidy2 with DArTag data to estimate ploidy, aneuploidy, and large-scale copy-number variation.\n      \n\n      \n      \n        \n        Ploidy & Dosage\n        \n        Genotype Data\n        \n      \n      \n\n      Open tutorial →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Concept\n        \n        BIGr\n        \n        Qploidy2\n        \n        \n        Beginner\n        \n      \n\n      \n        What is allele dosage?\n      \n\n      \n      Understand what allele dosage represents in diploids and polyploids, how it differs from read fraction, and why dosage uncertainty matters.\n      \n\n      \n      \n        \n        Genotype Data\n        \n        Ploidy & Dosage\n        \n      \n      \n\n      Open concept →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Concept\n        \n        BIGr\n        \n        BIGapp\n        \n        \n        Intermediate\n        \n      \n\n      \n        Choosing a missing-data threshold\n      \n\n      \n      Choose marker and sample missingness thresholds by diagnosing the data source, matching the downstream analysis, and testing sensitivity.\n      \n\n      \n      \n        \n        Genotype Data\n        \n        Data Quality\n        \n      \n      \n\n      Open concept →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Concept\n        \n        BIGr\n        \n        BIGapp\n        \n        Qploidy2\n        \n        \n        Intermediate\n        \n      \n\n      \n        SNP filtering in polyploids\n      \n\n      \n      Build a polyploid-aware SNP filtering strategy that considers sequence evidence, dosage uncertainty, duplicated genomes, and downstream goals.\n      \n\n      \n      \n        \n        Genotype Data\n        \n        Data Quality\n        \n        Ploidy & Dosage\n        \n      \n      \n\n      Open concept →\n    \n  \n\n  \n    \n    \n      \n    \n    \n\n    \n      \n        Concept\n        \n        BIGapp\n        \n        \n        Beginner\n        \n      \n\n      \n        What does cross-validation accuracy mean?\n      \n\n      \n      Interpret cross-validation results in genomic prediction without confusing predictive ability, selection accuracy, and the realism of the validation design.\n      \n\n      \n      \n        \n        Genomic Prediction\n        \n        Data Quality\n        \n      \n      \n\n      Open concept →\n    \n  \n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -361,7 +396,7 @@
     "href": "index.html#featured-software",
     "title": "Breeding Insight Software",
     "section": "Featured software",
-    "text": "Featured software\nCompare packages and applications, then go directly to installation instructions, documentation, source code, and related tutorials.\n\n\n\nBIGr\n\n\nBIGr\nCore genomic analysis functions for diploid and polyploid breeding programs.\n\nR packageGenomics\n\nExplore BIGr\n\n\n\n\nBIG\n\n\nBIGapp\nA user-friendly Shiny application for genomic analysis without requiring command-line workflows.\n\nR ShinyGWAS + GS\n\nExplore BIGapp\n\n\n\n\nQ2\n\n\nQploidy2\nPloidy, aneuploidy, and large-scale copy-number estimation from genotyping data.\n\nR packagePloidy + CNV\n\nExplore Qploidy2"
+    "text": "Featured software\nCompare packages and applications, then go directly to installation instructions, documentation, source code, and related tutorials.\n\n\n\n\nBIGr\nCore genomic analysis functions for diploid and polyploid breeding programs.\n\nR packageGenomics\n\nExplore BIGr\n\n\n\n\n\nBIGapp\nA user-friendly Shiny application for genomic analysis without requiring command-line workflows.\n\nR ShinyGWAS + GS\n\nExplore BIGapp\n\n\n\n\n\nQploidy2\nPloidy, aneuploidy, and large-scale copy-number estimation from genotyping data.\n\nR packagePloidy + CNV\n\nExplore Qploidy2"
   },
   {
     "objectID": "index.html#task-based-learning",
@@ -438,14 +473,14 @@
     "href": "learn/genomics-path.html",
     "title": "Choose a genomic analysis path",
     "section": "",
-    "text": "A unified portal should help users choose tools without requiring them to know package names first.\n\n\n\nGoal\nRecommended starting point\n\n\n\n\nProcess and transform genotype data\nBIGr\n\n\nUse an interactive genomic analysis interface\nBIGapp\n\n\nEstimate ploidy, aneuploidy, or large CNV\nQploidy2\n\n\nManage breeding program data\nDeltaBreed"
+    "text": "A unified portal should help users choose tools without requiring them to know package names first.\n\n\n\nGoal\nRecommended starting point\n\n\n\n\nProcess and transform genotype data\nBIGr\n\n\nUse an interactive genomic analysis interface\nBIGapp\n\n\nEstimate ploidy, aneuploidy, or large CNV\nQploidy2\n\n\nValidate pedigrees and assess ancestry\nFamilia\n\n\nOptimize mate allocation and genetic gain\nAlloMate\n\n\nAssign parentage and estimate breed or line composition\nBIGpopA"
   },
   {
     "objectID": "learn/genomics-path.html#start-with-the-question",
     "href": "learn/genomics-path.html#start-with-the-question",
     "title": "Choose a genomic analysis path",
     "section": "",
-    "text": "A unified portal should help users choose tools without requiring them to know package names first.\n\n\n\nGoal\nRecommended starting point\n\n\n\n\nProcess and transform genotype data\nBIGr\n\n\nUse an interactive genomic analysis interface\nBIGapp\n\n\nEstimate ploidy, aneuploidy, or large CNV\nQploidy2\n\n\nManage breeding program data\nDeltaBreed"
+    "text": "A unified portal should help users choose tools without requiring them to know package names first.\n\n\n\nGoal\nRecommended starting point\n\n\n\n\nProcess and transform genotype data\nBIGr\n\n\nUse an interactive genomic analysis interface\nBIGapp\n\n\nEstimate ploidy, aneuploidy, or large CNV\nQploidy2\n\n\nValidate pedigrees and assess ancestry\nFamilia\n\n\nOptimize mate allocation and genetic gain\nAlloMate\n\n\nAssign parentage and estimate breed or line composition\nBIGpopA"
   },
   {
     "objectID": "learn/genomics-path.html#example-path",
@@ -543,14 +578,42 @@
     "href": "software.html",
     "title": "Software",
     "section": "",
-    "text": "Breeding Insight develops software across genomics, breeding data management, phenotyping, and decision support. Use the filters to narrow the catalog by task or technology.\n\nSee learning materials → Breeding Insight GitHub\n\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nBIGapp\n\n\n\nR Shiny\n\nGenomics\n\nGWAS\n\nGenomic selection\n\nVisualization\n\n\n\nA user-friendly Shiny application for genomic analysis without command-line tools.\n\n\n\n\n\n\n\n\n\n\n\n\nBIGr\n\n\n\nR package\n\nGenomics\n\nGWAS\n\nGenomic selection\n\nPolyploid\n\n\n\nCore genomic analysis functions for diploid and polyploid breeding programs.\n\n\n\n\n\n\n\n\n\n\n\n\nDeltaBreed\n\n\n\nWeb application\n\nBreeding data\n\nData management\n\nInformatics\n\n\n\nOpen-source data management software for specialty crop and animal breeders.\n\n\n\n\n\n\n\n\n\n\n\n\nQploidy2\n\n\n\nR package\n\nPloidy\n\nAneuploidy\n\nCNV\n\nDArTag\n\n\n\nPloidy, aneuploidy, and large-scale copy-number estimation from genotyping data.\n\n\n\n\n\nNo matching items\n Back to top"
+    "text": "Breeding Insight develops software across genomics, breeding data management, phenotyping, and decision support. Use the filters to narrow the catalog by task or technology.\n\nSee learning materials → Breeding Insight GitHub\n\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nAlloMate\n\n\n\nR Shiny\n\nMate allocation\n\nKinship\n\nBreeding optimization\n\nOCS\n\n\n\nGenetic mate allocation and breeding optimization that balances gain and inbreeding.\n\n\n\n\n\n\n\n\n\n\n\n\nBIGapp\n\n\n\nR Shiny\n\nGenomics\n\nGWAS\n\nGenomic selection\n\nVisualization\n\n\n\nA user-friendly Shiny application for genomic analysis without command-line tools.\n\n\n\n\n\n\n\n\n\n\n\n\nBIGpopA\n\n\n\nR package\n\nPedigree\n\nParentage\n\nPopulation structure\n\nPolyploid\n\n\n\nPedigree quality control, parentage assignment, and breed or line composition estimation.\n\n\n\n\n\n\n\n\n\n\n\n\nBIGr\n\n\n\nR package\n\nGenomics\n\nGWAS\n\nGenomic selection\n\nPolyploid\n\n\n\nCore genomic analysis functions for diploid and polyploid breeding programs.\n\n\n\n\n\n\n\n\n\n\n\n\nFamilia\n\n\n\nR Shiny\n\nPedigree\n\nParentage\n\nPopulation structure\n\nAncestry\n\n\n\nPedigree validation, parentage assignment, and ancestry assessment for plant and animal populations.\n\n\n\n\n\n\n\n\n\n\n\n\nQploidy2\n\n\n\nR package\n\nPloidy\n\nAneuploidy\n\nCNV\n\nDArTag\n\n\n\nPloidy, aneuploidy, and large-scale copy-number estimation from genotyping data.\n\n\n\n\n\nNo matching items\n Back to top"
+  },
+  {
+    "objectID": "software/bigapp.html",
+    "href": "software/bigapp.html",
+    "title": "BIGapp",
+    "section": "",
+    "text": "BIGapp provides a graphical interface for common genomic analyses, including workflows for population structure, association analysis, genomic prediction, and related tasks.\n\nR ShinyInteractiveDiploid + polyploid"
+  },
+  {
+    "objectID": "software/bigapp.html#start-here",
+    "href": "software/bigapp.html#start-here",
+    "title": "BIGapp",
+    "section": "Start here",
+    "text": "Start here\nSource code Breeding Insight software page"
+  },
+  {
+    "objectID": "software/bigapp.html#good-fit-for",
+    "href": "software/bigapp.html#good-fit-for",
+    "title": "BIGapp",
+    "section": "Good fit for",
+    "text": "Good fit for\n\nUsers who prefer an interactive graphical workflow\nTeaching genomic analysis concepts without requiring command-line expertise\nAnalyses supported by the BIGr/BIGapp ecosystem"
+  },
+  {
+    "objectID": "software/bigapp.html#related-learning",
+    "href": "software/bigapp.html#related-learning",
+    "title": "BIGapp",
+    "section": "Related learning",
+    "text": "Related learning\n\nChoose a genomic analysis path"
   },
   {
     "objectID": "software/bigr.html",
     "href": "software/bigr.html",
     "title": "BIGr",
     "section": "",
-    "text": "BIGr provides genomic and pedigree analysis functions designed for diploid and polyploid breeding programs. It also serves as a computational foundation for workflows exposed through BIGapp.\n\nR packageDiploid + polyploidCRAN\n\n\n\nBIGr"
+    "text": "BIGr provides genomic and pedigree analysis functions designed for diploid and polyploid breeding programs. It also serves as a computational foundation for workflows exposed through BIGapp.\n\nR packageDiploid + polyploidCRAN"
   },
   {
     "objectID": "software/bigr.html#start-here",
@@ -578,7 +641,7 @@
     "href": "software/qploidy2.html",
     "title": "Qploidy2",
     "section": "",
-    "text": "Qploidy2 is designed for large-scale copy-number variation, ploidy, and aneuploidy estimation using genotyping-platform data. Its workflow includes methods based on allele-ratio information and Hidden Markov Models.\n\nR packagePloidy + CNVHMM\n\n\n\nQ2"
+    "text": "Qploidy2 is designed for large-scale copy-number variation, ploidy, and aneuploidy estimation using genotyping-platform data. Its workflow includes methods based on allele-ratio information and Hidden Markov Models.\n\nR packagePloidy + CNVHMM"
   },
   {
     "objectID": "software/qploidy2.html#start-here",
