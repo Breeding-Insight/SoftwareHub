@@ -21,7 +21,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -82,12 +82,12 @@ ul.task-list li input[type="checkbox"] {
     const listingTargetEl = window.document.querySelector('#listing-learning-materials .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
-      return;
+      return; 
     }
 
     const options = {
       valueNames: ['listing-project','listing-website','listing-format','listing-execute','listing-engines','listing-language','listing-title','listing-description','listing-categories','listing-image','listing-image-alt','listing-order','listing-learning-type','listing-software','listing-level','listing-keywords','listing-path','listing-outputHref','listing-author','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
-
+      
       searchColumns: ["listing-project","listing-website","listing-format","listing-execute","listing-engines","listing-language","listing-title","listing-description","listing-categories","listing-image","listing-image-alt","listing-order","listing-learning-type","listing-software","listing-level","listing-keywords","listing-path","listing-outputHref","listing-author","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
     };
 
@@ -139,9 +139,9 @@ window.Quarto = {
 
 <meta property="og:title" content="Learn – Breeding Insight Software">
 <meta property="og:description" content="Tutorials, workflows, and practical guidance for breeding data and genomics.">
-<meta property="og:image" content="https://breeding-insight.github.io/software/assets/card-bigr.svg">
+<meta property="og:image" content="https://breeding-insight.github.io/software/assets/tutorial-path.svg">
 <meta property="og:site_name" content="Breeding Insight Software">
-<meta property="og:image:alt" content="BIGr logo on a blue and green geometric background.">
+<meta property="og:image:alt" content="">
 </head>
 
 <body class="nav-fixed fullcontent quarto-light">
@@ -166,32 +166,32 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./software.html">
+    <a class="nav-link" href="./software.html"> 
 <span class="menu-text">Software</span></a>
-  </li>
+  </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./learn.html" aria-current="page">
+    <a class="nav-link active" href="./learn.html" aria-current="page"> 
 <span class="menu-text">Learn</span></a>
-  </li>
+  </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./workshops.html">
+    <a class="nav-link" href="./workshops.html"> 
 <span class="menu-text">Workshops</span></a>
-  </li>
+  </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./resources.html">
+    <a class="nav-link" href="./resources.html"> 
 <span class="menu-text">Resources</span></a>
-  </li>
+  </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/Breeding-Insight"> <i class="bi bi-github" role="img" aria-label="Breeding Insight on GitHub">
-</i>
+</i> 
 <span class="menu-text"></span></a>
-  </li>
+  </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://breedinginsight.org/">
+    <a class="nav-link" href="https://breedinginsight.org/"> 
 <span class="menu-text">Breeding Insight</span></a>
-  </li>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -203,7 +203,7 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -221,11 +221,11 @@ window.Quarto = {
 
 <div class="quarto-title-meta">
 
-
-
-
+    
+  
+    
   </div>
-
+  
 
 
 </header>
@@ -330,381 +330,341 @@ Prepare data, fit genomic prediction models, and evaluate prediction accuracy.
 </div>
 <div class="learn-listing-grid list">
 
-  <article class="learn-listing-card" data-index="0" data-categories="R2V0dGluZyUyMFN0YXJ0ZWQlMkNHZW5vdHlwZSUyMERhdGE=" data-listing-file-modified-sort="1783953288134" data-listing-reading-time-sort="4" data-listing-word-count-sort="625">
-
-    <a class="learn-listing-image" href="./learn/install-r.html" aria-label="Open Install R for BIGr">
-      <img src="./assets/card-bigr.svg" alt="BIGr logo on a blue and green geometric background." loading="lazy">
-    </a>
-
-
-    <div class="learn-listing-body">
-      <div class="learn-card-badges" aria-label="Learning material metadata">
-        <span class="learn-badge learn-badge-type listing-learning-type">Guide</span>
-
-        <span class="learn-badge learn-badge-software listing-software">BIGr</span>
-
-
-        <span class="learn-badge learn-badge-level listing-level">Beginner</span>
-
-      </div>
-
-      <h3 class="learn-listing-title anchored">
-        <a href="./learn/install-r.html" class="listing-title">Install R for BIGr</a>
-      </h3>
-
-
-      <p class="learn-listing-description listing-description">Install R 4.4 or newer, optionally add RStudio Desktop, and verify that BIGr is ready to use.</p>
-
-
-
-      <div class="learn-card-topics" aria-label="Topics">
-
-        <span class="learn-topic-tag listing-categories">Getting Started</span>
-
-        <span class="learn-topic-tag listing-categories">Genotype Data</span>
-
-      </div>
-
-
-      <a class="learn-card-open" href="./learn/install-r.html">Open guide <span aria-hidden="true">→</span></a>
-    </div>
-  </article>
-
-  <article class="learn-listing-card" data-index="1" data-categories="R2V0dGluZyUyMFN0YXJ0ZWQ=" data-listing-file-modified-sort="1783948899954" data-listing-reading-time-sort="1" data-listing-word-count-sort="113">
-
+  <article class="learn-listing-card" data-index="0" data-categories="R2V0dGluZyUyMFN0YXJ0ZWQ=" data-listing-file-modified-sort="1783948899954" data-listing-reading-time-sort="1" data-listing-word-count-sort="113">
+    
     <a class="learn-listing-image" href="./learn/genomics-path.html" aria-label="Open Choose a genomic analysis path">
       <img src="./assets/tutorial-path.svg" alt="" loading="lazy">
     </a>
-
+    
 
     <div class="learn-listing-body">
       <div class="learn-card-badges" aria-label="Learning material metadata">
         <span class="learn-badge learn-badge-type listing-learning-type">Guide</span>
-
-        <span class="learn-badge learn-badge-software listing-software">BIGr</span>
-
-        <span class="learn-badge learn-badge-software listing-software">BIGapp</span>
-
-        <span class="learn-badge learn-badge-software listing-software">Qploidy2</span>
-
-        <span class="learn-badge learn-badge-software listing-software">Familia</span>
-
-        <span class="learn-badge learn-badge-software listing-software">AlloMate</span>
-
-        <span class="learn-badge learn-badge-software listing-software">BIGpopA</span>
-
-
+        
+        <span class="learn-badge learn-badge-software listing-software">Uses BIGr</span>
+        
+        <span class="learn-badge learn-badge-software listing-software">Uses BIGapp</span>
+        
+        <span class="learn-badge learn-badge-software listing-software">Uses Qploidy2</span>
+        
+        <span class="learn-badge learn-badge-software listing-software">Uses Familia</span>
+        
+        <span class="learn-badge learn-badge-software listing-software">Uses AlloMate</span>
+        
+        <span class="learn-badge learn-badge-software listing-software">Uses BIGpopA</span>
+        
+        
         <span class="learn-badge learn-badge-level listing-level">Beginner</span>
-
+        
       </div>
 
       <h3 class="learn-listing-title anchored">
         <a href="./learn/genomics-path.html" class="listing-title">Choose a genomic analysis path</a>
       </h3>
 
-
+      
       <p class="learn-listing-description listing-description">Start from the breeding question and identify the appropriate Breeding Insight tool or workflow.</p>
+      
 
-
-
+      
       <div class="learn-card-topics" aria-label="Topics">
-
+        
         <span class="learn-topic-tag listing-categories">Getting Started</span>
-
+        
       </div>
-
+      
 
       <a class="learn-card-open" href="./learn/genomics-path.html">Open guide <span aria-hidden="true">→</span></a>
     </div>
   </article>
 
-  <article class="learn-listing-card" data-index="2" data-categories="R2V0dGluZyUyMFN0YXJ0ZWQlMkNHZW5vdHlwZSUyMERhdGE=" data-listing-file-modified-sort="1783953288326" data-listing-reading-time-sort="11" data-listing-word-count-sort="2175">
-
+  <article class="learn-listing-card" data-index="1" data-categories="R2V0dGluZyUyMFN0YXJ0ZWQlMkNHZW5vdHlwZSUyMERhdGE=" data-listing-file-modified-sort="1783954326020" data-listing-reading-time-sort="13" data-listing-word-count-sort="2558">
+    
     <a class="learn-listing-image" href="./learn/get-started-genomic-data-r.html" aria-label="Open Get started with genomic data in R">
-      <img src="./assets/card-bigr.svg" alt="BIGr logo on a blue and green geometric background." loading="lazy">
+      <img src="./assets/tutorial-genomic-data.svg" alt="A VCF table beside a read-depth chart labeled VCF basics." loading="lazy">
     </a>
-
+    
 
     <div class="learn-listing-body">
       <div class="learn-card-badges" aria-label="Learning material metadata">
         <span class="learn-badge learn-badge-type listing-learning-type">Tutorial</span>
-
-        <span class="learn-badge learn-badge-software listing-software">BIGr</span>
-
-
+        
+        <span class="learn-badge learn-badge-software listing-software">Uses BIGr</span>
+        
+        
         <span class="learn-badge learn-badge-level listing-level">Beginner</span>
-
+        
       </div>
 
       <h3 class="learn-listing-title anchored">
         <a href="./learn/get-started-genomic-data-r.html" class="listing-title">Get started with genomic data in R</a>
       </h3>
 
+      
+      <p class="learn-listing-description listing-description">Set up R, then load, inspect, filter, and visualize a VCF with diploid- and polyploid-aware checkpoints.</p>
+      
 
-      <p class="learn-listing-description listing-description">Load, inspect, filter, and visualize a BIGr VCF while learning which steps require ploidy-aware interpretation.</p>
-
-
-
+      
       <div class="learn-card-topics" aria-label="Topics">
-
+        
         <span class="learn-topic-tag listing-categories">Getting Started</span>
-
+        
         <span class="learn-topic-tag listing-categories">Genotype Data</span>
-
+        
       </div>
-
+      
 
       <a class="learn-card-open" href="./learn/get-started-genomic-data-r.html">Open tutorial <span aria-hidden="true">→</span></a>
     </div>
   </article>
 
-  <article class="learn-listing-card" data-index="3" data-categories="R2Vub3R5cGUlMjBEYXRhJTJDRGF0YSUyMFF1YWxpdHklMkNQbG9pZHklMjAlMjYlMjBEb3NhZ2U=" data-listing-file-modified-sort="1783692393000" data-listing-reading-time-sort="1" data-listing-word-count-sort="98">
-
+  <article class="learn-listing-card" data-index="2" data-categories="R2Vub3R5cGUlMjBEYXRhJTJDRGF0YSUyMFF1YWxpdHklMkNQbG9pZHklMjAlMjYlMjBEb3NhZ2U=" data-listing-file-modified-sort="1783692393000" data-listing-reading-time-sort="1" data-listing-word-count-sort="98">
+    
     <a class="learn-listing-image" href="./learn/madc-to-vcf.html" aria-label="Open Process MADC genotype data">
       <img src="./assets/tutorial-madc.svg" alt="" loading="lazy">
     </a>
-
+    
 
     <div class="learn-listing-body">
       <div class="learn-card-badges" aria-label="Learning material metadata">
         <span class="learn-badge learn-badge-type listing-learning-type">Workflow</span>
-
-        <span class="learn-badge learn-badge-software listing-software">BIGr</span>
-
-
+        
+        <span class="learn-badge learn-badge-software listing-software">Uses BIGr</span>
+        
+        
         <span class="learn-badge learn-badge-level listing-level">Intermediate</span>
-
+        
       </div>
 
       <h3 class="learn-listing-title anchored">
         <a href="./learn/madc-to-vcf.html" class="listing-title">Process MADC genotype data</a>
       </h3>
 
-
+      
       <p class="learn-listing-description listing-description">Use BIGr to filter targeted sequencing data and convert it into an analysis-ready VCF workflow.</p>
+      
 
-
-
+      
       <div class="learn-card-topics" aria-label="Topics">
-
+        
         <span class="learn-topic-tag listing-categories">Genotype Data</span>
-
+        
         <span class="learn-topic-tag listing-categories">Data Quality</span>
-
+        
         <span class="learn-topic-tag listing-categories">Ploidy &amp; Dosage</span>
-
+        
       </div>
-
+      
 
       <a class="learn-card-open" href="./learn/madc-to-vcf.html">Open workflow <span aria-hidden="true">→</span></a>
     </div>
   </article>
 
-  <article class="learn-listing-card" data-index="4" data-categories="UGxvaWR5JTIwJTI2JTIwRG9zYWdlJTJDR2Vub3R5cGUlMjBEYXRh" data-listing-file-modified-sort="1783692393000" data-listing-reading-time-sort="1" data-listing-word-count-sort="103">
-
+  <article class="learn-listing-card" data-index="3" data-categories="UGxvaWR5JTIwJTI2JTIwRG9zYWdlJTJDR2Vub3R5cGUlMjBEYXRh" data-listing-file-modified-sort="1783692393000" data-listing-reading-time-sort="1" data-listing-word-count-sort="103">
+    
     <a class="learn-listing-image" href="./learn/qploidy-alfalfa.html" aria-label="Open Estimate copy number in alfalfa with Qploidy2">
       <img src="./assets/tutorial-qploidy.svg" alt="" loading="lazy">
     </a>
-
+    
 
     <div class="learn-listing-body">
       <div class="learn-card-badges" aria-label="Learning material metadata">
         <span class="learn-badge learn-badge-type listing-learning-type">Tutorial</span>
-
-        <span class="learn-badge learn-badge-software listing-software">Qploidy2</span>
-
-
+        
+        <span class="learn-badge learn-badge-software listing-software">Uses Qploidy2</span>
+        
+        
         <span class="learn-badge learn-badge-level listing-level">Intermediate</span>
-
+        
       </div>
 
       <h3 class="learn-listing-title anchored">
         <a href="./learn/qploidy-alfalfa.html" class="listing-title">Estimate copy number in alfalfa with Qploidy2</a>
       </h3>
 
-
+      
       <p class="learn-listing-description listing-description">Use Qploidy2 with DArTag data to estimate ploidy, aneuploidy, and large-scale copy-number variation.</p>
+      
 
-
-
+      
       <div class="learn-card-topics" aria-label="Topics">
-
+        
         <span class="learn-topic-tag listing-categories">Ploidy &amp; Dosage</span>
-
+        
         <span class="learn-topic-tag listing-categories">Genotype Data</span>
-
+        
       </div>
-
+      
 
       <a class="learn-card-open" href="./learn/qploidy-alfalfa.html">Open tutorial <span aria-hidden="true">→</span></a>
     </div>
   </article>
 
-  <article class="learn-listing-card" data-index="5" data-categories="R2Vub3R5cGUlMjBEYXRhJTJDUGxvaWR5JTIwJTI2JTIwRG9zYWdl" data-listing-file-modified-sort="1783693184000" data-listing-reading-time-sort="4" data-listing-word-count-sort="614">
-
+  <article class="learn-listing-card" data-index="4" data-categories="R2Vub3R5cGUlMjBEYXRhJTJDUGxvaWR5JTIwJTI2JTIwRG9zYWdl" data-listing-file-modified-sort="1783693184000" data-listing-reading-time-sort="4" data-listing-word-count-sort="614">
+    
     <a class="learn-listing-image" href="./learn/what-is-allele-dosage.html" aria-label="Open What is allele dosage?">
       <img src="./assets/concept-allele-dosage.svg" alt="Five allele dosage states from zero to four copies at a tetraploid locus." loading="lazy">
     </a>
-
+    
 
     <div class="learn-listing-body">
       <div class="learn-card-badges" aria-label="Learning material metadata">
         <span class="learn-badge learn-badge-type listing-learning-type">Concept</span>
-
-        <span class="learn-badge learn-badge-software listing-software">BIGr</span>
-
-        <span class="learn-badge learn-badge-software listing-software">Qploidy2</span>
-
-
+        
+        <span class="learn-badge learn-badge-software listing-software">Uses BIGr</span>
+        
+        <span class="learn-badge learn-badge-software listing-software">Uses Qploidy2</span>
+        
+        
         <span class="learn-badge learn-badge-level listing-level">Beginner</span>
-
+        
       </div>
 
       <h3 class="learn-listing-title anchored">
         <a href="./learn/what-is-allele-dosage.html" class="listing-title">What is allele dosage?</a>
       </h3>
 
-
+      
       <p class="learn-listing-description listing-description">Understand what allele dosage represents in diploids and polyploids, how it differs from read fraction, and why dosage uncertainty matters.</p>
+      
 
-
-
+      
       <div class="learn-card-topics" aria-label="Topics">
-
+        
         <span class="learn-topic-tag listing-categories">Genotype Data</span>
-
+        
         <span class="learn-topic-tag listing-categories">Ploidy &amp; Dosage</span>
-
+        
       </div>
-
+      
 
       <a class="learn-card-open" href="./learn/what-is-allele-dosage.html">Open concept <span aria-hidden="true">→</span></a>
     </div>
   </article>
 
-  <article class="learn-listing-card" data-index="6" data-categories="R2Vub3R5cGUlMjBEYXRhJTJDRGF0YSUyMFF1YWxpdHk=" data-listing-file-modified-sort="1783693184000" data-listing-reading-time-sort="4" data-listing-word-count-sort="796">
-
+  <article class="learn-listing-card" data-index="5" data-categories="R2Vub3R5cGUlMjBEYXRhJTJDRGF0YSUyMFF1YWxpdHk=" data-listing-file-modified-sort="1783693184000" data-listing-reading-time-sort="4" data-listing-word-count-sort="796">
+    
     <a class="learn-listing-image" href="./learn/choosing-missing-data-threshold.html" aria-label="Open Choosing a missing-data threshold">
       <img src="./assets/concept-missing-data.svg" alt="Genotype matrix with missing cells beside a threshold slider." loading="lazy">
     </a>
-
+    
 
     <div class="learn-listing-body">
       <div class="learn-card-badges" aria-label="Learning material metadata">
         <span class="learn-badge learn-badge-type listing-learning-type">Concept</span>
-
-        <span class="learn-badge learn-badge-software listing-software">BIGr</span>
-
-        <span class="learn-badge learn-badge-software listing-software">BIGapp</span>
-
-
+        
+        <span class="learn-badge learn-badge-software listing-software">Uses BIGr</span>
+        
+        <span class="learn-badge learn-badge-software listing-software">Uses BIGapp</span>
+        
+        
         <span class="learn-badge learn-badge-level listing-level">Intermediate</span>
-
+        
       </div>
 
       <h3 class="learn-listing-title anchored">
         <a href="./learn/choosing-missing-data-threshold.html" class="listing-title">Choosing a missing-data threshold</a>
       </h3>
 
-
+      
       <p class="learn-listing-description listing-description">Choose marker and sample missingness thresholds by diagnosing the data source, matching the downstream analysis, and testing sensitivity.</p>
+      
 
-
-
+      
       <div class="learn-card-topics" aria-label="Topics">
-
+        
         <span class="learn-topic-tag listing-categories">Genotype Data</span>
-
+        
         <span class="learn-topic-tag listing-categories">Data Quality</span>
-
+        
       </div>
-
+      
 
       <a class="learn-card-open" href="./learn/choosing-missing-data-threshold.html">Open concept <span aria-hidden="true">→</span></a>
     </div>
   </article>
 
-  <article class="learn-listing-card" data-index="7" data-categories="R2Vub3R5cGUlMjBEYXRhJTJDRGF0YSUyMFF1YWxpdHklMkNQbG9pZHklMjAlMjYlMjBEb3NhZ2U=" data-listing-file-modified-sort="1783693100000" data-listing-reading-time-sort="4" data-listing-word-count-sort="796">
-
+  <article class="learn-listing-card" data-index="6" data-categories="R2Vub3R5cGUlMjBEYXRhJTJDRGF0YSUyMFF1YWxpdHklMkNQbG9pZHklMjAlMjYlMjBEb3NhZ2U=" data-listing-file-modified-sort="1783693100000" data-listing-reading-time-sort="4" data-listing-word-count-sort="796">
+    
     <a class="learn-listing-image" href="./learn/snp-filtering-polyploids.html" aria-label="Open SNP filtering in polyploids">
       <img src="./assets/concept-snp-filtering.svg" alt="Layered filtering pipeline from sequence evidence through dosage and dataset quality to analysis-ready SNPs." loading="lazy">
     </a>
-
+    
 
     <div class="learn-listing-body">
       <div class="learn-card-badges" aria-label="Learning material metadata">
         <span class="learn-badge learn-badge-type listing-learning-type">Concept</span>
-
-        <span class="learn-badge learn-badge-software listing-software">BIGr</span>
-
-        <span class="learn-badge learn-badge-software listing-software">BIGapp</span>
-
-        <span class="learn-badge learn-badge-software listing-software">Qploidy2</span>
-
-
+        
+        <span class="learn-badge learn-badge-software listing-software">Uses BIGr</span>
+        
+        <span class="learn-badge learn-badge-software listing-software">Uses BIGapp</span>
+        
+        <span class="learn-badge learn-badge-software listing-software">Uses Qploidy2</span>
+        
+        
         <span class="learn-badge learn-badge-level listing-level">Intermediate</span>
-
+        
       </div>
 
       <h3 class="learn-listing-title anchored">
         <a href="./learn/snp-filtering-polyploids.html" class="listing-title">SNP filtering in polyploids</a>
       </h3>
 
-
+      
       <p class="learn-listing-description listing-description">Build a polyploid-aware SNP filtering strategy that considers sequence evidence, dosage uncertainty, duplicated genomes, and downstream goals.</p>
+      
 
-
-
+      
       <div class="learn-card-topics" aria-label="Topics">
-
+        
         <span class="learn-topic-tag listing-categories">Genotype Data</span>
-
+        
         <span class="learn-topic-tag listing-categories">Data Quality</span>
-
+        
         <span class="learn-topic-tag listing-categories">Ploidy &amp; Dosage</span>
-
+        
       </div>
-
+      
 
       <a class="learn-card-open" href="./learn/snp-filtering-polyploids.html">Open concept <span aria-hidden="true">→</span></a>
     </div>
   </article>
 
-  <article class="learn-listing-card" data-index="8" data-categories="R2Vub21pYyUyMFByZWRpY3Rpb24lMkNEYXRhJTIwUXVhbGl0eQ==" data-listing-file-modified-sort="1783953439203" data-listing-reading-time-sort="4" data-listing-word-count-sort="779">
-
+  <article class="learn-listing-card" data-index="7" data-categories="R2Vub21pYyUyMFByZWRpY3Rpb24lMkNEYXRhJTIwUXVhbGl0eQ==" data-listing-file-modified-sort="1783953439203" data-listing-reading-time-sort="4" data-listing-word-count-sort="779">
+    
     <a class="learn-listing-image" href="./learn/cross-validation-accuracy.html" aria-label="Open What does cross-validation accuracy mean?">
       <img src="./assets/concept-cross-validation.svg" alt="Repeated cross-validation folds beside a predicted-versus-observed correlation plot." loading="lazy">
     </a>
-
+    
 
     <div class="learn-listing-body">
       <div class="learn-card-badges" aria-label="Learning material metadata">
         <span class="learn-badge learn-badge-type listing-learning-type">Concept</span>
-
-        <span class="learn-badge learn-badge-software listing-software">BIGapp</span>
-
-
+        
+        <span class="learn-badge learn-badge-software listing-software">Uses BIGapp</span>
+        
+        
         <span class="learn-badge learn-badge-level listing-level">Beginner</span>
-
+        
       </div>
 
       <h3 class="learn-listing-title anchored">
         <a href="./learn/cross-validation-accuracy.html" class="listing-title">What does cross-validation accuracy mean?</a>
       </h3>
 
-
+      
       <p class="learn-listing-description listing-description">Interpret cross-validation results in genomic prediction without confusing predictive ability, selection accuracy, and the realism of the validation design.</p>
+      
 
-
-
+      
       <div class="learn-card-topics" aria-label="Topics">
-
+        
         <span class="learn-topic-tag listing-categories">Genomic Prediction</span>
-
+        
         <span class="learn-topic-tag listing-categories">Data Quality</span>
-
+        
       </div>
-
+      
 
       <a class="learn-card-open" href="./learn/cross-validation-accuracy.html">Open concept <span aria-hidden="true">→</span></a>
     </div>
@@ -811,7 +771,7 @@ Prepare data, fit genomic prediction models, and evaluate prediction accuracy.
     anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {
+        if (clz.startsWith('code-annotation-')) {                     
           return true;
         }
       }
@@ -831,11 +791,11 @@ Prepare data, fit genomic prediction models, and evaluate prediction accuracy.
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
         button.setAttribute("data-bs-title", "Copied!");
-        tooltip = new bootstrap.Tooltip(button,
-          { trigger: "manual",
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
             customClass: "code-copy-button-tooltip",
             offset: [0, -8]});
-        tooltip.show();
+        tooltip.show();    
       }
       setTimeout(function() {
         if (tooltip) {
@@ -917,7 +877,7 @@ Prepare data, fit genomic prediction models, and evaluate prediction accuracy.
       if (onUntriggerFn) {
         config.onUntrigger = onUntriggerFn;
       }
-      window.tippy(el, config);
+      window.tippy(el, config); 
     }
     const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
     for (var i=0; i<noterefs.length; i++) {
@@ -992,7 +952,7 @@ Prepare data, fit genomic prediction models, and evaluate prediction accuracy.
       tippyHover(xref, undefined, function(instance) {
         instance.disable();
         let url = xref.getAttribute('href');
-        let hash = undefined;
+        let hash = undefined; 
         if (url.startsWith('#')) {
           hash = url;
         } else {
@@ -1020,7 +980,7 @@ Prepare data, fit genomic prediction models, and evaluate prediction accuracy.
               if (note !== null) {
                 const html = processXRef(id, note);
                 instance.setContent(html);
-              }
+              } 
             }).finally(() => {
               instance.enable();
               instance.show();
@@ -1044,7 +1004,7 @@ Prepare data, fit genomic prediction models, and evaluate prediction accuracy.
               }
               const html = processXRef(null, note);
               instance.setContent(html);
-            }
+            } 
           }).finally(() => {
             instance.enable();
             instance.show();
@@ -1084,7 +1044,7 @@ Prepare data, fit genomic prediction models, and evaluate prediction accuracy.
               height = bottom - top;
             }
             if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it
+              // cook up a div (if necessary) and position it 
               let div = window.document.getElementById("code-annotation-line-highlight");
               if (div === null) {
                 div = window.document.createElement("div");
@@ -1210,7 +1170,7 @@ Prepare data, fit genomic prediction models, and evaluate prediction accuracy.
   <div class="nav-footer">
     <div class="nav-footer-left">
 <p><strong>Breeding Insight</strong> — open-source tools for public plant and animal breeding.</p>
-</div>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     <div class="toc-actions"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/learn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
@@ -1220,12 +1180,12 @@ Prepare data, fit genomic prediction models, and evaluate prediction accuracy.
     <a class="nav-link" href="https://github.com/Breeding-Insight">
 <p>GitHub</p>
 </a>
-  </li>
+  </li>  
     <li class="nav-item">
     <a class="nav-link" href="https://breedinginsight.org/">
 <p>Main website</p>
 </a>
-  </li>
+  </li>  
 </ul>
     </div>
   </div>

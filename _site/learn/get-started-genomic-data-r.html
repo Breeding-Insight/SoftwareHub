@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="keywords" content="R, VCF, genotype, read depth, diploid, polyploid, allele dosage">
-<meta name="description" content="Load, inspect, filter, and visualize a BIGr VCF while learning which steps require ploidy-aware interpretation.">
+<meta name="description" content="Set up R, then load, inspect, filter, and visualize a VCF with diploid- and polyploid-aware checkpoints.">
 
 <title>Get started with genomic data in R – Breeding Insight Software</title>
 <style>
@@ -143,10 +143,10 @@ window.Quarto = {
 </script>
 
 <meta property="og:title" content="Get started with genomic data in R – Breeding Insight Software">
-<meta property="og:description" content="Load, inspect, filter, and visualize a BIGr VCF while learning which steps require ploidy-aware interpretation.">
-<meta property="og:image" content="https://breeding-insight.github.io/software/assets/card-bigr.svg">
+<meta property="og:description" content="Set up R, then load, inspect, filter, and visualize a VCF with diploid- and polyploid-aware checkpoints.">
+<meta property="og:image" content="https://breeding-insight.github.io/software/assets/tutorial-genomic-data.svg">
 <meta property="og:site_name" content="Breeding Insight Software">
-<meta property="og:image:alt" content="BIGr logo on a blue and green geometric background.">
+<meta property="og:image:alt" content="A VCF table beside a read-depth chart labeled VCF basics.">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -215,13 +215,18 @@ window.Quarto = {
   <ul>
   <li><a href="#what-you-will-learn" id="toc-what-you-will-learn" class="nav-link active" data-scroll-target="#what-you-will-learn">What you will learn</a></li>
   <li><a href="#what-you-need" id="toc-what-you-need" class="nav-link" data-scroll-target="#what-you-need">What you need</a></li>
-  <li><a href="#set-up-the-r-session" id="toc-set-up-the-r-session" class="nav-link" data-scroll-target="#set-up-the-r-session">1. Set up the R session</a></li>
-  <li><a href="#load-the-bigr-example-vcf" id="toc-load-the-bigr-example-vcf" class="nav-link" data-scroll-target="#load-the-bigr-example-vcf">2. Load the BIGr example VCF</a></li>
-  <li><a href="#understand-the-vcf-structure" id="toc-understand-the-vcf-structure" class="nav-link" data-scroll-target="#understand-the-vcf-structure">3. Understand the VCF structure</a></li>
-  <li><a href="#inspect-genotypes-dosage-and-depth" id="toc-inspect-genotypes-dosage-and-depth" class="nav-link" data-scroll-target="#inspect-genotypes-dosage-and-depth">4. Inspect genotypes, dosage, and depth</a></li>
-  <li><a href="#visualize-read-depth" id="toc-visualize-read-depth" class="nav-link" data-scroll-target="#visualize-read-depth">5. Visualize read depth</a></li>
-  <li><a href="#filter-with-an-explicit-scientific-rule" id="toc-filter-with-an-explicit-scientific-rule" class="nav-link" data-scroll-target="#filter-with-an-explicit-scientific-rule">6. Filter with an explicit scientific rule</a></li>
-  <li><a href="#interpretation-checkpoints" id="toc-interpretation-checkpoints" class="nav-link" data-scroll-target="#interpretation-checkpoints">7. Interpretation checkpoints</a></li>
+  <li><a href="#install-and-verify-r" id="toc-install-and-verify-r" class="nav-link" data-scroll-target="#install-and-verify-r">1. Install and verify R</a>
+  <ul class="collapse">
+  <li><a href="#optionally-install-rstudio-desktop" id="toc-optionally-install-rstudio-desktop" class="nav-link" data-scroll-target="#optionally-install-rstudio-desktop">Optionally install RStudio Desktop</a></li>
+  <li><a href="#check-basic-r-commands" id="toc-check-basic-r-commands" class="nav-link" data-scroll-target="#check-basic-r-commands">Check basic R commands</a></li>
+  </ul></li>
+  <li><a href="#install-and-load-the-packages" id="toc-install-and-load-the-packages" class="nav-link" data-scroll-target="#install-and-load-the-packages">2. Install and load the packages</a></li>
+  <li><a href="#load-the-bigr-example-vcf" id="toc-load-the-bigr-example-vcf" class="nav-link" data-scroll-target="#load-the-bigr-example-vcf">3. Load the BIGr example VCF</a></li>
+  <li><a href="#understand-the-vcf-structure" id="toc-understand-the-vcf-structure" class="nav-link" data-scroll-target="#understand-the-vcf-structure">4. Understand the VCF structure</a></li>
+  <li><a href="#inspect-genotypes-dosage-and-depth" id="toc-inspect-genotypes-dosage-and-depth" class="nav-link" data-scroll-target="#inspect-genotypes-dosage-and-depth">5. Inspect genotypes, dosage, and depth</a></li>
+  <li><a href="#visualize-read-depth" id="toc-visualize-read-depth" class="nav-link" data-scroll-target="#visualize-read-depth">6. Visualize read depth</a></li>
+  <li><a href="#filter-with-an-explicit-scientific-rule" id="toc-filter-with-an-explicit-scientific-rule" class="nav-link" data-scroll-target="#filter-with-an-explicit-scientific-rule">7. Filter with an explicit scientific rule</a></li>
+  <li><a href="#interpretation-checkpoints" id="toc-interpretation-checkpoints" class="nav-link" data-scroll-target="#interpretation-checkpoints">8. Interpretation checkpoints</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
   <li><a href="#exercise-1-count-variants-by-chromosome" id="toc-exercise-1-count-variants-by-chromosome" class="nav-link" data-scroll-target="#exercise-1-count-variants-by-chromosome">Exercise 1: Count variants by chromosome</a></li>
@@ -246,7 +251,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    Load, inspect, filter, and visualize a BIGr VCF while learning which steps require ploidy-aware interpretation.
+    Set up R, then load, inspect, filter, and visualize a VCF with diploid- and polyploid-aware checkpoints.
   </div>
 </div>
 
@@ -275,6 +280,7 @@ window.Quarto = {
 <p>Ploidy becomes essential when you interpret genotype encoding and allele dosage, decide whether depth is sufficient to separate dosage classes, choose some filters, and prepare data for downstream analysis. The example Iris dataset was called as diploid, but each step identifies what stays the same and what must change for a polyploid dataset.</p>
 <p>By the end, you will be able to:</p>
 <ol type="1">
+<li>install and verify R and the packages used in the tutorial;</li>
 <li>load the VCF bundled with BIGr;</li>
 <li>identify fixed, INFO, FORMAT, and sample fields;</li>
 <li>extract genotype, dosage, depth, allele-depth, and probability values;</li>
@@ -285,11 +291,10 @@ window.Quarto = {
 <section id="what-you-need" class="level2">
 <h2 class="anchored" data-anchor-id="what-you-need">What you need</h2>
 <ul>
-<li>R 4.4.0 or newer;</li>
-<li>BIGr and its dependencies; and</li>
-<li>about 20 minutes.</li>
+<li>A Windows, macOS, or Linux computer where you can install R packages;</li>
+<li>an internet connection for the initial setup; and</li>
+<li>about 30 minutes, plus package installation time.</li>
 </ul>
-<p>If R or BIGr is not ready, complete <a href="../learn/install-r.html">Install R for BIGr</a> first.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="About the displayed results">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -304,32 +309,120 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="set-up-the-r-session" class="level2">
-<h2 class="anchored" data-anchor-id="set-up-the-r-session">1. Set up the R session</h2>
-<p>Load BIGr. The tutorial uses <code>vcfR</code>, a BIGr dependency, to read and extract VCF fields. It uses the <code>ggplot2</code> package installed in the setup guide to make a plot.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(BIGr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="install-and-verify-r" class="level2">
+<h2 class="anchored" data-anchor-id="install-and-verify-r">1. Install and verify R</h2>
+<p>BIGr requires <strong>R 4.4.0 or newer</strong>. R is the software that runs the analysis. Choose your operating system and follow the official CRAN instructions.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Operating system</th>
+<th>Official installer</th>
+<th>What to choose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Windows</td>
+<td><a href="https://cran.r-project.org/bin/windows/base/">Download R for Windows</a></td>
+<td>Download the current base installer and accept the standard options.</td>
+</tr>
+<tr class="even">
+<td>macOS</td>
+<td><a href="https://cran.r-project.org/bin/macosx/">Download R for macOS</a></td>
+<td>Choose the installer that matches Apple silicon or Intel and your macOS version.</td>
+</tr>
+<tr class="odd">
+<td>Linux</td>
+<td><a href="https://cran.r-project.org/bin/linux/">R binaries for Linux</a></td>
+<td>Open the instructions for your distribution, such as Debian, Fedora, Red Hat, SUSE, or Ubuntu.</td>
+</tr>
+</tbody>
+</table>
+<p>When installation finishes, open R itself or a terminal and start R. At the <code>&gt;</code> prompt, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>R.version.string</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getRversion</span>() <span class="sc">&gt;=</span> <span class="st">"4.4.0"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The version text depends on the current R release and your operating system. The second command should return:</p>
+<pre class="text"><code>[1] TRUE</code></pre>
+<div class="callout callout-style-default callout-warning callout-titled" title="If the result is FALSE">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>If the result is FALSE
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Install a current R release from the CRAN link for your operating system, restart R, and run the check again. BIGr will not install on R versions older than 4.4.0.</p>
+</div>
+</div>
+<section id="optionally-install-rstudio-desktop" class="level3">
+<h3 class="anchored" data-anchor-id="optionally-install-rstudio-desktop">Optionally install RStudio Desktop</h3>
+<p>RStudio Desktop is an editor that can make it easier to write scripts, run code, inspect objects, and view plots. It does not replace R and is not required for this tutorial.</p>
+<p>If you want to use it, <a href="https://posit.co/download/rstudio-desktop/">download RStudio Desktop from Posit</a> after installing R. Open RStudio and run the same version check in its <strong>Console</strong> pane:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getRversion</span>() <span class="sc">&gt;=</span> <span class="st">"4.4.0"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The commands in this tutorial also work in the standard R console or in an R script run with <code>Rscript</code>.</p>
+</section>
+<section id="check-basic-r-commands" class="level3">
+<h3 class="anchored" data-anchor-id="check-basic-r-commands">Check basic R commands</h3>
+<p>Run these commands one line at a time:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">14</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Expected output:</p>
+<pre class="text"><code>[1] 4
+[1] 12</code></pre>
+</section>
+</section>
+<section id="install-and-load-the-packages" class="level2">
+<h2 class="anchored" data-anchor-id="install-and-load-the-packages">2. Install and load the packages</h2>
+<p>BIGr uses packages from both CRAN and Bioconductor. <code>BiocManager</code> configures those repositories and installs the required dependencies. This tutorial also uses <code>ggplot2</code> to make a plot.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"BiocManager"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"BIGr"</span>, <span class="st">"ggplot2"</span>),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ask =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">update =</span> <span class="cn">FALSE</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Installation can take several minutes. You normally run the installation commands only once for each R library.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Installation is different from loading">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Installation is different from loading
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>BiocManager::install()</code> puts packages on your computer. <code>library(BIGr)</code> loads BIGr into the current R session. Load BIGr again whenever you start a new session and want to use it.</p>
+</div>
+</div>
+<p>Restart R, then load BIGr. The tutorial uses <code>vcfR</code>, a BIGr dependency, to read and extract VCF fields.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(BIGr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Check that your versions meet the requirement and that the two supporting packages are available:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">getRversion</span>() <span class="sc">&gt;=</span> <span class="st">"4.4.0"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">requireNamespace</span>(<span class="st">"vcfR"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">requireNamespace</span>(<span class="st">"ggplot2"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>No output means that all three checks passed. If a check fails, return to the <a href="../learn/install-r.html">R and BIGr setup guide</a>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">getRversion</span>() <span class="sc">&gt;=</span> <span class="st">"4.4.0"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">requireNamespace</span>(<span class="st">"vcfR"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">requireNamespace</span>(<span class="st">"ggplot2"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>No output means that all three checks passed. If a package check fails, restart R and repeat the installation block. Copy the complete error message if you need help; its final line may omit the dependency that failed.</p>
 </section>
 <section id="load-the-bigr-example-vcf" class="level2">
-<h2 class="anchored" data-anchor-id="load-the-bigr-example-vcf">2. Load the BIGr example VCF</h2>
+<h2 class="anchored" data-anchor-id="load-the-bigr-example-vcf">3. Load the BIGr example VCF</h2>
 <p><code>system.file()</code> locates a file installed inside an R package. This avoids hard-coding a path that would be different on every computer.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>vcf_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"iris_DArT_VCF.vcf.gz"</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">"BIGr"</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">nzchar</span>(vcf_file), <span class="fu">file.exists</span>(vcf_file))</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>iris_vcf <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">read.vcfR</span>(</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  vcf_file,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>iris_vcf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>vcf_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"iris_DArT_VCF.vcf.gz"</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">"BIGr"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">nzchar</span>(vcf_file), <span class="fu">file.exists</span>(vcf_file))</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>iris_vcf <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">read.vcfR</span>(</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  vcf_file,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>iris_vcf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Expected summary:</p>
 <pre class="text"><code>***** Object of Class vcfR *****
 150 samples
@@ -353,7 +446,7 @@ Object size: 6.3 Mb
 </div>
 </section>
 <section id="understand-the-vcf-structure" class="level2">
-<h2 class="anchored" data-anchor-id="understand-the-vcf-structure">3. Understand the VCF structure</h2>
+<h2 class="anchored" data-anchor-id="understand-the-vcf-structure">4. Understand the VCF structure</h2>
 <p>A VCF has three main kinds of content:</p>
 <table class="caption-top table">
 <colgroup>
@@ -387,11 +480,11 @@ Object size: 6.3 Mb
 </tbody>
 </table>
 <p>Inspect the first six fixed records:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fixed <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(iris_vcf<span class="sc">@</span>fix)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>fixed[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="fu">c</span>(</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CHROM"</span>, <span class="st">"POS"</span>, <span class="st">"ID"</span>, <span class="st">"REF"</span>, <span class="st">"ALT"</span>, <span class="st">"QUAL"</span>, <span class="st">"FILTER"</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fixed <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(iris_vcf<span class="sc">@</span>fix)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>fixed[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="fu">c</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CHROM"</span>, <span class="st">"POS"</span>, <span class="st">"ID"</span>, <span class="st">"REF"</span>, <span class="st">"ALT"</span>, <span class="st">"QUAL"</span>, <span class="st">"FILTER"</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Expected output:</p>
 <pre class="text"><code>  CHROM POS         ID REF ALT QUAL FILTER
 1  Chr1  10  Chr1_0010   A   B &lt;NA&gt;   &lt;NA&gt;
@@ -401,14 +494,14 @@ Object size: 6.3 Mb
 5  Chr4 830  Chr4_0830   A   B &lt;NA&gt;   &lt;NA&gt;
 6  Chr4 840  Chr4_0840   A   B &lt;NA&gt;   &lt;NA&gt;</code></pre>
 <p>Now verify the dimensions, chromosomes, and per-sample FORMAT definition:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>n_variants <span class="ot">&lt;-</span> <span class="fu">nrow</span>(iris_vcf<span class="sc">@</span>fix)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>n_samples <span class="ot">&lt;-</span> <span class="fu">ncol</span>(iris_vcf<span class="sc">@</span>gt) <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>chromosomes <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(iris_vcf<span class="sc">@</span>fix[, <span class="st">"CHROM"</span>]))</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>format_fields <span class="ot">&lt;-</span> <span class="fu">unique</span>(iris_vcf<span class="sc">@</span>gt[, <span class="st">"FORMAT"</span>])</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">variants =</span> n_variants, <span class="at">samples =</span> n_samples)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>chromosomes</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>format_fields</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>n_variants <span class="ot">&lt;-</span> <span class="fu">nrow</span>(iris_vcf<span class="sc">@</span>fix)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>n_samples <span class="ot">&lt;-</span> <span class="fu">ncol</span>(iris_vcf<span class="sc">@</span>gt) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>chromosomes <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(iris_vcf<span class="sc">@</span>fix[, <span class="st">"CHROM"</span>]))</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>format_fields <span class="ot">&lt;-</span> <span class="fu">unique</span>(iris_vcf<span class="sc">@</span>gt[, <span class="st">"FORMAT"</span>])</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">variants =</span> n_variants, <span class="at">samples =</span> n_samples)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>chromosomes</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>format_fields</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Expected output:</p>
 <pre class="text"><code>variants  samples
      499      150
@@ -458,45 +551,45 @@ Object size: 6.3 Mb
 <p>Do not assume that every VCF contains these fields or uses the same dosage convention. Read the <code>##FORMAT</code> definitions in each input file before interpreting its sample values.</p>
 </section>
 <section id="inspect-genotypes-dosage-and-depth" class="level2">
-<h2 class="anchored" data-anchor-id="inspect-genotypes-dosage-and-depth">4. Inspect genotypes, dosage, and depth</h2>
+<h2 class="anchored" data-anchor-id="inspect-genotypes-dosage-and-depth">5. Inspect genotypes, dosage, and depth</h2>
 <p>Extract each field into a matrix with variants in rows and samples in columns:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>gt <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(iris_vcf, <span class="at">element =</span> <span class="st">"GT"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>ud <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  iris_vcf,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">element =</span> <span class="st">"UD"</span>,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">as.numeric =</span> <span class="cn">TRUE</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>dp <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  iris_vcf,</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">element =</span> <span class="st">"DP"</span>,</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">as.numeric =</span> <span class="cn">TRUE</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>ra <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  iris_vcf,</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">element =</span> <span class="st">"RA"</span>,</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">as.numeric =</span> <span class="cn">TRUE</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>ad <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(iris_vcf, <span class="at">element =</span> <span class="st">"AD"</span>)</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>mpp <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  iris_vcf,</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">element =</span> <span class="st">"MPP"</span>,</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">as.numeric =</span> <span class="cn">TRUE</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>gt <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(iris_vcf, <span class="at">element =</span> <span class="st">"GT"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ud <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  iris_vcf,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">element =</span> <span class="st">"UD"</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">as.numeric =</span> <span class="cn">TRUE</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>dp <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  iris_vcf,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">element =</span> <span class="st">"DP"</span>,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">as.numeric =</span> <span class="cn">TRUE</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>ra <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  iris_vcf,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">element =</span> <span class="st">"RA"</span>,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">as.numeric =</span> <span class="cn">TRUE</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>ad <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(iris_vcf, <span class="at">element =</span> <span class="st">"AD"</span>)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>mpp <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  iris_vcf,</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">element =</span> <span class="st">"MPP"</span>,</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">as.numeric =</span> <span class="cn">TRUE</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Look at four sample calls for the first variant:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>first_calls <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample =</span> <span class="fu">colnames</span>(gt)[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">GT =</span> gt[<span class="dv">1</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">reference_dosage =</span> ud[<span class="dv">1</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">depth =</span> dp[<span class="dv">1</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">reference_reads =</span> ra[<span class="dv">1</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">allelic_depths =</span> ad[<span class="dv">1</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">posterior_probability =</span> <span class="fu">round</span>(mpp[<span class="dv">1</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="dv">3</span>),</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(first_calls) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>first_calls</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>first_calls <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample =</span> <span class="fu">colnames</span>(gt)[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">GT =</span> gt[<span class="dv">1</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">reference_dosage =</span> ud[<span class="dv">1</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">depth =</span> dp[<span class="dv">1</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">reference_reads =</span> ra[<span class="dv">1</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">allelic_depths =</span> ad[<span class="dv">1</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">posterior_probability =</span> <span class="fu">round</span>(mpp[<span class="dv">1</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="dv">3</span>),</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(first_calls) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>first_calls</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Expected output:</p>
 <pre class="text"><code>    sample  GT reference_dosage depth reference_reads allelic_depths posterior_probability
 1 Sample_1 0/1                1   477             328        328,149                 1.000
@@ -505,8 +598,8 @@ Object size: 6.3 Mb
 4 Sample_4 0/1                1   506             142        142,364                 0.990</code></pre>
 <p>For this diploid example, <code>GT = 0/1</code> and <code>UD = 1</code> both describe one reference and one alternate allele. <code>UD</code> counts the reference allele, so <code>UD = 0</code> corresponds to the alternate homozygote and <code>UD = 2</code> to the reference homozygote.</p>
 <p>Summarize all hard genotype calls and depths:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(gt)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">as.vector</span>(dp))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(gt)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">as.vector</span>(dp))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Expected output:</p>
 <pre class="text"><code>gt
   0/0   0/1   1/1
@@ -532,30 +625,30 @@ Object size: 6.3 Mb
 </div>
 </section>
 <section id="visualize-read-depth" class="level2">
-<h2 class="anchored" data-anchor-id="visualize-read-depth">5. Visualize read depth</h2>
+<h2 class="anchored" data-anchor-id="visualize-read-depth">6. Visualize read depth</h2>
 <p>A distribution plot can reveal low-depth calls and a long high-depth tail that a single mean would hide.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>depth_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">depth =</span> <span class="fu">as.vector</span>(dp))</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>depth_plot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  depth_data,</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> depth)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_histogram</span>(</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">binwidth =</span> <span class="dv">25</span>,</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">boundary =</span> <span class="dv">0</span>,</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"#48A9C5"</span>,</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"white"</span>,</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.15</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1200</span>)) <span class="sc">+</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Read depth per genotype call"</span>,</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of calls"</span>,</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Depth distribution in the BIGr Iris VCF"</span></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>)</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>depth_plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>depth_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">depth =</span> <span class="fu">as.vector</span>(dp))</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>depth_plot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  depth_data,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> depth)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_histogram</span>(</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">binwidth =</span> <span class="dv">25</span>,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">boundary =</span> <span class="dv">0</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"#48A9C5"</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"white"</span>,</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.15</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1200</span>)) <span class="sc">+</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Read depth per genotype call"</span>,</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of calls"</span>,</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Depth distribution in the BIGr Iris VCF"</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>)</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>depth_plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../assets/tutorial-vcf-depth.png" class="img-fluid figure-img" alt="Histogram of read depth per genotype call in the BIGr Iris VCF."></p>
@@ -565,29 +658,29 @@ Object size: 6.3 Mb
 <p>The display is limited to 0 through 1,200 so the main distribution is readable; the summary above confirms that some values extend to 3,796.</p>
 </section>
 <section id="filter-with-an-explicit-scientific-rule" class="level2">
-<h2 class="anchored" data-anchor-id="filter-with-an-explicit-scientific-rule">6. Filter with an explicit scientific rule</h2>
+<h2 class="anchored" data-anchor-id="filter-with-an-explicit-scientific-rule">7. Filter with an explicit scientific rule</h2>
 <p>Start by evaluating a call-level depth rule without changing the VCF. A threshold of 20 is used here only to demonstrate the mechanics; it is not a universal recommendation.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>keep_depth <span class="ot">&lt;-</span> dp <span class="sc">&gt;=</span> <span class="dv">20</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">calls_passing =</span> <span class="fu">sum</span>(keep_depth, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">percent_passing =</span> <span class="fu">round</span>(</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(keep_depth, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">*</span> <span class="dv">100</span>,</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>keep_depth <span class="ot">&lt;-</span> dp <span class="sc">&gt;=</span> <span class="dv">20</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">calls_passing =</span> <span class="fu">sum</span>(keep_depth, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">percent_passing =</span> <span class="fu">round</span>(</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(keep_depth, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Expected output:</p>
 <pre class="text"><code>  calls_passing percent_passing
         71556.0            95.6</code></pre>
 <p>This logical matrix records which calls pass; it does not alter <code>iris_vcf</code>. Before setting a production threshold, examine the caller’s probability estimates, depth distribution, technical validation, missing-data consequences, and whether adjacent dosage states can be separated at the organism’s ploidy.</p>
 <p>BIGr can also filter the full VCF. The example below removes variants with minor allele frequency below 0.05. The Iris file was modeled as diploid, so its correct argument is <code>ploidy = 2</code>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>iris_filtered <span class="ot">&lt;-</span> BIGr<span class="sc">::</span><span class="fu">filterVCF</span>(</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  iris_vcf,</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter.MAF =</span> <span class="fl">0.05</span>,</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ploidy =</span> <span class="dv">2</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(iris_filtered<span class="sc">@</span>fix)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>iris_filtered <span class="ot">&lt;-</span> BIGr<span class="sc">::</span><span class="fu">filterVCF</span>(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  iris_vcf,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter.MAF =</span> <span class="fl">0.05</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ploidy =</span> <span class="dv">2</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(iris_filtered<span class="sc">@</span>fix)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Expected result after BIGr’s progress messages:</p>
 <pre class="text"><code>[1] 423</code></pre>
 <div class="callout callout-style-default callout-warning callout-titled" title="Change ploidy for your data">
@@ -605,7 +698,7 @@ Object size: 6.3 Mb
 </div>
 </section>
 <section id="interpretation-checkpoints" class="level2">
-<h2 class="anchored" data-anchor-id="interpretation-checkpoints">7. Interpretation checkpoints</h2>
+<h2 class="anchored" data-anchor-id="interpretation-checkpoints">8. Interpretation checkpoints</h2>
 <p>Before continuing to PCA, association analysis, genomic prediction, or another downstream task, record answers to these questions:</p>
 <table class="caption-top table">
 <colgroup>
@@ -660,7 +753,7 @@ Object size: 6.3 Mb
 <summary>
 Show solution
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">table</span>(iris_vcf<span class="sc">@</span>fix[, <span class="st">"CHROM"</span>]), <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">table</span>(iris_vcf<span class="sc">@</span>fix[, <span class="st">"CHROM"</span>]), <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>Chr8</code> contains the most variants, with 163.</p>
 </details>
 </section>
@@ -671,7 +764,7 @@ Show solution
 <summary>
 Show solution
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(mpp <span class="sc">&lt;</span> <span class="fl">0.90</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(mpp <span class="sc">&lt;</span> <span class="fl">0.90</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The result is 844 calls. This count is a diagnostic, not an automatic recommendation to discard them.</p>
 </details>
 </section>

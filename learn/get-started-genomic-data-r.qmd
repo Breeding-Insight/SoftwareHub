@@ -1,11 +1,11 @@
 ---
 title: "Get started with genomic data in R"
-description: "Load, inspect, filter, and visualize a BIGr VCF while learning which steps require ploidy-aware interpretation."
+description: "Set up R, then load, inspect, filter, and visualize a VCF with diploid- and polyploid-aware checkpoints."
 categories:
   - Getting Started
   - Genotype Data
-image: ../assets/card-bigr.svg
-image-alt: "BIGr logo on a blue and green geometric background."
+image: ../assets/tutorial-genomic-data.svg
+image-alt: "A VCF table beside a read-depth chart labeled VCF basics."
 order: 15
 learning-type: Tutorial
 software:
@@ -31,27 +31,101 @@ Ploidy becomes essential when you interpret genotype encoding and allele dosage,
 
 By the end, you will be able to:
 
-1. load the VCF bundled with BIGr;
-2. identify fixed, INFO, FORMAT, and sample fields;
-3. extract genotype, dosage, depth, allele-depth, and probability values;
-4. visualize depth and apply a documented filter; and
-5. distinguish universal VCF operations from ploidy-aware interpretation.
+1. install and verify R and the packages used in the tutorial;
+2. load the VCF bundled with BIGr;
+3. identify fixed, INFO, FORMAT, and sample fields;
+4. extract genotype, dosage, depth, allele-depth, and probability values;
+5. visualize depth and apply a documented filter; and
+6. distinguish universal VCF operations from ploidy-aware interpretation.
 
 ## What you need
 
-- R 4.4.0 or newer;
-- BIGr and its dependencies; and
-- about 20 minutes.
-
-If R or BIGr is not ready, complete [Install R for BIGr](install-r.qmd) first.
+- A Windows, macOS, or Linux computer where you can install R packages;
+- an internet connection for the initial setup; and
+- about 30 minutes, plus package installation time.
 
 ::: {.callout-note title="About the displayed results"}
 Code execution is disabled during normal site builds. The outputs and plot shown here were generated and checked with R 4.5.1, BIGr 0.8.1, and the VCF bundled with BIGr. Run each code block in your own R session to reproduce them.
 :::
 
-## 1. Set up the R session
+## 1. Install and verify R
 
-Load BIGr. The tutorial uses `vcfR`, a BIGr dependency, to read and extract VCF fields. It uses the `ggplot2` package installed in the setup guide to make a plot.
+BIGr requires **R 4.4.0 or newer**. R is the software that runs the analysis. Choose your operating system and follow the official CRAN instructions.
+
+| Operating system | Official installer | What to choose |
+|---|---|---|
+| Windows | [Download R for Windows](https://cran.r-project.org/bin/windows/base/) | Download the current base installer and accept the standard options. |
+| macOS | [Download R for macOS](https://cran.r-project.org/bin/macosx/) | Choose the installer that matches Apple silicon or Intel and your macOS version. |
+| Linux | [R binaries for Linux](https://cran.r-project.org/bin/linux/) | Open the instructions for your distribution, such as Debian, Fedora, Red Hat, SUSE, or Ubuntu. |
+
+When installation finishes, open R itself or a terminal and start R. At the `>` prompt, run:
+
+```r
+R.version.string
+getRversion() >= "4.4.0"
+```
+
+The version text depends on the current R release and your operating system. The second command should return:
+
+```text
+[1] TRUE
+```
+
+::: {.callout-warning title="If the result is FALSE"}
+Install a current R release from the CRAN link for your operating system, restart R, and run the check again. BIGr will not install on R versions older than 4.4.0.
+:::
+
+### Optionally install RStudio Desktop
+
+RStudio Desktop is an editor that can make it easier to write scripts, run code, inspect objects, and view plots. It does not replace R and is not required for this tutorial.
+
+If you want to use it, [download RStudio Desktop from Posit](https://posit.co/download/rstudio-desktop/) after installing R. Open RStudio and run the same version check in its **Console** pane:
+
+```r
+getRversion() >= "4.4.0"
+```
+
+The commands in this tutorial also work in the standard R console or in an R script run with `Rscript`.
+
+### Check basic R commands
+
+Run these commands one line at a time:
+
+```r
+2 + 2
+mean(c(10, 12, 14))
+```
+
+Expected output:
+
+```text
+[1] 4
+[1] 12
+```
+
+## 2. Install and load the packages
+
+BIGr uses packages from both CRAN and Bioconductor. `BiocManager` configures those repositories and installs the required dependencies. This tutorial also uses `ggplot2` to make a plot.
+
+```r
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+  install.packages("BiocManager")
+}
+
+BiocManager::install(
+  c("BIGr", "ggplot2"),
+  ask = FALSE,
+  update = FALSE
+)
+```
+
+Installation can take several minutes. You normally run the installation commands only once for each R library.
+
+::: {.callout-tip title="Installation is different from loading"}
+`BiocManager::install()` puts packages on your computer. `library(BIGr)` loads BIGr into the current R session. Load BIGr again whenever you start a new session and want to use it.
+:::
+
+Restart R, then load BIGr. The tutorial uses `vcfR`, a BIGr dependency, to read and extract VCF fields.
 
 ```r
 library(BIGr)
@@ -65,9 +139,9 @@ stopifnot(requireNamespace("vcfR", quietly = TRUE))
 stopifnot(requireNamespace("ggplot2", quietly = TRUE))
 ```
 
-No output means that all three checks passed. If a check fails, return to the [R and BIGr setup guide](install-r.qmd).
+No output means that all three checks passed. If a package check fails, restart R and repeat the installation block. Copy the complete error message if you need help; its final line may omit the dependency that failed.
 
-## 2. Load the BIGr example VCF
+## 3. Load the BIGr example VCF
 
 `system.file()` locates a file installed inside an R package. This avoids hard-coding a path that would be different on every computer.
 
@@ -103,7 +177,7 @@ Object size: 6.3 Mb
 The object should report **499 variants**, **150 samples**, and **9 chromosomes**. If your numbers differ, confirm that `vcf_file` points to `iris_DArT_VCF.vcf.gz` from the installed BIGr package.
 :::
 
-## 3. Understand the VCF structure
+## 4. Understand the VCF structure
 
 A VCF has three main kinds of content:
 
@@ -172,7 +246,7 @@ The order in `GT:UD:DP:RA:AD:MPP` tells you how to read every colon-separated sa
 
 Do not assume that every VCF contains these fields or uses the same dosage convention. Read the `##FORMAT` definitions in each input file before interpreting its sample values.
 
-## 4. Inspect genotypes, dosage, and depth
+## 5. Inspect genotypes, dosage, and depth
 
 Extract each field into a matrix with variants in rows and samples in columns:
 
@@ -260,7 +334,7 @@ The file contains a hard genotype in every cell, but 1,481 cells have depth zero
 For a biallelic locus at ploidy $P$, a dosage can span 0 through $P$. Adjacent expected allele fractions are separated by $1/P$, so higher-ploidy data generally need more read evidence to distinguish dosage classes reliably. Never reuse `ploidy = 2` merely because this Iris example uses it.
 :::
 
-## 5. Visualize read depth
+## 6. Visualize read depth
 
 A distribution plot can reveal low-depth calls and a long high-depth tail that a single mean would hide.
 
@@ -293,7 +367,7 @@ depth_plot
 
 The display is limited to 0 through 1,200 so the main distribution is readable; the summary above confirms that some values extend to 3,796.
 
-## 6. Filter with an explicit scientific rule
+## 7. Filter with an explicit scientific rule
 
 Start by evaluating a call-level depth rule without changing the VCF. A threshold of 20 is used here only to demonstrate the mechanics; it is not a universal recommendation.
 
@@ -340,7 +414,7 @@ Expected result after BIGr's progress messages:
 For a tetraploid dataset, for example, use `ploidy = 4` only if tetraploidy matches the organism, genomic region, and genotype-calling model. Confirm whether dosage counts the reference or alternate allele before calculating frequencies or recoding values.
 :::
 
-## 7. Interpretation checkpoints
+## 8. Interpretation checkpoints
 
 Before continuing to PCA, association analysis, genomic prediction, or another downstream task, record answers to these questions:
 

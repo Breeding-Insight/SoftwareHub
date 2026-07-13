@@ -34,6 +34,5 @@ library(BIGr)
 
 ## Related learning
 
-- [Install R for BIGr](../learn/install-r.qmd)
 - [Get started with genomic data in R](../learn/get-started-genomic-data-r.qmd)
 - [Process MADC genotype data](../learn/madc-to-vcf.qmd)

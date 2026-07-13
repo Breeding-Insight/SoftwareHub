@@ -17,7 +17,7 @@
       <div class="learn-card-badges" aria-label="Learning material metadata">
         <span class="learn-badge learn-badge-type listing-learning-type"><%- learningType %></span>
         <% for (const tool of software) { %>
-        <span class="learn-badge learn-badge-software listing-software"><%- tool %></span>
+        <span class="learn-badge learn-badge-software listing-software">Uses <%- tool %></span>
         <% } %>
         <% if (level) { %>
         <span class="learn-badge learn-badge-level listing-level"><%- level %></span>

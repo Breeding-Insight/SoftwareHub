@@ -2,7 +2,6 @@
   {
     "listing": "/learn.html",
     "items": [
-      "/learn/install-r.html",
       "/learn/genomics-path.html",
       "/learn/get-started-genomic-data-r.html",
       "/learn/madc-to-vcf.html",
