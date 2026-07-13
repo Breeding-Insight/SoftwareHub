@@ -1,0 +1,46 @@
+---
+title: "Workshop page template"
+description: "A consistent landing page for Breeding Insight training events."
+---
+
+## Overview
+
+**Audience:**  
+**Date:**  
+**Instructors:**  
+**Prerequisites:**  
+
+## Learning objectives
+
+By the end of the workshop, participants will be able to:
+
+1. ...
+2. ...
+3. ...
+
+## Before the workshop
+
+- [Setup instructions](setup-template.qmd)
+- Example data
+- Preflight check
+
+## Module 1
+
+- Slides
+- Live-code notes
+- Exercise
+- Solution
+
+## Module 2
+
+- Slides
+- Live-code notes
+- Exercise
+- Solution
+
+## After the workshop
+
+- Recording
+- FAQ
+- Maintained tutorials
+- Issue tracker / support route

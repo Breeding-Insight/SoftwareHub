@@ -1,0 +1,35 @@
+---
+title: "Qploidy2"
+description: "Ploidy, aneuploidy, and large-scale copy-number estimation from genotyping data."
+categories: [R package, Ploidy, Aneuploidy, CNV, DArTag]
+image: ../assets/card-qploidy2.svg
+---
+
+::: {.software-header}
+::: {}
+Qploidy2 is designed for large-scale copy-number variation, ploidy, and aneuploidy estimation using genotyping-platform data. Its workflow includes methods based on allele-ratio information and Hidden Markov Models.
+
+<div class="meta-row"><span class="pill">R package</span><span class="pill">Ploidy + CNV</span><span class="pill">HMM</span></div>
+:::
+<div class="software-badge">Q2</div>
+:::
+
+## Start here
+
+```r
+# Development version
+remotes::install_github("Breeding-Insight/Qploidy2")
+```
+
+[Source code](https://github.com/Breeding-Insight/Qploidy2){.btn-bi-primary}
+[Alfalfa tutorial](https://breeding-insight.github.io/Qploidy2/Qploidy_alfalfa_tutorial.html){.btn-bi-secondary}
+
+## Good fit for
+
+- Ploidy estimation
+- Aneuploidy detection
+- Large-scale copy-number analysis from marker data
+
+## Related learning
+
+- [Estimate copy number in alfalfa](../learn/qploidy-alfalfa.qmd)

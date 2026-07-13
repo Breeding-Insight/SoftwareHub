@@ -1,0 +1,31 @@
+---
+title: "Workshop setup template"
+description: "Reusable preflight instructions for hands-on Breeding Insight workshops."
+---
+
+## Complete this before the workshop
+
+### 1. Confirm software
+
+State exact minimum versions and provide one verification command per dependency.
+
+```bash
+quarto --version
+R --version
+```
+
+### 2. Install packages
+
+Use a single copyable block and pin versions when reproducibility requires it.
+
+### 3. Download example data
+
+Provide checksums for larger or frequently mirrored files.
+
+### 4. Run the preflight check
+
+Give participants a 30-second test that confirms the environment works.
+
+### 5. Report problems
+
+Specify what diagnostic output to include and where to ask for help.

@@ -1,0 +1,22 @@
+---
+title: "Software"
+description: "Open-source packages and applications developed and supported by Breeding Insight."
+listing:
+  contents: "software/*.qmd"
+  type: grid
+  sort: "title asc"
+  categories: true
+  sort-ui: [title]
+  filter-ui: true
+  fields: [image, title, description, categories]
+  grid-columns: 3
+  page-size: 12
+toc: false
+---
+
+Breeding Insight develops software across genomics, breeding data management, phenotyping, and decision support. Use the filters to narrow the catalog by task or technology.
+
+::: {.listing-actions}
+[See learning materials →](learn.qmd){.btn-bi-secondary}
+[Breeding Insight GitHub](https://github.com/Breeding-Insight){.btn-bi-secondary}
+:::

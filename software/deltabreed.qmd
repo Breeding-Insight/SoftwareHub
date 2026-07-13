@@ -1,0 +1,26 @@
+---
+title: "DeltaBreed"
+description: "Open-source data management software for specialty crop and animal breeders."
+categories: [Web application, Breeding data, Data management, Informatics]
+image: ../assets/card-deltabreed.svg
+---
+
+::: {.software-header}
+::: {}
+DeltaBreed is open-source data management software for specialty crop and animal breeders.
+
+<div class="meta-row"><span class="pill">Web application</span><span class="pill">Breeding informatics</span></div>
+:::
+<div class="software-badge">ΔB</div>
+:::
+
+## Start here
+
+[Source code](https://github.com/Breeding-Insight/DeltaBreed){.btn-bi-primary}
+[Breeding Insight software page](https://breedinginsight.org/software/deltabreed/){.btn-bi-secondary}
+
+## Good fit for
+
+- Breeding program data management
+- Open-source breeding informatics workflows
+- Connecting field and program data with downstream analysis

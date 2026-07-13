@@ -1,0 +1,171 @@
+---
+title: "Choosing a missing-data threshold"
+description: "Choose marker and sample missingness thresholds by diagnosing the data source, matching the downstream analysis, and testing sensitivity."
+categories:
+  - Genotype Data
+  - Data Quality
+image: ../assets/concept-missing-data.svg
+image-alt: "Genotype matrix with missing cells beside a threshold slider."
+order: 50
+learning-type: Concept
+software:
+  - BIGr
+  - BIGapp
+level: Intermediate
+keywords:
+  - missing data
+  - missingness
+  - call rate
+  - SNP filtering
+  - genotype filtering
+  - imputation
+  - GBS
+---
+
+::: {.concept-definition}
+There is **no universal missing-data threshold** that is correct for every genotype dataset. A useful threshold removes unreliable data without discarding so much information that the downstream analysis becomes weaker or less representative.
+:::
+
+## First separate two different filters
+
+Missingness is usually evaluated in two directions.
+
+::: {.concept-example-grid}
+::: {.concept-example}
+#### Marker missingness
+
+For each SNP or locus: what proportion of samples lack a usable genotype?
+
+A marker with 30% missingness has calls for roughly 70% of retained samples.
+:::
+
+::: {.concept-example}
+#### Sample missingness
+
+For each individual: what proportion of retained markers lack a usable genotype?
+
+A sample with unusually high missingness may reflect poor DNA, low coverage, library failure, or assay mismatch.
+:::
+:::
+
+Do not treat these as the same decision. A few globally poor samples can make many otherwise useful markers appear incomplete, so sample-level diagnostics often deserve attention before final marker filtering.
+
+## Why a fixed rule can fail
+
+The same numerical threshold can behave very differently across datasets.
+
+A 20% marker-missingness limit might be:
+
+- unnecessarily strict for a sparse sequencing dataset followed by validated imputation;
+- too permissive for a targeted assay where most loci are expected to genotype nearly every sample;
+- acceptable for one exploratory population analysis but problematic for a method that requires a nearly complete matrix;
+- misleading when missingness is concentrated in one family, population, sequencing batch, or taxon.
+
+The central question is not simply **“how much is missing?”** It is also **“why is it missing, and where?”**
+
+## A defensible workflow
+
+### 1. Diagnose before filtering
+
+Plot or summarize:
+
+- missingness per sample;
+- missingness per marker;
+- missingness by sequencing batch, plate, library, family, population, or species;
+- read depth or genotype confidence against missingness;
+- the number of samples and markers retained across candidate thresholds.
+
+A bimodal distribution is especially informative. For example, a subset of samples with 70–90% missingness may indicate failed samples rather than a reason to loosen the marker threshold for everyone.
+
+### 2. Define the downstream objective
+
+::: {.concept-decision-grid}
+::: {.concept-decision}
+#### Targeted genotyping
+
+High missingness can indicate assay failure or off-target behavior. Investigate the locus or sample before assuming imputation will rescue it.
+:::
+
+::: {.concept-decision}
+#### Population analysis
+
+Missingness that differs among populations can create or distort structure. Check whether filtering changes PCA, distances, differentiation, or clustering.
+:::
+
+::: {.concept-decision}
+#### Genomic prediction
+
+A more permissive marker set may be useful when imputation is accurate, but imputation should be validated under a design that matches deployment. Outcome information from validation samples must not leak into preprocessing.
+:::
+
+::: {.concept-decision}
+#### Linkage or QTL analysis
+
+Genotyping errors and missing parental or progeny calls can disrupt segregation and map construction. The relevant tolerance depends on the population and mapping model.
+:::
+:::
+
+### 3. Compare candidate thresholds
+
+Instead of choosing one value by habit, run a small sensitivity analysis. For example, compare several candidate marker filters spanning stricter to more permissive settings.
+
+::: {.callout-note title="Illustrative sensitivity grid—not universal recommendations"}
+A project might compare maximum marker missingness of **5%, 10%, 20%, and 50%**, then track retained marker count, retained sample count, allele-frequency distribution, imputation performance, and the stability of the biological conclusion. The useful values for a particular dataset may be entirely different.
+:::
+
+### 4. Evaluate the consequence, not only the retained count
+
+For each candidate threshold, ask:
+
+- How many markers and samples remain?
+- Are certain families or populations disproportionately removed?
+- Does marker density become uneven across the genome?
+- Do PCA or relationship patterns change materially?
+- Does prediction performance change under a realistic validation design?
+- If imputing, how accurate are masked genotypes at the relevant allele frequencies and dosage states?
+
+A threshold is easier to defend when the main conclusion is stable across a reasonable range of settings.
+
+## Missingness can be informative
+
+Missing data are not always random. They may correlate with:
+
+- sequence divergence from the reference;
+- restriction-site polymorphism in GBS/RAD-seq;
+- low DNA quality;
+- batch effects;
+- allele-specific assay performance;
+- paralogous or homoeologous mapping problems;
+- species or population membership.
+
+That means aggressive filtering can sometimes remove a biologically non-random subset of the dataset. Conversely, retaining systematic missingness can also bias inference.
+
+## Special caution for polyploids
+
+In polyploid data, a genotype may be technically non-missing but still highly uncertain. A hard dosage call with weak posterior support is not equivalent to a confident call.
+
+Missing-data filtering should therefore be considered alongside:
+
+- read depth;
+- posterior genotype probability;
+- allelic bias;
+- overdispersion;
+- unexpected ploidy or copy number;
+- locus behavior consistent with paralogous or homoeologous sequence.
+
+## Practical takeaway
+
+::: {.bi-callout}
+Choose a missing-data threshold by combining **data diagnostics + downstream requirements + sensitivity analysis**. Report both sample- and marker-level rules, and document whether missing genotypes were imputed.
+:::
+
+## Continue learning
+
+[Process MADC genotype data](madc-to-vcf.qmd){.btn-bi-primary}
+[Choose a genomic analysis path](genomics-path.qmd){.btn-bi-secondary}
+
+## Further reading
+
+- Nazareno AG, Knowles LL. 2021. *There Is No “Rule of Thumb”: Genomic Filter Settings for a Small Plant Population to Obtain Unbiased Gene Flow Estimates*. **Frontiers in Plant Science** 12:677009. [doi:10.3389/fpls.2021.677009](https://doi.org/10.3389/fpls.2021.677009)
+- Fu Y-B. 2014. *Genetic Diversity Analysis of Highly Incomplete SNP Genotype Data with Imputations: An Empirical Assessment*. **G3** 4:891–900. [doi:10.1534/g3.114.010942](https://doi.org/10.1534/g3.114.010942)
+- Torkamaneh D, Belzile F. 2015. *Scanning and Filling: Ultra-Dense SNP Genotyping Combining Genotyping-By-Sequencing, SNP Array and Whole-Genome Resequencing Data*. **PLOS ONE** 10:e0131533. [doi:10.1371/journal.pone.0131533](https://doi.org/10.1371/journal.pone.0131533)

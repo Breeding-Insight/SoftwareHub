@@ -1,0 +1,41 @@
+---
+title: "Process MADC genotype data"
+description: "Use BIGr to filter targeted sequencing data and convert it into an analysis-ready VCF workflow."
+categories:
+  - Genotype Data
+  - Data Quality
+  - Ploidy & Dosage
+image: ../assets/tutorial-madc.svg
+order: 20
+learning-type: Workflow
+software:
+  - BIGr
+level: Intermediate
+keywords:
+  - DArTag
+  - MADC
+  - VCF
+  - genotype processing
+  - dosage
+---
+
+## Goal
+
+Turn MADC-format targeted genotyping data into a clean representation suitable for downstream genomic analysis.
+
+## Why this belongs in the portal
+
+This is a durable **workflow** rather than merely a function reference. Users need to understand quality filtering, dosage conventions, coordinate validity, sorting, and VCF expectations as a connected process.
+
+[Open the current BIGr tutorial](https://breeding-insight.github.io/BIGr_documentation/){.btn-bi-primary}
+[Explore BIGr](../software/bigr.qmd){.btn-bi-secondary}
+
+## Proposed migrated outline
+
+1. Inspect the MADC file and identify required metadata.
+2. Filter low-quality loci and samples.
+3. Standardize genotype/dosage conventions.
+4. Validate chromosome and position fields.
+5. Write, sort, compress, and index the VCF.
+6. Run checkpoints before downstream analysis.
+7. Continue to PCA, GWAS, genomic prediction, or other analyses.

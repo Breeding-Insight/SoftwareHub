@@ -1,0 +1,66 @@
+---
+title: "Resources"
+description: "Standards and reusable patterns for Breeding Insight documentation and training materials."
+toc: true
+---
+
+## What belongs where?
+
+| Content | Canonical home | Portal role |
+|---|---|---|
+| Function/API reference | Package documentation | Link and discovery |
+| Installation | Package documentation + package landing page | Summarize and link |
+| Single-package tutorial | Portal or package docs | Prefer portal when broadly useful |
+| Cross-package workflow | Portal | Canonical home |
+| Workshop | Portal | Canonical home |
+| Release notes | Package repository/site | Link only |
+| FAQ | Package or shared support page | Keep close to issue ownership |
+
+## Content front matter
+
+Every tutorial should use consistent metadata so Quarto listings can discover and filter it:
+
+```yaml
+---
+title: "Process DArTag MADC data to an analysis-ready VCF"
+description: "Filter targeted sequencing data, call dosage, and write a sorted VCF."
+categories: [BIGr, DArTag, VCF, Genotype processing]
+level: intermediate
+time: "45 min"
+order: 20
+---
+```
+
+## Tutorial writing pattern
+
+### 1. Goal
+
+State the outcome in biological or analytical terms.
+
+### 2. What you need
+
+List required files, versions, expected columns, and approximate compute needs.
+
+### 3. Workflow map
+
+Show the sequence of steps before introducing code.
+
+### 4. Reproducible steps
+
+Use executable code where feasible. Keep incidental output hidden and preserve outputs that teach interpretation.
+
+### 5. Checkpoint
+
+After each major stage, show what a successful result looks like.
+
+### 6. Troubleshooting
+
+Document common failure modes and the diagnostic information users should collect before filing an issue.
+
+### 7. Next steps
+
+Link to the next workflow rather than ending at a package boundary.
+
+## Migration principle
+
+Do not copy reference material into multiple places. Migrate durable teaching content, then link back to the package's canonical reference documentation. Redirect old URLs when pages move so existing workshop handouts and publications do not break.
