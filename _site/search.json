@@ -169,84 +169,95 @@
     "href": "workshops/bigapp/genomic-selection.html",
     "title": "Module 4: Genomic Selection",
     "section": "",
-    "text": "Workshop path\n\nOverview\nSetup\n1. Quality control\n2. PCA\n3. GWASpoly\n4. Genomic selection\nDataset\nGenomic selection uses markers across the genome to predict genetic merit. In BIGapp, we have two related tasks:\nThis module is optional because both analyses can take longer than the guided two-hour session.",
+    "text": "Workshop path\n\nOverview\nSetup\n1. Quality control\n2. PCA\n3. GWASpoly\n4. Genomic selection\nDataset",
     "crumbs": [
       "Software",
       "4. Genomic selection (optional)"
     ]
   },
   {
-    "objectID": "workshops/bigapp/genomic-selection.html#why-use-genome-wide-prediction",
-    "href": "workshops/bigapp/genomic-selection.html#why-use-genome-wide-prediction",
+    "objectID": "workshops/bigapp/genomic-selection.html#what-is-genomic-selection",
+    "href": "workshops/bigapp/genomic-selection.html#what-is-genomic-selection",
     "title": "Module 4: Genomic Selection",
-    "section": "Why Use Genome-Wide Prediction?",
-    "text": "Why Use Genome-Wide Prediction?\nPhenotyping can be slow, seasonal, expensive, or destructive. Wouldn’t it be useful if we could use marker information to help decide which candidates should advance to those costly stages?\nThat is the basic idea. We combine observed phenotypes with marker relationships in a training set, then estimate values for genotyped candidates. Genomic prediction does not eliminate field evaluation. It gives us another source of evidence for deciding what to test next.\nUnlike a GWAS, this workflow is not trying to interpret one significant locus at a time. Many markers can jointly contribute information, including through their relationship to unobserved trait loci.",
+    "section": "What is Genomic Selection?",
+    "text": "What is Genomic Selection?\nGenomic selection uses markers across the genome to predict genetic merit for a trait. Unlike GWAS, we are not trying to interpret one significant locus at a time. We use information across many markers to predict candidates.\n\nThe Traditional Problem\nTo evaluate a candidate as a parent, we may need to make crosses, grow offspring, measure the trait, and estimate breeding value from those records. For some traits and species, that can take years.\n\n\nThe Genomic Approach\nWith genomic selection, we:\n\ngenotype the samples\ntrain a model using samples with both genotypes and phenotypes\nvalidate how well the model predicts held-out samples\nuse the fitted model to predict genotyped candidates\n\n\n\n\nGenomic selection workflow from phenotyped and genotyped training samples to predictions for genotyped candidates.\n\n\nFigure: Escamilla et al. (2025), open-access article, licensed CC BY-NC-ND.\n\n\n\n\n\n\nTipThe Key Insight\n\n\n\nOnce we have a validated model, we can generate predictions for genotyped candidates before collecting the target phenotype on every candidate. Those predictions supplement, rather than replace, the breeding program’s field and experimental evidence.",
     "crumbs": [
       "Software",
       "4. Genomic selection (optional)"
     ]
   },
   {
-    "objectID": "workshops/bigapp/genomic-selection.html#training-and-prediction",
-    "href": "workshops/bigapp/genomic-selection.html#training-and-prediction",
+    "objectID": "workshops/bigapp/genomic-selection.html#how-does-it-work",
+    "href": "workshops/bigapp/genomic-selection.html#how-does-it-work",
     "title": "Module 4: Genomic Selection",
-    "section": "Training and Prediction",
-    "text": "Training and Prediction\nThe training data contain both genotypes and observed phenotypes. A fitted model can then predict samples that have genotypes but no phenotype for the selected trait.\n\n\n\nGenomic selection workflow from phenotyped and genotyped training samples to predictions for genotyped candidates.\n\n\nFigure: Escamilla et al. (2025), open-access article, licensed CC BY-NC-ND.\nPrediction depends on trait architecture, phenotype quality, genotyping, model, relatedness between training and target samples, and validation design. There is no universal predictive-ability rating or minimum training-population size that applies to every breeding decision.\nBefore we fit a model, we need to define the trait, candidate set, and intended use. We also need to decide what current selection process the model should be compared with. Those choices determine which validation design is useful.",
+    "section": "How Does It Work?",
+    "text": "How Does It Work?\n\nThe Basic Idea\nThe training data contain both marker dosages and observed phenotypes. A genomic prediction model uses marker-based relationships and estimated effects to predict the trait or genetic merit of other genotyped samples.\nThe exact model is more complicated than adding a few known marker effects, but a useful mental model is:\ngenotypes + phenotypes in the training set\n                  |\n                  v\n           fitted prediction model\n                  |\n                  v\n      predictions for genotyped candidates\n\n\nWhat We Need\n\n\n\n\n\n\n\n\nComponent\nWhat it contains\nHow it is used\n\n\n\n\nGenotypes\nMarker dosages for training samples and candidates\nBuilds genomic relationships and prediction inputs\n\n\nPhenotypes\nTrait records for training samples\nProvides the response used to fit and validate the model\n\n\nTraining set\nSamples with both genotypes and phenotypes\nFits the model\n\n\nTarget set\nSamples for which we want predictions\nDefines the actual prediction problem\n\n\n\n\n\nWhat Affects Prediction?\nPrediction depends on the data and the decision we want to make:\n\n\n\n\n\n\n\nFactor\nWhy it matters\n\n\n\n\nPhenotype quality\nNo model can recover information that is not present in the trait records\n\n\nTraining-target relationship\nPredictions usually transfer differently as the target becomes less represented by the training data\n\n\nTrait architecture\nMarker information can capture traits differently depending on the number and distribution of genetic effects\n\n\nEnvironments and fixed effects\nTraining records and future candidates need comparable, correctly modeled context\n\n\nGenotyping and marker overlap\nTraining and target data must use compatible markers, dosage coding, sample IDs, and ploidy\n\n\nValidation design\nThe held-out samples need to represent the way predictions will actually be used\n\n\n\nThere is no universal predictive-ability rating or minimum training-set size that applies to every breeding decision. We need to compare the model with the program’s current selection process for the intended target samples.",
     "crumbs": [
       "Software",
       "4. Genomic selection (optional)"
     ]
   },
   {
-    "objectID": "workshops/bigapp/genomic-selection.html#part-1-predictive-ability",
-    "href": "workshops/bigapp/genomic-selection.html#part-1-predictive-ability",
+    "objectID": "workshops/bigapp/genomic-selection.html#running-genomic-selection-in-bigapp",
+    "href": "workshops/bigapp/genomic-selection.html#running-genomic-selection-in-bigapp",
     "title": "Module 4: Genomic Selection",
-    "section": "Part 1: Predictive Ability",
-    "text": "Part 1: Predictive Ability\nBIGapp repeats cross-validation and reports the correlation between predicted and observed values for each iteration. Before treating that correlation as evidence for a breeding decision, read Cross-validation accuracy for genomic prediction.\nCross-validation separates model fitting from evaluation. We hold out some records, predict them without using their phenotypes for training, and compare the predictions with the observations. Repeating that split shows us how sensitive the result is to a particular fold assignment.\nThe important part is not just the number of folds. The held-out samples should mimic the prediction problem we actually care about as closely as the available data allow.\n\n\n\nDiagram of five-fold cross-validation in which each fold is held out once for testing.\n\n\nFigure: K-fold cross validation, Wikimedia Commons, CC BY-SA 4.0.\n\nSelect Predictive Ability under Genomic Selection.\nUnder Choose VCF File, upload the filtered VCF from Module 1.\nUnder Choose Trait File, upload atlantic_giant_pumpkin_diversity_phenotypes.csv.\nIn Trait File Options, select NA and Sample_ID, review the preview, and select Save.\nSet Species Ploidy to 2.\nSet Iterations to 5 for a short demonstration.\nUnder Select Trait(s), choose Fruit_Weight_lbs.\nLeave fixed effects and Advanced Options (beta) unchanged for the core exercise.\nSelect Run Analysis.\nReview Violin Plot, Box Plot, and P.A. Table. Save the table with the settings used.\n\n\n\n\nGenomic selection demonstration. The current application separates Predictive Ability from Genomic Prediction, as described in the written steps.\n\n\n\n\n\n\n\n\nTipPredictive Ability answer\n\n\n\n\n\nThe table contains one result per iteration, and the plots summarize that distribution. Values can change between runs because fold assignment is random. Record the full distribution, the iteration count, the method and relationship matrix, and the samples included. Do not reduce the exercise to a fixed expected correlation.",
+    "section": "Running Genomic Selection in BIGapp",
+    "text": "Running Genomic Selection in BIGapp\nBIGapp separates model evaluation from the generation of predictions:\n\n\n\n\n\n\n\nBIGapp feature\nQuestion it answers\n\n\n\n\nPredictive Ability\nHow does the model perform on phenotypes withheld during cross-validation?\n\n\nGenomic Prediction\nWhat predicted phenotypes and EBVs does the fitted model return?\n\n\n\n\n\n\n\n\n\nTipWhich Feature Should We Use?\n\n\n\nStart with Predictive Ability to evaluate the model under a relevant validation design. Use Genomic Prediction to create predictions only after the inputs, intended target, and validation evidence have been defined.",
     "crumbs": [
       "Software",
       "4. Genomic selection (optional)"
     ]
   },
   {
-    "objectID": "workshops/bigapp/genomic-selection.html#part-2-genomic-prediction",
-    "href": "workshops/bigapp/genomic-selection.html#part-2-genomic-prediction",
+    "objectID": "workshops/bigapp/genomic-selection.html#feature-1-predictive-ability",
+    "href": "workshops/bigapp/genomic-selection.html#feature-1-predictive-ability",
     "title": "Module 4: Genomic Selection",
-    "section": "Part 2: Genomic Prediction",
-    "text": "Part 2: Genomic Prediction\n\nSelect Genomic Prediction under Genomic Selection.\nUpload the same filtered VCF and phenotype CSV.\nIn Trait File Options, select NA and Sample_ID, then save.\nSet Species Ploidy to 2.\nUnder Select Trait, choose Fruit_Weight_lbs.\nLeave fixed effects and Advanced Options (beta) unchanged for the core exercise.\nSelect Run Analysis, review the confirmation, and proceed.\nInspect Predicted Pheno Table and EBVs Table.\nUse Save Files to retain the output and analysis settings.\n\nThe default single-VCF workflow fits with samples that have trait records and returns results for samples in that VCF. Advanced Options (beta) can accept a separate prediction VCF and alternative method or relationship-matrix settings. Use advanced settings only when the training and target marker sets, allele coding, sample IDs, and ploidy have been checked.",
+    "section": "Feature 1: Predictive Ability",
+    "text": "Feature 1: Predictive Ability\n\nHow Cross-Validation Works\nBIGapp uses five-fold cross-validation. It splits the phenotyped samples into five groups, trains with four groups, predicts the fifth, and continues until every group has been held out. Predictive ability is the Pearson correlation between the observed and predicted values.\nRepeating the five-fold split across iterations shows how much the result changes with fold assignment.\n\n\n\nDiagram of five-fold cross-validation in which each fold is held out once for testing.\n\n\nFigure: K-fold cross validation, Wikimedia Commons, CC BY-SA 4.0.\nThe important part is not just the number of folds. The held-out samples should mimic the prediction problem we actually care about as closely as the available data allow. Read Cross-validation accuracy for genomic prediction before using this result in a breeding decision.\n\n\nRun Predictive Ability\n\nSelect Predictive Ability under Genomic Selection.\nUnder Choose VCF File, upload the filtered VCF from Module 1.\nUnder Choose Trait File, upload atlantic_giant_pumpkin_diversity_phenotypes.csv.\nIn Trait File Options, select NA and Sample_ID, review the preview, and select Save.\nSet Species Ploidy to 2.\nSet Iterations to 5 for this short demonstration.\nUnder Select Trait(s), choose Fruit_Weight_lbs.\nLeave fixed effects and Advanced Options (beta) unchanged for the core exercise.\nSelect Run Analysis.\n\n\n\n\nGenomic selection demonstration. The current application separates Predictive Ability from Genomic Prediction, as described in the written steps.\n\n\n\n\nUnderstand the Output\n\nViolin Plot: shows the distribution and density of correlations across cross-validation results.\nBox Plot: summarizes the median, spread, and possible outliers.\nP.A. Table: records predictive ability for each iteration and selected trait.\n\nDo not reduce this output to one fixed expected correlation. Values can change because fold assignment is random. Save the full distribution, iteration count, method, relationship matrix, and samples included.",
     "crumbs": [
       "Software",
       "4. Genomic selection (optional)"
     ]
   },
   {
-    "objectID": "workshops/bigapp/genomic-selection.html#interpreting-the-output",
-    "href": "workshops/bigapp/genomic-selection.html#interpreting-the-output",
+    "objectID": "workshops/bigapp/genomic-selection.html#feature-2-genomic-prediction",
+    "href": "workshops/bigapp/genomic-selection.html#feature-2-genomic-prediction",
     "title": "Module 4: Genomic Selection",
-    "section": "Interpreting the Output",
-    "text": "Interpreting the Output\nAn EBV is a model-based estimate for a defined trait and target population. A candidate ranking is useful only if the validation represents how we plan to use the model.\nRandom folds can look better than the real prediction problem when close relatives occur in both the training and test folds, or when future predictions will target a different cycle, environment, or population.\nThe predicted-phenotype table uses the trait scale supplied to the model. The EBV table contains the model’s estimate of genetic merit under the selected settings. Before interpreting either table, check the sample IDs, missing phenotypes, and direction of selection for the trait.\n\n\n\n\n\n\nTipGenomic Prediction answer\n\n\n\n\n\nThe output should contain a Predicted Pheno Table and an EBVs Table for Fruit_Weight_lbs. Numerical values depend on the fitted data and selected settings. Compare rankings only within the saved run, and do not treat the simulated regional pattern as a recommendation for selection.",
+    "section": "Feature 2: Genomic Prediction",
+    "text": "Feature 2: Genomic Prediction\n\nTwo Ways to Use It\nWith the default single-VCF workflow, BIGapp fits the model using samples that have phenotypes and returns predictions for samples in that VCF. Under Advanced Options (beta), a separate prediction VCF can be supplied for a distinct target set.\nBefore using a separate prediction VCF, check that the training and target files use compatible markers, allele coding, sample IDs, and ploidy.\n\n\nRun Genomic Prediction\n\nSelect Genomic Prediction under Genomic Selection.\nUpload the same filtered VCF and phenotype CSV.\nIn Trait File Options, select NA and Sample_ID, then save.\nSet Species Ploidy to 2.\nUnder Select Trait, choose Fruit_Weight_lbs.\nLeave fixed effects and Advanced Options (beta) unchanged for the core exercise.\nSelect Run Analysis, review the confirmation, and proceed.\nInspect Predicted Pheno Table and EBVs Table.\nUse Save Files to retain the output and analysis settings.\n\n\n\nUnderstand the Output\nThe Predicted Pheno Table contains model predictions on the trait scale used for fitting. The EBVs Table contains model-based estimates of genetic merit under the selected settings.\nAn EBV is not an observed phenotype or a permanent property of the sample. It depends on the training data, model, trait definition, and target population. Check sample IDs, missing phenotypes, and the direction of selection before interpreting a ranking.",
     "crumbs": [
       "Software",
       "4. Genomic selection (optional)"
     ]
   },
   {
-    "objectID": "workshops/bigapp/genomic-selection.html#discussion-questions",
-    "href": "workshops/bigapp/genomic-selection.html#discussion-questions",
+    "objectID": "workshops/bigapp/genomic-selection.html#using-the-results",
+    "href": "workshops/bigapp/genomic-selection.html#using-the-results",
     "title": "Module 4: Genomic Selection",
-    "section": "Discussion Questions",
-    "text": "Discussion Questions\n\nWhat future samples or breeding cycle should the validation mimic?\nCould relatives occur in both training and test folds?\nWhich fixed effects would be known at prediction time?\nHow would you compare genomic prediction with the program’s current selection process?\nWhat information must be saved so another analyst can reproduce the ranking?",
+    "section": "Using the Results",
+    "text": "Using the Results\nPredictions can help us prioritize candidates, plan additional phenotyping, or compare possible parents. But a ranking is useful only if the validation represents how we plan to use the model.\nRandom folds can look better than the real prediction problem when close relatives occur in both training and test folds, or when future predictions target a different cycle, environment, or population.\nBefore making a decision, ask:\n\nWhat future samples or breeding cycle should the validation mimic?\nCould close relatives occur in both training and test folds?\nWhich fixed effects will be known when predictions are made?\nWhat current selection process should the model be compared with?\nWhat new phenotypes will be collected to monitor or update the model?",
     "crumbs": [
       "Software",
       "4. Genomic selection (optional)"
     ]
   },
   {
-    "objectID": "workshops/bigapp/genomic-selection.html#next-steps",
-    "href": "workshops/bigapp/genomic-selection.html#next-steps",
+    "objectID": "workshops/bigapp/genomic-selection.html#practical-considerations",
+    "href": "workshops/bigapp/genomic-selection.html#practical-considerations",
     "title": "Module 4: Genomic Selection",
-    "section": "Next Steps",
-    "text": "Next Steps\n\nReview Cross-validation accuracy for genomic prediction.\nRead the in-app parameter and results help before using advanced options.\nReport software issues through the BIGapp issue tracker.",
+    "section": "Practical Considerations",
+    "text": "Practical Considerations\n\nTraining Data Design\nThe training set should represent the target material and trait range well enough for the intended decision. Accurate phenotypes, consistent sample identity, appropriate environmental information, and compatible genotypes all matter. Adding records is useful when those records add relevant information, not simply because the row count becomes larger.\n\n\nWhen Might Genomic Prediction Help?\nIt may be useful when phenotyping is expensive, slow, seasonal, destructive, or limited to later stages, and when the program can validate predictions for the candidates it needs to select.\nIt may add less value when the target trait is already easy and inexpensive to measure at the decision stage, the training records do not represent future candidates, or the validation design does not match deployment.",
+    "crumbs": [
+      "Software",
+      "4. Genomic selection (optional)"
+    ]
+  },
+  {
+    "objectID": "workshops/bigapp/genomic-selection.html#exercise",
+    "href": "workshops/bigapp/genomic-selection.html#exercise",
+    "title": "Module 4: Genomic Selection",
+    "section": "Exercise",
+    "text": "Exercise\n\nPart 1: Assess Predictive Ability\n\nRun Predictive Ability for Fruit_Weight_lbs with five iterations.\nCompare the violin plot, box plot, and P.A. table.\nHow much do correlations vary across iterations?\nWhat target population or future cycle does this validation represent?\n\n\n\nPart 2: Generate Predictions\n\nRun Genomic Prediction for Fruit_Weight_lbs.\nConfirm that Predicted Pheno Table and EBVs Table are available.\nCompare the highest and lowest ranked samples.\nIdentify which information you would need before using that ranking in a real selection decision.\n\n\n\n\n\n\n\nTipExercise Answer\n\n\n\n\n\nThe Predictive Ability output contains a distribution of correlations rather than one guaranteed value. Record the values from your run because fold assignment is random.\nGenomic Prediction returns a Predicted Pheno Table and an EBVs Table for Fruit_Weight_lbs. Numerical results depend on the fitted data and settings. The simulated regional pattern is part of the teaching dataset, not a recommendation to select samples from a particular region.\nA defensible decision would also require a validation design that represents future candidates, reliable phenotypes, compatible genotype coding, the known fixed effects available at prediction time, and a comparison with the program’s current selection process.",
     "crumbs": [
       "Software",
       "4. Genomic selection (optional)"
@@ -257,7 +268,29 @@
     "href": "workshops/bigapp/genomic-selection.html#key-takeaways",
     "title": "Module 4: Genomic Selection",
     "section": "Key Takeaways",
-    "text": "Key Takeaways\n\nPredictive Ability evaluates out-of-sample prediction within a validation design.\nGenomic Prediction fits a model and creates predicted-phenotype and EBV outputs.\nValidation must resemble the samples and decisions for which the model will be used.\nSave the folds or iteration settings, model choices, input identities, and complete output distribution.\n\n\nFinish: Review the dataset guide, or return to the workshop overview.",
+    "text": "Key Takeaways\n\nGenomic selection uses genome-wide marker information to predict genetic merit.\nPredictive Ability evaluates held-out predictions under repeated five-fold cross-validation.\nGenomic Prediction creates predicted-phenotype and EBV tables from a fitted model.\nValidation should represent the samples and decisions for which the model will be used.\nThere is no universal correlation rating or minimum training-set size for every program.\nSave the inputs, sample definitions, iterations, model settings, and complete output distribution.",
+    "crumbs": [
+      "Software",
+      "4. Genomic selection (optional)"
+    ]
+  },
+  {
+    "objectID": "workshops/bigapp/genomic-selection.html#you-have-completed-the-workshop",
+    "href": "workshops/bigapp/genomic-selection.html#you-have-completed-the-workshop",
+    "title": "Module 4: Genomic Selection",
+    "section": "You Have Completed the Workshop",
+    "text": "You Have Completed the Workshop\nYou have worked through the core BIGapp sequence:\n\nData quality control: filter uncertain genotype cells, markers, and samples.\nPCA: explore genetic structure and possible outliers.\nGWASpoly: find and diagnose marker-trait associations.\nGenomic selection: evaluate prediction and generate model-based estimates.\n\nFrom here, try the workflow with a carefully documented dataset from your own program, or return to the relevant module when you need to review an analysis decision.",
+    "crumbs": [
+      "Software",
+      "4. Genomic selection (optional)"
+    ]
+  },
+  {
+    "objectID": "workshops/bigapp/genomic-selection.html#resources",
+    "href": "workshops/bigapp/genomic-selection.html#resources",
+    "title": "Module 4: Genomic Selection",
+    "section": "Resources",
+    "text": "Resources\n\nBIGapp repository and issue tracker\nBIGapp tutorials\nCross-validation accuracy for genomic prediction\n\n\nFinish: Review the dataset guide, or return to the workshop overview.",
     "crumbs": [
       "Software",
       "4. Genomic selection (optional)"
@@ -268,29 +301,29 @@
     "href": "workshops/bigapp/data-quality-control.html",
     "title": "Module 1: Data Quality Control",
     "section": "",
-    "text": "Workshop path\n\nOverview\nSetup\n1. Quality control\n2. PCA\n3. GWASpoly\n4. Genomic selection\nDataset\nGenomic markers let us compare inherited variation before every trait can be measured. But before we use those markers, we need to know whether the genotype calls, markers, and samples are reliable enough for the analysis that comes next.",
+    "text": "Workshop path\n\nOverview\nSetup\n1. Quality control\n2. PCA\n3. GWASpoly\n4. Genomic selection\nDataset",
     "crumbs": [
       "Software",
       "1. Data quality control"
     ]
   },
   {
-    "objectID": "workshops/bigapp/data-quality-control.html#why-quality-control-comes-first",
-    "href": "workshops/bigapp/data-quality-control.html#why-quality-control-comes-first",
+    "objectID": "workshops/bigapp/data-quality-control.html#why-genomics-in-plant-breeding",
+    "href": "workshops/bigapp/data-quality-control.html#why-genomics-in-plant-breeding",
     "title": "Module 1: Data Quality Control",
-    "section": "Why Quality Control Comes First",
-    "text": "Why Quality Control Comes First\nMarker data can help us describe diversity, locate trait associations, and support selection. Every downstream model, though, assumes that the genotype matrix is a reasonable representation of the samples.\nLow read depth can make an individual genotype uncertain. A marker with extensive missing data may compare different subsets of samples. A sample with extensive missing data may contribute little reliable information.\nSo, we treat filtering as an analysis decision, not a cleanup button. We will inspect the data before and after filtering, record every cutoff, and keep the original file.",
+    "section": "Why Genomics in Plant Breeding?",
+    "text": "Why Genomics in Plant Breeding?\nBefore we open BIGapp, let’s step back and ask why we are using genomic data in the first place.\n\nThe Traditional Breeding Challenge\nBreeders cannot see genes directly. We make crosses, grow and evaluate plants, select the best individuals, and repeat that process across generations. That works, but it can be slow and expensive, especially when a trait takes years to measure, depends on a particular environment, or requires destructive phenotyping.\n\n\nWhat Genomic Data Gives Us\nGenomic markers give us another way to compare individuals. We can use them to:\n\nidentify which genetic variants each sample carries\ndescribe genetic relationships and population structure\nfind genomic regions associated with measured traits\nsupport earlier selection when an appropriate prediction model has been validated\n\nGenomic data does not replace careful phenotyping. It lets us connect phenotype records with inherited variation and make better-informed decisions.\n\n\n\n\n\n\nTipThe Bottom Line\n\n\n\nMarkers give us information we cannot get by looking at the plant alone. But that information is useful only if the genotype data are reliable enough for the analysis.",
     "crumbs": [
       "Software",
       "1. Data quality control"
     ]
   },
   {
-    "objectID": "workshops/bigapp/data-quality-control.html#genotypes-snps-and-dosage",
-    "href": "workshops/bigapp/data-quality-control.html#genotypes-snps-and-dosage",
+    "objectID": "workshops/bigapp/data-quality-control.html#what-is-a-snp",
+    "href": "workshops/bigapp/data-quality-control.html#what-is-a-snp",
     "title": "Module 1: Data Quality Control",
-    "section": "Genotypes, SNPs, and Dosage",
-    "text": "Genotypes, SNPs, and Dosage\nA single-nucleotide polymorphism, or SNP, is a genomic position where samples carry different bases. In a diploid biallelic marker, allele dosage records the number of alternate-allele copies:\n\n\n\nVCF genotype\nAllele dosage\nInterpretation\n\n\n\n\n0/0\n0\ntwo reference copies\n\n\n0/1\n1\none reference and one alternate copy\n\n\n1/1\n2\ntwo alternate copies\n\n\n\nPolyploid dosage can range from zero to the species ploidy. See What is allele dosage? for a fuller explanation.\nThe workshop VCF stores GT, DP, and AD for each sample-marker cell. GT is the genotype, DP is total read depth, and AD contains reference and alternate read counts. The dataset guide documents every input.\nIn a VCF, the first columns identify the chromosome, position, marker, alleles, and other site-level information. The sample columns come next. The FORMAT column tells us how to read the colon-separated values in each sample cell. When FORMAT is GT:DP:AD, for example, each sample cell contains those three fields in that order.",
+    "section": "What is a SNP?",
+    "text": "What is a SNP?\nA single-nucleotide polymorphism, or SNP, is a genomic position where samples carry different bases. In a diploid biallelic marker, allele dosage records the number of alternate-allele copies:\n\n\n\nVCF genotype\nAllele dosage\nInterpretation\n\n\n\n\n0/0\n0\ntwo reference copies\n\n\n0/1\n1\none reference and one alternate copy\n\n\n1/1\n2\ntwo alternate copies\n\n\n\nPolyploid dosage can range from zero to the species ploidy. See What is allele dosage? for a fuller explanation.\n\nFrom Genotypes to Dosage\nThe workshop VCF stores GT, DP, and AD for each sample-marker cell. GT is the genotype, DP is total read depth, and AD contains reference and alternate read counts. The dataset guide documents every input.\nIn a VCF, the first columns identify the chromosome, position, marker, alleles, and other site-level information. The sample columns come next. The FORMAT column tells us how to read the colon-separated values in each sample cell. When FORMAT is GT:DP:AD, for example, each sample cell contains those three fields in that order.",
     "crumbs": [
       "Software",
       "1. Data quality control"
@@ -301,7 +334,29 @@
     "href": "workshops/bigapp/data-quality-control.html#find-your-way-around-bigapp",
     "title": "Module 1: Data Quality Control",
     "section": "Find Your Way Around BIGapp",
-    "text": "Find Your Way Around BIGapp\nBIGapp organizes analyses in its left navigation. This workshop uses the current labels VCF Filtering, PCA, GWASpoly, Predictive Ability, and Genomic Prediction.\n\n\n\nThe navigation animation is supplementary. The current written labels above are the source of truth.\n\n\nEach analysis has its own upload controls. Uploading a file in one section does not make it available automatically in another section.\n\n\n\nBIGapp file-upload demonstration. Follow the numbered steps below if the interface has changed since this recording.",
+    "text": "Find Your Way Around BIGapp\nBIGapp organizes analyses in its left navigation. This workshop uses the current labels VCF Filtering, PCA, GWASpoly, Predictive Ability, and Genomic Prediction.\n\n\n\nThe navigation animation is supplementary. The current written labels above are the source of truth.",
+    "crumbs": [
+      "Software",
+      "1. Data quality control"
+    ]
+  },
+  {
+    "objectID": "workshops/bigapp/data-quality-control.html#loading-data",
+    "href": "workshops/bigapp/data-quality-control.html#loading-data",
+    "title": "Module 1: Data Quality Control",
+    "section": "Loading Data",
+    "text": "Loading Data\n\nWhat Data Do We Need?\nThis module starts with genotype data in a compressed VCF. Later modules will also use the phenotype CSV, which connects each Sample_ID with fruit weight and the metadata used to color plots.\nAt its simplest, the genotype data become a marker-by-sample dosage matrix:\n\n\n\nSample\nSNP 1\nSNP 2\nSNP 3\n\n\n\n\nSample 1\n0\n1\n2\n\n\nSample 2\n1\n1\n0\n\n\nSample 3\n2\n0\n1\n\n\n\nBIGapp converts the VCF genotype fields to this dosage representation for the analyses. We still need the original VCF because it also contains depth and allele-count information used for quality control.\n\n\nHow Loading Works in BIGapp\nEach analysis has its own upload controls. Uploading a file in one section does not make it available automatically in another section. We will upload the filtered VCF again when we move to PCA and GWASpoly.\n\n\n\nBIGapp file-upload demonstration. Follow the numbered steps below if the interface has changed since this recording.\n\n\nWhen an analysis also needs the phenotype CSV, BIGapp opens Trait File Options. Select NA for Missing Data Value, choose Sample_ID for Sample ID Column, check the preview, and select Save. The preview is our chance to catch a wrong delimiter, shifted column, or unexpected sample-ID field before running the analysis.",
+    "crumbs": [
+      "Software",
+      "1. Data quality control"
+    ]
+  },
+  {
+    "objectID": "workshops/bigapp/data-quality-control.html#quality-control-why-it-matters",
+    "href": "workshops/bigapp/data-quality-control.html#quality-control-why-it-matters",
+    "title": "Module 1: Data Quality Control",
+    "section": "Quality Control: Why It Matters",
+    "text": "Quality Control: Why It Matters\nRaw genomic data can contain uncertain genotype cells, poorly performing markers, and poorly performing samples:\n\nLow-depth cells: the genotype is supported by too few reads.\nHigh-missingness markers: a SNP is unavailable for an unusual fraction of samples.\nHigh-missingness samples: a sample has too little usable genotype information.\nVery low-frequency markers: there may be too little information for the intended analysis, or the calls may need closer inspection.\n\nIf we ignore these problems, every downstream result can be affected. So, we treat filtering as an analysis decision, not a cleanup button. We inspect the data before and after filtering, record every cutoff, and keep the original file.",
     "crumbs": [
       "Software",
       "1. Data quality control"
@@ -323,7 +378,7 @@
     "href": "workshops/bigapp/data-quality-control.html#filter-the-workshop-vcf",
     "title": "Module 1: Data Quality Control",
     "section": "Filter the Workshop VCF",
-    "text": "Filter the Workshop VCF\n\nStart your local installation with BIGapp::run_app() and select VCF Filtering under Genotype Processing.\nUnder Choose VCF File, upload atlantic_giant_pumpkin_diversity.vcf.gz.\nSet Output File Name to atlantic_giant_pumpkin_filtered.\nSet Species Ploidy to 2.\nSet MAF filter to 0.05.\nSet Min Read Depth (Marker per Sample) to 10.\nSet Remove SNPs with &gt;= % missing data to 50.\nSet Remove Samples with &gt;= % missing data to 50.\nLeave Use Updog Filtering Parameters? off because this VCF does not contain the required updog quality annotations.\nSelect Apply Filters and wait until Status reaches 100 percent.\nUse Download VCF file and keep the result for Modules 2 through 4.\n\n\n\n\nVCF Filtering demonstration. The numbered settings above reflect the maintained interface.\n\n\n\n\n\n\n\n\nImportantThese are example thresholds\n\n\n\nPloidy 2 describes the simulated samples. Depth 10, MAF 0.05, and 50 percent missingness cutoffs were selected to expose the planted quality categories in this teaching dataset. Choose thresholds for real data from the assay, depth distribution, study goal, population, and downstream method.",
+    "text": "Filter the Workshop VCF\n\nStart your local installation with BIGapp::run_app() and select VCF Filtering under Genotype Processing.\nUnder Choose VCF File, upload atlantic_giant_pumpkin_diversity.vcf.gz.\nSet Output File Name to atlantic_giant_pumpkin_filtered.\nSet Species Ploidy to 2.\nSet MAF filter to 0.05.\nSet Min Read Depth (Marker per Sample) to 10.\nSet Remove SNPs with &gt;= % missing data to 50.\nSet Remove Samples with &gt;= % missing data to 50.\nLeave Use Updog Filtering Parameters? off because this VCF does not contain the required updog quality annotations.\nSelect Apply Filters and wait until Status reaches 100 percent.\nUse Download VCF file and keep the result for Modules 2 through 4.\n\n\n\n\nVCF Filtering demonstration. The numbered settings above reflect the maintained interface.\n\n\n\n\n\n\n\n\nImportantThese Are Example Thresholds\n\n\n\nPloidy 2 describes the simulated samples. Depth 10, MAF 0.05, and 50 percent missingness cutoffs were selected to expose the planted quality categories in this teaching dataset. Choose thresholds for real data from the assay, depth distribution, study goal, population, and downstream method.",
     "crumbs": [
       "Software",
       "1. Data quality control"
@@ -334,18 +389,29 @@
     "href": "workshops/bigapp/data-quality-control.html#check-your-result",
     "title": "Module 1: Data Quality Control",
     "section": "Check Your Result",
-    "text": "Check Your Result\nWhen the run finishes, BIGapp reports retained SNPs and the percentage removed. The downloaded VCF should contain:\n\n\n\nCheck\nExpected result\n\n\n\n\nRetained variants\n1,000\n\n\nRetained samples\n200\n\n\nMissing genotype cells\n9,447\n\n\nVariants removed\n200 of 1,200, or 16.7 percent\n\n\n\n\n\n\n\n\n\nTipExercise answer\n\n\n\n\n\nThe example retains 1,000 variants and all 200 samples. It removes 100 simulated low-MAF markers and 100 simulated high-missingness markers. Among retained markers, 9,447 genotype cells are missing after cells below depth 10 are set to missing.\nIf your result differs, first confirm the five numerical inputs and that you uploaded the original workshop VCF. A threshold typed as 0.50 in a field that requests a percentage is not the same as 50.",
+    "text": "Check Your Result\nWhen the run finishes, BIGapp reports retained SNPs and the percentage removed. The downloaded VCF should contain:\n\n\n\nCheck\nExpected result\n\n\n\n\nRetained variants\n1,000\n\n\nRetained samples\n200\n\n\nMissing genotype cells\n9,447\n\n\nVariants removed\n200 of 1,200, or 16.7 percent",
     "crumbs": [
       "Software",
       "1. Data quality control"
     ]
   },
   {
-    "objectID": "workshops/bigapp/data-quality-control.html#inspect-the-distributions",
-    "href": "workshops/bigapp/data-quality-control.html#inspect-the-distributions",
+    "objectID": "workshops/bigapp/data-quality-control.html#summary-statistics",
+    "href": "workshops/bigapp/data-quality-control.html#summary-statistics",
     "title": "Module 1: Data Quality Control",
-    "section": "Inspect the Distributions",
-    "text": "Inspect the Distributions\nUse the Plot Controls panel to compare Unfiltered VCF and Filtered VCF histograms. Look at SNP missingness and sample missingness rather than relying only on the retained count.\n\n\n\nExample MAF histogram after workshop filtering.\n\n\nFor your own study, ask whether the retained distribution makes sense for the population and the way the markers were discovered. A skewed distribution is something to investigate. It is not an automatic instruction to tighten the cutoff.\n\nWhat Each Check Can Reveal\n\n\n\n\n\n\n\nCheck\nQuestion to ask\n\n\n\n\nSNP missingness\nAre some markers uncalled in an unusual fraction of samples?\n\n\nSample missingness\nAre some samples consistently difficult to genotype?\n\n\nMinor allele frequency\nAre many markers nearly invariant in this dataset?\n\n\nRead depth\nAre calls supported by enough reads, and are unusually deep markers consistent with duplicated or collapsed regions?\n\n\n\nMaximum-depth and suspected-paralog checks are not part of this teaching filter, but they can matter for real sequence-derived markers. Review the maintained SNP-filtering guidance before defining a research workflow.",
+    "section": "Summary Statistics",
+    "text": "Summary Statistics\nUse the Plot Controls panel to compare Unfiltered VCF and Filtered VCF histograms. Look at SNP missingness and sample missingness rather than relying only on the retained count.\n\n\n\nExample MAF histogram after workshop filtering.\n\n\nFor your own study, ask whether the retained distribution makes sense for the population and the way the markers were discovered. A skewed distribution is something to investigate. It is not an automatic instruction to tighten the cutoff.\n\nWhat Each Check Can Reveal\n\n\n\n\n\n\n\nCheck\nQuestion to ask\n\n\n\n\nSNP missingness\nAre some markers uncalled in an unusual fraction of samples?\n\n\nSample missingness\nAre some samples consistently difficult to genotype?\n\n\nMinor allele frequency\nAre many markers nearly invariant in this dataset?\n\n\nRead depth\nAre calls supported by enough reads, and are unusually deep markers consistent with duplicated or collapsed regions?\n\n\n\nMaximum-depth and suspected-paralog checks are not part of this teaching filter, but they can matter for real sequence-derived markers. Review the maintained SNP-filtering guidance before defining a research workflow.\n\n\nOptional: Genomic Diversity\nFor a broader summary, select Genomic Diversity under Summary Metrics and upload the filtered VCF. Set Species Ploidy to 2, run the analysis, and review the MAF Plot, OHet Plot, Sample Table, and SNP Table.\nThe observed-heterozygosity plot can help us spot samples that are unusual relative to the rest of this dataset. An outlier is a reason to check identity, missingness, contamination, ancestry, and the expected biology. It is not an automatic reason to remove a sample.",
+    "crumbs": [
+      "Software",
+      "1. Data quality control"
+    ]
+  },
+  {
+    "objectID": "workshops/bigapp/data-quality-control.html#exercise",
+    "href": "workshops/bigapp/data-quality-control.html#exercise",
+    "title": "Module 1: Data Quality Control",
+    "section": "Exercise",
+    "text": "Exercise\nUsing the original workshop VCF and the settings above:\n\nHow many variants and samples remain?\nWhat percentage of variants were removed?\nHow many genotype cells are missing after the depth rule is applied?\nWhich simulated marker categories account for the removed variants?\nWhat changed between the unfiltered and filtered missingness plots?\n\n\n\n\n\n\n\nTipExercise Answer\n\n\n\n\n\nThe example retains 1,000 variants and all 200 samples. It removes 200 of 1,200 variants, or about 16.7 percent. Those are 100 simulated low-MAF markers and 100 simulated high-missingness markers.\nAmong the retained markers, 9,447 genotype cells are missing after cells below depth 10 are set to missing. If your result differs, first confirm the five numerical inputs and that you uploaded the original workshop VCF. A threshold typed as 0.50 in a field that requests a percentage is not the same as 50.",
     "crumbs": [
       "Software",
       "1. Data quality control"
@@ -1342,7 +1408,7 @@
     "href": "workshops/bigapp/gwas.html#the-manhattan-plot",
     "title": "Module 3: GWASpoly",
     "section": "The Manhattan Plot",
-    "text": "The Manhattan Plot\nGWAS results are commonly summarized with a Manhattan plot. Each point represents one marker test.\n\n\n\nExample Manhattan plot with a genomic association peak.\n\n\n\nReading the Plot\n\nHorizontal axis: genomic position, arranged by chromosome\nVertical axis: marker significance, usually negative log10 p-value\nPeaks: regions containing markers with comparatively strong evidence\nThreshold line: the cutoff produced by the selected significance method\n\nNearby tall points can represent correlated evidence from one genomic region rather than several independent trait loci. A peak is a region to investigate, not proof that its tallest marker is causal.\n\n\n\n\n\n\nTipWhy negative log10?\n\n\n\nA p-value of 0.001 becomes 3 after the negative log10 transformation. Smaller p-values become larger plotted values, which makes genomic peaks easier to see.",
+    "text": "The Manhattan Plot\nGWAS results are commonly summarized with a Manhattan plot. Each point represents one marker test.\n\n\n\nExample Manhattan plot with a genomic association peak.\n\n\n\nReading the Plot\n\nHorizontal axis: genomic position, arranged by chromosome\nVertical axis: marker significance, usually negative log10 p-value\nPeaks: regions containing markers with comparatively strong evidence\nThreshold line: the cutoff produced by the selected significance method\n\nNearby tall points can represent correlated evidence from one genomic region rather than several independent trait loci. A peak is a region to investigate, not proof that its tallest marker is causal.\n\n\n\n\n\n\nTipWhy Negative Log10?\n\n\n\nA p-value of 0.001 becomes 3 after the negative log10 transformation. Smaller p-values become larger plotted values, which makes genomic peaks easier to see.",
     "crumbs": [
       "Software",
       "3. GWASpoly"
@@ -1375,7 +1441,7 @@
     "href": "workshops/bigapp/gwas.html#interpreting-the-results",
     "title": "Module 3: GWASpoly",
     "section": "Interpreting the Results",
-    "text": "Interpreting the Results\nDo not judge the run from one plot. We will go through the outputs in an order that keeps the model choice, association evidence, and diagnostics connected.\n\n1. Check the BIC Plot and Table\nOpen BIC Plot and BIC Table. Find the minimum BIC and record its number of PCs. This is the PC count BIGapp used for the run. The selected value is an output from this dataset, not a fixed recommendation for every analysis.\n\n\n2. Check the Manhattan Plot and Significant Markers\nOpen Manhattan Plot. Under Model Selection, compare all, additive, 1-dom, and general for this diploid exercise. Then open QTL - significant markers and sort the table by chromosome and position.\nFor each reported marker, connect the table back to the plot:\n\n\n\n\n\n\n\nOutput\nWhat it tells you\n\n\n\n\nChromosome and position\nWhere the marker occurs in the reference assembly\n\n\nModel\nWhich dosage-effect model produced the result\n\n\nP-value or plotted significance\nStrength of evidence under that marker test\n\n\nThreshold method\nHow the multiple-testing cutoff was defined\n\n\n\n\n\nWhat Makes a Result Worth Following?\nLook for a region that still makes sense after you check:\n\nthe model and population-structure controls\nsupport from nearby markers\ngenotype and phenotype data quality\nconsistency in relevant environments or independent data\nwhether the effect would matter for the breeding decision\n\n\n\nRed Flags\nStop and investigate if you see a single isolated marker, broad p-value inflation, a marker supported by very few samples, or a result that disappears with a reasonable model change.\n\n\n3. Understand the Chromosome 4 Peak\nThe workshop data are designed to show three nearby significant markers on chromosome 4. Does that mean we found three independent trait loci?\nIn this example, no. This is linkage disequilibrium, or LD, in action. Nearby markers can carry correlated allele information.\n\n\n\n\n\n\n\n\n\nMarker\nPosition on chromosome 4\nSimulated role\nDistance from SNP_0240\n\n\n\n\nSNP_0238\n18,109,217 bp\nLD tag\nabout 858 kb\n\n\nSNP_0239\n18,487,979 bp\nLD tag\nabout 479 kb\n\n\nSNP_0240\n18,967,397 bp\ncausal ground truth\n0 kb\n\n\n\n\n\n\n\n\n\nImportantKey lesson\n\n\n\nSeveral significant markers in one region can represent one candidate trait locus rather than several independent effects. We know SNP_0240 is the causal ground truth because the SNP-information file records how the dataset was simulated. We could not make that claim from the GWAS result alone.\n\n\nOpen Filter QTL by LD window and inspect the LD plot. Adjust Adjust base pair window here to filter QTLs while watching the Filtered QTL table. The LD curve helps you choose a physical base-pair window for grouping nearby hits. This control does not calculate pairwise LD clumps for every significant-marker pair.\nWith a window that groups the three chromosome 4 markers, we get one candidate QTL region. Record the distance you used and why you chose it.\nIn real data, the most significant marker can tag an unobserved causal variant. Fine mapping, functional annotation, independent validation, and biological evidence are needed before making a causal claim.\n\n\n4. Check the QQ Plot\nOpen QQ Plot. A quantile-quantile plot compares observed p-values with the distribution expected under the null model.\n\n\n\nExample QQ plot with most points near the diagonal and tail departure.\n\n\nHere is what to look for:\n\nMost points near the diagonal: the bulk of marker tests is broadly consistent with the reference distribution.\nDeparture mainly in the tail: can be consistent with a limited set of associated markers.\nBroad departure across the range: can indicate unaccounted structure, model misspecification, or another systematic effect.\n\nDo not diagnose the run from the most extreme point alone. Compare the QQ pattern with the BIC result, Manhattan plot, sample structure, and analysis settings.\n\n\n5. Check the Multiple QTL Model\nOpen Multiple QTL model after the LD-window step. This output evaluates supported combinations of the candidate QTL retained after regional filtering. Save this table with the single-marker and LD-filtered results so the sequence of decisions remains reproducible.",
+    "text": "Interpreting the Results\nDo not judge the run from one plot. We will go through the outputs in an order that keeps the model choice, association evidence, and diagnostics connected.\n\n1. Check the BIC Plot and Table\nOpen BIC Plot and BIC Table. Find the minimum BIC and record its number of PCs. This is the PC count BIGapp used for the run. The selected value is an output from this dataset, not a fixed recommendation for every analysis.\n\n\n2. Check the Manhattan Plot and Significant Markers\nOpen Manhattan Plot. Under Model Selection, compare all, additive, 1-dom, and general for this diploid exercise. Then open QTL - significant markers and sort the table by chromosome and position.\nFor each reported marker, connect the table back to the plot:\n\n\n\n\n\n\n\nOutput\nWhat it tells you\n\n\n\n\nChromosome and position\nWhere the marker occurs in the reference assembly\n\n\nModel\nWhich dosage-effect model produced the result\n\n\nP-value or plotted significance\nStrength of evidence under that marker test\n\n\nThreshold method\nHow the multiple-testing cutoff was defined\n\n\n\n\n\nWhat Makes a Result Worth Following?\nLook for a region that still makes sense after you check:\n\nthe model and population-structure controls\nsupport from nearby markers\ngenotype and phenotype data quality\nconsistency in relevant environments or independent data\nwhether the effect would matter for the breeding decision\n\n\n\nRed Flags\nStop and investigate if you see a single isolated marker, broad p-value inflation, a marker supported by very few samples, or a result that disappears with a reasonable model change.\n\n\n3. Understand the Chromosome 4 Peak\nThe workshop data are designed to show three nearby significant markers on chromosome 4. Does that mean we found three independent trait loci?\nIn this example, no. This is linkage disequilibrium, or LD, in action. Nearby markers can carry correlated allele information.\n\n\n\n\n\n\n\n\n\nMarker\nPosition on chromosome 4\nSimulated role\nDistance from SNP_0240\n\n\n\n\nSNP_0238\n18,109,217 bp\nLD tag\nabout 858 kb\n\n\nSNP_0239\n18,487,979 bp\nLD tag\nabout 479 kb\n\n\nSNP_0240\n18,967,397 bp\ncausal ground truth\n0 kb\n\n\n\n\n\n\n\n\n\nImportantKey Lesson\n\n\n\nSeveral significant markers in one region can represent one candidate trait locus rather than several independent effects. We know SNP_0240 is the causal ground truth because the SNP-information file records how the dataset was simulated. We could not make that claim from the GWAS result alone.\n\n\nOpen Filter QTL by LD window and inspect the LD plot. Adjust Adjust base pair window here to filter QTLs while watching the Filtered QTL table. The LD curve helps you choose a physical base-pair window for grouping nearby hits. This control does not calculate pairwise LD clumps for every significant-marker pair.\nWith a window that groups the three chromosome 4 markers, we get one candidate QTL region. Record the distance you used and why you chose it.\nIn real data, the most significant marker can tag an unobserved causal variant. Fine mapping, functional annotation, independent validation, and biological evidence are needed before making a causal claim.\n\n\n4. Check the QQ Plot\nOpen QQ Plot. A quantile-quantile plot compares observed p-values with the distribution expected under the null model.\n\n\n\nExample QQ plot with most points near the diagonal and tail departure.\n\n\nHere is what to look for:\n\nMost points near the diagonal: the bulk of marker tests is broadly consistent with the reference distribution.\nDeparture mainly in the tail: can be consistent with a limited set of associated markers.\nBroad departure across the range: can indicate unaccounted structure, model misspecification, or another systematic effect.\n\nDo not diagnose the run from the most extreme point alone. Compare the QQ pattern with the BIC result, Manhattan plot, sample structure, and analysis settings.\n\n\n5. Check the Multiple QTL Model\nOpen Multiple QTL model after the LD-window step. This output evaluates supported combinations of the candidate QTL retained after regional filtering. Save this table with the single-marker and LD-filtered results so the sequence of decisions remains reproducible.",
     "crumbs": [
       "Software",
       "3. GWASpoly"
@@ -1408,7 +1474,7 @@
     "href": "workshops/bigapp/gwas.html#exercise",
     "title": "Module 3: GWASpoly",
     "section": "Exercise",
-    "text": "Exercise\nUsing Fruit_Weight_lbs and the settings in this module:\n\nRecord the number of PCs at the minimum BIC.\nIdentify the chromosome with the strongest association peak.\nRecord which model or models place markers above the selected threshold.\nExamine the QQ plot. Is departure broad, or concentrated mainly in the tail?\nCount the nearby significant markers in the chromosome 4 region.\nAdjust the physical LD window. How does the number of retained candidate regions change?\nExplain why several significant markers can represent one candidate QTL.\n\n\n\n\n\n\n\nTipExercise answer\n\n\n\n\n\nThe simulated data are designed to produce one chromosome 4 association region involving SNP_0238, SNP_0239, and SNP_0240. The markers span about 858 kb. A physical window that groups these nearby hits yields one candidate QTL region rather than three independent regions.\nThe QQ plot should be interpreted from your saved run rather than matched to a universal pattern. Your selected genetic model and significance method determine the exact significant-marker rows. SNP_0240 is the simulated causal ground truth; the GWAS result alone would not establish that conclusion in observed data.\nSave the BIC table, Manhattan plot, QQ plot, significant-marker table, LD-filtered table, multiple-QTL output, and the settings that produced them.",
+    "text": "Exercise\nUsing Fruit_Weight_lbs and the settings in this module:\n\nRecord the number of PCs at the minimum BIC.\nIdentify the chromosome with the strongest association peak.\nRecord which model or models place markers above the selected threshold.\nExamine the QQ plot. Is departure broad, or concentrated mainly in the tail?\nCount the nearby significant markers in the chromosome 4 region.\nAdjust the physical LD window. How does the number of retained candidate regions change?\nExplain why several significant markers can represent one candidate QTL.\n\n\n\n\n\n\n\nTipExercise Answer\n\n\n\n\n\nThe simulated data are designed to produce one chromosome 4 association region involving SNP_0238, SNP_0239, and SNP_0240. The markers span about 858 kb. A physical window that groups these nearby hits yields one candidate QTL region rather than three independent regions.\nThe QQ plot should be interpreted from your saved run rather than matched to a universal pattern. Your selected genetic model and significance method determine the exact significant-marker rows. SNP_0240 is the simulated causal ground truth; the GWAS result alone would not establish that conclusion in observed data.\nSave the BIC table, Manhattan plot, QQ plot, significant-marker table, LD-filtered table, multiple-QTL output, and the settings that produced them.",
     "crumbs": [
       "Software",
       "3. GWASpoly"
@@ -1430,18 +1496,29 @@
     "href": "workshops/bigapp/pca.html",
     "title": "Module 2: Population Structure and PCA",
     "section": "",
-    "text": "Workshop path\n\nOverview\nSetup\n1. Quality control\n2. PCA\n3. GWASpoly\n4. Genomic selection\nDataset\nPopulation structure means that some samples are more genetically similar to one another than to the rest of the dataset. Geography, breeding history, selection, gene flow, and relatedness can all create that pattern.\nWhy do we care? If we ignore structure, it can be confused with a marker-trait association. It can also affect how well a prediction transfers from one group to another.",
+    "text": "Workshop path\n\nOverview\nSetup\n1. Quality control\n2. PCA\n3. GWASpoly\n4. Genomic selection\nDataset",
     "crumbs": [
       "Software",
       "2. Population structure and PCA"
     ]
   },
   {
-    "objectID": "workshops/bigapp/pca.html#what-pca-does",
-    "href": "workshops/bigapp/pca.html#what-pca-does",
+    "objectID": "workshops/bigapp/pca.html#what-is-population-structure",
+    "href": "workshops/bigapp/pca.html#what-is-population-structure",
     "title": "Module 2: Population Structure and PCA",
-    "section": "What PCA Does",
-    "text": "What PCA Does\nPrincipal component analysis, or PCA, summarizes variation across many markers with a smaller set of axes. Each point in a PCA plot is a sample. Nearby points have more similar marker profiles than widely separated points, given the variants and scaling used in the analysis.\n\n\n\nConceptual diagram showing many variables summarized along principal-component axes.\n\n\nPCA is exploratory. A cluster does not prove that we found a biological population. An outlier is a reason to check the sample identity and data quality, not an automatic reason to delete the sample.\n\nReading a PCA Plot\nI like to read a PCA plot in three passes:\n\nCheck the axes. Which PCs are plotted, and how much marker variation does each represent?\nLook at the points. Do you see separation, overlap, gradients, or isolated samples?\nAdd the metadata. Color or shape the points with trusted fields such as region, state, breeding program, plate, or sequencing batch.\n\nThis order reduces the temptation to force a biological story onto a pattern that could reflect data quality or a technical batch.",
+    "section": "What is Population Structure?",
+    "text": "What is Population Structure?\nPopulation structure means that some samples are more genetically similar to one another than to the rest of the dataset. Geography, breeding history, selection, gene flow, and relatedness can all create that pattern.\n\nWhy Does It Matter for Breeding?\nWhy do we care? If we ignore structure, it can be confused with a marker-trait association. It can also affect how well a prediction transfers from one group to another.\nStructure can also help us understand the material itself. We might see distinct ancestry groups, continuous variation, recent mixing, duplicate samples, or a sample that does not match its label. PCA gives us a first look at those patterns.",
+    "crumbs": [
+      "Software",
+      "2. Population structure and PCA"
+    ]
+  },
+  {
+    "objectID": "workshops/bigapp/pca.html#what-is-pca",
+    "href": "workshops/bigapp/pca.html#what-is-pca",
+    "title": "Module 2: Population Structure and PCA",
+    "section": "What is PCA?",
+    "text": "What is PCA?\nPrincipal component analysis, or PCA, takes variation across thousands of markers and summarizes its main patterns with a small number of axes. This lets us visualize high-dimensional genotype data in two or three dimensions.\n\nThe Intuition\nImagine that every SNP is its own dimension. A dataset with 5,000 SNPs places each sample in a 5,000-dimensional space, which we cannot draw directly.\nPCA finds new axes through that space:\n\nPC1 captures the largest direction of variation among the samples.\nPC2 captures the largest remaining direction that is independent of PC1.\nLater PCs continue to capture smaller, independent directions of variation.\n\nWe then plot the sample coordinates on two or three of those axes.\n\n\n\nConceptual diagram showing many variables summarized along principal-component axes.\n\n\n\n\nReading a PCA Plot\nEach point is one sample. The geometry has a direct interpretation:\n\nSamples close together have more similar marker profiles.\nSamples far apart are more genetically different along the plotted axes.\nClusters show groups of samples that share marker patterns.\nA gradient shows continuous genetic change rather than a sharp division.\nAn isolated point is genetically different from the main cloud on those axes.\n\nI like to read the plot in three passes:\n\nCheck the axes. Which PCs are plotted, and how much marker variation does each represent?\nLook at the points. Do you see separation, overlap, gradients, or isolated samples?\nAdd the metadata. Color or shape the points with trusted fields such as region, state, breeding program, plate, or sequencing batch.\n\n\n\n\n\n\n\nNoteWhat PCA Does Not Tell Us\n\n\n\nPCA shows the marker pattern, but it does not name its cause. We use biological and technical metadata to determine whether a cluster or gradient reflects ancestry, breeding history, relatedness, data quality, or a batch effect. Likewise, an outlier is a sample to investigate, not a sample to remove automatically.",
     "crumbs": [
       "Software",
       "2. Population structure and PCA"
@@ -1459,22 +1536,55 @@
     ]
   },
   {
-    "objectID": "workshops/bigapp/pca.html#reading-the-output",
-    "href": "workshops/bigapp/pca.html#reading-the-output",
+    "objectID": "workshops/bigapp/pca.html#understanding-the-output",
+    "href": "workshops/bigapp/pca.html#understanding-the-output",
     "title": "Module 2: Population Structure and PCA",
-    "section": "Reading the Output",
-    "text": "Reading the Output\nThe 2D and 3D plots show sample scores on selected components. The scree plot shows the variance summarized by successive components. Use the X-axis and Y-axis controls to inspect more than the first pair.\nThe scree plot is a summary, not a pass-fail test. A sharp decline means the early PCs capture relatively large directions of variation. A gradual decline means the variation is spread across more axes. Do not assume that only PC1 and PC2 matter just because they are shown first.\nThe workshop panel simulates three regional ancestry sources with gene flow. Color is therefore used to compare known simulated metadata with the genetic pattern, not to create the pattern.\n\n\n\nColoring PCA scores by a trait-file field. Select Region in the current Color Variable control.\n\n\n\n\n\n\n\n\nTipExercise answer\n\n\n\n\n\nThe PCA should show three overlapping regional patterns rather than three perfectly separated groups. Eastern and Midwest samples overlap, while Western samples tend to be more separated. The overlap is expected because the simulated ancestry proportions include gene flow.\nExact variance percentages depend on the VCF you uploaded. Record the displayed values instead of comparing them with a generic expected range.",
+    "section": "Understanding the Output",
+    "text": "Understanding the Output\nThe 2D and 3D plots show sample scores on selected components. The scree plot shows the variance summarized by successive components. Use the X-axis and Y-axis controls to inspect more than the first pair.\nThe workshop panel simulates three regional ancestry sources with gene flow. Color is therefore used to compare known simulated metadata with the genetic pattern, not to create the pattern.\n\n\n\nColoring PCA scores by a trait-file field. Select Region in the current Color Variable control.",
     "crumbs": [
       "Software",
       "2. Population structure and PCA"
     ]
   },
   {
-    "objectID": "workshops/bigapp/pca.html#practice-interpreting-patterns",
-    "href": "workshops/bigapp/pca.html#practice-interpreting-patterns",
+    "objectID": "workshops/bigapp/pca.html#coloring-by-groups",
+    "href": "workshops/bigapp/pca.html#coloring-by-groups",
     "title": "Module 2: Population Structure and PCA",
-    "section": "Practice Interpreting Patterns",
-    "text": "Practice Interpreting Patterns\n\n\n\nExample of distinct PCA clusters.\n\n\nDistinct groups can reflect population history, batches, related samples, or labeling problems. This is why we compare the plot with trusted metadata.\n\n\n\nExample of continuous PCA variation.\n\n\nContinuous variation can reflect admixture or geographic clines. It does not mean that structure is absent.\n\n\n\nExample of a PCA outlier.\n\n\nIf you see an outlier, check its sample identity, missingness, heterozygosity, ploidy, possible contamination, and whether it belongs to the intended taxon.",
+    "section": "Coloring by Groups",
+    "text": "Coloring by Groups\nColor does not create the PCA pattern. It lets us compare a pattern that was calculated from the markers with information we already have about the samples.\nStart with Region, then try State and Breeding_Program. Technical fields matter too. If a cluster lines up with a sequencing batch or plate rather than a biological field, we need to investigate that before telling a biological story.\nUse Add Shapes (2D-Plot only) when a second grouping helps. Keep the plot readable. Too many colors and shapes can hide the pattern we are trying to understand.",
+    "crumbs": [
+      "Software",
+      "2. Population structure and PCA"
+    ]
+  },
+  {
+    "objectID": "workshops/bigapp/pca.html#how-many-pcs-should-we-look-at",
+    "href": "workshops/bigapp/pca.html#how-many-pcs-should-we-look-at",
+    "title": "Module 2: Population Structure and PCA",
+    "section": "How Many PCs Should We Look At?",
+    "text": "How Many PCs Should We Look At?\nThe scree plot shows how much marker variation is summarized by each principal component. A sharp decline means the early PCs capture relatively large directions of variation. A gradual decline means the variation is spread across more axes.\nThere is no universal number of PCs to inspect. Start with PC1 and PC2, look at the scree plot, then compare other pairs such as PC2 and PC3. If an important pattern appears only on a later axis, check whether it matches biology, data quality, or a technical variable.",
+    "crumbs": [
+      "Software",
+      "2. Population structure and PCA"
+    ]
+  },
+  {
+    "objectID": "workshops/bigapp/pca.html#interpreting-your-results",
+    "href": "workshops/bigapp/pca.html#interpreting-your-results",
+    "title": "Module 2: Population Structure and PCA",
+    "section": "Interpreting Your Results",
+    "text": "Interpreting Your Results\nThe shape of a PCA plot is a starting point. It tells us what pattern needs an explanation, but not whether that explanation is biological, technical, or a mixture of both.\n\nScenario 1: Clear Clusters\n\n\n\nExample of distinct PCA clusters.\n\n\nWhat the plot shows: The samples form distinct groups in marker space.\nPossible explanations: Ancestry, breeding history, related sets of samples, or a technical batch can create those groups.\nWhat to check:\n\nDo the clusters match Region, State, or Breeding_Program?\nDo they instead match plate, sequencing batch, missingness, or another technical field?\nAre the groups still visible on other PC pairs?\n\nWhat to do next: Account for structure in association models, and make sure prediction validation represents any transfer between groups. Whether groups should be analyzed together or separately depends on the biological question, sample sizes, and intended use.\n\n\nScenario 2: Continuous Variation\n\n\n\nExample of continuous PCA variation.\n\n\nWhat the plot shows: The samples vary along a genetic gradient rather than forming discrete groups.\nPossible explanations: Admixture, gene flow, geography, or a gradual breeding-history pattern can create that gradient.\nWhat to check:\n\nDoes position along the gradient match geography or ancestry metadata?\nDoes a technical variable change along the same axis?\nDo later PCs reveal another pattern hidden by the main gradient?\n\nWhat to do next: Do not treat the lack of sharp clusters as evidence that structure is absent. Include the relevant structure controls in downstream models and design validation across the part of the gradient where predictions will be used.\n\n\nScenario 3: Outliers\n\n\n\nExample of a PCA outlier.\n\n\nWhat the plot shows: One or more samples are separated from the main cloud on the plotted axes.\nPossible explanations: A sample may be genuinely different, mislabeled, contaminated, unusually related to the rest, outside the intended taxon, or affected by poor genotype data.\nWhat to check:\n\nsample identity and metadata\nSNP and sample missingness\nobserved heterozygosity and read depth\nexpected ploidy and taxon\nplate, sequencing batch, and possible contamination\n\nWhat to do next: Do not remove an outlier just because it is far from the main cloud. Confirm the explanation first, document the evidence, and then decide whether it belongs in the analysis or should be handled separately.",
+    "crumbs": [
+      "Software",
+      "2. Population structure and PCA"
+    ]
+  },
+  {
+    "objectID": "workshops/bigapp/pca.html#optional-dapc",
+    "href": "workshops/bigapp/pca.html#optional-dapc",
+    "title": "Module 2: Population Structure and PCA",
+    "section": "Optional: DAPC",
+    "text": "Optional: DAPC\nBIGapp also includes DAPC under Population Structure. PCA summarizes the main continuous directions of marker variation without requiring groups. DAPC is a separate workflow that first estimates or accepts a number of clusters and then looks for axes that separate those groups.\nDAPC can be useful when group assignment is the question, but it should not replace the exploratory PCA in this module. The selected number of clusters, retained PCs, sample size, and biological interpretation all matter. If you use it, save the BIC Plot, BIC Values, DAPC Plot, and assignment table with the settings used.",
     "crumbs": [
       "Software",
       "2. Population structure and PCA"
@@ -1485,7 +1595,7 @@
     "href": "workshops/bigapp/pca.html#exercise",
     "title": "Module 2: Population Structure and PCA",
     "section": "Exercise",
-    "text": "Exercise\n\nWhich regional patterns overlap most?\nDoes coloring by State show finer variation within Region?\nAre any apparent outliers also unusual in sequencing lane, plate, or missingness?\nHow does the plot change when you use PC2 and PC3?\n\n\n\n\n\n\n\nTipDiscussion answer\n\n\n\n\n\nThe planted regional structure should become clearer when colored by Region, but sample points remain admixed. Metadata associations are prompts for follow-up. They do not by themselves distinguish biology from technical batch effects.",
+    "text": "Exercise\n\nWhich regional patterns overlap most?\nDoes coloring by State show finer variation within Region?\nAre any apparent outliers also unusual in sequencing lane, plate, or missingness?\nHow does the plot change when you use PC2 and PC3?\n\n\n\n\n\n\n\nTipExercise Answer\n\n\n\n\n\nThe PCA should show three overlapping regional patterns rather than three perfectly separated groups. Eastern and Midwest samples overlap, while Western samples tend to be more separated. That overlap is expected because the simulated ancestry proportions include gene flow.\nColoring by Region should make the broad pattern easier to see. State may show finer variation, but the samples remain admixed. Exact variance percentages depend on the VCF you uploaded, so record the values from your run instead of comparing them with a generic expected range.\nMetadata associations are prompts for follow-up. They do not by themselves distinguish biology from a technical batch effect.",
     "crumbs": [
       "Software",
       "2. Population structure and PCA"
@@ -1497,6 +1607,28 @@
     "title": "Module 2: Population Structure and PCA",
     "section": "Key Takeaways",
     "text": "Key Takeaways\n\nPCA summarizes marker variation; it does not assign biological populations by itself.\nInterpret the axes and point geometry before coloring by metadata.\nCompare biological labels with technical labels when investigating clusters or outliers.\nSave the PC scores and plotting choices so the display can be reproduced.\n\n\nNext: Download the PC table as an audit record, then continue to Module 3: GWASpoly.",
+    "crumbs": [
+      "Software",
+      "2. Population structure and PCA"
+    ]
+  },
+  {
+    "objectID": "workshops/bigapp/pca.html#what-pca-does",
+    "href": "workshops/bigapp/pca.html#what-pca-does",
+    "title": "Module 2: Population Structure and PCA",
+    "section": "What PCA Does",
+    "text": "What PCA Does\nPrincipal component analysis, or PCA, summarizes variation across many markers with a smaller set of axes. Each point in a PCA plot is a sample. Nearby points have more similar marker profiles than widely separated points, given the variants and scaling used in the analysis.\n\n\n\nConceptual diagram showing many variables summarized along principal-component axes.\n\n\nPCA is exploratory. A cluster does not prove that we found a biological population. An outlier is a reason to check the sample identity and data quality, not an automatic reason to delete the sample.\n\nReading a PCA Plot\nI like to read a PCA plot in three passes:\n\nCheck the axes. Which PCs are plotted, and how much marker variation does each represent?\nLook at the points. Do you see separation, overlap, gradients, or isolated samples?\nAdd the metadata. Color or shape the points with trusted fields such as region, state, breeding program, plate, or sequencing batch.\n\nThis order reduces the temptation to force a biological story onto a pattern that could reflect data quality or a technical batch.",
+    "crumbs": [
+      "Software",
+      "2. Population structure and PCA"
+    ]
+  },
+  {
+    "objectID": "workshops/bigapp/pca.html#practice-interpreting-patterns",
+    "href": "workshops/bigapp/pca.html#practice-interpreting-patterns",
+    "title": "Module 2: Population Structure and PCA",
+    "section": "Practice Interpreting Patterns",
+    "text": "Practice Interpreting Patterns\n\n\n\nExample of distinct PCA clusters.\n\n\nDistinct groups can reflect population history, batches, related samples, or labeling problems. This is why we compare the plot with trusted metadata.\n\n\n\nExample of continuous PCA variation.\n\n\nContinuous variation can reflect admixture or geographic clines. It does not mean that structure is absent.\n\n\n\nExample of a PCA outlier.\n\n\nIf you see an outlier, check its sample identity, missingness, heterozygosity, ploidy, possible contamination, and whether it belongs to the intended taxon.",
     "crumbs": [
       "Software",
       "2. Population structure and PCA"

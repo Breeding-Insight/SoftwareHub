@@ -218,16 +218,31 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#why-quality-control-comes-first" id="toc-why-quality-control-comes-first" class="nav-link active" data-scroll-target="#why-quality-control-comes-first">Why Quality Control Comes First</a></li>
-  <li><a href="#genotypes-snps-and-dosage" id="toc-genotypes-snps-and-dosage" class="nav-link" data-scroll-target="#genotypes-snps-and-dosage">Genotypes, SNPs, and Dosage</a></li>
+  <li><a href="#why-genomics-in-plant-breeding" id="toc-why-genomics-in-plant-breeding" class="nav-link active" data-scroll-target="#why-genomics-in-plant-breeding">Why Genomics in Plant Breeding?</a>
+  <ul class="collapse">
+  <li><a href="#the-traditional-breeding-challenge" id="toc-the-traditional-breeding-challenge" class="nav-link" data-scroll-target="#the-traditional-breeding-challenge">The Traditional Breeding Challenge</a></li>
+  <li><a href="#what-genomic-data-gives-us" id="toc-what-genomic-data-gives-us" class="nav-link" data-scroll-target="#what-genomic-data-gives-us">What Genomic Data Gives Us</a></li>
+  </ul></li>
+  <li><a href="#what-is-a-snp" id="toc-what-is-a-snp" class="nav-link" data-scroll-target="#what-is-a-snp">What is a SNP?</a>
+  <ul class="collapse">
+  <li><a href="#from-genotypes-to-dosage" id="toc-from-genotypes-to-dosage" class="nav-link" data-scroll-target="#from-genotypes-to-dosage">From Genotypes to Dosage</a></li>
+  </ul></li>
   <li><a href="#find-your-way-around-bigapp" id="toc-find-your-way-around-bigapp" class="nav-link" data-scroll-target="#find-your-way-around-bigapp">Find Your Way Around BIGapp</a></li>
+  <li><a href="#loading-data" id="toc-loading-data" class="nav-link" data-scroll-target="#loading-data">Loading Data</a>
+  <ul class="collapse">
+  <li><a href="#what-data-do-we-need" id="toc-what-data-do-we-need" class="nav-link" data-scroll-target="#what-data-do-we-need">What Data Do We Need?</a></li>
+  <li><a href="#how-loading-works-in-bigapp" id="toc-how-loading-works-in-bigapp" class="nav-link" data-scroll-target="#how-loading-works-in-bigapp">How Loading Works in BIGapp</a></li>
+  </ul></li>
+  <li><a href="#quality-control-why-it-matters" id="toc-quality-control-why-it-matters" class="nav-link" data-scroll-target="#quality-control-why-it-matters">Quality Control: Why It Matters</a></li>
   <li><a href="#why-filtering-order-matters" id="toc-why-filtering-order-matters" class="nav-link" data-scroll-target="#why-filtering-order-matters">Why Filtering Order Matters</a></li>
   <li><a href="#filter-the-workshop-vcf" id="toc-filter-the-workshop-vcf" class="nav-link" data-scroll-target="#filter-the-workshop-vcf">Filter the Workshop VCF</a></li>
   <li><a href="#check-your-result" id="toc-check-your-result" class="nav-link" data-scroll-target="#check-your-result">Check Your Result</a></li>
-  <li><a href="#inspect-the-distributions" id="toc-inspect-the-distributions" class="nav-link" data-scroll-target="#inspect-the-distributions">Inspect the Distributions</a>
+  <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics">Summary Statistics</a>
   <ul class="collapse">
   <li><a href="#what-each-check-can-reveal" id="toc-what-each-check-can-reveal" class="nav-link" data-scroll-target="#what-each-check-can-reveal">What Each Check Can Reveal</a></li>
+  <li><a href="#optional-genomic-diversity" id="toc-optional-genomic-diversity" class="nav-link" data-scroll-target="#optional-genomic-diversity">Optional: Genomic Diversity</a></li>
   </ul></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a></li>
   <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key Takeaways</a></li>
   <li><a href="#what-to-save" id="toc-what-to-save" class="nav-link" data-scroll-target="#what-to-save">What to Save</a></li>
   </ul>
@@ -300,15 +315,40 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Save:</strong> the filtered VCF for every later module</li>
 </ul>
 </div>
-<p>Genomic markers let us compare inherited variation before every trait can be measured. But before we use those markers, we need to know whether the genotype calls, markers, and samples are reliable enough for the analysis that comes next.</p>
-<section id="why-quality-control-comes-first" class="level2">
-<h2 class="anchored" data-anchor-id="why-quality-control-comes-first">Why Quality Control Comes First</h2>
-<p>Marker data can help us describe diversity, locate trait associations, and support selection. Every downstream model, though, assumes that the genotype matrix is a reasonable representation of the samples.</p>
-<p>Low read depth can make an individual genotype uncertain. A marker with extensive missing data may compare different subsets of samples. A sample with extensive missing data may contribute little reliable information.</p>
-<p>So, we treat filtering as an analysis decision, not a cleanup button. We will inspect the data before and after filtering, record every cutoff, and keep the original file.</p>
+<section id="why-genomics-in-plant-breeding" class="level2">
+<h2 class="anchored" data-anchor-id="why-genomics-in-plant-breeding">Why Genomics in Plant Breeding?</h2>
+<p>Before we open BIGapp, let’s step back and ask why we are using genomic data in the first place.</p>
+<section id="the-traditional-breeding-challenge" class="level3">
+<h3 class="anchored" data-anchor-id="the-traditional-breeding-challenge">The Traditional Breeding Challenge</h3>
+<p>Breeders cannot see genes directly. We make crosses, grow and evaluate plants, select the best individuals, and repeat that process across generations. That works, but it can be slow and expensive, especially when a trait takes years to measure, depends on a particular environment, or requires destructive phenotyping.</p>
 </section>
-<section id="genotypes-snps-and-dosage" class="level2">
-<h2 class="anchored" data-anchor-id="genotypes-snps-and-dosage">Genotypes, SNPs, and Dosage</h2>
+<section id="what-genomic-data-gives-us" class="level3">
+<h3 class="anchored" data-anchor-id="what-genomic-data-gives-us">What Genomic Data Gives Us</h3>
+<p>Genomic markers give us another way to compare individuals. We can use them to:</p>
+<ul>
+<li>identify which genetic variants each sample carries</li>
+<li>describe genetic relationships and population structure</li>
+<li>find genomic regions associated with measured traits</li>
+<li>support earlier selection when an appropriate prediction model has been validated</li>
+</ul>
+<p>Genomic data does not replace careful phenotyping. It lets us connect phenotype records with inherited variation and make better-informed decisions.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>The Bottom Line
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Markers give us information we cannot get by looking at the plant alone. But that information is useful only if the genotype data are reliable enough for the analysis.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="what-is-a-snp" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-snp">What is a SNP?</h2>
 <p>A single-nucleotide polymorphism, or SNP, is a genomic position where samples carry different bases. In a diploid biallelic marker, allele dosage records the number of alternate-allele copies:</p>
 <table class="caption-top table">
 <thead>
@@ -337,8 +377,11 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 <p>Polyploid dosage can range from zero to the species ploidy. See <a href="../../learn/what-is-allele-dosage.html">What is allele dosage?</a> for a fuller explanation.</p>
+<section id="from-genotypes-to-dosage" class="level3">
+<h3 class="anchored" data-anchor-id="from-genotypes-to-dosage">From Genotypes to Dosage</h3>
 <p>The workshop VCF stores <code>GT</code>, <code>DP</code>, and <code>AD</code> for each sample-marker cell. <code>GT</code> is the genotype, <code>DP</code> is total read depth, and <code>AD</code> contains reference and alternate read counts. The <a href="../../workshops/bigapp/dataset-guide.html">dataset guide</a> documents every input.</p>
 <p>In a VCF, the first columns identify the chromosome, position, marker, alleles, and other site-level information. The sample columns come next. The <code>FORMAT</code> column tells us how to read the colon-separated values in each sample cell. When <code>FORMAT</code> is <code>GT:DP:AD</code>, for example, each sample cell contains those three fields in that order.</p>
+</section>
 </section>
 <section id="find-your-way-around-bigapp" class="level2">
 <h2 class="anchored" data-anchor-id="find-your-way-around-bigapp">Find Your Way Around BIGapp</h2>
@@ -349,13 +392,67 @@ ul.task-list li input[type="checkbox"] {
 The navigation animation is supplementary. The current written labels above are the source of truth.
 </figcaption>
 </figure>
-<p>Each analysis has its own upload controls. Uploading a file in one section does not make it available automatically in another section.</p>
+</section>
+<section id="loading-data" class="level2">
+<h2 class="anchored" data-anchor-id="loading-data">Loading Data</h2>
+<section id="what-data-do-we-need" class="level3">
+<h3 class="anchored" data-anchor-id="what-data-do-we-need">What Data Do We Need?</h3>
+<p>This module starts with genotype data in a compressed VCF. Later modules will also use the phenotype CSV, which connects each <code>Sample_ID</code> with fruit weight and the metadata used to color plots.</p>
+<p>At its simplest, the genotype data become a marker-by-sample dosage matrix:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Sample</th>
+<th style="text-align: right;">SNP 1</th>
+<th style="text-align: right;">SNP 2</th>
+<th style="text-align: right;">SNP 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sample 1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td>Sample 2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td>Sample 3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<p>BIGapp converts the VCF genotype fields to this dosage representation for the analyses. We still need the original VCF because it also contains depth and allele-count information used for quality control.</p>
+</section>
+<section id="how-loading-works-in-bigapp" class="level3">
+<h3 class="anchored" data-anchor-id="how-loading-works-in-bigapp">How Loading Works in BIGapp</h3>
+<p>Each analysis has its own upload controls. Uploading a file in one section does not make it available automatically in another section. We will upload the filtered VCF again when we move to PCA and GWASpoly.</p>
 <figure class="figure">
 <img class="workshop-animation figure-img" src="images/bigapp-load-data.gif" alt="Animation selecting a VCF and a trait CSV with BIGapp file inputs">
 <figcaption>
 BIGapp file-upload demonstration. Follow the numbered steps below if the interface has changed since this recording.
 </figcaption>
 </figure>
+<p>When an analysis also needs the phenotype CSV, BIGapp opens <strong>Trait File Options</strong>. Select <code>NA</code> for <strong>Missing Data Value</strong>, choose <code>Sample_ID</code> for <strong>Sample ID Column</strong>, check the preview, and select <strong>Save</strong>. The preview is our chance to catch a wrong delimiter, shifted column, or unexpected sample-ID field before running the analysis.</p>
+</section>
+</section>
+<section id="quality-control-why-it-matters" class="level2">
+<h2 class="anchored" data-anchor-id="quality-control-why-it-matters">Quality Control: Why It Matters</h2>
+<p>Raw genomic data can contain uncertain genotype cells, poorly performing markers, and poorly performing samples:</p>
+<ul>
+<li><strong>Low-depth cells:</strong> the genotype is supported by too few reads.</li>
+<li><strong>High-missingness markers:</strong> a SNP is unavailable for an unusual fraction of samples.</li>
+<li><strong>High-missingness samples:</strong> a sample has too little usable genotype information.</li>
+<li><strong>Very low-frequency markers:</strong> there may be too little information for the intended analysis, or the calls may need closer inspection.</li>
+</ul>
+<p>If we ignore these problems, every downstream result can be affected. So, we treat filtering as an analysis decision, not a cleanup button. We inspect the data before and after filtering, record every cutoff, and keep the original file.</p>
 </section>
 <section id="why-filtering-order-matters" class="level2">
 <h2 class="anchored" data-anchor-id="why-filtering-order-matters">Why Filtering Order Matters</h2>
@@ -391,7 +488,7 @@ VCF Filtering demonstration. The numbered settings above reflect the maintained 
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>These are example thresholds
+<span class="screen-reader-only">Important</span>These Are Example Thresholds
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -428,26 +525,9 @@ VCF Filtering demonstration. The numbered settings above reflect the maintained 
 </tr>
 </tbody>
 </table>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Exercise answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The example retains 1,000 variants and all 200 samples. It removes 100 simulated low-MAF markers and 100 simulated high-missingness markers. Among retained markers, 9,447 genotype cells are missing after cells below depth 10 are set to missing.</p>
-<p>If your result differs, first confirm the five numerical inputs and that you uploaded the original workshop VCF. A threshold typed as <code>0.50</code> in a field that requests a percentage is not the same as <code>50</code>.</p>
-</div>
-</div>
-</div>
 </section>
-<section id="inspect-the-distributions" class="level2">
-<h2 class="anchored" data-anchor-id="inspect-the-distributions">Inspect the Distributions</h2>
+<section id="summary-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="summary-statistics">Summary Statistics</h2>
 <p>Use the <strong>Plot Controls</strong> panel to compare <strong>Unfiltered VCF</strong> and <strong>Filtered VCF</strong> histograms. Look at SNP missingness and sample missingness rather than relying only on the retained count.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -490,6 +570,39 @@ VCF Filtering demonstration. The numbered settings above reflect the maintained 
 </table>
 <p>Maximum-depth and suspected-paralog checks are not part of this teaching filter, but they can matter for real sequence-derived markers. Review the maintained <a href="../../learn/snp-filtering-polyploids.html">SNP-filtering guidance</a> before defining a research workflow.</p>
 </section>
+<section id="optional-genomic-diversity" class="level3">
+<h3 class="anchored" data-anchor-id="optional-genomic-diversity">Optional: Genomic Diversity</h3>
+<p>For a broader summary, select <strong>Genomic Diversity</strong> under <strong>Summary Metrics</strong> and upload the filtered VCF. Set <strong>Species Ploidy</strong> to <code>2</code>, run the analysis, and review the <strong>MAF Plot</strong>, <strong>OHet Plot</strong>, <strong>Sample Table</strong>, and <strong>SNP Table</strong>.</p>
+<p>The observed-heterozygosity plot can help us spot samples that are unusual relative to the rest of this dataset. An outlier is a reason to check identity, missingness, contamination, ancestry, and the expected biology. It is not an automatic reason to remove a sample.</p>
+</section>
+</section>
+<section id="exercise" class="level2">
+<h2 class="anchored" data-anchor-id="exercise">Exercise</h2>
+<p>Using the original workshop VCF and the settings above:</p>
+<ol type="1">
+<li>How many variants and samples remain?</li>
+<li>What percentage of variants were removed?</li>
+<li>How many genotype cells are missing after the depth rule is applied?</li>
+<li>Which simulated marker categories account for the removed variants?</li>
+<li>What changed between the unfiltered and filtered missingness plots?</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Exercise Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The example retains 1,000 variants and all 200 samples. It removes 200 of 1,200 variants, or about 16.7 percent. Those are 100 simulated low-MAF markers and 100 simulated high-missingness markers.</p>
+<p>Among the retained markers, 9,447 genotype cells are missing after cells below depth 10 are set to missing. If your result differs, first confirm the five numerical inputs and that you uploaded the original workshop VCF. A threshold typed as <code>0.50</code> in a field that requests a percentage is not the same as <code>50</code>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="key-takeaways" class="level2">
 <h2 class="anchored" data-anchor-id="key-takeaways">Key Takeaways</h2>

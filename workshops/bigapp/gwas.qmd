@@ -74,7 +74,7 @@ GWAS results are commonly summarized with a Manhattan plot. Each point represent
 Nearby tall points can represent correlated evidence from one genomic region rather than several independent trait loci. A peak is a region to investigate, not proof that its tallest marker is causal.
 
 ::: {.callout-tip}
-## Why negative log10?
+## Why Negative Log10?
 
 A p-value of 0.001 becomes 3 after the negative log10 transformation. Smaller p-values become larger plotted values, which makes genomic peaks easier to see.
 :::
@@ -178,7 +178,7 @@ In this example, no. This is linkage disequilibrium, or LD, in action. Nearby ma
 | `SNP_0240` | 18,967,397 bp | causal ground truth | 0 kb |
 
 ::: {.callout-important}
-## Key lesson
+## Key Lesson
 
 Several significant markers in one region can represent one candidate trait locus rather than several independent effects. We know `SNP_0240` is the causal ground truth because the [SNP-information file](dataset-guide.qmd#what-the-snp-information-csv-contains) records how the dataset was simulated. We could not make that claim from the GWAS result alone.
 :::
@@ -256,7 +256,7 @@ Using `Fruit_Weight_lbs` and the settings in this module:
 7. Explain why several significant markers can represent one candidate QTL.
 
 ::: {.callout-tip collapse="true"}
-## Exercise answer
+## Exercise Answer
 
 The simulated data are designed to produce one chromosome 4 association region involving `SNP_0238`, `SNP_0239`, and `SNP_0240`. The markers span about 858 kb. A physical window that groups these nearby hits yields one candidate QTL region rather than three independent regions.
 

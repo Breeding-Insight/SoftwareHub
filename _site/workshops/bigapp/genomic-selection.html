@@ -218,14 +218,44 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#why-use-genome-wide-prediction" id="toc-why-use-genome-wide-prediction" class="nav-link active" data-scroll-target="#why-use-genome-wide-prediction">Why Use Genome-Wide Prediction?</a></li>
-  <li><a href="#training-and-prediction" id="toc-training-and-prediction" class="nav-link" data-scroll-target="#training-and-prediction">Training and Prediction</a></li>
-  <li><a href="#part-1-predictive-ability" id="toc-part-1-predictive-ability" class="nav-link" data-scroll-target="#part-1-predictive-ability">Part 1: Predictive Ability</a></li>
-  <li><a href="#part-2-genomic-prediction" id="toc-part-2-genomic-prediction" class="nav-link" data-scroll-target="#part-2-genomic-prediction">Part 2: Genomic Prediction</a></li>
-  <li><a href="#interpreting-the-output" id="toc-interpreting-the-output" class="nav-link" data-scroll-target="#interpreting-the-output">Interpreting the Output</a></li>
-  <li><a href="#discussion-questions" id="toc-discussion-questions" class="nav-link" data-scroll-target="#discussion-questions">Discussion Questions</a></li>
-  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
+  <li><a href="#what-is-genomic-selection" id="toc-what-is-genomic-selection" class="nav-link active" data-scroll-target="#what-is-genomic-selection">What is Genomic Selection?</a>
+  <ul class="collapse">
+  <li><a href="#the-traditional-problem" id="toc-the-traditional-problem" class="nav-link" data-scroll-target="#the-traditional-problem">The Traditional Problem</a></li>
+  <li><a href="#the-genomic-approach" id="toc-the-genomic-approach" class="nav-link" data-scroll-target="#the-genomic-approach">The Genomic Approach</a></li>
+  </ul></li>
+  <li><a href="#how-does-it-work" id="toc-how-does-it-work" class="nav-link" data-scroll-target="#how-does-it-work">How Does It Work?</a>
+  <ul class="collapse">
+  <li><a href="#the-basic-idea" id="toc-the-basic-idea" class="nav-link" data-scroll-target="#the-basic-idea">The Basic Idea</a></li>
+  <li><a href="#what-we-need" id="toc-what-we-need" class="nav-link" data-scroll-target="#what-we-need">What We Need</a></li>
+  <li><a href="#what-affects-prediction" id="toc-what-affects-prediction" class="nav-link" data-scroll-target="#what-affects-prediction">What Affects Prediction?</a></li>
+  </ul></li>
+  <li><a href="#running-genomic-selection-in-bigapp" id="toc-running-genomic-selection-in-bigapp" class="nav-link" data-scroll-target="#running-genomic-selection-in-bigapp">Running Genomic Selection in BIGapp</a></li>
+  <li><a href="#feature-1-predictive-ability" id="toc-feature-1-predictive-ability" class="nav-link" data-scroll-target="#feature-1-predictive-ability">Feature 1: Predictive Ability</a>
+  <ul class="collapse">
+  <li><a href="#how-cross-validation-works" id="toc-how-cross-validation-works" class="nav-link" data-scroll-target="#how-cross-validation-works">How Cross-Validation Works</a></li>
+  <li><a href="#run-predictive-ability" id="toc-run-predictive-ability" class="nav-link" data-scroll-target="#run-predictive-ability">Run Predictive Ability</a></li>
+  <li><a href="#understand-the-output" id="toc-understand-the-output" class="nav-link" data-scroll-target="#understand-the-output">Understand the Output</a></li>
+  </ul></li>
+  <li><a href="#feature-2-genomic-prediction" id="toc-feature-2-genomic-prediction" class="nav-link" data-scroll-target="#feature-2-genomic-prediction">Feature 2: Genomic Prediction</a>
+  <ul class="collapse">
+  <li><a href="#two-ways-to-use-it" id="toc-two-ways-to-use-it" class="nav-link" data-scroll-target="#two-ways-to-use-it">Two Ways to Use It</a></li>
+  <li><a href="#run-genomic-prediction" id="toc-run-genomic-prediction" class="nav-link" data-scroll-target="#run-genomic-prediction">Run Genomic Prediction</a></li>
+  <li><a href="#understand-the-output-1" id="toc-understand-the-output-1" class="nav-link" data-scroll-target="#understand-the-output-1">Understand the Output</a></li>
+  </ul></li>
+  <li><a href="#using-the-results" id="toc-using-the-results" class="nav-link" data-scroll-target="#using-the-results">Using the Results</a></li>
+  <li><a href="#practical-considerations" id="toc-practical-considerations" class="nav-link" data-scroll-target="#practical-considerations">Practical Considerations</a>
+  <ul class="collapse">
+  <li><a href="#training-data-design" id="toc-training-data-design" class="nav-link" data-scroll-target="#training-data-design">Training Data Design</a></li>
+  <li><a href="#when-might-genomic-prediction-help" id="toc-when-might-genomic-prediction-help" class="nav-link" data-scroll-target="#when-might-genomic-prediction-help">When Might Genomic Prediction Help?</a></li>
+  </ul></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a>
+  <ul class="collapse">
+  <li><a href="#part-1-assess-predictive-ability" id="toc-part-1-assess-predictive-ability" class="nav-link" data-scroll-target="#part-1-assess-predictive-ability">Part 1: Assess Predictive Ability</a></li>
+  <li><a href="#part-2-generate-predictions" id="toc-part-2-generate-predictions" class="nav-link" data-scroll-target="#part-2-generate-predictions">Part 2: Generate Predictions</a></li>
+  </ul></li>
   <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key Takeaways</a></li>
+  <li><a href="#you-have-completed-the-workshop" id="toc-you-have-completed-the-workshop" class="nav-link" data-scroll-target="#you-have-completed-the-workshop">You Have Completed the Workshop</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/workshops/bigapp/genomic-selection.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -296,21 +326,35 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Save:</strong> validation results, predictions, settings, and sample definitions</li>
 </ul>
 </div>
-<p>Genomic selection uses markers across the genome to predict genetic merit. In BIGapp, we have two related tasks:</p>
-<ul>
-<li><strong>Predictive Ability</strong> uses repeated cross-validation to evaluate out-of-sample prediction within the available phenotyped data.</li>
-<li><strong>Genomic Prediction</strong> fits a model and returns predicted phenotypes and estimated breeding values, or EBVs.</li>
-</ul>
-<p>This module is optional because both analyses can take longer than the guided two-hour session.</p>
-<section id="why-use-genome-wide-prediction" class="level2">
-<h2 class="anchored" data-anchor-id="why-use-genome-wide-prediction">Why Use Genome-Wide Prediction?</h2>
-<p>Phenotyping can be slow, seasonal, expensive, or destructive. Wouldn’t it be useful if we could use marker information to help decide which candidates should advance to those costly stages?</p>
-<p>That is the basic idea. We combine observed phenotypes with marker relationships in a training set, then estimate values for genotyped candidates. Genomic prediction does not eliminate field evaluation. It gives us another source of evidence for deciding what to test next.</p>
-<p>Unlike a GWAS, this workflow is not trying to interpret one significant locus at a time. Many markers can jointly contribute information, including through their relationship to unobserved trait loci.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Extra Material
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This module is optional self-study. If there is time in the guided session, work through the concepts and <strong>Predictive Ability</strong> exercise. Otherwise, complete it after the workshop using your local BIGapp installation.</p>
+</div>
+</div>
+<section id="what-is-genomic-selection" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-genomic-selection">What is Genomic Selection?</h2>
+<p>Genomic selection uses markers across the genome to predict genetic merit for a trait. Unlike GWAS, we are not trying to interpret one significant locus at a time. We use information across many markers to predict candidates.</p>
+<section id="the-traditional-problem" class="level3">
+<h3 class="anchored" data-anchor-id="the-traditional-problem">The Traditional Problem</h3>
+<p>To evaluate a candidate as a parent, we may need to make crosses, grow offspring, measure the trait, and estimate breeding value from those records. For some traits and species, that can take years.</p>
 </section>
-<section id="training-and-prediction" class="level2">
-<h2 class="anchored" data-anchor-id="training-and-prediction">Training and Prediction</h2>
-<p>The training data contain both genotypes and observed phenotypes. A fitted model can then predict samples that have genotypes but no phenotype for the selected trait.</p>
+<section id="the-genomic-approach" class="level3">
+<h3 class="anchored" data-anchor-id="the-genomic-approach">The Genomic Approach</h3>
+<p>With genomic selection, we:</p>
+<ol type="1">
+<li>genotype the samples</li>
+<li>train a model using samples with both genotypes and phenotypes</li>
+<li>validate how well the model predicts held-out samples</li>
+<li>use the fitted model to predict genotyped candidates</li>
+</ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/gs-concept.jpg" class="img-fluid figure-img" style="width:80.0%" alt="Diagram showing a genomic-selection model trained with genotypes and phenotypes and then applied to genotyped candidates"></p>
@@ -318,14 +362,163 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 <p><em>Figure: Escamilla et al.&nbsp;(2025), <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12127607/">open-access article</a>, licensed CC BY-NC-ND.</em></p>
-<p>Prediction depends on trait architecture, phenotype quality, genotyping, model, relatedness between training and target samples, and validation design. There is no universal predictive-ability rating or minimum training-population size that applies to every breeding decision.</p>
-<p>Before we fit a model, we need to define the trait, candidate set, and intended use. We also need to decide what current selection process the model should be compared with. Those choices determine which validation design is useful.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>The Key Insight
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Once we have a validated model, we can generate predictions for genotyped candidates before collecting the target phenotype on every candidate. Those predictions supplement, rather than replace, the breeding program’s field and experimental evidence.</p>
+</div>
+</div>
 </section>
-<section id="part-1-predictive-ability" class="level2">
-<h2 class="anchored" data-anchor-id="part-1-predictive-ability">Part 1: Predictive Ability</h2>
-<p>BIGapp repeats cross-validation and reports the correlation between predicted and observed values for each iteration. Before treating that correlation as evidence for a breeding decision, read <a href="../../learn/cross-validation-accuracy.html">Cross-validation accuracy for genomic prediction</a>.</p>
-<p>Cross-validation separates model fitting from evaluation. We hold out some records, predict them without using their phenotypes for training, and compare the predictions with the observations. Repeating that split shows us how sensitive the result is to a particular fold assignment.</p>
-<p>The important part is not just the number of folds. The held-out samples should mimic the prediction problem we actually care about as closely as the available data allow.</p>
+</section>
+<section id="how-does-it-work" class="level2">
+<h2 class="anchored" data-anchor-id="how-does-it-work">How Does It Work?</h2>
+<section id="the-basic-idea" class="level3">
+<h3 class="anchored" data-anchor-id="the-basic-idea">The Basic Idea</h3>
+<p>The training data contain both marker dosages and observed phenotypes. A genomic prediction model uses marker-based relationships and estimated effects to predict the trait or genetic merit of other genotyped samples.</p>
+<p>The exact model is more complicated than adding a few known marker effects, but a useful mental model is:</p>
+<pre class="text"><code>genotypes + phenotypes in the training set
+                  |
+                  v
+           fitted prediction model
+                  |
+                  v
+      predictions for genotyped candidates</code></pre>
+</section>
+<section id="what-we-need" class="level3">
+<h3 class="anchored" data-anchor-id="what-we-need">What We Need</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>What it contains</th>
+<th>How it is used</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Genotypes</td>
+<td>Marker dosages for training samples and candidates</td>
+<td>Builds genomic relationships and prediction inputs</td>
+</tr>
+<tr class="even">
+<td>Phenotypes</td>
+<td>Trait records for training samples</td>
+<td>Provides the response used to fit and validate the model</td>
+</tr>
+<tr class="odd">
+<td>Training set</td>
+<td>Samples with both genotypes and phenotypes</td>
+<td>Fits the model</td>
+</tr>
+<tr class="even">
+<td>Target set</td>
+<td>Samples for which we want predictions</td>
+<td>Defines the actual prediction problem</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="what-affects-prediction" class="level3">
+<h3 class="anchored" data-anchor-id="what-affects-prediction">What Affects Prediction?</h3>
+<p>Prediction depends on the data and the decision we want to make:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Factor</th>
+<th>Why it matters</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Phenotype quality</td>
+<td>No model can recover information that is not present in the trait records</td>
+</tr>
+<tr class="even">
+<td>Training-target relationship</td>
+<td>Predictions usually transfer differently as the target becomes less represented by the training data</td>
+</tr>
+<tr class="odd">
+<td>Trait architecture</td>
+<td>Marker information can capture traits differently depending on the number and distribution of genetic effects</td>
+</tr>
+<tr class="even">
+<td>Environments and fixed effects</td>
+<td>Training records and future candidates need comparable, correctly modeled context</td>
+</tr>
+<tr class="odd">
+<td>Genotyping and marker overlap</td>
+<td>Training and target data must use compatible markers, dosage coding, sample IDs, and ploidy</td>
+</tr>
+<tr class="even">
+<td>Validation design</td>
+<td>The held-out samples need to represent the way predictions will actually be used</td>
+</tr>
+</tbody>
+</table>
+<p>There is no universal predictive-ability rating or minimum training-set size that applies to every breeding decision. We need to compare the model with the program’s current selection process for the intended target samples.</p>
+</section>
+</section>
+<section id="running-genomic-selection-in-bigapp" class="level2">
+<h2 class="anchored" data-anchor-id="running-genomic-selection-in-bigapp">Running Genomic Selection in BIGapp</h2>
+<p>BIGapp separates model evaluation from the generation of predictions:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>BIGapp feature</th>
+<th>Question it answers</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Predictive Ability</strong></td>
+<td>How does the model perform on phenotypes withheld during cross-validation?</td>
+</tr>
+<tr class="even">
+<td><strong>Genomic Prediction</strong></td>
+<td>What predicted phenotypes and EBVs does the fitted model return?</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Which Feature Should We Use?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Start with <strong>Predictive Ability</strong> to evaluate the model under a relevant validation design. Use <strong>Genomic Prediction</strong> to create predictions only after the inputs, intended target, and validation evidence have been defined.</p>
+</div>
+</div>
+</section>
+<section id="feature-1-predictive-ability" class="level2">
+<h2 class="anchored" data-anchor-id="feature-1-predictive-ability">Feature 1: Predictive Ability</h2>
+<section id="how-cross-validation-works" class="level3">
+<h3 class="anchored" data-anchor-id="how-cross-validation-works">How Cross-Validation Works</h3>
+<p>BIGapp uses five-fold cross-validation. It splits the phenotyped samples into five groups, trains with four groups, predicts the fifth, and continues until every group has been held out. Predictive ability is the Pearson correlation between the observed and predicted values.</p>
+<p>Repeating the five-fold split across iterations shows how much the result changes with fold assignment.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/cross-validation.png" class="img-fluid figure-img" style="width:80.0%" alt="Five rows of blocks illustrating five-fold cross-validation with a different test block held out in each row"></p>
@@ -333,17 +526,20 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 <p><em>Figure: <a href="https://commons.wikimedia.org/wiki/File:K-fold_cross_validation_EN.svg">K-fold cross validation</a>, Wikimedia Commons, CC BY-SA 4.0.</em></p>
+<p>The important part is not just the number of folds. The held-out samples should mimic the prediction problem we actually care about as closely as the available data allow. Read <a href="../../learn/cross-validation-accuracy.html">Cross-validation accuracy for genomic prediction</a> before using this result in a breeding decision.</p>
+</section>
+<section id="run-predictive-ability" class="level3">
+<h3 class="anchored" data-anchor-id="run-predictive-ability">Run Predictive Ability</h3>
 <ol type="1">
 <li>Select <strong>Predictive Ability</strong> under <strong>Genomic Selection</strong>.</li>
 <li>Under <strong>Choose VCF File</strong>, upload the filtered VCF from Module 1.</li>
 <li>Under <strong>Choose Trait File</strong>, upload <code>atlantic_giant_pumpkin_diversity_phenotypes.csv</code>.</li>
 <li>In <strong>Trait File Options</strong>, select <code>NA</code> and <code>Sample_ID</code>, review the preview, and select <strong>Save</strong>.</li>
 <li>Set <strong>Species Ploidy</strong> to <code>2</code>.</li>
-<li>Set <strong>Iterations</strong> to <code>5</code> for a short demonstration.</li>
+<li>Set <strong>Iterations</strong> to <code>5</code> for this short demonstration.</li>
 <li>Under <strong>Select Trait(s)</strong>, choose <code>Fruit_Weight_lbs</code>.</li>
 <li>Leave fixed effects and <strong>Advanced Options (beta)</strong> unchanged for the core exercise.</li>
 <li>Select <strong>Run Analysis</strong>.</li>
-<li>Review <strong>Violin Plot</strong>, <strong>Box Plot</strong>, and <strong>P.A. Table</strong>. Save the table with the settings used.</li>
 </ol>
 <figure class="figure">
 <img class="workshop-animation figure-img" src="images/bigapp-gs.gif" alt="Animation configuring and running genomic prediction controls in BIGapp">
@@ -351,25 +547,26 @@ ul.task-list li input[type="checkbox"] {
 Genomic selection demonstration. The current application separates Predictive Ability from Genomic Prediction, as described in the written steps.
 </figcaption>
 </figure>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Predictive Ability answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The table contains one result per iteration, and the plots summarize that distribution. Values can change between runs because fold assignment is random. Record the full distribution, the iteration count, the method and relationship matrix, and the samples included. Do not reduce the exercise to a fixed expected correlation.</p>
-</div>
-</div>
-</div>
 </section>
-<section id="part-2-genomic-prediction" class="level2">
-<h2 class="anchored" data-anchor-id="part-2-genomic-prediction">Part 2: Genomic Prediction</h2>
+<section id="understand-the-output" class="level3">
+<h3 class="anchored" data-anchor-id="understand-the-output">Understand the Output</h3>
+<ul>
+<li><strong>Violin Plot:</strong> shows the distribution and density of correlations across cross-validation results.</li>
+<li><strong>Box Plot:</strong> summarizes the median, spread, and possible outliers.</li>
+<li><strong>P.A. Table:</strong> records predictive ability for each iteration and selected trait.</li>
+</ul>
+<p>Do not reduce this output to one fixed expected correlation. Values can change because fold assignment is random. Save the full distribution, iteration count, method, relationship matrix, and samples included.</p>
+</section>
+</section>
+<section id="feature-2-genomic-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="feature-2-genomic-prediction">Feature 2: Genomic Prediction</h2>
+<section id="two-ways-to-use-it" class="level3">
+<h3 class="anchored" data-anchor-id="two-ways-to-use-it">Two Ways to Use It</h3>
+<p>With the default single-VCF workflow, BIGapp fits the model using samples that have phenotypes and returns predictions for samples in that VCF. Under <strong>Advanced Options (beta)</strong>, a separate prediction VCF can be supplied for a distinct target set.</p>
+<p>Before using a separate prediction VCF, check that the training and target files use compatible markers, allele coding, sample IDs, and ploidy.</p>
+</section>
+<section id="run-genomic-prediction" class="level3">
+<h3 class="anchored" data-anchor-id="run-genomic-prediction">Run Genomic Prediction</h3>
 <ol type="1">
 <li>Select <strong>Genomic Prediction</strong> under <strong>Genomic Selection</strong>.</li>
 <li>Upload the same filtered VCF and phenotype CSV.</li>
@@ -381,55 +578,105 @@ Genomic selection demonstration. The current application separates Predictive Ab
 <li>Inspect <strong>Predicted Pheno Table</strong> and <strong>EBVs Table</strong>.</li>
 <li>Use <strong>Save Files</strong> to retain the output and analysis settings.</li>
 </ol>
-<p>The default single-VCF workflow fits with samples that have trait records and returns results for samples in that VCF. <strong>Advanced Options (beta)</strong> can accept a separate prediction VCF and alternative method or relationship-matrix settings. Use advanced settings only when the training and target marker sets, allele coding, sample IDs, and ploidy have been checked.</p>
 </section>
-<section id="interpreting-the-output" class="level2">
-<h2 class="anchored" data-anchor-id="interpreting-the-output">Interpreting the Output</h2>
-<p>An EBV is a model-based estimate for a defined trait and target population. A candidate ranking is useful only if the validation represents how we plan to use the model.</p>
-<p>Random folds can look better than the real prediction problem when close relatives occur in both the training and test folds, or when future predictions will target a different cycle, environment, or population.</p>
-<p>The predicted-phenotype table uses the trait scale supplied to the model. The EBV table contains the model’s estimate of genetic merit under the selected settings. Before interpreting either table, check the sample IDs, missing phenotypes, and direction of selection for the trait.</p>
+<section id="understand-the-output-1" class="level3">
+<h3 class="anchored" data-anchor-id="understand-the-output-1">Understand the Output</h3>
+<p>The <strong>Predicted Pheno Table</strong> contains model predictions on the trait scale used for fitting. The <strong>EBVs Table</strong> contains model-based estimates of genetic merit under the selected settings.</p>
+<p>An EBV is not an observed phenotype or a permanent property of the sample. It depends on the training data, model, trait definition, and target population. Check sample IDs, missing phenotypes, and the direction of selection before interpreting a ranking.</p>
+</section>
+</section>
+<section id="using-the-results" class="level2">
+<h2 class="anchored" data-anchor-id="using-the-results">Using the Results</h2>
+<p>Predictions can help us prioritize candidates, plan additional phenotyping, or compare possible parents. But a ranking is useful only if the validation represents how we plan to use the model.</p>
+<p>Random folds can look better than the real prediction problem when close relatives occur in both training and test folds, or when future predictions target a different cycle, environment, or population.</p>
+<p>Before making a decision, ask:</p>
+<ol type="1">
+<li>What future samples or breeding cycle should the validation mimic?</li>
+<li>Could close relatives occur in both training and test folds?</li>
+<li>Which fixed effects will be known when predictions are made?</li>
+<li>What current selection process should the model be compared with?</li>
+<li>What new phenotypes will be collected to monitor or update the model?</li>
+</ol>
+</section>
+<section id="practical-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="practical-considerations">Practical Considerations</h2>
+<section id="training-data-design" class="level3">
+<h3 class="anchored" data-anchor-id="training-data-design">Training Data Design</h3>
+<p>The training set should represent the target material and trait range well enough for the intended decision. Accurate phenotypes, consistent sample identity, appropriate environmental information, and compatible genotypes all matter. Adding records is useful when those records add relevant information, not simply because the row count becomes larger.</p>
+</section>
+<section id="when-might-genomic-prediction-help" class="level3">
+<h3 class="anchored" data-anchor-id="when-might-genomic-prediction-help">When Might Genomic Prediction Help?</h3>
+<p>It may be useful when phenotyping is expensive, slow, seasonal, destructive, or limited to later stages, and when the program can validate predictions for the candidates it needs to select.</p>
+<p>It may add less value when the target trait is already easy and inexpensive to measure at the decision stage, the training records do not represent future candidates, or the validation design does not match deployment.</p>
+</section>
+</section>
+<section id="exercise" class="level2">
+<h2 class="anchored" data-anchor-id="exercise">Exercise</h2>
+<section id="part-1-assess-predictive-ability" class="level3">
+<h3 class="anchored" data-anchor-id="part-1-assess-predictive-ability">Part 1: Assess Predictive Ability</h3>
+<ol type="1">
+<li>Run <strong>Predictive Ability</strong> for <code>Fruit_Weight_lbs</code> with five iterations.</li>
+<li>Compare the violin plot, box plot, and P.A. table.</li>
+<li>How much do correlations vary across iterations?</li>
+<li>What target population or future cycle does this validation represent?</li>
+</ol>
+</section>
+<section id="part-2-generate-predictions" class="level3">
+<h3 class="anchored" data-anchor-id="part-2-generate-predictions">Part 2: Generate Predictions</h3>
+<ol type="1">
+<li>Run <strong>Genomic Prediction</strong> for <code>Fruit_Weight_lbs</code>.</li>
+<li>Confirm that <strong>Predicted Pheno Table</strong> and <strong>EBVs Table</strong> are available.</li>
+<li>Compare the highest and lowest ranked samples.</li>
+<li>Identify which information you would need before using that ranking in a real selection decision.</li>
+</ol>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Genomic Prediction answer
+<span class="screen-reader-only">Tip</span>Exercise Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The output should contain a <strong>Predicted Pheno Table</strong> and an <strong>EBVs Table</strong> for <code>Fruit_Weight_lbs</code>. Numerical values depend on the fitted data and selected settings. Compare rankings only within the saved run, and do not treat the simulated regional pattern as a recommendation for selection.</p>
+<p>The Predictive Ability output contains a distribution of correlations rather than one guaranteed value. Record the values from your run because fold assignment is random.</p>
+<p>Genomic Prediction returns a <strong>Predicted Pheno Table</strong> and an <strong>EBVs Table</strong> for <code>Fruit_Weight_lbs</code>. Numerical results depend on the fitted data and settings. The simulated regional pattern is part of the teaching dataset, not a recommendation to select samples from a particular region.</p>
+<p>A defensible decision would also require a validation design that represents future candidates, reliable phenotypes, compatible genotype coding, the known fixed effects available at prediction time, and a comparison with the program’s current selection process.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="discussion-questions" class="level2">
-<h2 class="anchored" data-anchor-id="discussion-questions">Discussion Questions</h2>
-<ol type="1">
-<li>What future samples or breeding cycle should the validation mimic?</li>
-<li>Could relatives occur in both training and test folds?</li>
-<li>Which fixed effects would be known at prediction time?</li>
-<li>How would you compare genomic prediction with the program’s current selection process?</li>
-<li>What information must be saved so another analyst can reproduce the ranking?</li>
-</ol>
-</section>
-<section id="next-steps" class="level2">
-<h2 class="anchored" data-anchor-id="next-steps">Next Steps</h2>
-<ul>
-<li>Review <a href="../../learn/cross-validation-accuracy.html">Cross-validation accuracy for genomic prediction</a>.</li>
-<li>Read the in-app parameter and results help before using advanced options.</li>
-<li>Report software issues through the <a href="https://github.com/Breeding-Insight/BIGapp/issues">BIGapp issue tracker</a>.</li>
-</ul>
 </section>
 <section id="key-takeaways" class="level2">
 <h2 class="anchored" data-anchor-id="key-takeaways">Key Takeaways</h2>
 <ul>
-<li><strong>Predictive Ability</strong> evaluates out-of-sample prediction within a validation design.</li>
-<li><strong>Genomic Prediction</strong> fits a model and creates predicted-phenotype and EBV outputs.</li>
-<li>Validation must resemble the samples and decisions for which the model will be used.</li>
-<li>Save the folds or iteration settings, model choices, input identities, and complete output distribution.</li>
+<li>Genomic selection uses genome-wide marker information to predict genetic merit.</li>
+<li><strong>Predictive Ability</strong> evaluates held-out predictions under repeated five-fold cross-validation.</li>
+<li><strong>Genomic Prediction</strong> creates predicted-phenotype and EBV tables from a fitted model.</li>
+<li>Validation should represent the samples and decisions for which the model will be used.</li>
+<li>There is no universal correlation rating or minimum training-set size for every program.</li>
+<li>Save the inputs, sample definitions, iterations, model settings, and complete output distribution.</li>
+</ul>
+</section>
+<section id="you-have-completed-the-workshop" class="level2">
+<h2 class="anchored" data-anchor-id="you-have-completed-the-workshop">You Have Completed the Workshop</h2>
+<p>You have worked through the core BIGapp sequence:</p>
+<ol type="1">
+<li><strong>Data quality control:</strong> filter uncertain genotype cells, markers, and samples.</li>
+<li><strong>PCA:</strong> explore genetic structure and possible outliers.</li>
+<li><strong>GWASpoly:</strong> find and diagnose marker-trait associations.</li>
+<li><strong>Genomic selection:</strong> evaluate prediction and generate model-based estimates.</li>
+</ol>
+<p>From here, try the workflow with a carefully documented dataset from your own program, or return to the relevant module when you need to review an analysis decision.</p>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<ul>
+<li><a href="https://github.com/Breeding-Insight/BIGapp">BIGapp repository and issue tracker</a></li>
+<li><a href="https://scribehow.com/page/BIGapp_Tutorials__FdLsY9ZxQsi6kgT9p-U2Zg">BIGapp tutorials</a></li>
+<li><a href="../../learn/cross-validation-accuracy.html">Cross-validation accuracy for genomic prediction</a></li>
 </ul>
 <div class="workshop-next">
 <p><strong>Finish:</strong> Review the <a href="../../workshops/bigapp/dataset-guide.html">dataset guide</a>, or return to the <a href="../../workshops/bigapp/index.html">workshop overview</a>.</p>

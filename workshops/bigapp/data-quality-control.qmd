@@ -25,17 +25,32 @@ description: "Load the simulated pumpkin VCF and apply depth, missingness, and m
 - **Save:** the filtered VCF for every later module
 :::
 
-Genomic markers let us compare inherited variation before every trait can be measured. But before we use those markers, we need to know whether the genotype calls, markers, and samples are reliable enough for the analysis that comes next.
+## Why Genomics in Plant Breeding?
 
-## Why Quality Control Comes First
+Before we open BIGapp, let's step back and ask why we are using genomic data in the first place.
 
-Marker data can help us describe diversity, locate trait associations, and support selection. Every downstream model, though, assumes that the genotype matrix is a reasonable representation of the samples.
+### The Traditional Breeding Challenge
 
-Low read depth can make an individual genotype uncertain. A marker with extensive missing data may compare different subsets of samples. A sample with extensive missing data may contribute little reliable information.
+Breeders cannot see genes directly. We make crosses, grow and evaluate plants, select the best individuals, and repeat that process across generations. That works, but it can be slow and expensive, especially when a trait takes years to measure, depends on a particular environment, or requires destructive phenotyping.
 
-So, we treat filtering as an analysis decision, not a cleanup button. We will inspect the data before and after filtering, record every cutoff, and keep the original file.
+### What Genomic Data Gives Us
 
-## Genotypes, SNPs, and Dosage
+Genomic markers give us another way to compare individuals. We can use them to:
+
+- identify which genetic variants each sample carries
+- describe genetic relationships and population structure
+- find genomic regions associated with measured traits
+- support earlier selection when an appropriate prediction model has been validated
+
+Genomic data does not replace careful phenotyping. It lets us connect phenotype records with inherited variation and make better-informed decisions.
+
+::: {.callout-tip}
+## The Bottom Line
+
+Markers give us information we cannot get by looking at the plant alone. But that information is useful only if the genotype data are reliable enough for the analysis.
+:::
+
+## What is a SNP?
 
 A single-nucleotide polymorphism, or SNP, is a genomic position where samples carry different bases. In a diploid biallelic marker, allele dosage records the number of alternate-allele copies:
 
@@ -46,6 +61,8 @@ A single-nucleotide polymorphism, or SNP, is a genomic position where samples ca
 | `1/1` | 2 | two alternate copies |
 
 Polyploid dosage can range from zero to the species ploidy. See [What is allele dosage?](../../learn/what-is-allele-dosage.qmd) for a fuller explanation.
+
+### From Genotypes to Dosage
 
 The workshop VCF stores `GT`, `DP`, and `AD` for each sample-marker cell. `GT` is the genotype, `DP` is total read depth, and `AD` contains reference and alternate read counts. The [dataset guide](dataset-guide.qmd) documents every input.
 
@@ -60,12 +77,43 @@ BIGapp organizes analyses in its left navigation. This workshop uses the current
   <figcaption>The navigation animation is supplementary. The current written labels above are the source of truth.</figcaption>
 </figure>
 
-Each analysis has its own upload controls. Uploading a file in one section does not make it available automatically in another section.
+## Loading Data
+
+### What Data Do We Need?
+
+This module starts with genotype data in a compressed VCF. Later modules will also use the phenotype CSV, which connects each `Sample_ID` with fruit weight and the metadata used to color plots.
+
+At its simplest, the genotype data become a marker-by-sample dosage matrix:
+
+| Sample | SNP 1 | SNP 2 | SNP 3 |
+|---|---:|---:|---:|
+| Sample 1 | 0 | 1 | 2 |
+| Sample 2 | 1 | 1 | 0 |
+| Sample 3 | 2 | 0 | 1 |
+
+BIGapp converts the VCF genotype fields to this dosage representation for the analyses. We still need the original VCF because it also contains depth and allele-count information used for quality control.
+
+### How Loading Works in BIGapp
+
+Each analysis has its own upload controls. Uploading a file in one section does not make it available automatically in another section. We will upload the filtered VCF again when we move to PCA and GWASpoly.
 
 <figure>
   <img class="workshop-animation" src="images/bigapp-load-data.gif" alt="Animation selecting a VCF and a trait CSV with BIGapp file inputs">
   <figcaption>BIGapp file-upload demonstration. Follow the numbered steps below if the interface has changed since this recording.</figcaption>
 </figure>
+
+When an analysis also needs the phenotype CSV, BIGapp opens **Trait File Options**. Select `NA` for **Missing Data Value**, choose `Sample_ID` for **Sample ID Column**, check the preview, and select **Save**. The preview is our chance to catch a wrong delimiter, shifted column, or unexpected sample-ID field before running the analysis.
+
+## Quality Control: Why It Matters
+
+Raw genomic data can contain uncertain genotype cells, poorly performing markers, and poorly performing samples:
+
+- **Low-depth cells:** the genotype is supported by too few reads.
+- **High-missingness markers:** a SNP is unavailable for an unusual fraction of samples.
+- **High-missingness samples:** a sample has too little usable genotype information.
+- **Very low-frequency markers:** there may be too little information for the intended analysis, or the calls may need closer inspection.
+
+If we ignore these problems, every downstream result can be affected. So, we treat filtering as an analysis decision, not a cleanup button. We inspect the data before and after filtering, record every cutoff, and keep the original file.
 
 ## Why Filtering Order Matters
 
@@ -97,7 +145,7 @@ For more background, read [Choose a missing-data threshold](../../learn/choosing
 </figure>
 
 ::: {.callout-important}
-## These are example thresholds
+## These Are Example Thresholds
 
 Ploidy 2 describes the simulated samples. Depth 10, MAF 0.05, and 50 percent missingness cutoffs were selected to expose the planted quality categories in this teaching dataset. Choose thresholds for real data from the assay, depth distribution, study goal, population, and downstream method.
 :::
@@ -113,15 +161,7 @@ When the run finishes, BIGapp reports retained SNPs and the percentage removed. 
 | Missing genotype cells | 9,447 |
 | Variants removed | 200 of 1,200, or 16.7 percent |
 
-::: {.callout-tip collapse="true"}
-## Exercise answer
-
-The example retains 1,000 variants and all 200 samples. It removes 100 simulated low-MAF markers and 100 simulated high-missingness markers. Among retained markers, 9,447 genotype cells are missing after cells below depth 10 are set to missing.
-
-If your result differs, first confirm the five numerical inputs and that you uploaded the original workshop VCF. A threshold typed as `0.50` in a field that requests a percentage is not the same as `50`.
-:::
-
-## Inspect the Distributions
+## Summary Statistics
 
 Use the **Plot Controls** panel to compare **Unfiltered VCF** and **Filtered VCF** histograms. Look at SNP missingness and sample missingness rather than relying only on the retained count.
 
@@ -139,6 +179,30 @@ For your own study, ask whether the retained distribution makes sense for the po
 | Read depth | Are calls supported by enough reads, and are unusually deep markers consistent with duplicated or collapsed regions? |
 
 Maximum-depth and suspected-paralog checks are not part of this teaching filter, but they can matter for real sequence-derived markers. Review the maintained [SNP-filtering guidance](../../learn/snp-filtering-polyploids.qmd) before defining a research workflow.
+
+### Optional: Genomic Diversity
+
+For a broader summary, select **Genomic Diversity** under **Summary Metrics** and upload the filtered VCF. Set **Species Ploidy** to `2`, run the analysis, and review the **MAF Plot**, **OHet Plot**, **Sample Table**, and **SNP Table**.
+
+The observed-heterozygosity plot can help us spot samples that are unusual relative to the rest of this dataset. An outlier is a reason to check identity, missingness, contamination, ancestry, and the expected biology. It is not an automatic reason to remove a sample.
+
+## Exercise
+
+Using the original workshop VCF and the settings above:
+
+1. How many variants and samples remain?
+2. What percentage of variants were removed?
+3. How many genotype cells are missing after the depth rule is applied?
+4. Which simulated marker categories account for the removed variants?
+5. What changed between the unfiltered and filtered missingness plots?
+
+::: {.callout-tip collapse="true"}
+## Exercise Answer
+
+The example retains 1,000 variants and all 200 samples. It removes 200 of 1,200 variants, or about 16.7 percent. Those are 100 simulated low-MAF markers and 100 simulated high-missingness markers.
+
+Among the retained markers, 9,447 genotype cells are missing after cells below depth 10 are set to missing. If your result differs, first confirm the five numerical inputs and that you uploaded the original workshop VCF. A threshold typed as `0.50` in a field that requests a percentage is not the same as `50`.
+:::
 
 ## Key Takeaways
 
