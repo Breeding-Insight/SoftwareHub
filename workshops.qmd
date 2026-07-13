@@ -4,20 +4,29 @@ description: "Hands-on training materials, exercises, and workshop resources."
 toc: true
 ---
 
-Published workshops will bring together participant setup, exercises, example data, recordings, and other materials from Breeding Insight training events.
+Use a workshop when you want a guided sequence of explanations and hands-on exercises. The example files are included so every participant can follow the same analysis.
 
-## Recommended workshop structure
+## Available workshops
 
-1. **Overview:** audience, prerequisites, learning objectives, instructors, and date.
-2. **Before the workshop:** installation checks, accounts, data downloads, and a short validation exercise.
-3. **Modules:** slides, live-code notes, exercises, and solutions.
-4. **Example data:** versioned and small enough for participants to reproduce the exercises.
-5. **After the workshop:** recordings, FAQ, updates, and links to maintained tutorials.
+```{=html}
+<div class="workshop-grid">
+  <a class="workshop-card no-external" href="workshops/bigapp/">
+    <div class="workshop-card-image">
+      <img src="assets/card-bigapp.svg" alt="BIGapp interface represented by a browser window with genomic charts">
+    </div>
+    <div class="workshop-card-body">
+      <h3>Introduction to BIGapp for Plant Breeding</h3>
+      <p>Import and filter genotype data, explore population structure, run GWASpoly, and try genomic prediction in a two-hour, point-and-click workshop. Local BIGapp installation is required.</p>
+      <div class="meta-row" aria-label="Workshop details">
+        <span class="pill">Workshop</span>
+        <span class="pill">Beginner</span>
+        <span class="pill">BIGapp</span>
+        <span class="pill">2 hours</span>
+      </div>
+      <span class="workshop-card-link">Open workshop</span>
+    </div>
+  </a>
+</div>
+```
 
-::: {.callout-note}
-## Workshop materials are being prepared
-
-Public workshop pages will appear here when their participant instructions and exercises are ready. In the meantime, use the [Learn library](learn.qmd) for maintained concepts, tutorials, and workflows.
-:::
-
-Authors preparing new training materials can follow the [resource standards](resources.qmd) for code visibility, callouts, checkpoints, exercises, and reproducibility.
+Looking for a shorter resource? Browse the [Learn library](learn.qmd) for focused concepts, guides, tutorials, and workflows.

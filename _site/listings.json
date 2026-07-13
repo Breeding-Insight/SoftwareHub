@@ -1,5 +1,16 @@
 [
   {
+    "listing": "/software.html",
+    "items": [
+      "/software/allomate.html",
+      "/software/bigapp.html",
+      "/software/bigpopa.html",
+      "/software/bigr.html",
+      "/software/familia.html",
+      "/software/qploidy2.html"
+    ]
+  },
+  {
     "listing": "/learn.html",
     "items": [
       "/learn/genomics-path.html",
@@ -10,17 +21,6 @@
       "/learn/choosing-missing-data-threshold.html",
       "/learn/snp-filtering-polyploids.html",
       "/learn/cross-validation-accuracy.html"
-    ]
-  },
-  {
-    "listing": "/software.html",
-    "items": [
-      "/software/allomate.html",
-      "/software/bigapp.html",
-      "/software/bigpopa.html",
-      "/software/bigr.html",
-      "/software/familia.html",
-      "/software/qploidy2.html"
     ]
   }
 ]

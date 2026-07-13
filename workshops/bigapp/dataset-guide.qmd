@@ -1,0 +1,103 @@
+---
+title: "BIGapp Workshop Dataset Guide"
+subtitle: "Atlantic Giant pumpkin diversity panel"
+description: "Documentation, downloads, checksums, and expected results for the simulated BIGapp workshop dataset."
+date: 2025-12-15
+---
+
+::: {.workshop-progress role="navigation" aria-label="Workshop progress"}
+<span class="workshop-progress-title">Workshop path</span>
+
+1. [Overview](index.qmd)
+2. [Setup](setup.qmd)
+3. [1. Quality control](data-quality-control.qmd)
+4. [2. PCA](pca.qmd)
+5. [3. GWASpoly](gwas.qmd)
+6. [4. Genomic selection](genomic-selection.qmd)
+7. [Dataset](dataset-guide.qmd){aria-current="page"}
+:::
+
+::: {.lesson-overview}
+**Dataset at a glance**
+
+- **Status:** fully simulated teaching data
+- **Samples:** 200
+- **Markers:** 1,200 before filtering; 1,000 at the workshop checkpoint
+- **Files:** genotype VCF, phenotype CSV, SNP-information CSV, and README
+:::
+
+This workshop uses a fully simulated diversity panel of 200 Atlantic Giant pumpkin (*Cucurbita maxima*) samples. It was designed for teaching and must not be interpreted as observed biological or breeding-program data.
+
+## Direct downloads
+
+| File | Records | SHA-256 checksum |
+|---|---:|---|
+| [atlantic_giant_pumpkin_diversity.vcf.gz](data/atlantic_giant_pumpkin_diversity.vcf.gz){download="atlantic_giant_pumpkin_diversity.vcf.gz"} | 1,200 variants, 200 samples | `badf7aee0e145e90e0d1adff380f0fe561c702ac4bf9e2c5304d2e4037edc7da` |
+| [atlantic_giant_pumpkin_diversity_phenotypes.csv](data/atlantic_giant_pumpkin_diversity_phenotypes.csv){download="atlantic_giant_pumpkin_diversity_phenotypes.csv"} | 200 data rows | `2c916cb8731570d3574f3e0d676bf84eb9c25d22ea10a94a1291b44d7adb253a` |
+| [atlantic_giant_pumpkin_diversity_snp_info.csv](data/atlantic_giant_pumpkin_diversity_snp_info.csv){download="atlantic_giant_pumpkin_diversity_snp_info.csv"} | 1,200 data rows | `3a9213fafe4f752cc3f3efc654af6cb89206020a9f458a1b53bf471bd63f8512` |
+| [Dataset README](data/README_diversity_panel.md){download="README_diversity_panel.md"} | Documentation | `99ce5346bf23ffc3d224e729582ce04f91cc298eb87c6fe59803ec89b4e3da90` |
+
+Checksums identify the copied workshop files. On macOS or Linux, verify one with:
+
+```bash
+shasum -a 256 atlantic_giant_pumpkin_diversity.vcf.gz
+```
+
+## What the VCF contains
+
+The compressed VCF is based on coordinates from the *C. maxima* HZAU telomere-to-telomere assembly. It has 20 chromosomes, 1,200 biallelic SNPs, and 200 sample columns. Sample genotype fields use `GT:DP:AD`:
+
+- `GT` records the allele call.
+- `DP` records total read depth for one sample at one SNP.
+- `AD` records reads supporting the reference and alternate alleles.
+
+The simulated quality categories contain 1,000 good markers, 100 low-MAF markers, and 100 high-missingness markers. The poor-quality markers are distributed across all chromosomes.
+
+## What the phenotype CSV contains
+
+Each of the 200 rows represents one simulated sample. `Sample_ID` joins this table to the VCF. The remaining fields describe state, region, breeding program, sequencing batch, plate and well, three ancestry proportions, and `Fruit_Weight_lbs`.
+
+The samples represent three overlapping simulated regions: Eastern, Midwest, and Western. Their ancestry proportions create structure that can be explored in PCA and accounted for in association analysis.
+
+## What the SNP-information CSV contains
+
+Each of the 1,200 rows describes one VCF marker. The file contains chromosome, position, SNP ID, alleles, quality category, QTL annotation, and simulated ancestral allele frequencies.
+
+`SNP_0240` is explicitly the simulated ground-truth causal variant for fruit weight. `SNP_0238` and `SNP_0239` are simulated tag markers in strong linkage disequilibrium with it. This ground truth is available only because the data are simulated. A significant marker in a real study should not be called causal without additional evidence.
+
+## Verified checks
+
+The local copies were checked for:
+
+- 1,200 VCF variant records
+- 200 VCF sample names
+- 200 phenotype records with unique sample IDs
+- 1,200 SNP-information records with unique marker IDs
+- complete overlap between phenotype IDs and VCF sample IDs
+- complete overlap between SNP-information IDs and VCF marker IDs
+
+With ploidy 2, minimum depth 10, MAF 0.05, and 50 percent SNP and sample missingness thresholds, the teaching checkpoint is:
+
+| Result | Expected value |
+|---|---:|
+| Retained variants | 1,000 |
+| Retained samples | 200 |
+| Missing genotype cells after filtering | 9,447 |
+
+The missing-cell total is important: genotype cells below depth 10 are first set to missing, then the SNP and sample missingness filters are evaluated. Changing the depth cutoff can therefore change both missingness and which rows or columns pass their thresholds.
+
+## Expected analysis patterns
+
+- **PCA:** three overlapping regional clusters, with Western samples more separated and gene flow between regions.
+- **GWASpoly:** a chromosome 4 peak involving `SNP_0238`, `SNP_0239`, and `SNP_0240`, followed by one simulated QTL region after LD-window filtering.
+- **Genomic prediction:** numerical results depend on random cross-validation splits and selected settings, so the workshop does not assign universal quality labels or promise a fixed correlation.
+
+## Reference coordinate citation
+
+The simulated coordinates refer to the HZAU assembly described by Zeng Q, Wei M, Li S, et al. (2024), "Complete genome assembly provides insights into the centromere architecture of pumpkin (*Cucurbita maxima*)," *Plant Communications*, 5(9):100935. [https://doi.org/10.1016/j.xplc.2024.100935](https://doi.org/10.1016/j.xplc.2024.100935)
+
+For BIGapp, cite Sandercock AM, Peel MD, Taniguti CH, et al. (2025), "BIGapp: A User-Friendly Genomic Tool Kit Identified Quantitative Trait Loci for Creeping Rootedness in Alfalfa (*Medicago sativa* L.)," *The Plant Genome*, 18:e70067. [https://doi.org/10.1002/tpg2.70067](https://doi.org/10.1002/tpg2.70067)
+
+::: {.workshop-next}
+**Use the data:** Start with the required [local setup](setup.qmd), then continue to [Module 1: Data quality control](data-quality-control.qmd).
+:::

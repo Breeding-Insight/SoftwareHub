@@ -1,0 +1,108 @@
+---
+title: "Introduction to BIGapp for Plant Breeding"
+subtitle: "A beginner workshop for point-and-click genomic analysis"
+description: "A two-hour, hands-on introduction to genotype quality control, PCA, GWASpoly, and genomic selection in BIGapp."
+---
+
+BIGapp is a free R Shiny application for processing and analyzing low- to mid-density genotype data in diploid and polyploid species. This workshop uses its graphical interface, so no R or command-line experience is required.
+
+<div class="meta-row"><span class="pill">Workshop</span><span class="pill">Beginner</span><span class="pill">BIGapp</span><span class="pill">2 hours</span></div>
+
+[Complete required setup](setup.qmd){.btn-bi-primary}
+[Download workshop data](dataset-guide.qmd){.btn-bi-secondary}
+
+::: {.workshop-progress role="navigation" aria-label="Workshop progress"}
+<span class="workshop-progress-title">Workshop path</span>
+
+1. [Overview](index.qmd){aria-current="page"}
+2. [Setup](setup.qmd)
+3. [1. Quality control](data-quality-control.qmd)
+4. [2. PCA](pca.qmd)
+5. [3. GWASpoly](gwas.qmd)
+6. [4. Genomic selection](genomic-selection.qmd)
+7. [Dataset](dataset-guide.qmd)
+:::
+
+::: {.callout-important}
+## Install BIGapp before the workshop
+
+The hands-on exercises run in a local BIGapp installation. The [public online BIGapp](https://big-demo.shinyapps.io/bigapp-main/) is a view-only preview for becoming familiar with the interface. Do not use the shared preview to run the workshop data or analyses.
+:::
+
+::: {.callout-note}
+## About this adaptation
+
+These maintained materials are adapted from the original [Introduction to BIGapp for Plant Breeding workshop](https://alex-sandercock.github.io/biotools/workshops/bigapp-2025/). Interface labels and checkpoints have been updated for the official BIGapp main release.
+:::
+
+## Who this is for
+
+This workshop is designed for students, researchers, and breeders who want to use genomic data without first learning a programming language. Familiarity with plant breeding is helpful, but prior experience with R, VCF files, or bioinformatics is not required.
+
+## What you will learn
+
+By the end of the guided modules, you will be able to:
+
+1. Explain what SNP genotypes and allele dosage represent.
+2. Filter low-depth genotype cells, markers, and samples with adjustable criteria.
+3. Use PCA to inspect population structure and possible outliers.
+4. Run GWASpoly and interpret its BIC, Manhattan, QQ, and LD-window results.
+5. Describe how cross-validation supports genomic prediction decisions.
+
+## Workshop schedule
+
+| Time | Activity |
+|---|---|
+| Before the session | [Install BIGapp and complete the setup check](setup.qmd) |
+| 0:00 to 0:10 | Confirm local BIGapp and workshop files |
+| 0:10 to 0:50 | [Module 1: Data quality control](data-quality-control.qmd) |
+| 0:50 to 1:00 | Break |
+| 1:00 to 1:25 | [Module 2: Population structure and PCA](pca.qmd) |
+| 1:25 to 1:55 | [Module 3: GWASpoly](gwas.qmd) |
+| 1:55 to 2:00 | Review and next steps |
+
+The [genomic selection module](genomic-selection.qmd) is optional self-study material or an extension when time allows.
+
+## What you need
+
+- R 4.4.0 or later and a local BIGapp installation
+- A current web browser with JavaScript enabled
+- Internet access during setup to install R packages
+- The three local files described in the [dataset guide](dataset-guide.qmd)
+- Enough free disk space for BIGapp, its R-package dependencies, the workshop files, and saved results
+
+::: {.callout-important}
+## Download the files before the session
+
+- [Genotype VCF, compressed](data/atlantic_giant_pumpkin_diversity.vcf.gz){download="atlantic_giant_pumpkin_diversity.vcf.gz"}
+- [Phenotypes and sample metadata CSV](data/atlantic_giant_pumpkin_diversity_phenotypes.csv){download="atlantic_giant_pumpkin_diversity_phenotypes.csv"}
+- [SNP-information CSV](data/atlantic_giant_pumpkin_diversity_snp_info.csv){download="atlantic_giant_pumpkin_diversity_snp_info.csv"}
+:::
+
+## The workflow
+
+The guided analysis follows one continuous sequence:
+
+1. Install BIGapp, start it locally, and check the example files.
+2. Filter the VCF with dataset-specific example thresholds.
+3. Inspect genetic structure with PCA.
+4. Test the simulated fruit-weight trait with GWASpoly.
+5. Optionally estimate predictive ability and generate genomic predictions.
+
+Each module includes written steps and a collapsible answer. The animations are supplementary, so you can complete every exercise without relying on them.
+
+## Help and reporting problems
+
+For software problems, unexpected results, or feature requests, [open an issue in the BIGapp repository](https://github.com/Breeding-Insight/BIGapp/issues). Include the BIGapp version or public-demo URL, the browser and operating system, the step that failed, and the complete error message. Do not attach private genotype or phenotype files to a public issue.
+
+## Related learning
+
+- [Get started with genomic data in R](../../learn/get-started-genomic-data-r.qmd)
+- [What is allele dosage?](../../learn/what-is-allele-dosage.qmd)
+- [Choose a missing-data threshold](../../learn/choosing-missing-data-threshold.qmd)
+- [SNP filtering for polyploid data](../../learn/snp-filtering-polyploids.qmd)
+- [Cross-validation accuracy for genomic prediction](../../learn/cross-validation-accuracy.qmd)
+
+::: {.workshop-next}
+**Next:** [Install BIGapp and complete the setup check](setup.qmd). Finish this required pre-work before the guided session.
+:::

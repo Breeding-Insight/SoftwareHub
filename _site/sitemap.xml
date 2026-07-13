@@ -1,83 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://breeding-insight.github.io/software/workshops.html</loc>
-    <lastmod>2026-07-13T18:04:11.413Z</lastmod>
+    <loc>https://breeding-insight.github.io/software/workshops/bigapp/setup.html</loc>
+    <lastmod>2026-07-13T20:28:24.174Z</lastmod>
   </url>
   <url>
-    <loc>https://breeding-insight.github.io/software/software/familia.html</loc>
-    <lastmod>2026-07-13T13:21:40.319Z</lastmod>
+    <loc>https://breeding-insight.github.io/software/workshops/bigapp/index.html</loc>
+    <lastmod>2026-07-13T19:28:09.058Z</lastmod>
   </url>
   <url>
-    <loc>https://breeding-insight.github.io/software/software/bigpopa.html</loc>
-    <lastmod>2026-07-13T13:21:40.686Z</lastmod>
+    <loc>https://breeding-insight.github.io/software/workshops/bigapp/genomic-selection.html</loc>
+    <lastmod>2026-07-13T20:28:23.997Z</lastmod>
   </url>
   <url>
-    <loc>https://breeding-insight.github.io/software/software/allomate.html</loc>
-    <lastmod>2026-07-13T13:21:40.498Z</lastmod>
+    <loc>https://breeding-insight.github.io/software/workshops/bigapp/data-quality-control.html</loc>
+    <lastmod>2026-07-13T20:27:55.303Z</lastmod>
   </url>
   <url>
-    <loc>https://breeding-insight.github.io/software/resources.html</loc>
-    <lastmod>2026-07-10T13:53:26.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://breeding-insight.github.io/software/learn/what-is-a-madc-file.html</loc>
-    <lastmod>2026-07-13T17:59:32.208Z</lastmod>
-  </url>
-  <url>
-    <loc>https://breeding-insight.github.io/software/learn/madc-to-vcf.html</loc>
-    <lastmod>2026-07-13T17:58:51.966Z</lastmod>
-  </url>
-  <url>
-    <loc>https://breeding-insight.github.io/software/learn/genomics-path.html</loc>
-    <lastmod>2026-07-13T17:58:51.596Z</lastmod>
-  </url>
-  <url>
-    <loc>https://breeding-insight.github.io/software/learn/choosing-missing-data-threshold.html</loc>
-    <lastmod>2026-07-13T18:04:12.142Z</lastmod>
-  </url>
-  <url>
-    <loc>https://breeding-insight.github.io/software/index.html</loc>
-    <lastmod>2026-07-13T13:21:39.055Z</lastmod>
-  </url>
-  <url>
-    <loc>https://breeding-insight.github.io/software/about.html</loc>
-    <lastmod>2026-07-10T13:53:26.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://breeding-insight.github.io/software/learn.html</loc>
-    <lastmod>2026-07-13T18:18:15.480Z</lastmod>
-  </url>
-  <url>
-    <loc>https://breeding-insight.github.io/software/learn/cross-validation-accuracy.html</loc>
-    <lastmod>2026-07-13T18:04:12.327Z</lastmod>
-  </url>
-  <url>
-    <loc>https://breeding-insight.github.io/software/learn/get-started-genomic-data-r.html</loc>
-    <lastmod>2026-07-13T17:58:51.783Z</lastmod>
-  </url>
-  <url>
-    <loc>https://breeding-insight.github.io/software/learn/snp-filtering-polyploids.html</loc>
-    <lastmod>2026-07-13T18:04:12.524Z</lastmod>
-  </url>
-  <url>
-    <loc>https://breeding-insight.github.io/software/learn/what-is-allele-dosage.html</loc>
-    <lastmod>2026-07-13T18:04:11.964Z</lastmod>
-  </url>
-  <url>
-    <loc>https://breeding-insight.github.io/software/software.html</loc>
-    <lastmod>2026-07-10T13:53:26.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://breeding-insight.github.io/software/software/bigapp.html</loc>
-    <lastmod>2026-07-13T13:21:39.238Z</lastmod>
+    <loc>https://breeding-insight.github.io/software/software/qploidy2.html</loc>
+    <lastmod>2026-07-13T17:55:23.479Z</lastmod>
   </url>
   <url>
     <loc>https://breeding-insight.github.io/software/software/bigr.html</loc>
     <lastmod>2026-07-13T14:51:37.752Z</lastmod>
   </url>
   <url>
-    <loc>https://breeding-insight.github.io/software/software/qploidy2.html</loc>
-    <lastmod>2026-07-13T17:55:23.479Z</lastmod>
+    <loc>https://breeding-insight.github.io/software/software/bigapp.html</loc>
+    <lastmod>2026-07-13T13:21:39.238Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/software.html</loc>
+    <lastmod>2026-07-10T13:53:26.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/learn/what-is-allele-dosage.html</loc>
+    <lastmod>2026-07-13T18:04:11.964Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/learn/snp-filtering-polyploids.html</loc>
+    <lastmod>2026-07-13T18:04:12.524Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/learn/get-started-genomic-data-r.html</loc>
+    <lastmod>2026-07-13T17:58:51.783Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/learn/cross-validation-accuracy.html</loc>
+    <lastmod>2026-07-13T18:04:12.327Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/learn.html</loc>
+    <lastmod>2026-07-13T18:18:15.480Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/about.html</loc>
+    <lastmod>2026-07-10T13:53:26.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/index.html</loc>
+    <lastmod>2026-07-13T13:21:39.055Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/learn/choosing-missing-data-threshold.html</loc>
+    <lastmod>2026-07-13T18:04:12.142Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/learn/genomics-path.html</loc>
+    <lastmod>2026-07-13T17:58:51.596Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/learn/madc-to-vcf.html</loc>
+    <lastmod>2026-07-13T17:58:51.966Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/learn/what-is-a-madc-file.html</loc>
+    <lastmod>2026-07-13T17:59:32.208Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/resources.html</loc>
+    <lastmod>2026-07-10T13:53:26.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/software/allomate.html</loc>
+    <lastmod>2026-07-13T13:21:40.498Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/software/bigpopa.html</loc>
+    <lastmod>2026-07-13T13:21:40.686Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/software/familia.html</loc>
+    <lastmod>2026-07-13T13:21:40.319Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/workshops.html</loc>
+    <lastmod>2026-07-13T19:36:17.428Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/workshops/bigapp/dataset-guide.html</loc>
+    <lastmod>2026-07-13T19:30:24.382Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/workshops/bigapp/gwas.html</loc>
+    <lastmod>2026-07-13T20:27:03.444Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/workshops/bigapp/pca.html</loc>
+    <lastmod>2026-07-13T20:27:55.498Z</lastmod>
   </url>
 </urlset>

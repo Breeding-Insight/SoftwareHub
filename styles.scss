@@ -309,6 +309,239 @@ h2.section-heading {
   background: rgba(163, 217, 172, .16);
 }
 
+/* Workshop discovery and lesson pages */
+.workshop-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.15rem;
+  margin: 1.25rem 0 2.5rem;
+}
+
+.workshop-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(42, 101, 118, .18);
+  border-radius: .375rem;
+  background: #fff;
+  color: $bi-charcoal !important;
+  text-decoration: none !important;
+  transition: background-color .16s ease, border-color .16s ease;
+}
+
+.workshop-card:hover,
+.workshop-card:focus-visible {
+  border-color: rgba(42, 101, 118, .45);
+  background: #fafcfc;
+}
+
+.workshop-card:focus-visible {
+  outline: 3px solid rgba(72, 169, 197, .32);
+  outline-offset: 2px;
+}
+
+.workshop-card-image {
+  display: grid;
+  min-height: 12rem;
+  place-items: center;
+  padding: 1.25rem;
+  background: $bi-mist;
+}
+
+.workshop-card-image img {
+  width: 100%;
+  height: 9.5rem;
+  object-fit: contain;
+}
+
+.workshop-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.1rem;
+}
+
+.workshop-card-body h3 {
+  margin: 0 0 .5rem;
+  font-size: 1.2rem;
+}
+
+.workshop-card-body p {
+  margin-bottom: .65rem;
+  color: $bi-gray;
+}
+
+.workshop-card-link {
+  margin-top: auto;
+  color: $bi-teal-dark;
+  font-weight: 750;
+}
+
+.workshop-page figure {
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+
+.workshop-page figure img,
+.workshop-page .workshop-animation {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.workshop-page figcaption {
+  max-width: 48rem;
+  margin-right: auto;
+  margin-left: auto;
+  color: $bi-gray;
+  text-align: center;
+}
+
+.workshop-page table {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.workshop-page :not(pre) > code {
+  overflow-wrap: anywhere;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.workshop-progress {
+  margin: 0 0 1.75rem;
+  padding: 1rem;
+  border: 1px solid rgba(42, 101, 118, .22);
+  border-radius: .5rem;
+  background: #f7fafb;
+}
+
+.workshop-progress-title {
+  display: block;
+  margin-bottom: .6rem;
+  color: $bi-teal-dark;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.workshop-progress ol {
+  display: grid;
+  min-width: 0;
+  max-width: 100%;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: .35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.workshop-progress li {
+  min-width: 0;
+}
+
+.workshop-progress a {
+  display: flex;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 2.75rem;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: .45rem .35rem;
+  border: 1px solid rgba(42, 101, 118, .2);
+  border-radius: .35rem;
+  background: #fff;
+  color: $bi-teal-dark;
+  font-size: .77rem;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  text-align: center;
+  text-decoration: none;
+}
+
+.workshop-progress a:hover {
+  border-color: $bi-teal;
+  background: $bi-mist;
+}
+
+.workshop-progress a:focus-visible {
+  outline: 3px solid rgba(72, 169, 197, .4);
+  outline-offset: 2px;
+}
+
+.workshop-progress a[aria-current="page"] {
+  border-color: $bi-teal-dark;
+  background: $bi-teal-dark;
+  color: #fff;
+}
+
+.lesson-overview {
+  margin: 0 0 1.75rem;
+  padding: 1rem 1.1rem;
+  border-left: 4px solid $bi-green;
+  border-radius: .35rem;
+  background: rgba(163, 217, 172, .14);
+}
+
+.lesson-overview > :last-child {
+  margin-bottom: 0;
+}
+
+.lesson-overview ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .35rem 1.25rem;
+  margin-bottom: 0;
+}
+
+.workshop-next {
+  margin-top: 2rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(42, 101, 118, .22);
+  border-radius: .5rem;
+  background: #f7fafb;
+}
+
+.workshop-next > :last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 760px) {
+  .workshop-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body.learning-material-page .quarto-title-meta {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  body.learning-material-page .quarto-title-meta > div:first-child {
+    grid-row: auto;
+  }
+
+  .workshop-progress ol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .workshop-progress li:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .lesson-overview ul {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Quarto listings */
 .quarto-listing-container-grid .card {
   height: 100%;
