@@ -1,5 +1,8 @@
 ---
 title: "Convert MADC data to a genotype-called VCF"
+author: "Alexander M. Sandercock"
+date: 2025-06-18
+date-modified: 2026-07-13
 description: "Use BIGr to recover biallelic read counts, call diploid or polyploid genotypes with Updog, and filter a validated VCF."
 categories:
   - Genotype Data
@@ -30,7 +33,7 @@ execute:
 
 Convert a HapApp-processed DArT MADC file into a **biallelic read-count VCF**, call reference-allele dosage with [Updog](https://dcgerard.github.io/updog/), convert those calls into a genotype-called VCF with BIGr, and apply documented quality filters.
 
-This workflow supports both diploid and polyploid organisms. You must supply the correct ploidy and adjust the depth requirements, model evaluation, and filter interpretation to the number and separability of the expected dosage classes. If ploidy is uncertain, use the [Qploidy2 tutorial](qploidy-alfalfa.qmd) and [Qploidy2 software page](../software/qploidy2.qmd) before calling genotypes.
+This workflow supports both diploid and polyploid organisms. You must supply the correct ploidy and adjust the depth requirements, model evaluation, and filter interpretation to the number and separability of the expected dosage classes. If ploidy is uncertain, use the [Qploidy2 tutorial](https://breeding-insight.github.io/Qploidy2/Qploidy_alfalfa_tutorial.html) and [Qploidy2 software page](../software/qploidy2.qmd) before calling genotypes.
 
 By the end, you will have validated:
 
@@ -725,7 +728,7 @@ This tutorial does not install or execute polyRAD. polyRAD can be substantially 
 - [What is allele dosage?](what-is-allele-dosage.qmd) explains dosage direction and uncertainty.
 - [SNP filtering in polyploids](snp-filtering-polyploids.qmd) develops a ploidy-aware filtering strategy.
 - [Choosing a missing-data threshold](choosing-missing-data-threshold.qmd) shows how to evaluate missingness sensitivity.
-- [Estimate copy number in alfalfa with Qploidy2](qploidy-alfalfa.qmd) addresses ploidy, aneuploidy, and large copy-number changes.
+- [Estimate copy number in alfalfa with Qploidy2](https://breeding-insight.github.io/Qploidy2/Qploidy_alfalfa_tutorial.html) addresses ploidy, aneuploidy, and large copy-number changes.
 
 ## References
 

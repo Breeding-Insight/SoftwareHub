@@ -1,6 +1,8 @@
 ---
 title: "Workshop page template"
 description: "A consistent landing page for Breeding Insight training events."
+draft: true
+search: false
 ---
 
 ## Overview

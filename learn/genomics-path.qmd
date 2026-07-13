@@ -1,5 +1,7 @@
 ---
 title: "Choose a genomic analysis path"
+author: "Alexander M. Sandercock"
+date: 2026-07-13
 description: "Start from the breeding question and identify the appropriate Breeding Insight tool or workflow."
 categories:
   - Getting Started

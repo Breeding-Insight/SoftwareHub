@@ -1,5 +1,7 @@
 ---
 title: "Get started with genomic data in R"
+author: "Alexander M. Sandercock"
+date: 2026-07-13
 description: "Set up R, then load, inspect, filter, and visualize a VCF with diploid- and polyploid-aware checkpoints."
 categories:
   - Getting Started
@@ -480,6 +482,6 @@ You used the same core operations needed for both diploid and polyploid VCFs: lo
 Continue with the path that matches your goal:
 
 - [What is allele dosage?](what-is-allele-dosage.qmd) explains dosage in diploids and polyploids.
-- [Estimate copy number in alfalfa with Qploidy2](qploidy-alfalfa.qmd) points polyploid learners to the Qploidy2 workflow.
+- [Estimate copy number in alfalfa with Qploidy2](https://breeding-insight.github.io/Qploidy2/Qploidy_alfalfa_tutorial.html) points polyploid learners to the Qploidy2 workflow.
 - [Explore Qploidy2](../software/qploidy2.qmd) describes tools for ploidy, aneuploidy, and copy-number estimation.
 - [Process MADC genotype data](madc-to-vcf.qmd) continues into BIGr data preparation and VCF generation.

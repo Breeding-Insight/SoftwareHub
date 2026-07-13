@@ -1,14 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 425" role="img" aria-labelledby="title desc">
   <title id="title">MADC file concept</title>
   <desc id="desc">A table of fixed allele identifiers, marker identifiers, and read counts for two samples. A side panel emphasizes that the values are read counts rather than genotype calls.</desc>
-  <defs>
-    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-      <stop stop-color="#EEF7F8"/>
-      <stop offset="1" stop-color="#F3FAF4"/>
-    </linearGradient>
-  </defs>
-
-  <rect width="800" height="425" rx="28" fill="url(#bg)"/>
+  <rect width="800" height="425" rx="28" fill="#F2F8F8"/>
   <circle cx="735" cy="42" r="118" fill="#48A9C5" opacity=".08"/>
   <circle cx="70" cy="418" r="125" fill="#A3D9AC" opacity=".10"/>
 

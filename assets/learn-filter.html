@@ -1,81 +1,222 @@
 <script>
 (() => {
-  const FILTER_PARAM = "filter";
+  const FACETS = ["type", "topic", "software", "level"];
+  const FACET_ORDER = {
+    type: ["Concept", "Guide", "Tutorial", "Workflow"],
+    topic: [
+      "Getting Started",
+      "Genotype Data",
+      "Data Quality",
+      "Ploidy & Dosage",
+      "File Formats",
+      "Population Analysis",
+      "Trait Mapping",
+      "Genomic Prediction"
+    ],
+    software: ["BIGr", "BIGapp", "Qploidy2", "Familia", "AlloMate", "BIGpopA"],
+    level: ["Beginner", "Intermediate", "Advanced"]
+  };
   const LISTING_ANCHOR = "all-learning-materials";
 
-  function findListingFilter() {
-    const selectors = [
-      ".quarto-listing-filter input",
-      ".quarto-listing-filter input[type='search']",
-      "#listing-learning-materials-filter",
-      "input[id*='learning-materials'][type='search']",
-      ".quarto-listing-container input[type='search']"
-    ];
+  const state = {
+    filters: new Map(FACETS.map((facet) => [facet, new Set()])),
+    query: ""
+  };
 
-    for (const selector of selectors) {
-      const input = document.querySelector(selector);
-      if (input) return input;
+  let cards = [];
+  let searchInput;
+  let clearButton;
+  let resultCount;
+  let noResults;
+
+  function decodeValues(card, facet) {
+    try {
+      return JSON.parse(decodeURIComponent(card.dataset[`learn${facet[0].toUpperCase()}${facet.slice(1)}`] || "%5B%5D"));
+    } catch (_error) {
+      return [];
     }
-    return null;
   }
 
-  function applyFilter(value, scroll = true, attempt = 0) {
-    const input = findListingFilter();
-    const listing = window["quarto-listings"]?.["listing-learning-materials"];
-
-    // Quarto can initialize listing controls after the page DOM is ready.
-    if ((!input || !listing) && attempt < 20) {
-      window.setTimeout(() => applyFilter(value, scroll, attempt + 1), 75);
-      return;
-    }
-    if (!input || !listing) return;
-
-    listing.search();
-    if (value) {
-      const query = value.toLocaleLowerCase();
-      listing.filter((item) => item.elm.innerText.toLocaleLowerCase().includes(query));
-    } else {
-      listing.filter();
-    }
-    input.value = value;
-
-    document.querySelectorAll(".learn-filter-link").forEach((link) => {
-      link.classList.toggle("is-active", link.dataset.learnFilter === value && value !== "");
-      link.closest(".goal-card")?.classList.toggle(
-        "is-active",
-        link.dataset.learnFilter === value && value !== ""
-      );
+  function sortValues(facet, values) {
+    const preferred = FACET_ORDER[facet] || [];
+    return [...values].sort((a, b) => {
+      const aIndex = preferred.indexOf(a);
+      const bIndex = preferred.indexOf(b);
+      if (aIndex !== -1 || bIndex !== -1) {
+        if (aIndex === -1) return 1;
+        if (bIndex === -1) return -1;
+        return aIndex - bIndex;
+      }
+      return a.localeCompare(b);
     });
+  }
 
-    if (scroll) {
-      document.getElementById(LISTING_ANCHOR)?.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+  function buildFacetControls() {
+    for (const facet of FACETS) {
+      const container = document.querySelector(`[data-filter-options="${facet}"]`);
+      if (!container) continue;
+
+      const values = new Set(cards.flatMap((card) => decodeValues(card, facet)));
+      for (const value of sortValues(facet, values)) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "learn-filter-pill";
+        button.dataset.facet = facet;
+        button.dataset.value = value;
+        button.setAttribute("aria-pressed", "false");
+        button.textContent = value;
+        container.append(button);
+      }
     }
   }
 
-  function updateUrl(value) {
-    const url = new URL(window.location.href);
-    if (value) url.searchParams.set(FILTER_PARAM, value);
-    else url.searchParams.delete(FILTER_PARAM);
-    url.hash = LISTING_ANCHOR;
-    window.history.replaceState({}, "", url);
+  function normalize(value) {
+    return value.toLocaleLowerCase().replace(/\s+/g, " ").trim();
   }
 
-  document.addEventListener("click", (event) => {
-    const link = event.target.closest(".learn-filter-link");
-    if (!link) return;
+  function cardMatches(card) {
+    for (const facet of FACETS) {
+      const selected = state.filters.get(facet);
+      if (!selected.size) continue;
+      const values = decodeValues(card, facet);
+      if (!values.some((value) => selected.has(value))) return false;
+    }
 
-    event.preventDefault();
-    const value = link.dataset.learnFilter || "";
-    updateUrl(value);
-    applyFilter(value, true);
-  });
+    const terms = normalize(state.query).split(" ").filter(Boolean);
+    if (!terms.length) return true;
+
+    let cardText = "";
+    try {
+      cardText = decodeURIComponent(card.dataset.learnSearch || "");
+    } catch (_error) {
+      cardText = card.textContent || "";
+    }
+    const normalizedCardText = normalize(cardText);
+    return terms.every((term) => normalizedCardText.includes(term));
+  }
+
+  function hasActiveFilters() {
+    return Boolean(state.query.trim()) || FACETS.some((facet) => state.filters.get(facet).size > 0);
+  }
+
+  function syncControls() {
+    document.querySelectorAll(".learn-filter-pill").forEach((button) => {
+      const pressed = state.filters.get(button.dataset.facet)?.has(button.dataset.value) || false;
+      button.setAttribute("aria-pressed", String(pressed));
+    });
+    if (searchInput) searchInput.value = state.query;
+  }
+
+  function applyFilters() {
+    let visible = 0;
+    for (const card of cards) {
+      const matches = cardMatches(card);
+      card.hidden = !matches;
+      if (matches) visible += 1;
+    }
+
+    if (resultCount) {
+      resultCount.textContent = `${visible} ${visible === 1 ? "learning material" : "learning materials"}`;
+    }
+    if (noResults) noResults.hidden = visible !== 0;
+    if (clearButton) clearButton.disabled = !hasActiveFilters();
+    syncControls();
+  }
+
+  function writeUrl(historyMethod = "replaceState", includeAnchor = false) {
+    const url = new URL(window.location.href);
+    for (const facet of FACETS) {
+      url.searchParams.delete(facet);
+      for (const value of sortValues(facet, state.filters.get(facet))) {
+        url.searchParams.append(facet, value);
+      }
+    }
+    url.searchParams.delete("q");
+    url.searchParams.delete("filter");
+    if (state.query.trim()) url.searchParams.set("q", state.query.trim());
+    if (includeAnchor) url.hash = LISTING_ANCHOR;
+    window.history[historyMethod]({}, "", url);
+  }
+
+  function readUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const available = new Map(FACETS.map((facet) => [
+      facet,
+      new Set(cards.flatMap((card) => decodeValues(card, facet)))
+    ]));
+
+    for (const facet of FACETS) {
+      const selected = new Set(
+        params.getAll(facet).filter((value) => available.get(facet).has(value))
+      );
+      state.filters.set(facet, selected);
+    }
+    state.query = params.get("q") || "";
+  }
+
+  function clearState() {
+    for (const facet of FACETS) state.filters.get(facet).clear();
+    state.query = "";
+  }
+
+  function scrollToListing() {
+    document.getElementById(LISTING_ANCHOR)?.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      block: "start"
+    });
+  }
 
   document.addEventListener("DOMContentLoaded", () => {
-    const value = new URLSearchParams(window.location.search).get(FILTER_PARAM);
-    if (value !== null) applyFilter(value, false);
+    cards = [...document.querySelectorAll(".learn-listing-card")];
+    searchInput = document.getElementById("learn-material-search");
+    clearButton = document.getElementById("learn-clear-filters");
+    resultCount = document.getElementById("learn-result-count");
+    noResults = document.getElementById("learn-no-results");
+    if (!cards.length || !searchInput) return;
+
+    buildFacetControls();
+    readUrl();
+    applyFilters();
+
+    document.addEventListener("click", (event) => {
+      const pill = event.target.closest(".learn-filter-pill");
+      if (pill) {
+        const selected = state.filters.get(pill.dataset.facet);
+        if (selected.has(pill.dataset.value)) selected.delete(pill.dataset.value);
+        else selected.add(pill.dataset.value);
+        writeUrl("pushState");
+        applyFilters();
+        return;
+      }
+
+      const trigger = event.target.closest(".learn-filter-trigger");
+      if (trigger) {
+        event.preventDefault();
+        clearState();
+        state.filters.get(trigger.dataset.setFacet)?.add(trigger.dataset.setValue);
+        writeUrl("pushState", true);
+        applyFilters();
+        scrollToListing();
+      }
+    });
+
+    searchInput.addEventListener("input", () => {
+      state.query = searchInput.value;
+      writeUrl("replaceState");
+      applyFilters();
+    });
+
+    clearButton?.addEventListener("click", () => {
+      clearState();
+      writeUrl("pushState");
+      applyFilters();
+      searchInput.focus();
+    });
+
+    window.addEventListener("popstate", () => {
+      readUrl();
+      applyFilters();
+    });
   });
 })();
 </script>

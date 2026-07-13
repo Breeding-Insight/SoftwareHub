@@ -1,5 +1,7 @@
 ---
 title: "What is allele dosage?"
+author: "Alexander M. Sandercock"
+date: 2026-07-13
 description: "Understand what allele dosage represents in diploids and polyploids, how it differs from read fraction, and why dosage uncertainty matters."
 categories:
   - Genotype Data
@@ -68,7 +70,7 @@ Observed allele counts are affected by:
 - outlying observations;
 - mapping of reads from paralogous or homoeologous regions.
 
-This is why dosage callers use the read evidence—and often population-level information—to estimate genotype probabilities rather than simply rounding the observed allele fraction.
+This is why dosage callers use the read evidence, and often population-level information, to estimate genotype probabilities rather than simply rounding the observed allele fraction.
 
 ::: {.concept-example-grid}
 ::: {.concept-example}
@@ -117,7 +119,7 @@ For a biallelic locus at ploidy $P$, code dosage consistently as an integer from
 ## Continue learning
 
 [Process MADC genotype data](madc-to-vcf.qmd){.btn-bi-primary}
-[Estimate ploidy and copy-number variation in alfalfa](qploidy-alfalfa.qmd){.btn-bi-secondary}
+[Estimate ploidy and copy-number variation in alfalfa](https://breeding-insight.github.io/Qploidy2/Qploidy_alfalfa_tutorial.html){.btn-bi-secondary}
 
 ## Further reading
 

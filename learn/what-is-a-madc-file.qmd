@@ -1,5 +1,11 @@
 ---
 title: "What is a MADC file?"
+author:
+  - "Alexander M. Sandercock"
+  - "Cristiane H. Taniguti"
+  - "Dongyan Zhao"
+date: 2025-06-18
+date-modified: 2026-07-13
 description: "Understand how DArT MADC files represent microhaplotype read counts and how BIGr turns those counts into variant data."
 categories:
   - Genotype Data

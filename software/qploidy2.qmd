@@ -33,4 +33,4 @@ remotes::install_github("Breeding-Insight/Qploidy2")
 
 ## Related learning
 
-- [Estimate copy number in alfalfa](../learn/qploidy-alfalfa.qmd)
+- [Estimate copy number in alfalfa](https://breeding-insight.github.io/Qploidy2/Qploidy_alfalfa_tutorial.html)

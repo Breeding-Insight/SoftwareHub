@@ -6,6 +6,7 @@ project:
     - "software/*.qmd"
     - "learn/*.qmd"
     - "workshops/*.qmd"
+    - "!workshops/*-template.qmd"
 
 website:
   title: "Breeding Insight Software"
@@ -40,7 +41,7 @@ website:
         href: https://breedinginsight.org/
   page-footer:
     left: |
-      **Breeding Insight** — open-source tools for public plant and animal breeding.
+      **Breeding Insight:** open-source tools for public plant and animal breeding.
     right:
       - text: GitHub
         href: https://github.com/Breeding-Insight
@@ -58,6 +59,8 @@ format:
     code-overflow: wrap
     smooth-scroll: true
     link-external-newwindow: true
+    canonical-url: true
+    date-format: "MMMM D, YYYY"
 
 execute:
   freeze: auto

@@ -4,44 +4,20 @@ description: "Hands-on training materials, exercises, and workshop resources."
 toc: true
 ---
 
-Find participant setup, exercises, example data, recordings, and other materials from Breeding Insight training events.
+Published workshops will bring together participant setup, exercises, example data, recordings, and other materials from Breeding Insight training events.
 
 ## Recommended workshop structure
 
-1. **Overview** — audience, prerequisites, learning objectives, instructors, and date.
-2. **Before the workshop** — installation checks, accounts, data downloads, and a short validation exercise.
-3. **Modules** — slides, live-code notes, exercises, and solutions.
-4. **Example data** — versioned and small enough for participants to reproduce the exercises.
-5. **After the workshop** — recordings, FAQ, updates, and links to maintained tutorials.
+1. **Overview:** audience, prerequisites, learning objectives, instructors, and date.
+2. **Before the workshop:** installation checks, accounts, data downloads, and a short validation exercise.
+3. **Modules:** slides, live-code notes, exercises, and solutions.
+4. **Example data:** versioned and small enough for participants to reproduce the exercises.
+5. **After the workshop:** recordings, FAQ, updates, and links to maintained tutorials.
 
-::: {.path-grid}
-::: {.path-card}
-<div class="path-icon">A</div>
+::: {.callout-note}
+## Workshop materials are being prepared
 
-### Participant setup
-
-A reusable preflight page for R, package versions, command-line tools, and example data.
-
-[Open the setup template](workshops/setup-template.qmd){.card-link}
+Public workshop pages will appear here when their participant instructions and exercises are ready. In the meantime, use the [Learn library](learn.qmd) for maintained concepts, tutorials, and workflows.
 :::
 
-::: {.path-card}
-<div class="path-icon">B</div>
-
-### Workshop template
-
-A consistent structure for objectives, modules, exercises, solutions, and recordings.
-
-[Open the workshop template](workshops/workshop-template.qmd){.card-link}
-:::
-
-::: {.path-card}
-<div class="path-icon">C</div>
-
-### Teaching conventions
-
-Guidance for code visibility, callouts, checkpoints, exercise blocks, and reproducibility.
-
-[View resource standards](resources.qmd){.card-link}
-:::
-:::
+Authors preparing new training materials can follow the [resource standards](resources.qmd) for code visibility, callouts, checkpoints, exercises, and reproducibility.

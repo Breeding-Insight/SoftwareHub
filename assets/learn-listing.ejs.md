@@ -1,47 +1,92 @@
 ```{=html}
-<div class="learn-listing-grid list">
-<% for (const item of items) {
-     const software = Array.isArray(item.software) ? item.software : (item.software ? [item.software] : []);
-     const categories = Array.isArray(item.categories) ? item.categories : (item.categories ? [item.categories] : []);
+<%
+const externalItems = [
+  {
+    title: 'Estimate copy number in alfalfa with Qploidy2',
+    description: 'Use Qploidy2 with DArTag data to estimate ploidy, aneuploidy, and large-scale copy-number variation.',
+    categories: ['Ploidy & Dosage', 'Genotype Data'],
+    image: 'assets/tutorial-qploidy.svg',
+    'image-alt': 'Ploidy and copy-number variation tutorial.',
+    order: 30,
+    'learning-type': 'Tutorial',
+    author: 'Cristiane H. Taniguti',
+    software: ['Qploidy2'],
+    level: 'Intermediate',
+    keywords: ['alfalfa', 'CNV', 'DArTag', 'copy number', 'aneuploidy'],
+    path: 'https://breeding-insight.github.io/Qploidy2/Qploidy_alfalfa_tutorial.html',
+    external: true
+  }
+];
+
+const learningItems = items
+  .concat(externalItems)
+  .sort((a, b) => (Number(a.order) || 999) - (Number(b.order) || 999));
+
+const asArray = (value) => Array.isArray(value) ? value : (value ? [value] : []);
+const encoded = (value) => encodeURIComponent(JSON.stringify(value));
+%>
+<div class="learn-listing-grid">
+<% for (const item of learningItems) {
+     const software = asArray(item.software);
+     const categories = asArray(item.categories);
+     const keywords = asArray(item.keywords);
      const learningType = item['learning-type'] || 'Learning material';
      const level = item.level || '';
+     const author = Array.isArray(item.author)
+       ? item.author.map((entry) => typeof entry === 'string' ? entry : entry.name).filter(Boolean).join(', ')
+       : (typeof item.author === 'object' ? item.author.name : item.author) || '';
+     const isExternal = item.external === true;
+     const searchText = [item.title, item.description, learningType, level, author, isExternal ? 'External' : '']
+       .concat(software, categories, keywords)
+       .filter(Boolean)
+       .join(' ');
 %>
-  <article class="learn-listing-card" <%= metadataAttrs(item) %>>
-    <% if (item.image) { %>
-    <a class="learn-listing-image" href="<%- item.path %>" aria-label="Open <%- item.title %>">
+  <article class="learn-listing-card"
+    data-learn-type="<%- encoded([learningType]) %>"
+    data-learn-topic="<%- encoded(categories) %>"
+    data-learn-software="<%- encoded(software) %>"
+    data-learn-level="<%- encoded(level ? [level] : []) %>"
+    data-learn-search="<%- encoded(searchText) %>">
+    <a class="learn-listing-link<%= isExternal ? '' : ' no-external' %>" href="<%- item.path %>"<% if (isExternal) { %> target="_blank" rel="noopener"<% } %>>
+<% if (item.image) { %>
+    <div class="learn-listing-image">
       <img src="<%- item.image %>" alt="<%- item['image-alt'] || '' %>" loading="lazy">
-    </a>
-    <% } %>
+    </div>
+<% } %>
 
     <div class="learn-listing-body">
       <div class="learn-card-badges" aria-label="Learning material metadata">
-        <span class="learn-badge learn-badge-type listing-learning-type"><%- learningType %></span>
-        <% for (const tool of software) { %>
-        <span class="learn-badge learn-badge-software listing-software">Uses <%- tool %></span>
-        <% } %>
-        <% if (level) { %>
-        <span class="learn-badge learn-badge-level listing-level"><%- level %></span>
-        <% } %>
+        <span class="learn-badge learn-badge-type"><%- learningType %></span>
+<% if (isExternal) { %>
+        <span class="learn-badge learn-badge-external">External</span>
+<% } %>
+<% for (const tool of software) { %>
+        <span class="learn-badge learn-badge-software">Uses <%- tool %></span>
+<% } %>
+<% if (level) { %>
+        <span class="learn-badge learn-badge-level"><%- level %></span>
+<% } %>
       </div>
 
-      <h3 class="learn-listing-title">
-        <a href="<%- item.path %>" class="listing-title"><%- item.title %></a>
-      </h3>
+      <div class="learn-listing-title" role="heading" aria-level="3">
+        <%- item.title %><% if (isExternal) { %><span class="visually-hidden"> (external tutorial)</span><% } %>
+      </div>
 
-      <% if (item.description) { %>
-      <p class="learn-listing-description listing-description"><%- item.description %></p>
-      <% } %>
+<% if (item.description) { %>
+      <p class="learn-listing-description"><%- item.description %></p>
+<% } %>
 
-      <% if (categories.length) { %>
+<% if (categories.length) { %>
       <div class="learn-card-topics" aria-label="Topics">
-        <% for (const category of categories) { %>
-        <span class="learn-topic-tag listing-categories"><%- category %></span>
-        <% } %>
+<% for (const category of categories) { %>
+        <span class="learn-topic-tag"><%- category %></span>
+<% } %>
       </div>
-      <% } %>
+<% } %>
 
-      <a class="learn-card-open" href="<%- item.path %>">Open <%- learningType.toLowerCase() %> <span aria-hidden="true">→</span></a>
+      <span class="learn-card-open" aria-hidden="true">Open <%- learningType.toLowerCase() %> <%= isExternal ? '↗' : '→' %></span>
     </div>
+    </a>
   </article>
 <% } %>
 </div>

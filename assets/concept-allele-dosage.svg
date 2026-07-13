@@ -1,10 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 425" role="img" aria-labelledby="title desc">
   <title id="title">Allele dosage concept</title>
   <desc id="desc">Five dosage states from zero to four copies in a tetraploid locus.</desc>
-  <defs>
-    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#eef7f8"/><stop offset="1" stop-color="#f3faf4"/></linearGradient>
-  </defs>
-  <rect width="800" height="425" rx="28" fill="url(#bg)"/>
+  <rect width="800" height="425" rx="28" fill="#F2F8F8"/>
   <text x="52" y="72" fill="#2A6576" font-family="Arial, sans-serif" font-size="25" font-weight="700">ALLELE DOSAGE</text>
   <text x="52" y="110" fill="#434544" font-family="Arial, sans-serif" font-size="18">Copies of the B allele at a tetraploid locus</text>
   <g transform="translate(52 165)">

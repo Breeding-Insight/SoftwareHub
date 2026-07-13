@@ -6,6 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Alexander M. Sandercock">
+<meta name="dcterms.date" content="2026-07-13">
 <meta name="keywords" content="R, VCF, genotype, read depth, diploid, polyploid, allele dosage">
 <meta name="description" content="Set up R, then load, inspect, filter, and visualize a VCF with diploid- and polyploid-aware checkpoints.">
 
@@ -81,9 +83,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-effba262e874657e83d0e513aa0f2f81.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-280cfbd09fa09395ae2635d5124b2c91.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-280cfbd09fa09395ae2635d5124b2c91.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-280cfbd09fa09395ae2635d5124b2c91.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-7cb284bb03c085bcf23f119999d663af.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-7cb284bb03c085bcf23f119999d663af.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-7cb284bb03c085bcf23f119999d663af.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -147,9 +149,10 @@ window.Quarto = {
 <meta property="og:image" content="https://breeding-insight.github.io/software/assets/tutorial-genomic-data.svg">
 <meta property="og:site_name" content="Breeding Insight Software">
 <meta property="og:image:alt" content="A VCF table beside a read-depth chart labeled VCF basics.">
+<link rel="canonical" href="https://breeding-insight.github.io/software/learn/get-started-genomic-data-r.html">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed learning-material-page quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -258,7 +261,19 @@ window.Quarto = {
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Alexander M. Sandercock </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 13, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -785,7 +800,7 @@ Show solution
 <p>Continue with the path that matches your goal:</p>
 <ul>
 <li><a href="../learn/what-is-allele-dosage.html">What is allele dosage?</a> explains dosage in diploids and polyploids.</li>
-<li><a href="../learn/qploidy-alfalfa.html">Estimate copy number in alfalfa with Qploidy2</a> points polyploid learners to the Qploidy2 workflow.</li>
+<li><a href="https://breeding-insight.github.io/Qploidy2/Qploidy_alfalfa_tutorial.html">Estimate copy number in alfalfa with Qploidy2</a> points polyploid learners to the Qploidy2 workflow.</li>
 <li><a href="../software/qploidy2.html">Explore Qploidy2</a> describes tools for ploidy, aneuploidy, and copy-number estimation.</li>
 <li><a href="../learn/madc-to-vcf.html">Process MADC genotype data</a> continues into BIGr data preparation and VCF generation.</li>
 </ul>
@@ -1203,7 +1218,7 @@ Show solution
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><strong>Breeding Insight</strong> — open-source tools for public plant and animal breeding.</p>
+<p><strong>Breeding Insight:</strong> open-source tools for public plant and animal breeding.</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
