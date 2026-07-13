@@ -822,7 +822,7 @@
     "href": "learn.html",
     "title": "Learn",
     "section": "",
-    "text": "Learning library\n\n\n\nBuild background knowledge, follow a focused example, or work through a complete analysis from raw inputs to validated results.\n\nBrowse learning materials View workshops"
+    "text": "Learning library\n\n\n\nFind a concept, follow a focused example, or work through a complete analysis from raw inputs to validated results.\n\nSearch learning materials \n\n\nJump to filtered results Looking for guided training? View workshops."
   },
   {
     "objectID": "learn.html#choose-how-to-learn",
@@ -843,7 +843,7 @@
     "href": "learn.html#all-learning-materials",
     "title": "Learn",
     "section": "Browse all learning materials",
-    "text": "Browse all learning materials\nSearch across titles, descriptions, topics, software, and keywords. Select more than one pill within a group to broaden that part of the search.\n\n  \n    Search learning materials\n    \n  \n\n  \n    \n      Format\n      \n    \n    \n      Topic\n      \n    \n    \n      Software\n      \n    \n    \n      Level\n      \n    \n  \n\n  \n    \n    Clear all filters\n  \n\n\n\n  No learning materials match those filters.\n  Try removing a filter or using a broader search term.\n\n\n\n\n\n  \n    \n\n    \n      \n    \n\n    \n      \n        Guide\n\n        Uses BIGr\n\n        Uses BIGapp\n\n        Uses Qploidy2\n\n        Uses Familia\n\n        Uses AlloMate\n\n        Uses BIGpopA\n\n        Beginner\n\n      \n\n      \n        Choose a genomic analysis path\n      \n\n      Start from the breeding question and identify the appropriate Breeding Insight tool or workflow.\n\n      \n\n        Getting Started\n\n      \n\n      Open guide →\n    \n    \n  \n\n  \n    \n\n    \n      \n    \n\n    \n      \n        Tutorial\n\n        Uses BIGr\n\n        Beginner\n\n      \n\n      \n        Get started with genomic data in R\n      \n\n      Set up R, then load, inspect, filter, and visualize a VCF with diploid- and polyploid-aware checkpoints.\n\n      \n\n        Getting Started\n\n        Genotype Data\n\n      \n\n      Open tutorial →\n    \n    \n  \n\n  \n    \n\n    \n      \n    \n\n    \n      \n        Concept\n\n        Uses BIGr\n\n        Beginner\n\n      \n\n      \n        What is a MADC file?\n      \n\n      Understand how DArT MADC files represent microhaplotype read counts and how BIGr turns those counts into variant data.\n\n      \n\n        Genotype Data\n\n        File Formats\n\n      \n\n      Open concept →\n    \n    \n  \n\n  \n    \n\n    \n      \n    \n\n    \n      \n        Workflow\n\n        Uses BIGr\n\n        Intermediate\n\n      \n\n      \n        Convert MADC data to a genotype-called VCF\n      \n\n      Use BIGr to recover biallelic read counts, call diploid or polyploid genotypes with Updog, and filter a validated VCF.\n\n      \n\n        Genotype Data\n\n        Data Quality\n\n        Ploidy & Dosage\n\n      \n\n      Open workflow →\n    \n    \n  \n\n  \n    \n\n    \n      \n    \n\n    \n      \n        Tutorial\n\n        External\n\n        Uses Qploidy2\n\n        Intermediate\n\n      \n\n      \n        Estimate copy number in alfalfa with Qploidy2 (external tutorial)\n      \n\n      Use Qploidy2 with DArTag data to estimate ploidy, aneuploidy, and large-scale copy-number variation.\n\n      \n\n        Ploidy & Dosage\n\n        Genotype Data\n\n      \n\n      Open tutorial ↗\n    \n    \n  \n\n  \n    \n\n    \n      \n    \n\n    \n      \n        Concept\n\n        Uses BIGr\n\n        Uses Qploidy2\n\n        Beginner\n\n      \n\n      \n        What is allele dosage?\n      \n\n      Understand what allele dosage represents in diploids and polyploids, how it differs from read fraction, and why dosage uncertainty matters.\n\n      \n\n        Genotype Data\n\n        Ploidy & Dosage\n\n      \n\n      Open concept →\n    \n    \n  \n\n  \n    \n\n    \n      \n    \n\n    \n      \n        Concept\n\n        Uses BIGr\n\n        Uses BIGapp\n\n        Intermediate\n\n      \n\n      \n        Choosing a missing-data threshold\n      \n\n      Choose marker and sample missingness thresholds by diagnosing the data source, matching the downstream analysis, and testing sensitivity.\n\n      \n\n        Genotype Data\n\n        Data Quality\n\n      \n\n      Open concept →\n    \n    \n  \n\n  \n    \n\n    \n      \n    \n\n    \n      \n        Concept\n\n        Uses BIGr\n\n        Uses BIGapp\n\n        Uses Qploidy2\n\n        Intermediate\n\n      \n\n      \n        SNP filtering in polyploids\n      \n\n      Build a polyploid-aware SNP filtering strategy that considers sequence evidence, dosage uncertainty, duplicated genomes, and downstream goals.\n\n      \n\n        Genotype Data\n\n        Data Quality\n\n        Ploidy & Dosage\n\n      \n\n      Open concept →\n    \n    \n  \n\n  \n    \n\n    \n      \n    \n\n    \n      \n        Concept\n\n        Uses BIGapp\n\n        Beginner\n\n      \n\n      \n        What does cross-validation accuracy mean?\n      \n\n      Interpret cross-validation results in genomic prediction without confusing predictive ability, selection accuracy, and the realism of the validation design.\n\n      \n\n        Genomic Prediction\n\n        Data Quality\n\n      \n\n      Open concept →\n    \n    \n  \n\n\nNo matching items"
+    "text": "Browse all learning materials\nSearch across titles, descriptions, topics, software, and keywords. Select more than one pill within a group to broaden that part of the search.\n\n  \n    \n      Format\n      \n    \n    \n      Topic\n      \n    \n    \n      Software\n      \n    \n    \n      Level\n      \n    \n  \n\n  \n    \n    Clear all filters\n  \n\n\n\n  No learning materials match those filters.\n  Try removing a filter or using a broader search term.\n\n\n\n\n\n  \n    \n\n    \n      \n    \n\n    \n      \n        Guide\n\n        Uses BIGr\n\n        Uses BIGapp\n\n        Uses Qploidy2\n\n        Uses Familia\n\n        Uses AlloMate\n\n        Uses BIGpopA\n\n        Beginner\n\n      \n\n      \n        Choose a genomic analysis path\n      \n\n      Start from the breeding question and identify the appropriate Breeding Insight tool or workflow.\n\n      \n\n        Getting Started\n\n      \n\n      Open guide →\n    \n    \n  \n\n  \n    \n\n    \n      \n    \n\n    \n      \n        Tutorial\n\n        Uses BIGr\n\n        Beginner\n\n      \n\n      \n        Get started with genomic data in R\n      \n\n      Set up R, then load, inspect, filter, and visualize a VCF with diploid- and polyploid-aware checkpoints.\n\n      \n\n        Getting Started\n\n        Genotype Data\n\n      \n\n      Open tutorial →\n    \n    \n  \n\n  \n    \n\n    \n      \n    \n\n    \n      \n        Concept\n\n        Uses BIGr\n\n        Beginner\n\n      \n\n      \n        What is a MADC file?\n      \n\n      Understand how DArT MADC files represent microhaplotype read counts and how BIGr turns those counts into variant data.\n\n      \n\n        Genotype Data\n\n        File Formats\n\n      \n\n      Open concept →\n    \n    \n  \n\n  \n    \n\n    \n      \n    \n\n    \n      \n        Workflow\n\n        Uses BIGr\n\n        Intermediate\n\n      \n\n      \n        Convert MADC data to a genotype-called VCF\n      \n\n      Use BIGr to recover biallelic read counts, call diploid or polyploid genotypes with Updog, and filter a validated VCF.\n\n      \n\n        Genotype Data\n\n        Data Quality\n\n        Ploidy & Dosage\n\n      \n\n      Open workflow →\n    \n    \n  \n\n  \n    \n\n    \n      \n    \n\n    \n      \n        Tutorial\n\n        External\n\n        Uses Qploidy2\n\n        Intermediate\n\n      \n\n      \n        Estimate copy number in alfalfa with Qploidy2 (external tutorial)\n      \n\n      Use Qploidy2 with DArTag data to estimate ploidy, aneuploidy, and large-scale copy-number variation.\n\n      \n\n        Ploidy & Dosage\n\n        Genotype Data\n\n      \n\n      Open tutorial ↗\n    \n    \n  \n\n  \n    \n\n    \n      \n    \n\n    \n      \n        Concept\n\n        Uses BIGr\n\n        Uses Qploidy2\n\n        Beginner\n\n      \n\n      \n        What is allele dosage?\n      \n\n      Understand what allele dosage represents in diploids and polyploids, how it differs from read fraction, and why dosage uncertainty matters.\n\n      \n\n        Genotype Data\n\n        Ploidy & Dosage\n\n      \n\n      Open concept →\n    \n    \n  \n\n  \n    \n\n    \n      \n    \n\n    \n      \n        Concept\n\n        Uses BIGr\n\n        Uses BIGapp\n\n        Intermediate\n\n      \n\n      \n        Choosing a missing-data threshold\n      \n\n      Choose marker and sample missingness thresholds by diagnosing the data source, matching the downstream analysis, and testing sensitivity.\n\n      \n\n        Genotype Data\n\n        Data Quality\n\n      \n\n      Open concept →\n    \n    \n  \n\n  \n    \n\n    \n      \n    \n\n    \n      \n        Concept\n\n        Uses BIGr\n\n        Uses BIGapp\n\n        Uses Qploidy2\n\n        Intermediate\n\n      \n\n      \n        SNP filtering in polyploids\n      \n\n      Build a polyploid-aware SNP filtering strategy that considers sequence evidence, dosage uncertainty, duplicated genomes, and downstream goals.\n\n      \n\n        Genotype Data\n\n        Data Quality\n\n        Ploidy & Dosage\n\n      \n\n      Open concept →\n    \n    \n  \n\n  \n    \n\n    \n      \n    \n\n    \n      \n        Concept\n\n        Uses BIGapp\n\n        Beginner\n\n      \n\n      \n        What does cross-validation accuracy mean?\n      \n\n      Interpret cross-validation results in genomic prediction without confusing predictive ability, selection accuracy, and the realism of the validation design.\n\n      \n\n        Genomic Prediction\n\n        Data Quality\n\n      \n\n      Open concept →\n    \n    \n  \n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -1165,35 +1165,49 @@
     "href": "resources.html",
     "title": "Resources",
     "section": "",
-    "text": "Content\nCanonical home\nPortal role\n\n\n\n\nFunction/API reference\nPackage documentation\nLink and discovery\n\n\nInstallation\nPackage documentation + package landing page\nSummarize and link\n\n\nSingle-package tutorial\nPortal or package docs\nPrefer portal when broadly useful\n\n\nCross-package workflow\nPortal\nCanonical home\n\n\nWorkshop\nPortal\nCanonical home\n\n\nRelease notes\nPackage repository/site\nLink only\n\n\nFAQ\nPackage or shared support page\nKeep close to issue ownership"
+    "text": "Use this page when you need a primary specification, a support route, or a checklist to make an analysis easier to reproduce. For explanations and worked examples, use the Learn library. For installation and package documentation, start with Software."
   },
   {
-    "objectID": "resources.html#what-belongs-where",
-    "href": "resources.html#what-belongs-where",
+    "objectID": "resources.html#get-help",
+    "href": "resources.html#get-help",
     "title": "Resources",
-    "section": "",
-    "text": "Content\nCanonical home\nPortal role\n\n\n\n\nFunction/API reference\nPackage documentation\nLink and discovery\n\n\nInstallation\nPackage documentation + package landing page\nSummarize and link\n\n\nSingle-package tutorial\nPortal or package docs\nPrefer portal when broadly useful\n\n\nCross-package workflow\nPortal\nCanonical home\n\n\nWorkshop\nPortal\nCanonical home\n\n\nRelease notes\nPackage repository/site\nLink only\n\n\nFAQ\nPackage or shared support page\nKeep close to issue ownership"
+    "section": "Get Help",
+    "text": "Get Help\nReport software problems in the repository that owns the code. Search existing issues first, then include the software version, operating system, the step that failed, and the complete error message.\n\n\n\nSoftware\nIssue tracker\n\n\n\n\nAlloMate\nBreeding-Insight/AlloMate issues\n\n\nBIGapp\nBreeding-Insight/BIGapp issues\n\n\nBIGpopA\nBreeding-Insight/BIGpopA issues\n\n\nBIGr\nBreeding-Insight/BIGr issues\n\n\nFamilia\nBreeding-Insight/Familia issues\n\n\nQploidy2\nBreeding-Insight/Qploidy2 issues\n\n\n\n\n\n\n\n\n\nWarningProtect Private Data\n\n\n\nDo not attach private genotype files, phenotypes, pedigrees, sample identifiers, or breeding-program records to a public issue. Create a small simulated or de-identified example when the error cannot be reproduced with package example data.\n\n\nFor workshop questions, return to the relevant workshop setup or module. Each maintained workshop lists its expected inputs, checkpoints, and software support route."
   },
   {
-    "objectID": "resources.html#content-front-matter",
-    "href": "resources.html#content-front-matter",
+    "objectID": "resources.html#standards-and-specifications",
+    "href": "resources.html#standards-and-specifications",
     "title": "Resources",
-    "section": "Content front matter",
-    "text": "Content front matter\nEvery tutorial should use consistent metadata so Quarto listings can discover and filter it:\n---\ntitle: \"Process DArTag MADC data to an analysis-ready VCF\"\ndescription: \"Filter targeted sequencing data, call dosage, and write a sorted VCF.\"\ncategories: [BIGr, DArTag, VCF, Genotype processing]\nlevel: intermediate\ntime: \"45 min\"\norder: 20\n---"
+    "section": "Standards and Specifications",
+    "text": "Standards and Specifications\nThese are the canonical references for formats and data exchange used across breeding and genomic workflows.\n\n\n\nResource\nUse it for\nOfficial reference\n\n\n\n\nVariant Call Format\nGenomic variants, genotype fields, depth, and allele counts\nHTS specifications and current VCF documents\n\n\nBreeding API\nExchanging germplasm, trial, phenotype, and genotype data between breeding applications\nBrAPI documentation\n\n\nMIAPPE\nRecording the metadata needed to understand and reuse a plant phenotyping experiment\nMIAPPE 1.1 publication and data model\n\n\nCrop Ontology\nStandard trait, method, and scale definitions for crop phenotyping\nCrop Ontology\n\n\n\nUse the version of a standard that matches the tool and project requirements. Record that version with the analysis rather than writing only “VCF” or “BrAPI” in the methods."
   },
   {
-    "objectID": "resources.html#tutorial-writing-pattern",
-    "href": "resources.html#tutorial-writing-pattern",
+    "objectID": "resources.html#reproducibility-checklist",
+    "href": "resources.html#reproducibility-checklist",
     "title": "Resources",
-    "section": "Tutorial writing pattern",
-    "text": "Tutorial writing pattern\n\n1. Goal\nState the outcome in biological or analytical terms.\n\n\n2. What you need\nList required files, versions, expected columns, and approximate compute needs.\n\n\n3. Workflow map\nShow the sequence of steps before introducing code.\n\n\n4. Reproducible steps\nUse executable code where feasible. Keep incidental output hidden and preserve outputs that teach interpretation.\n\n\n5. Checkpoint\nAfter each major stage, show what a successful result looks like.\n\n\n6. Troubleshooting\nDocument common failure modes and the diagnostic information users should collect before filing an issue.\n\n\n7. Next steps\nLink to the next workflow rather than ending at a package boundary."
+    "section": "Reproducibility Checklist",
+    "text": "Reproducibility Checklist\n\nBefore the Analysis\n\nPreserve the original input files as read-only copies.\nRecord where the data came from and whether they are observed, simulated, or transformed.\nCheck sample IDs, marker IDs, ploidy, missing-value codes, reference assembly, and coordinate system.\nCalculate a checksum for every input that will be shared or archived.\nDefine the biological question and the samples to which the result should apply.\n\nOn macOS or Linux, calculate a SHA-256 checksum with:\nshasum -a 256 path/to/file\n\n\nDuring the Analysis\n\nSave consequential filtering thresholds and model settings.\nRecord retained marker and sample counts after major transformations.\nKeep diagnostic plots and tables, not only the final figure.\nGive outputs stable names that identify the analysis stage.\nRecord warnings and failed attempts when they affected a later decision.\n\n\n\nWhen Reporting or Archiving\n\nRecord the software and package versions.\nDescribe the samples, trait, reference assembly, filtering, model, and validation design.\nInclude checksums and a data dictionary with shared files.\nSeparate known simulation truth from conclusions inferred by the analysis.\nState where code, data, and restricted materials can be accessed.\n\nFor an R analysis, save the session information:\nsessionInfo()\npackageVersion(\"BIGr\")"
   },
   {
-    "objectID": "resources.html#migration-principle",
-    "href": "resources.html#migration-principle",
+    "objectID": "resources.html#citations-and-licenses",
+    "href": "resources.html#citations-and-licenses",
     "title": "Resources",
-    "section": "Migration principle",
-    "text": "Migration principle\nDo not copy reference material into multiple places. Migrate durable teaching content, then link back to the package’s canonical reference documentation. Redirect old URLs when pages move so existing workshop handouts and publications do not break."
+    "section": "Citations and Licenses",
+    "text": "Citations and Licenses\nUse the citation supplied by the software repository or installed R package. In R, check whether a package provides a citation with:\ncitation(\"packageName\")\nAlso record the exact software version and repository URL. A paper citation identifies the method or software project; the version identifies the code that produced the result.\nWhen reusing a figure, dataset, or other third-party asset, retain its creator, source link, and license. Confirm that the license permits the intended reuse and note whether the material was modified."
+  },
+  {
+    "objectID": "resources.html#example-data-and-downloads",
+    "href": "resources.html#example-data-and-downloads",
+    "title": "Resources",
+    "section": "Example Data and Downloads",
+    "text": "Example Data and Downloads\nThe BIGapp workshop dataset guide provides a fully simulated diversity panel with file definitions, direct downloads, checksums, expected record counts, and verified filtering results. It is suitable for learning and software checks, not for biological inference.\n\nCompressed genotype VCF\nPhenotypes and sample metadata CSV\nSNP-information CSV\n\nFor package-specific example data, use the examples distributed with that package or linked from its software page. This keeps example files synchronized with the code that reads them."
+  },
+  {
+    "objectID": "resources.html#for-contributors",
+    "href": "resources.html#for-contributors",
+    "title": "Resources",
+    "section": "For Contributors",
+    "text": "For Contributors\nDocumentation authors and maintainers should use the repository’s contributor guide for content types, learning metadata, writing expectations, and listing behavior. Contributor standards remain separate from this public reference page."
   },
   {
     "objectID": "software/allomate.html",
@@ -1607,28 +1621,6 @@
     "title": "Module 2: Population Structure and PCA",
     "section": "Key Takeaways",
     "text": "Key Takeaways\n\nPCA summarizes marker variation; it does not assign biological populations by itself.\nInterpret the axes and point geometry before coloring by metadata.\nCompare biological labels with technical labels when investigating clusters or outliers.\nSave the PC scores and plotting choices so the display can be reproduced.\n\n\nNext: Download the PC table as an audit record, then continue to Module 3: GWASpoly.",
-    "crumbs": [
-      "Software",
-      "2. Population structure and PCA"
-    ]
-  },
-  {
-    "objectID": "workshops/bigapp/pca.html#what-pca-does",
-    "href": "workshops/bigapp/pca.html#what-pca-does",
-    "title": "Module 2: Population Structure and PCA",
-    "section": "What PCA Does",
-    "text": "What PCA Does\nPrincipal component analysis, or PCA, summarizes variation across many markers with a smaller set of axes. Each point in a PCA plot is a sample. Nearby points have more similar marker profiles than widely separated points, given the variants and scaling used in the analysis.\n\n\n\nConceptual diagram showing many variables summarized along principal-component axes.\n\n\nPCA is exploratory. A cluster does not prove that we found a biological population. An outlier is a reason to check the sample identity and data quality, not an automatic reason to delete the sample.\n\nReading a PCA Plot\nI like to read a PCA plot in three passes:\n\nCheck the axes. Which PCs are plotted, and how much marker variation does each represent?\nLook at the points. Do you see separation, overlap, gradients, or isolated samples?\nAdd the metadata. Color or shape the points with trusted fields such as region, state, breeding program, plate, or sequencing batch.\n\nThis order reduces the temptation to force a biological story onto a pattern that could reflect data quality or a technical batch.",
-    "crumbs": [
-      "Software",
-      "2. Population structure and PCA"
-    ]
-  },
-  {
-    "objectID": "workshops/bigapp/pca.html#practice-interpreting-patterns",
-    "href": "workshops/bigapp/pca.html#practice-interpreting-patterns",
-    "title": "Module 2: Population Structure and PCA",
-    "section": "Practice Interpreting Patterns",
-    "text": "Practice Interpreting Patterns\n\n\n\nExample of distinct PCA clusters.\n\n\nDistinct groups can reflect population history, batches, related samples, or labeling problems. This is why we compare the plot with trusted metadata.\n\n\n\nExample of continuous PCA variation.\n\n\nContinuous variation can reflect admixture or geographic clines. It does not mean that structure is absent.\n\n\n\nExample of a PCA outlier.\n\n\nIf you see an outlier, check its sample identity, missingness, heterozygosity, ploidy, possible contamination, and whether it belongs to the intended taxon.",
     "crumbs": [
       "Software",
       "2. Population structure and PCA"

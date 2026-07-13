@@ -1,66 +1,112 @@
 ---
 title: "Resources"
-description: "Standards and reusable patterns for Breeding Insight documentation and training materials."
+description: "Standards, support links, reproducibility guidance, citations, and example data for breeding and genomic analysis."
 toc: true
 ---
 
-## What belongs where?
+Use this page when you need a primary specification, a support route, or a checklist to make an analysis easier to reproduce. For explanations and worked examples, use the [Learn library](learn.qmd). For installation and package documentation, start with [Software](software.qmd).
 
-| Content | Canonical home | Portal role |
+::: {.callout-note}
+## Breeding Insight Learning Hub
+
+The [Breeding Insight Learning Hub](https://breedinginsight.org/learning-hub/) brings together additional manuals, training materials, videos, and resources for Breeding Insight tools and services.
+:::
+
+## Get Help
+
+Report software problems in the repository that owns the code. Search existing issues first, then include the software version, operating system, the step that failed, and the complete error message.
+
+| Software | Issue tracker |
+|---|---|
+| AlloMate | [Breeding-Insight/AlloMate issues](https://github.com/Breeding-Insight/AlloMate/issues) |
+| BIGapp | [Breeding-Insight/BIGapp issues](https://github.com/Breeding-Insight/BIGapp/issues) |
+| BIGpopA | [Breeding-Insight/BIGpopA issues](https://github.com/Breeding-Insight/BIGpopA/issues) |
+| BIGr | [Breeding-Insight/BIGr issues](https://github.com/Breeding-Insight/BIGr/issues) |
+| Familia | [Breeding-Insight/Familia issues](https://github.com/Breeding-Insight/Familia/issues) |
+| Qploidy2 | [Breeding-Insight/Qploidy2 issues](https://github.com/Breeding-Insight/Qploidy2/issues) |
+
+::: {.callout-warning}
+## Protect Private Data
+
+Do not attach private genotype files, phenotypes, pedigrees, sample identifiers, or breeding-program records to a public issue. Create a small simulated or de-identified example when the error cannot be reproduced with package example data.
+:::
+
+For workshop questions, return to the relevant [workshop setup or module](workshops.qmd). Each maintained workshop lists its expected inputs, checkpoints, and software support route.
+
+## Standards and Specifications
+
+These are the canonical references for formats and data exchange used across breeding and genomic workflows.
+
+| Resource | Use it for | Official reference |
 |---|---|---|
-| Function/API reference | Package documentation | Link and discovery |
-| Installation | Package documentation + package landing page | Summarize and link |
-| Single-package tutorial | Portal or package docs | Prefer portal when broadly useful |
-| Cross-package workflow | Portal | Canonical home |
-| Workshop | Portal | Canonical home |
-| Release notes | Package repository/site | Link only |
-| FAQ | Package or shared support page | Keep close to issue ownership |
+| Variant Call Format | Genomic variants, genotype fields, depth, and allele counts | [HTS specifications and current VCF documents](https://samtools.github.io/hts-specs/) |
+| Breeding API | Exchanging germplasm, trial, phenotype, and genotype data between breeding applications | [BrAPI documentation](https://brapi.org/documentation) |
+| MIAPPE | Recording the metadata needed to understand and reuse a plant phenotyping experiment | [MIAPPE 1.1 publication and data model](https://pmc.ncbi.nlm.nih.gov/articles/PMC7317793/) |
+| Crop Ontology | Standard trait, method, and scale definitions for crop phenotyping | [Crop Ontology](https://cropontology.org/) |
 
-## Content front matter
+Use the version of a standard that matches the tool and project requirements. Record that version with the analysis rather than writing only "VCF" or "BrAPI" in the methods.
 
-Every tutorial should use consistent metadata so Quarto listings can discover and filter it:
+## Reproducibility Checklist
 
-```yaml
----
-title: "Process DArTag MADC data to an analysis-ready VCF"
-description: "Filter targeted sequencing data, call dosage, and write a sorted VCF."
-categories: [BIGr, DArTag, VCF, Genotype processing]
-level: intermediate
-time: "45 min"
-order: 20
----
+### Before the Analysis
+
+- Preserve the original input files as read-only copies.
+- Record where the data came from and whether they are observed, simulated, or transformed.
+- Check sample IDs, marker IDs, ploidy, missing-value codes, reference assembly, and coordinate system.
+- Calculate a checksum for every input that will be shared or archived.
+- Define the biological question and the samples to which the result should apply.
+
+On macOS or Linux, calculate a SHA-256 checksum with:
+
+```bash
+shasum -a 256 path/to/file
 ```
 
-## Tutorial writing pattern
+### During the Analysis
 
-### 1. Goal
+- Save consequential filtering thresholds and model settings.
+- Record retained marker and sample counts after major transformations.
+- Keep diagnostic plots and tables, not only the final figure.
+- Give outputs stable names that identify the analysis stage.
+- Record warnings and failed attempts when they affected a later decision.
 
-State the outcome in biological or analytical terms.
+### When Reporting or Archiving
 
-### 2. What you need
+- Record the software and package versions.
+- Describe the samples, trait, reference assembly, filtering, model, and validation design.
+- Include checksums and a data dictionary with shared files.
+- Separate known simulation truth from conclusions inferred by the analysis.
+- State where code, data, and restricted materials can be accessed.
 
-List required files, versions, expected columns, and approximate compute needs.
+For an R analysis, save the session information:
 
-### 3. Workflow map
+```r
+sessionInfo()
+packageVersion("BIGr")
+```
 
-Show the sequence of steps before introducing code.
+## Citations and Licenses
 
-### 4. Reproducible steps
+Use the citation supplied by the software repository or installed R package. In R, check whether a package provides a citation with:
 
-Use executable code where feasible. Keep incidental output hidden and preserve outputs that teach interpretation.
+```r
+citation("packageName")
+```
 
-### 5. Checkpoint
+Also record the exact software version and repository URL. A paper citation identifies the method or software project; the version identifies the code that produced the result.
 
-After each major stage, show what a successful result looks like.
+When reusing a figure, dataset, or other third-party asset, retain its creator, source link, and license. Confirm that the license permits the intended reuse and note whether the material was modified.
 
-### 6. Troubleshooting
+## Example Data and Downloads
 
-Document common failure modes and the diagnostic information users should collect before filing an issue.
+The [BIGapp workshop dataset guide](workshops/bigapp/dataset-guide.qmd) provides a fully simulated diversity panel with file definitions, direct downloads, checksums, expected record counts, and verified filtering results. It is suitable for learning and software checks, not for biological inference.
 
-### 7. Next steps
+- [Compressed genotype VCF](workshops/bigapp/data/atlantic_giant_pumpkin_diversity.vcf.gz){download="atlantic_giant_pumpkin_diversity.vcf.gz"}
+- [Phenotypes and sample metadata CSV](workshops/bigapp/data/atlantic_giant_pumpkin_diversity_phenotypes.csv){download="atlantic_giant_pumpkin_diversity_phenotypes.csv"}
+- [SNP-information CSV](workshops/bigapp/data/atlantic_giant_pumpkin_diversity_snp_info.csv){download="atlantic_giant_pumpkin_diversity_snp_info.csv"}
 
-Link to the next workflow rather than ending at a package boundary.
+For package-specific example data, use the examples distributed with that package or linked from its [software page](software.qmd). This keeps example files synchronized with the code that reads them.
 
-## Migration principle
+## For Contributors
 
-Do not copy reference material into multiple places. Migrate durable teaching content, then link back to the package's canonical reference documentation. Redirect old URLs when pages move so existing workshop handouts and publications do not break.
+Documentation authors and maintainers should use the repository's [contributor guide](https://github.com/Breeding-Insight/software/blob/main/CONTRIBUTING.md) for content types, learning metadata, writing expectations, and listing behavior. Contributor standards remain separate from this public reference page.

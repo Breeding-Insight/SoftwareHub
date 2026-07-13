@@ -15,17 +15,22 @@ format:
     include-after-body: assets/learn-filter.html
 ---
 
-::: {.learn-hero}
-::: {.learn-hero-inner}
+::: {.learn-library-header}
+::: {.learn-library-header-inner}
 <div class="hero-kicker">Learning library</div>
 
-# Analyze breeding and genomic data
+# Learn breeding and genomic analysis
 
-Build background knowledge, follow a focused example, or work through a complete analysis from raw inputs to validated results.
+Find a concept, follow a focused example, or work through a complete analysis from raw inputs to validated results.
 
-<div class="learn-hero-actions">
-<a class="btn-bi-primary no-external" href="#all-learning-materials">Browse learning materials</a>
-<a class="btn-bi-secondary no-external" href="workshops.html">View workshops</a>
+<div class="learn-filter-search learn-library-search">
+  <label for="learn-material-search">Search learning materials</label>
+  <input id="learn-material-search" type="search" autocomplete="off" placeholder="Try MADC, VCF, dosage, or missingness">
+</div>
+
+<div class="learn-library-links">
+  <a class="no-external" href="#all-learning-materials">Jump to filtered results</a>
+  <span>Looking for guided training? <a class="no-external" href="workshops.html">View workshops</a>.</span>
 </div>
 :::
 :::
@@ -108,11 +113,6 @@ Search across titles, descriptions, topics, software, and keywords. Select more 
 
 ```{=html}
 <div class="learn-filter-panel" aria-label="Filter learning materials">
-  <div class="learn-filter-search">
-    <label for="learn-material-search">Search learning materials</label>
-    <input id="learn-material-search" type="search" autocomplete="off" placeholder="Try MADC, VCF, dosage, or missingness">
-  </div>
-
   <div class="learn-facet-grid">
     <fieldset class="learn-facet" data-learn-facet="type">
       <legend>Format</legend>
