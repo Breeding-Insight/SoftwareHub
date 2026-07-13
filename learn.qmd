@@ -1,0 +1,101 @@
+---
+title: "Learn"
+description: "Tutorials, workflows, and practical guidance for breeding data and genomics."
+listing:
+  id: learning-materials
+  contents: "learn/*.qmd"
+  template: assets/learn-listing.ejs.md
+  sort: "order asc"
+  filter-ui: true
+  sort-ui: false
+  page-size: 12
+toc: false
+format:
+  html:
+    include-after-body: assets/learn-filter.html
+---
+
+::: {.learn-hero}
+::: {.learn-hero-inner}
+<div class="hero-kicker">Learning library</div>
+
+# Tutorials for breeding data and genomics
+
+Start with the task you need to complete, or search by software, data type, and analysis method.
+
+<div class="learn-hero-actions">
+<a class="btn-bi-primary" href="#all-learning-materials">Browse all materials</a>
+<a class="btn-bi-secondary" href="workshops.html">View workshops</a>
+</div>
+:::
+:::
+
+## What do you want to do? {.section-heading}
+
+Choose a goal to see the most relevant guides and tutorials.
+
+::: {.goal-grid}
+<div class="goal-card">
+  <span class="goal-number">01</span>
+  <h3><a class="learn-filter-link" data-learn-filter="Genotype Data" href="?filter=Genotype%20Data#all-learning-materials">Prepare genotype data</a></h3>
+  <p>Import, transform, standardize, and export genotype or variant data for downstream analysis.</p>
+  <a class="goal-link learn-filter-link" data-learn-filter="Genotype Data" href="?filter=Genotype%20Data#all-learning-materials">View tutorials</a>
+</div>
+
+<div class="goal-card">
+  <span class="goal-number">02</span>
+  <h3><a class="learn-filter-link" data-learn-filter="Data Quality" href="?filter=Data%20Quality#all-learning-materials">Improve data quality</a></h3>
+  <p>Filter markers and samples, diagnose missingness, and validate analysis-ready datasets.</p>
+  <a class="goal-link learn-filter-link" data-learn-filter="Data Quality" href="?filter=Data%20Quality#all-learning-materials">View tutorials</a>
+</div>
+
+<div class="goal-card">
+  <span class="goal-number">03</span>
+  <h3><a class="learn-filter-link" data-learn-filter="Ploidy & Dosage" href="?filter=Ploidy%20%26%20Dosage#all-learning-materials">Analyze polyploids</a></h3>
+  <p>Work with allele dosage, ploidy, aneuploidy, and large-scale copy-number variation.</p>
+  <a class="goal-link learn-filter-link" data-learn-filter="Ploidy & Dosage" href="?filter=Ploidy%20%26%20Dosage#all-learning-materials">View tutorials</a>
+</div>
+
+<div class="goal-card">
+  <span class="goal-number">04</span>
+  <h3><a class="learn-filter-link" data-learn-filter="Population Analysis" href="?filter=Population%20Analysis#all-learning-materials">Understand populations</a></h3>
+  <p>Explore structure, diversity, relatedness, and other population-level patterns.</p>
+  <a class="goal-link learn-filter-link" data-learn-filter="Population Analysis" href="?filter=Population%20Analysis#all-learning-materials">View tutorials</a>
+</div>
+
+<div class="goal-card">
+  <span class="goal-number">05</span>
+  <h3><a class="learn-filter-link" data-learn-filter="Trait Mapping" href="?filter=Trait%20Mapping#all-learning-materials">Map traits</a></h3>
+  <p>Move from curated genotype and phenotype data toward GWAS, QTL, and association analyses.</p>
+  <a class="goal-link learn-filter-link" data-learn-filter="Trait Mapping" href="?filter=Trait%20Mapping#all-learning-materials">View tutorials</a>
+</div>
+
+<div class="goal-card">
+  <span class="goal-number">06</span>
+  <h3><a class="learn-filter-link" data-learn-filter="Genomic Prediction" href="?filter=Genomic%20Prediction#all-learning-materials">Predict performance</a></h3>
+  <p>Prepare data, fit genomic prediction models, and evaluate prediction accuracy.</p>
+  <a class="goal-link learn-filter-link" data-learn-filter="Genomic Prediction" href="?filter=Genomic%20Prediction#all-learning-materials">View tutorials</a>
+</div>
+:::
+
+## Browse by topic {.section-heading}
+
+Use a broad topic to narrow the list. The search also recognizes terms such as MADC, VCF, DArTag, GWAS, and PCA.
+
+::: {.topic-filter-row}
+<a class="topic-filter learn-filter-link" data-learn-filter="Getting Started" href="?filter=Getting%20Started#all-learning-materials">Getting Started</a>
+<a class="topic-filter learn-filter-link" data-learn-filter="Genotype Data" href="?filter=Genotype%20Data#all-learning-materials">Genotype Data</a>
+<a class="topic-filter learn-filter-link" data-learn-filter="Data Quality" href="?filter=Data%20Quality#all-learning-materials">Data Quality</a>
+<a class="topic-filter learn-filter-link" data-learn-filter="Ploidy & Dosage" href="?filter=Ploidy%20%26%20Dosage#all-learning-materials">Ploidy &amp; Dosage</a>
+<a class="topic-filter learn-filter-link" data-learn-filter="Population Analysis" href="?filter=Population%20Analysis#all-learning-materials">Population Analysis</a>
+<a class="topic-filter learn-filter-link" data-learn-filter="Trait Mapping" href="?filter=Trait%20Mapping#all-learning-materials">Trait Mapping</a>
+<a class="topic-filter learn-filter-link" data-learn-filter="Genomic Prediction" href="?filter=Genomic%20Prediction#all-learning-materials">Genomic Prediction</a>
+<a class="topic-filter topic-filter-reset" data-learn-filter="" href="#all-learning-materials">All topics</a>
+:::
+
+## All learning materials {#all-learning-materials .section-heading}
+
+Search by topic, software name, data type, or analysis method.
+
+::: {#learning-materials}
+:::

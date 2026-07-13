@@ -1,0 +1,125 @@
+---
+title: "What is allele dosage?"
+description: "Understand what allele dosage represents in diploids and polyploids, how it differs from read fraction, and why dosage uncertainty matters."
+categories:
+  - Genotype Data
+  - Ploidy & Dosage
+image: ../assets/concept-allele-dosage.svg
+image-alt: "Five allele dosage states from zero to four copies at a tetraploid locus."
+order: 40
+learning-type: Concept
+software:
+  - BIGr
+  - Qploidy2
+level: Beginner
+keywords:
+  - allele dosage
+  - ploidy
+  - polyploid
+  - genotype
+  - read depth
+  - dosage calling
+---
+
+::: {.concept-definition}
+**Allele dosage** is the number of copies of a specified allele carried by an individual at a locus. At a biallelic locus in an organism with ploidy $P$, dosage can range from **0 to $P$**.
+:::
+
+## Start with a diploid example
+
+Suppose a SNP has two alleles, `A` and `B`, and we define dosage as the number of copies of `B`.
+
+| Genotype | B-allele dosage |
+|---|---:|
+| `AA` | 0 |
+| `AB` | 1 |
+| `BB` | 2 |
+
+In a diploid, the three genotype states correspond directly to dosages 0, 1, and 2.
+
+## What changes in a tetraploid?
+
+A locus modeled at tetraploid ploidy has four chromosome copies contributing to the genotype. For the same `A/B` SNP, five dosage states are possible:
+
+::: {.dosage-scale}
+<div class="dosage-state"><strong>0</strong><span>AAAA</span></div>
+<div class="dosage-state"><strong>1</strong><span>AAAB</span></div>
+<div class="dosage-state"><strong>2</strong><span>AABB</span></div>
+<div class="dosage-state"><strong>3</strong><span>ABBB</span></div>
+<div class="dosage-state"><strong>4</strong><span>BBBB</span></div>
+:::
+
+The intermediate heterozygous states are biologically distinct. Collapsing all of them into a single `AB` class discards information that can matter for linkage mapping, association analysis, genomic prediction, and other quantitative analyses.
+
+::: {.callout-tip title="Dosage is allele-specific"}
+A dosage value has meaning only after the counted allele is defined. If `B` dosage is 1 in a tetraploid, then `A` dosage is 3. When exchanging data, document whether dosage counts the reference allele, alternate allele, or another explicitly named allele.
+:::
+
+## Dosage is not the same as read fraction
+
+For sequencing data, a sample with dosage 2 in a tetraploid has an **idealized expected** `B`-allele fraction of $2/4 = 0.5$. But an observed read fraction of 0.5 is not automatically proof of dosage 2.
+
+Observed allele counts are affected by:
+
+- finite read sampling, especially at low depth;
+- allele-specific amplification or capture bias;
+- sequencing error;
+- overdispersion beyond simple binomial sampling;
+- outlying observations;
+- mapping of reads from paralogous or homoeologous regions.
+
+This is why dosage callers use the read evidence—and often population-level information—to estimate genotype probabilities rather than simply rounding the observed allele fraction.
+
+::: {.concept-example-grid}
+::: {.concept-example}
+#### Idealized expectation
+
+Tetraploid dosage 1 suggests an alternate-allele fraction near $1/4 = 0.25$ when both alleles are sampled equally.
+:::
+
+::: {.concept-example}
+#### Real observation
+
+A dosage-1 individual might produce 3 alternate reads out of 20, 7 out of 20, or another count. The caller must decide how compatible that evidence is with each dosage state.
+:::
+:::
+
+## Dosage, ploidy, and copy number are different concepts
+
+| Term | Question it answers | Example |
+|---|---|---|
+| **Ploidy** | How many chromosome-set copies are being modeled? | Tetraploid: $P=4$ |
+| **Allele dosage** | How many copies of a specified allele occur at this locus? | `B` dosage = 3 |
+| **Copy number** | How many copies of a genomic region or sequence are present? | A segment has 5 copies |
+
+They can interact, but they are not interchangeable. For example, an aneuploid or copy-number-variable region can violate the assumption that every locus follows the organism-wide ploidy.
+
+## Why dosage uncertainty matters
+
+A hard call such as `2` hides the fact that some calls are much more certain than others. Two samples can both be assigned dosage 2 while having very different read depth and posterior support.
+
+For sequencing-based genotyping, check whether the workflow retains or exposes quantities such as:
+
+- posterior genotype probability;
+- genotype quality;
+- read depth;
+- allele bias estimates;
+- model-fit diagnostics.
+
+When uncertainty is substantial, treating every hard dosage call as equally reliable can propagate error downstream.
+
+## Practical takeaway
+
+::: {.bi-callout}
+For a biallelic locus at ploidy $P$, code dosage consistently as an integer from **0 through $P$**, state which allele is being counted, and keep genotype uncertainty available whenever the calling method provides it.
+:::
+
+## Continue learning
+
+[Process MADC genotype data](madc-to-vcf.qmd){.btn-bi-primary}
+[Estimate ploidy and copy-number variation in alfalfa](qploidy-alfalfa.qmd){.btn-bi-secondary}
+
+## Further reading
+
+- Gerard D, Ferrão LFV, Garcia AAF, Stephens M. 2018. *Genotyping Polyploids from Messy Sequencing Data*. **Genetics** 210:789–807. [doi:10.1534/genetics.118.301468](https://doi.org/10.1534/genetics.118.301468)
+- Gemenet DC et al. 2020. *Sequencing depth and genotype quality: accuracy and breeding operation considerations for genomic selection applications in autopolyploid crops*. **Theoretical and Applied Genetics** 133:3345–3363. [doi:10.1007/s00122-020-03673-2](https://doi.org/10.1007/s00122-020-03673-2)

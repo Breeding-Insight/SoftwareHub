@@ -1,0 +1,163 @@
+---
+title: "What does cross-validation accuracy mean?"
+description: "Interpret cross-validation results in genomic prediction without confusing predictive ability, selection accuracy, and the realism of the validation design."
+categories:
+  - Genomic Prediction
+  - Data Quality
+image: ../assets/concept-cross-validation.svg
+image-alt: "Repeated cross-validation folds beside a predicted-versus-observed correlation plot."
+order: 70
+learning-type: Concept
+software:
+  - BIGapp
+level: Beginner
+keywords:
+  - cross-validation
+  - genomic prediction
+  - prediction accuracy
+  - predictive ability
+  - GEBV
+  - breeding value
+  - k-fold
+  - validation
+---
+
+::: {.concept-definition}
+In genomic prediction, cross-validation asks: **how well does a model predict records that were withheld from model fitting under a particular validation design?** The answer is specific to the population, trait, phenotype definition, and split strategy that were tested.
+:::
+
+## The basic idea
+
+In $k$-fold cross-validation:
+
+1. divide individuals or records into $k$ groups;
+2. fit the model using $k-1$ groups;
+3. predict the withheld group;
+4. repeat until every group has been withheld;
+5. summarize agreement between predictions and observations;
+6. often repeat the entire partitioning process several times.
+
+The important phrase is **withheld from model fitting**. Any preprocessing step that learns from the validation phenotypes can leak information and make performance look better than it really is.
+
+## What number is commonly reported?
+
+A common statistic is the Pearson correlation between predicted values and observed phenotypes—or adjusted phenotype estimates—in the held-out data:
+
+$$
+r = \mathrm{cor}(\widehat{y}, y)
+$$
+
+This is often called *prediction accuracy* in applied papers. More precisely, when the observed quantity is a phenotype rather than the unknown true breeding value, **predictive ability** is usually the clearer term.
+
+::: {.callout-important title="Accuracy and predictive ability are not always the same"}
+True selection accuracy is conceptually the correlation between a predicted breeding value and the **true breeding value**. The true breeding value is usually unobserved. A correlation with held-out phenotype or entry mean therefore measures a related but different quantity.
+:::
+
+Some analyses scale a phenotype-based correlation by a measure related to heritability to approximate accuracy. That can be useful under specific assumptions, but the exact formula and phenotype definition must be reported. Do not mix scaled and unscaled correlations in the same comparison.
+
+## How should I interpret a correlation?
+
+Suppose cross-validation returns $r = 0.50$.
+
+That does **not** mean:
+
+- 50% of individuals were predicted correctly;
+- the model is “50% accurate” in a classification sense;
+- 50% of genetic variance was explained.
+
+It means that, in the tested held-out records, predicted and observed values had a moderate positive linear association.
+
+Also remember:
+
+- correlation measures ranking/association, not calibration;
+- a model can correlate well but systematically over- or under-predict;
+- $r^2$ is not automatically the proportion of genetic variance explained;
+- a single mean correlation hides variation among folds or repetitions.
+
+## The validation design defines the question
+
+This is the most important point on the page.
+
+::: {.concept-decision-grid}
+::: {.concept-decision}
+#### Random k-fold
+
+**Question:** Can the model predict other individuals drawn from a similar, intermixed population?
+
+Close relatives can appear in both training and validation folds.
+:::
+
+::: {.concept-decision}
+#### Leave-family-out
+
+**Question:** Can the model predict a family not represented in training?
+
+Usually more difficult and often more realistic for across-family transfer.
+:::
+
+::: {.concept-decision}
+#### Leave-year-out
+
+**Question:** Can historical data predict a future or separate year?
+
+This begins to test temporal transfer and genotype-by-environment effects.
+:::
+
+::: {.concept-decision}
+#### New genotype × environment scenario
+
+**Question:** Can the model predict untested genotypes, environments, or both?
+
+The split must mirror the intended deployment scenario.
+:::
+:::
+
+A model can therefore have several legitimate cross-validation results, each answering a different operational question.
+
+## Why random cross-validation can look too good
+
+Breeding populations often contain strong family or population structure. If close relatives occur in both the training and validation sets, a model can predict family means or population membership very well even when its ability to distinguish the best individuals within a family is modest.
+
+This does not make random cross-validation “wrong.” It means the result estimates performance for that **random-split scenario**, not necessarily the harder scenario the breeding program intends to deploy.
+
+## Compare models fairly
+
+When comparing two genomic prediction models:
+
+- use the same folds for both models;
+- repeat partitioning when random splits are used;
+- summarize the distribution across folds/repeats, not only one mean;
+- keep preprocessing inside the resampling workflow when it uses outcome information;
+- choose the validation design before looking for the most favorable result.
+
+Paired folds are especially valuable because both models face the same training and validation records in each comparison.
+
+## A reporting checklist
+
+::: {.concept-checklist}
+- What exactly was predicted: phenotype, BLUE, BLUP, breeding value, or another quantity?
+- What statistic was reported: correlation, RMSE, MAE, $R^2$, or a scaled measure?
+- How were folds constructed?
+- Were families, years, sites, or populations separated?
+- How many folds and repeats were used?
+- Were the same folds used across models?
+- Was hyperparameter tuning nested inside the validation procedure?
+- How related were training and target individuals?
+- Is this the scenario in which the breeding program will actually use the model?
+:::
+
+## Practical takeaway
+
+::: {.bi-callout}
+A cross-validation number is not an intrinsic property of a genomic prediction model. Interpret it as: **performance under this exact prediction scenario, in this population, for this trait, using this response and this split design**.
+:::
+
+## Continue learning
+
+[Choose a genomic analysis path](genomics-path.qmd){.btn-bi-primary}
+[Browse genomic prediction materials](../learn.qmd?filter=Genomic%20Prediction#all-learning-materials){.btn-bi-secondary}
+
+## Further reading
+
+- Werner CR et al. 2020. *How Population Structure Impacts Genomic Selection Accuracy in Cross-Validation: Implications for Practical Breeding*. **Frontiers in Plant Science** 11:592977. [doi:10.3389/fpls.2020.592977](https://doi.org/10.3389/fpls.2020.592977)
+- Runcie DE, Cheng H. 2019. *Pitfalls and Remedies for Cross Validation with Multi-trait Genomic Prediction Methods*. **G3** 9:3727–3741. [doi:10.1534/g3.119.400598](https://doi.org/10.1534/g3.119.400598)

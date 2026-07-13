@@ -1,0 +1,37 @@
+---
+title: "Choose a genomic analysis path"
+description: "Start from the breeding question and identify the appropriate Breeding Insight tool or workflow."
+categories:
+  - Getting Started
+image: ../assets/tutorial-path.svg
+order: 10
+learning-type: Guide
+software:
+  - BIGr
+  - BIGapp
+  - Qploidy2
+  - DeltaBreed
+level: Beginner
+keywords:
+  - genomics
+  - workflow
+  - tool selection
+  - analysis planning
+---
+
+## Start with the question
+
+A unified portal should help users choose tools without requiring them to know package names first.
+
+| Goal | Recommended starting point |
+|---|---|
+| Process and transform genotype data | BIGr |
+| Use an interactive genomic analysis interface | BIGapp |
+| Estimate ploidy, aneuploidy, or large CNV | Qploidy2 |
+| Manage breeding program data | DeltaBreed |
+
+## Example path
+
+**Targeted genotyping data → quality control → analysis-ready VCF → population structure → GWAS or genomic prediction**
+
+The value of the portal is that this sequence can link across packages while preserving each package's canonical reference documentation.

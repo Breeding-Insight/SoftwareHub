@@ -1,0 +1,47 @@
+meta:
+  name: "Breeding Insight"
+  link: "https://breedinginsight.org/"
+
+logo:
+  images:
+    bi-logo:
+      path: assets/breeding-insight.png
+      alt: "Breeding Insight"
+    bi-mark:
+      path: assets/bi-mark.png
+      alt: "Breeding Insight mark"
+  small: bi-mark
+  medium: bi-logo
+  large: bi-logo
+
+color:
+  palette:
+    teal-dark: "#2A6576"
+    teal: "#48A9C5"
+    teal-light: "#B5DDE8"
+    green-dark: "#1E5D28"
+    green: "#319B42"
+    green-light: "#A3D9AC"
+    charcoal: "#434544"
+    gray: "#707372"
+    mist: "#F4F8F8"
+    white: "#FFFFFF"
+  foreground: charcoal
+  background: white
+  primary: teal-dark
+  secondary: green-dark
+
+# Uses system fonts so the site builds reliably in GitHub Actions.
+typography:
+  fonts:
+    - family: "Source Sans 3"
+      source: google
+    - family: "IBM Plex Mono"
+      source: google
+  base:
+    family: "Source Sans 3"
+  headings:
+    family: "Source Sans 3"
+    weight: 700
+  monospace:
+    family: "IBM Plex Mono"

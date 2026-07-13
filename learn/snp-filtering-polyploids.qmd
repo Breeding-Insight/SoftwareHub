@@ -1,0 +1,192 @@
+---
+title: "SNP filtering in polyploids"
+description: "Build a polyploid-aware SNP filtering strategy that considers sequence evidence, dosage uncertainty, duplicated genomes, and downstream goals."
+categories:
+  - Genotype Data
+  - Data Quality
+  - Ploidy & Dosage
+image: ../assets/concept-snp-filtering.svg
+image-alt: "Layered filtering pipeline from sequence evidence through dosage and dataset quality to analysis-ready SNPs."
+order: 60
+learning-type: Concept
+software:
+  - BIGr
+  - BIGapp
+  - Qploidy2
+level: Intermediate
+keywords:
+  - SNP filtering
+  - polyploid
+  - allele dosage
+  - dosage uncertainty
+  - read depth
+  - paralogs
+  - homoeologs
+  - MAF
+---
+
+::: {.concept-definition}
+Polyploid SNP filtering is not just diploid filtering with a different ploidy value. A useful strategy must account for **multiple dosage classes, genotype uncertainty, allele bias, duplicated genomic regions, and the assumptions of the downstream analysis**.
+:::
+
+## Why polyploid filtering is harder
+
+At a biallelic tetraploid locus, five dosage states are possible rather than three diploid genotype states. As ploidy increases, neighboring expected allele fractions become closer together, so sequencing depth and model fit become increasingly important for distinguishing dosage classes.
+
+Polyploid genomes can also contain highly similar duplicated regions. Reads from paralogs or homoeologs may map to the same reference location, producing:
+
+- excess read depth;
+- apparent heterozygosity across nearly every sample;
+- distorted allele ratios;
+- poor segregation;
+- variants that look polymorphic but do not behave like a single Mendelian locus.
+
+## Think in layers
+
+A defensible workflow usually filters several kinds of evidence in sequence.
+
+### 1. Sequence and locus evidence
+
+Before trusting a genotype call, evaluate whether the site itself is credible.
+
+Depending on the platform and caller, relevant metrics can include:
+
+- mapping quality;
+- base quality;
+- strand or positional bias;
+- minimum and maximum depth;
+- local alignment problems near indels;
+- duplicate or invalid coordinates;
+- uniquely mappable sequence;
+- unexpectedly high depth consistent with collapsed repeats or duplicated loci.
+
+::: {.callout-warning title="High depth is not always high confidence"}
+In a duplicated genome, an extreme depth outlier can indicate that reads from several genomic copies are collapsing onto one reference position. A minimum-depth filter alone will not detect that problem.
+:::
+
+### 2. Dosage-call quality
+
+For sequencing-based dosage calls, inspect more than the final integer genotype.
+
+Useful signals include:
+
+- posterior probability of the selected dosage;
+- separation among dosage clusters;
+- estimated allele bias;
+- overdispersion;
+- sequencing-error parameters;
+- outlier flags;
+- overall model fit.
+
+A site with many confident hard calls can still be problematic if the fitted model requires extreme bias or produces implausible cluster structure.
+
+### 3. Sample and marker missingness
+
+Remove globally poor samples and unreliable markers in a deliberate order. Then re-calculate missingness because removing failed samples can rescue otherwise useful loci.
+
+[Read: Choosing a missing-data threshold](choosing-missing-data-threshold.qmd)
+
+### 4. Frequency and informativeness
+
+Minor-allele-frequency filters should match the analysis and sample size.
+
+A rare allele may be:
+
+- biologically real but too sparse for a stable association test;
+- useful in a large genomic prediction population;
+- difficult to distinguish from error in shallow sequencing;
+- absent from one family but informative in another.
+
+Do not apply a MAF threshold simply because it is conventional. Record the value, the number of loci removed, and the reason the downstream method needs it.
+
+### 5. Mendelian or segregation behavior—when appropriate
+
+Family information can reveal loci that do not behave as expected. However, the expected segregation pattern depends on:
+
+- ploidy;
+- inheritance mode;
+- pairing behavior;
+- population design;
+- double reduction;
+- null alleles;
+- aneuploidy or copy-number variation.
+
+A diploid Hardy–Weinberg or segregation filter should not be transferred blindly to a polyploid dataset.
+
+### 6. Analysis-specific filtering
+
+The final marker set should reflect the actual question.
+
+::: {.concept-decision-grid}
+::: {.concept-decision}
+#### PCA or population structure
+
+Consider missingness, linkage disequilibrium, uneven marker density, and whether technical structure aligns with biological groups.
+:::
+
+::: {.concept-decision}
+#### GWAS
+
+Consider allele frequency, genotype uncertainty, population structure, marker redundancy, and whether the association model accepts dosage directly.
+:::
+
+::: {.concept-decision}
+#### Genomic prediction
+
+Aggressive LD pruning is often not automatically desirable because genome-wide marker information is the signal used for prediction. Validate filtering choices by prediction scenario.
+:::
+
+::: {.concept-decision}
+#### Linkage and QTL mapping
+
+Segregation behavior, parental dosage, family structure, and mapping-model assumptions become central.
+:::
+:::
+
+## A practical order of operations
+
+A useful starting sequence is:
+
+1. validate sample identity and gross sample quality;
+2. remove technically invalid or clearly unreliable sites;
+3. call dosage with a polyploid-aware model;
+4. filter low-confidence genotype calls or loci using caller diagnostics;
+5. re-calculate sample and marker missingness;
+6. evaluate depth extremes and duplicated-locus behavior;
+7. apply analysis-specific frequency, LD, or segregation filters;
+8. compare key outputs across reasonable alternative filter settings.
+
+The exact order can change with the technology. For example, a targeted MADC workflow and low-depth GBS workflow do not generate the same evidence or failure modes.
+
+## What to report
+
+::: {.concept-checklist}
+- organism and modeled ploidy;
+- reference assembly and mapping strategy;
+- site-level sequence filters;
+- dosage caller and model;
+- genotype-confidence threshold;
+- sample and marker missingness rules;
+- depth limits;
+- allele-frequency rule;
+- LD pruning, if used;
+- family/segregation filters, if used;
+- marker counts after each major step.
+:::
+
+## Practical takeaway
+
+::: {.bi-callout}
+Filter polyploid SNPs as a chain of evidence: **credible locus → credible dosage model → credible genotype calls → credible dataset → fit for the downstream analysis**. Avoid relying on one hard-call matrix and one universal threshold.
+:::
+
+## Continue learning
+
+[What is allele dosage?](what-is-allele-dosage.qmd){.btn-bi-primary}
+[Process MADC genotype data](madc-to-vcf.qmd){.btn-bi-secondary}
+
+## Further reading
+
+- Gerard D, Ferrão LFV, Garcia AAF, Stephens M. 2018. *Genotyping Polyploids from Messy Sequencing Data*. **Genetics** 210:789–807. [doi:10.1534/genetics.118.301468](https://doi.org/10.1534/genetics.118.301468)
+- Gemenet DC et al. 2020. *Sequencing depth and genotype quality: accuracy and breeding operation considerations for genomic selection applications in autopolyploid crops*. **Theoretical and Applied Genetics** 133:3345–3363. [doi:10.1007/s00122-020-03673-2](https://doi.org/10.1007/s00122-020-03673-2)
+- Clark LV, Mays W, Lipka AE, Sacks EJ. 2022. *A population-level statistic for assessing Mendelian behavior of genotyping-by-sequencing data from highly duplicated genomes*. **BMC Bioinformatics** 23:101. [doi:10.1186/s12859-022-04635-9](https://doi.org/10.1186/s12859-022-04635-9)

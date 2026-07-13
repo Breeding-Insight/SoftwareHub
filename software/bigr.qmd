@@ -1,0 +1,36 @@
+---
+title: "BIGr"
+description: "Core genomic analysis functions for diploid and polyploid breeding programs."
+categories: [R package, Genomics, GWAS, Genomic selection, Polyploid]
+image: ../assets/card-bigr.svg
+---
+
+::: {.software-header}
+::: {}
+BIGr provides genomic and pedigree analysis functions designed for diploid and polyploid breeding programs. It also serves as a computational foundation for workflows exposed through BIGapp.
+
+<div class="meta-row"><span class="pill">R package</span><span class="pill">Diploid + polyploid</span><span class="pill">CRAN</span></div>
+:::
+<div class="software-badge">BIGr</div>
+:::
+
+## Start here
+
+```r
+install.packages("BIGr")
+library(BIGr)
+```
+
+[Documentation](https://breeding-insight.github.io/BIGr_documentation/){.btn-bi-primary}
+[Source code](https://github.com/Breeding-Insight/BIGr){.btn-bi-secondary}
+[CRAN](https://cran.r-project.org/package=BIGr){.btn-bi-secondary}
+
+## Good fit for
+
+- Genotype processing and format conversion
+- Diploid and polyploid genomic analyses
+- Workflows that also feed BIGapp
+
+## Related learning
+
+- [Process MADC genotype data](../learn/madc-to-vcf.qmd)

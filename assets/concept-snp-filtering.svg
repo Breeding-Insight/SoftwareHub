@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 425" role="img" aria-labelledby="title desc">
+  <title id="title">SNP filtering in polyploids</title>
+  <desc id="desc">A layered filter pipeline from sequence evidence to analysis-ready SNPs.</desc>
+  <rect width="800" height="425" rx="28" fill="#F4F8F8"/>
+  <text x="52" y="72" fill="#2A6576" font-family="Arial" font-size="25" font-weight="700">POLYPLOID SNP FILTERING</text>
+  <text x="52" y="110" fill="#434544" font-family="Arial" font-size="18">Filter evidence, dosage confidence, and analysis assumptions</text>
+  <g transform="translate(62 168)">
+    <rect x="0" y="0" width="146" height="112" rx="18" fill="#fff" stroke="#B5DDE8" stroke-width="3"/>
+    <text x="73" y="38" text-anchor="middle" fill="#2A6576" font-family="Arial" font-size="16" font-weight="700">Sequence</text>
+    <text x="73" y="66" text-anchor="middle" fill="#707372" font-family="Arial" font-size="14">depth · mapping</text><text x="73" y="87" text-anchor="middle" fill="#707372" font-family="Arial" font-size="14">base quality</text>
+    <path d="M156 56h40" stroke="#48A9C5" stroke-width="5" stroke-linecap="round"/><path d="m188 46 12 10-12 10" fill="none" stroke="#48A9C5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="210" y="0" width="146" height="112" rx="18" fill="#fff" stroke="#B5DDE8" stroke-width="3"/>
+    <text x="283" y="38" text-anchor="middle" fill="#2A6576" font-family="Arial" font-size="16" font-weight="700">Dosage</text>
+    <text x="283" y="66" text-anchor="middle" fill="#707372" font-family="Arial" font-size="14">posterior · bias</text><text x="283" y="87" text-anchor="middle" fill="#707372" font-family="Arial" font-size="14">model fit</text>
+    <path d="M366 56h40" stroke="#319B42" stroke-width="5" stroke-linecap="round"/><path d="m398 46 12 10-12 10" fill="none" stroke="#319B42" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="420" y="0" width="146" height="112" rx="18" fill="#fff" stroke="#A3D9AC" stroke-width="3"/>
+    <text x="493" y="38" text-anchor="middle" fill="#1E5D28" font-family="Arial" font-size="16" font-weight="700">Dataset</text>
+    <text x="493" y="66" text-anchor="middle" fill="#707372" font-family="Arial" font-size="14">missingness · MAF</text><text x="493" y="87" text-anchor="middle" fill="#707372" font-family="Arial" font-size="14">sample QC</text>
+    <path d="M576 56h40" stroke="#319B42" stroke-width="5" stroke-linecap="round"/><path d="m608 46 12 10-12 10" fill="none" stroke="#319B42" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="630" y="0" width="110" height="112" rx="18" fill="#2A6576"/>
+    <text x="685" y="45" text-anchor="middle" fill="#fff" font-family="Arial" font-size="16" font-weight="700">Analysis-</text><text x="685" y="67" text-anchor="middle" fill="#fff" font-family="Arial" font-size="16" font-weight="700">ready</text><text x="685" y="91" text-anchor="middle" fill="#DDEFF3" font-family="Arial" font-size="13">for a goal</text>
+  </g>
+  <text x="400" y="346" text-anchor="middle" fill="#707372" font-family="Arial" font-size="16">No single filter set is optimal for every downstream analysis.</text>
+</svg>
