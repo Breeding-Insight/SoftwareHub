@@ -1,5 +1,7 @@
 ---
 title: "SNP filtering in polyploids"
+author: "Alexander M. Sandercock"
+date: 2026-07-13
 description: "Build a polyploid-aware SNP filtering strategy that considers sequence evidence, dosage uncertainty, duplicated genomes, and downstream goals."
 categories:
   - Genotype Data
@@ -99,7 +101,7 @@ A rare allele may be:
 
 Do not apply a MAF threshold simply because it is conventional. Record the value, the number of loci removed, and the reason the downstream method needs it.
 
-### 5. Mendelian or segregation behavior—when appropriate
+### 5. Mendelian or segregation behavior, when appropriate
 
 Family information can reveal loci that do not behave as expected. However, the expected segregation pattern depends on:
 

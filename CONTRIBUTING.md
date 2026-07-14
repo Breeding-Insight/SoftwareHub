@@ -57,7 +57,9 @@ Examples:
 - `BIGr`
 - `BIGapp`
 - `Qploidy2`
-- `DeltaBreed`
+- `Familia`
+- `AlloMate`
+- `BIGpopA`
 
 A cross-package workflow may list several tools.
 
@@ -96,7 +98,7 @@ Use this for specific technologies, formats, methods, organisms, or analyses suc
 
 ## Discovery behavior on `learn.qmd`
 
-The Learn page uses a custom Quarto listing template (`assets/learn-listing.ejs.md`) with native listing filtering and pagination. The template renders `learning-type`, `software`, and `level` as separate badges and keeps broad `categories` visible as topic tags. Goal cards and topic chips write a `?filter=` query parameter and use `assets/learn-filter.html` to apply that value to the listing filter. This keeps deep links shareable while allowing the underlying listing to remain metadata-driven.
+The Learn page uses a custom Quarto listing template (`assets/learn-listing.ejs.md`) with native listing filtering and pagination. The template renders `learning-type`, `software`, and `level` as separate badges, prefixes software badges with `Uses`, and keeps broad `categories` visible as topic tags. Goal cards and topic chips write a `?filter=` query parameter and use `assets/learn-filter.html` to apply that value to the listing filter. This keeps deep links shareable while allowing the underlying listing to remain metadata-driven.
 
 
 ## Concept page pattern

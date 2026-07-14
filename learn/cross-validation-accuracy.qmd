@@ -1,5 +1,7 @@
 ---
 title: "What does cross-validation accuracy mean?"
+author: "Alexander M. Sandercock"
+date: 2026-07-13
 description: "Interpret cross-validation results in genomic prediction without confusing predictive ability, selection accuracy, and the realism of the validation design."
 categories:
   - Genomic Prediction
@@ -41,7 +43,7 @@ The important phrase is **withheld from model fitting**. Any preprocessing step 
 
 ## What number is commonly reported?
 
-A common statistic is the Pearson correlation between predicted values and observed phenotypes—or adjusted phenotype estimates—in the held-out data:
+A common statistic is the Pearson correlation between predicted values and observed phenotypes, or adjusted phenotype estimates, in the held-out data:
 
 $$
 r = \mathrm{cor}(\widehat{y}, y)
@@ -155,7 +157,7 @@ A cross-validation number is not an intrinsic property of a genomic prediction m
 ## Continue learning
 
 [Choose a genomic analysis path](genomics-path.qmd){.btn-bi-primary}
-[Browse genomic prediction materials](../learn.qmd?filter=Genomic%20Prediction#all-learning-materials){.btn-bi-secondary}
+[Browse genomic prediction materials](../learn.html?filter=Genomic%20Prediction#all-learning-materials){.btn-bi-secondary}
 
 ## Further reading
 

@@ -6,10 +6,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="keywords" content="DArTag, MADC, VCF, genotype processing, dosage">
-<meta name="description" content="Use BIGr to filter targeted sequencing data and convert it into an analysis-ready VCF workflow.">
+<meta name="author" content="Alexander M. Sandercock">
+<meta name="dcterms.date" content="2025-06-18">
+<meta name="keywords" content="DArTag, MADC, VCF, Updog, vcfR, genotype calling, dosage, diploid, polyploid">
+<meta name="description" content="Use BIGr to recover biallelic read counts, call diploid or polyploid genotypes with Updog, and filter a validated VCF.">
 
-<title>Process MADC genotype data – Breeding Insight Software</title>
+<title>Convert MADC data to a genotype-called VCF – Breeding Insight Software</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -24,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -46,9 +83,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-effba262e874657e83d0e513aa0f2f81.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-02507b1fe35468d4b588cb917142b773.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-02507b1fe35468d4b588cb917142b773.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-02507b1fe35468d4b588cb917142b773.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-8f94084065d81b420d84a6ed678fb97a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-8f94084065d81b420d84a6ed678fb97a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-8f94084065d81b420d84a6ed678fb97a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -77,14 +114,45 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="Process MADC genotype data – Breeding Insight Software">
-<meta property="og:description" content="Use BIGr to filter targeted sequencing data and convert it into an analysis-ready VCF workflow.">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Convert MADC data to a genotype-called VCF – Breeding Insight Software">
+<meta property="og:description" content="Use BIGr to recover biallelic read counts, call diploid or polyploid genotypes with Updog, and filter a validated VCF.">
 <meta property="og:image" content="https://breeding-insight.github.io/software/assets/tutorial-madc.svg">
 <meta property="og:site_name" content="Breeding Insight Software">
+<meta property="og:image:alt" content="MADC data converted to VCF.">
+<link rel="canonical" href="https://breeding-insight.github.io/software/learn/madc-to-vcf.html">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed learning-material-page quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -149,8 +217,28 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#goal" id="toc-goal" class="nav-link active" data-scroll-target="#goal">Goal</a></li>
-  <li><a href="#why-this-belongs-in-the-portal" id="toc-why-this-belongs-in-the-portal" class="nav-link" data-scroll-target="#why-this-belongs-in-the-portal">Why this belongs in the portal</a></li>
-  <li><a href="#proposed-migrated-outline" id="toc-proposed-migrated-outline" class="nav-link" data-scroll-target="#proposed-migrated-outline">Proposed migrated outline</a></li>
+  <li><a href="#prerequisite-process-raw-madc-data-with-hapapp" id="toc-prerequisite-process-raw-madc-data-with-hapapp" class="nav-link" data-scroll-target="#prerequisite-process-raw-madc-data-with-hapapp">Prerequisite: process raw MADC data with HapApp</a></li>
+  <li><a href="#reproducible-example" id="toc-reproducible-example" class="nav-link" data-scroll-target="#reproducible-example">Reproducible example</a></li>
+  <li><a href="#install-and-load-the-packages" id="toc-install-and-load-the-packages" class="nav-link" data-scroll-target="#install-and-load-the-packages">1. Install and load the packages</a></li>
+  <li><a href="#locate-and-inspect-the-bundled-inputs" id="toc-locate-and-inspect-the-bundled-inputs" class="nav-link" data-scroll-target="#locate-and-inspect-the-bundled-inputs">2. Locate and inspect the bundled inputs</a></li>
+  <li><a href="#run-the-madc-sanity-checks" id="toc-run-the-madc-sanity-checks" class="nav-link" data-scroll-target="#run-the-madc-sanity-checks">3. Run the MADC sanity checks</a></li>
+  <li><a href="#convert-madc-counts-to-a-biallelic-vcf" id="toc-convert-madc-counts-to-a-biallelic-vcf" class="nav-link" data-scroll-target="#convert-madc-counts-to-a-biallelic-vcf">4. Convert MADC counts to a biallelic VCF</a></li>
+  <li><a href="#reopen-the-read-count-vcf-and-extract-matrices" id="toc-reopen-the-read-count-vcf-and-extract-matrices" class="nav-link" data-scroll-target="#reopen-the-read-count-vcf-and-extract-matrices">5. Reopen the read-count VCF and extract matrices</a></li>
+  <li><a href="#validate-and-prepare-the-count-matrices" id="toc-validate-and-prepare-the-count-matrices" class="nav-link" data-scroll-target="#validate-and-prepare-the-count-matrices">6. Validate and prepare the count matrices</a></li>
+  <li><a href="#call-genotypes-with-updog" id="toc-call-genotypes-with-updog" class="nav-link" data-scroll-target="#call-genotypes-with-updog">7. Call genotypes with Updog</a></li>
+  <li><a href="#inspect-updog-diagnostics" id="toc-inspect-updog-diagnostics" class="nav-link" data-scroll-target="#inspect-updog-diagnostics">8. Inspect Updog diagnostics</a></li>
+  <li><a href="#convert-updog-output-to-a-called-vcf" id="toc-convert-updog-output-to-a-called-vcf" class="nav-link" data-scroll-target="#convert-updog-output-to-a-called-vcf">9. Convert Updog output to a called VCF</a>
+  <ul class="collapse">
+  <li><a href="#understand-the-dosage-direction" id="toc-understand-the-dosage-direction" class="nav-link" data-scroll-target="#understand-the-dosage-direction">Understand the dosage direction</a></li>
+  </ul></li>
+  <li><a href="#reopen-validate-and-filter-the-called-vcf" id="toc-reopen-validate-and-filter-the-called-vcf" class="nav-link" data-scroll-target="#reopen-validate-and-filter-the-called-vcf">10. Reopen, validate, and filter the called VCF</a>
+  <ul class="collapse">
+  <li><a href="#apply-adjustable-quality-filters" id="toc-apply-adjustable-quality-filters" class="nav-link" data-scroll-target="#apply-adjustable-quality-filters">Apply adjustable quality filters</a></li>
+  </ul></li>
+  <li><a href="#alternative-retain-multiallelic-information-with-polyrad" id="toc-alternative-retain-multiallelic-information-with-polyrad" class="nav-link" data-scroll-target="#alternative-retain-multiallelic-information-with-polyrad">Alternative: retain multiallelic information with polyRAD</a></li>
+  <li><a href="#troubleshooting-checkpoints" id="toc-troubleshooting-checkpoints" class="nav-link" data-scroll-target="#troubleshooting-checkpoints">Troubleshooting checkpoints</a></li>
+  <li><a href="#continue-learning" id="toc-continue-learning" class="nav-link" data-scroll-target="#continue-learning">Continue learning</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/learn/madc-to-vcf.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -159,7 +247,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Process MADC genotype data</h1>
+<h1 class="title">Convert MADC data to a genotype-called VCF</h1>
   <div class="quarto-categories">
     <div class="quarto-category">Genotype Data</div>
     <div class="quarto-category">Data Quality</div>
@@ -169,15 +257,33 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    Use BIGr to filter targeted sequencing data and convert it into an analysis-ready VCF workflow.
+    Use BIGr to recover biallelic read counts, call diploid or polyploid genotypes with Updog, and filter a validated VCF.
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Alexander M. Sandercock </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 18, 2025</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">July 13, 2026</p>
+    </div>
+  </div>
     
   </div>
   
@@ -185,7 +291,7 @@ ul.task-list li input[type="checkbox"] {
 <div>
   <div class="keywords">
     <div class="block-title">Keywords</div>
-    <p>DArTag, MADC, VCF, genotype processing, dosage</p>
+    <p>DArTag, MADC, VCF, Updog, vcfR, genotype calling, dosage, diploid, polyploid</p>
   </div>
 </div>
 
@@ -194,24 +300,815 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="goal" class="level2">
 <h2 class="anchored" data-anchor-id="goal">Goal</h2>
-<p>Turn MADC-format targeted genotyping data into a clean representation suitable for downstream genomic analysis.</p>
-</section>
-<section id="why-this-belongs-in-the-portal" class="level2">
-<h2 class="anchored" data-anchor-id="why-this-belongs-in-the-portal">Why this belongs in the portal</h2>
-<p>This is a durable <strong>workflow</strong> rather than merely a function reference. Users need to understand quality filtering, dosage conventions, coordinate validity, sorting, and VCF expectations as a connected process.</p>
-<p><a href="https://breeding-insight.github.io/BIGr_documentation/" class="btn-bi-primary">Open the current BIGr tutorial</a> <a href="../software/bigr.html" class="btn-bi-secondary">Explore BIGr</a></p>
-</section>
-<section id="proposed-migrated-outline" class="level2">
-<h2 class="anchored" data-anchor-id="proposed-migrated-outline">Proposed migrated outline</h2>
+<p>Convert a HapApp-processed DArT MADC file into a <strong>biallelic read-count VCF</strong>, call reference-allele dosage with <a href="https://dcgerard.github.io/updog/">Updog</a>, convert those calls into a genotype-called VCF with BIGr, and apply documented quality filters.</p>
+<p>This workflow supports both diploid and polyploid organisms. You must supply the correct ploidy and adjust the depth requirements, model evaluation, and filter interpretation to the number and separability of the expected dosage classes. If ploidy is uncertain, use the <a href="https://breeding-insight.github.io/Qploidy2/Qploidy_alfalfa_tutorial.html">Qploidy2 tutorial</a> and <a href="../software/qploidy2.html">Qploidy2 software page</a> before calling genotypes.</p>
+<p>By the end, you will have validated:</p>
 <ol type="1">
-<li>Inspect the MADC file and identify required metadata.</li>
-<li>Filter low-quality loci and samples.</li>
-<li>Standardize genotype/dosage conventions.</li>
-<li>Validate chromosome and position fields.</li>
-<li>Write, sort, compress, and index the VCF.</li>
-<li>Run checkpoints before downstream analysis.</li>
-<li>Continue to PCA, GWAS, genomic prediction, or other analyses.</li>
+<li>fixed allele IDs and sequence orientation;</li>
+<li>biallelic REF/ALT recovery;</li>
+<li>matching reference-count and total-depth matrices;</li>
+<li>Updog dosage calls in the expected ploidy range; and</li>
+<li>a filtered VCF that reopens with the expected samples, variants, and FORMAT fields.</li>
 </ol>
+</section>
+<section id="prerequisite-process-raw-madc-data-with-hapapp" class="level2">
+<h2 class="anchored" data-anchor-id="prerequisite-process-raw-madc-data-with-hapapp">Prerequisite: process raw MADC data with HapApp</h2>
+<div class="callout callout-style-default callout-important callout-titled" title="This tutorial starts from a processed MADC">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>This tutorial starts from a processed MADC
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do not use a raw DArT MADC file in the conversion step. Raw reports first require HapApp processing to assign fixed allele IDs and address duplicate, ambiguous, or poor-quality microhaplotypes.</p>
+</div>
+</div>
+<p>Breeding Insight provides the public <a href="https://github.com/Breeding-Insight/HapApp_utils">HapApp_utils repository</a> for this preparation. Users may also use Breeding Insight’s forthcoming online HapApp after it becomes publicly available, or contact Breeding Insight for support. No online HapApp link is provided here because that service is not yet public.</p>
+<p>The HapApp workflow does more than rename rows: it applies initial sequence quality control, reconciles known alleles with the panel’s microhaplotype database, assigns standardized IDs to qualifying novel alleles, produces an updated fixed-ID MADC, and updates the FASTA database when new alleles are found (<a href="#ref-zhao-2026">Zhao et al.&nbsp;2026</a>).</p>
+<p>Possible paralog filtering also occurs before this tutorial when the organism, panel, and marker evidence make it appropriate. HapApp commands and paralog-filtering code are outside this workflow’s scope. BIGr 0.7.2’s <code>filterVCF()</code> applies a minimum-depth mask; it does not provide a maximum-depth filter and is not a substitute for this upstream paralog screen. Review <a href="../learn/snp-filtering-polyploids.html">SNP filtering in polyploids</a> for the biological reasons that duplicate loci can create extreme depth and distorted allele ratios.</p>
+<p>If MADC terminology is new, first read <a href="../learn/what-is-a-madc-file.html">What is a MADC file?</a>. For VCF structure and R basics, use <a href="../learn/get-started-genomic-data-r.html">Get started with genomic data in R</a>.</p>
+</section>
+<section id="reproducible-example" class="level2">
+<h2 class="anchored" data-anchor-id="reproducible-example">Reproducible example</h2>
+<p>Code execution is disabled during site builds. The displayed checkpoints were verified with:</p>
+<div class="table-responsive">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Verified value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>R</td>
+<td>4.5.1</td>
+</tr>
+<tr class="even">
+<td>BIGr</td>
+<td>CRAN 0.7.2</td>
+</tr>
+<tr class="odd">
+<td>Updog</td>
+<td>2.1.7</td>
+</tr>
+<tr class="even">
+<td>vcfR</td>
+<td>1.16.0</td>
+</tr>
+<tr class="odd">
+<td>Random seed</td>
+<td><code>20260713</code></td>
+</tr>
+<tr class="even">
+<td>BIGr workers</td>
+<td><code>n.cores = 1</code></td>
+</tr>
+<tr class="odd">
+<td>Updog workers</td>
+<td><code>nc = 1</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>On the verification system, MADC conversion took about 10 seconds and Updog calling took under 1 second. Runtime varies with the number of loci and samples, available cores, and operating system.</p>
+</section>
+<section id="install-and-load-the-packages" class="level2">
+<h2 class="anchored" data-anchor-id="install-and-load-the-packages">1. Install and load the packages</h2>
+<p>BIGr requires R 4.4.0 or newer. <code>BiocManager</code> installs BIGr together with its Bioconductor dependencies; Updog performs genotype calling, and vcfR reads and extracts VCF data.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"BiocManager"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"BIGr"</span>, <span class="st">"updog"</span>, <span class="st">"vcfR"</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ask =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">update =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Restart R, then load the packages and record their versions.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(BIGr)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(updog)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vcfR)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">getRversion</span>() <span class="sc">&gt;=</span> <span class="st">"4.4.0"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>R.version.string</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">c</span>(<span class="st">"BIGr"</span>, <span class="st">"updog"</span>, <span class="st">"vcfR"</span>), packageVersion)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Updog models allele bias, overdispersion, sequencing error, and genotype uncertainty rather than rounding read fractions. Its <a href="https://dcgerard.github.io/updog/">official package site</a> introduces the package and its supported models (<a href="#ref-gerard-2018">Gerard et al.&nbsp;2018</a>).</p>
+</section>
+<section id="locate-and-inspect-the-bundled-inputs" class="level2">
+<h2 class="anchored" data-anchor-id="locate-and-inspect-the-bundled-inputs">2. Locate and inspect the bundled inputs</h2>
+<p>This tutorial uses a small processed MADC, <code>.botloci</code> file, and haplotype FASTA bundled with BIGr. <code>system.file()</code> finds them without a machine-specific path.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>madc_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"example_MADC_FixedAlleleID.csv"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">"BIGr"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>botloci_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"example_SNPs_DArTag-probe-design_f180bp.botloci"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">"BIGr"</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>hap_seq_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"example_allele_db.fa"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">"BIGr"</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nzchar</span>(madc_file), <span class="fu">file.exists</span>(madc_file),</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nzchar</span>(botloci_file), <span class="fu">file.exists</span>(botloci_file),</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nzchar</span>(hap_seq_file), <span class="fu">file.exists</span>(hap_seq_file)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>madc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(madc_file, <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(madc)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(madc)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(madc[, <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>)])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Expected dimensions:</p>
+<pre class="text"><code>[1] 51 13</code></pre>
+<p>The file contains 51 microhaplotype rows, three identifying columns, and 10 sample read-count columns. Confirm that <code>AlleleID</code> contains fixed suffixes such as <code>_0001</code> and <code>_0002</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">c</span>(<span class="st">"AlleleID"</span>, <span class="st">"CloneID"</span>, <span class="st">"AlleleSequence"</span>) <span class="sc">%in%</span> <span class="fu">names</span>(madc)),</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">any</span>(<span class="fu">grepl</span>(<span class="st">"_0001"</span>, madc<span class="sc">$</span>AlleleID, <span class="at">fixed =</span> <span class="cn">TRUE</span>)),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">any</span>(<span class="fu">grepl</span>(<span class="st">"_0002"</span>, madc<span class="sc">$</span>AlleleID, <span class="at">fixed =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">readLines</span>(botloci_file))</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">readLines</span>(hap_seq_file))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Checkpoint: fixed IDs and strand information">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Checkpoint: fixed IDs and strand information
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The processed MADC must have fixed allele IDs. The <code>.botloci</code> file identifies sequences that require reverse complementation; without correct strand orientation, recovered REF and ALT bases can be reversed or complemented incorrectly.</p>
+</div>
+</div>
+</section>
+<section id="run-the-madc-sanity-checks" class="level2">
+<h2 class="anchored" data-anchor-id="run-the-madc-sanity-checks">3. Run the MADC sanity checks</h2>
+<p><code>check_madc_sanity()</code> returns named checks rather than one overall pass/fail flag.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sanity <span class="ot">&lt;-</span> BIGr<span class="sc">::</span><span class="fu">check_madc_sanity</span>(madc)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">check =</span> <span class="fu">names</span>(sanity<span class="sc">$</span>checks),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">result =</span> <span class="fu">unname</span>(sanity<span class="sc">$</span>checks),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="cn">NULL</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Verified results for the bundled file:</p>
+<div class="table-responsive">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 45%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Check</th>
+<th style="text-align: center;">Result</th>
+<th>Readiness interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Columns</code></td>
+<td style="text-align: center;"><code>TRUE</code></td>
+<td>Required columns are present</td>
+</tr>
+<tr class="even">
+<td><code>FixAlleleIDs</code></td>
+<td style="text-align: center;"><code>TRUE</code></td>
+<td>HapApp-style fixed IDs are present</td>
+</tr>
+<tr class="odd">
+<td><code>IUPACcodes</code></td>
+<td style="text-align: center;"><code>FALSE</code></td>
+<td>No unsupported ambiguous bases were found</td>
+</tr>
+<tr class="even">
+<td><code>LowerCase</code></td>
+<td style="text-align: center;"><code>FALSE</code></td>
+<td>No lowercase bases were found</td>
+</tr>
+<tr class="odd">
+<td><code>Indels</code></td>
+<td style="text-align: center;"><code>FALSE</code></td>
+<td>This example contains no detected target indels</td>
+</tr>
+<tr class="even">
+<td><code>ChromPos</code></td>
+<td style="text-align: center;"><code>TRUE</code></td>
+<td><code>CloneID</code> supplies chromosome and position</td>
+</tr>
+<tr class="odd">
+<td><code>allNAcol</code> / <code>allNArow</code></td>
+<td style="text-align: center;"><code>FALSE</code></td>
+<td>No empty row or column was found</td>
+</tr>
+<tr class="even">
+<td><code>RefAltSeqs</code></td>
+<td style="text-align: center;"><code>FALSE</code></td>
+<td>One Alt sequence is absent from the MADC and will be recovered from FASTA</td>
+</tr>
+<tr class="odd">
+<td><code>OtherAlleles</code></td>
+<td style="text-align: center;"><code>FALSE</code></td>
+<td>The example has no <code>Other</code> rows</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Some names describe the <strong>presence</strong> of a condition, so <code>FALSE</code> can be the desired result. For conversion, required columns and fixed IDs must be <code>TRUE</code>, while <code>IUPACcodes</code> must be <code>FALSE</code>. A missing Ref or Alt can be acceptable for <code>madc2vcf_all()</code> when the supplied haplotype FASTA contains it; the verified run recovers one missing Alt sequence.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Indel and marker-metadata checkpoint">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Indel and marker-metadata checkpoint
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Current BIGr supports target indels when you provide the required marker-information fields, including authoritative REF/ALT and indel position/length, together with <code>.botloci</code>. Off-target variants from that indel-containing tag are ignored. If <code>CloneID</code> does not encode chromosome and position, supply a marker-information CSV with compatible marker IDs, <code>Chr</code>, and <code>Pos</code>. Follow the <a href="https://cran.r-project.org/web/packages/BIGr/BIGr.pdf">BIGr reference manual</a> for the exact current fields.</p>
+</div>
+</div>
+</section>
+<section id="convert-madc-counts-to-a-biallelic-vcf" class="level2">
+<h2 class="anchored" data-anchor-id="convert-madc-counts-to-a-biallelic-vcf">4. Convert MADC counts to a biallelic VCF</h2>
+<p>Create a project output directory and run <code>madc2vcf_all()</code>. Updog consumes one reference count and one total count per sample and locus, so this workflow removes multiallelic SNPs.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>output_dir <span class="ot">&lt;-</span> <span class="st">"madc_updog_output"</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(output_dir, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>read_count_vcf_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  output_dir,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"madc_read_counts.vcf"</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>BIGr<span class="sc">::</span><span class="fu">madc2vcf_all</span>(</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">madc =</span> madc_file,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">botloci_file =</span> botloci_file,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">hap_seq_file =</span> hap_seq_file,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">n.cores =</span> <span class="dv">1</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">rm_multiallelic_SNP =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">alignment_score_thr =</span> <span class="dv">40</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">add_others =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">others_max_snps =</span> <span class="dv">5</span>,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">others_rm_with_indels =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">out_vcf =</span> read_count_vcf_file,</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">TRUE</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The verified run recovers the missing Alt sequence from FASTA, finds one multiallelic off-target SNP, removes it, and writes <strong>32 biallelic variants for 10 samples</strong>. It also writes the BIGr version and conversion parameters into VCF metadata.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Checkpoint: orientation, REF/ALT, and biallelic output">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Checkpoint: orientation, REF/ALT, and biallelic output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Read the conversion messages. Confirm that strand handling used the intended <code>.botloci</code>, missing sequences were recovered or deliberately discarded, REF and ALT are not <code>.</code>, and the number of removed multiallelic sites is understood. <code>rm_multiallelic_SNP = TRUE</code> is a deliberate Updog compatibility choice, not a statement that multiallelic biology is unimportant.</p>
+</div>
+</div>
+</section>
+<section id="reopen-the-read-count-vcf-and-extract-matrices" class="level2">
+<h2 class="anchored" data-anchor-id="reopen-the-read-count-vcf-and-extract-matrices">5. Reopen the read-count VCF and extract matrices</h2>
+<p>Use vcfR to reopen the file, following the structure introduced in the <a href="https://knausb.github.io/vcfR_documentation/quick_intro.html">official vcfR quick introduction</a> (<a href="#ref-knaus-2017">Knaus and Grünwald 2017</a>).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>read_vcf <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">read.vcfR</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  read_count_vcf_file,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">variants =</span> <span class="fu">nrow</span>(read_vcf<span class="sc">@</span>fix),</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">samples =</span> <span class="fu">ncol</span>(read_vcf<span class="sc">@</span>gt) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(read_vcf<span class="sc">@</span>gt[, <span class="st">"FORMAT"</span>])</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(read_vcf<span class="sc">@</span>fix[, <span class="fu">c</span>(<span class="st">"CHROM"</span>, <span class="st">"POS"</span>, <span class="st">"ID"</span>, <span class="st">"REF"</span>, <span class="st">"ALT"</span>)])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Expected summary:</p>
+<pre class="text"><code>variants  samples
+      32       10
+
+[1] "DP:RA:AD"</code></pre>
+<p>This is a <strong>read-count VCF</strong>, not a genotype-called VCF. Its FORMAT values are total depth (<code>DP</code>), reference-allele depth (<code>RA</code>), and ordered reference/alternate depths (<code>AD</code>). It has no <code>GT</code> or dosage field yet.</p>
+<p>Confirm that the conversion produced only biallelic variants with explicit alleles.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">any</span>(read_vcf<span class="sc">@</span>fix[, <span class="st">"REF"</span>] <span class="sc">==</span> <span class="st">"."</span>),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">any</span>(read_vcf<span class="sc">@</span>fix[, <span class="st">"ALT"</span>] <span class="sc">==</span> <span class="st">"."</span>),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">any</span>(<span class="fu">grepl</span>(<span class="st">","</span>, read_vcf<span class="sc">@</span>fix[, <span class="st">"ALT"</span>], <span class="at">fixed =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Extract the matrices as described in the <a href="https://knausb.github.io/vcfR_documentation/matrices.html">official vcfR matrix-extraction tutorial</a>. BIGr 0.7.2 writes reference depth as <code>RA</code>; do not substitute <code>RO</code> unless your own VCF header actually defines it.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ref_matrix <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  read_vcf,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">element =</span> <span class="st">"RA"</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">as.numeric =</span> <span class="cn">TRUE</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>size_matrix <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  read_vcf,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">element =</span> <span class="st">"DP"</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">as.numeric =</span> <span class="cn">TRUE</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Rows are variants and columns are samples, exactly as <code>multidog()</code> requires.</p>
+</section>
+<section id="validate-and-prepare-the-count-matrices" class="level2">
+<h2 class="anchored" data-anchor-id="validate-and-prepare-the-count-matrices">6. Validate and prepare the count matrices</h2>
+<p>Do not call genotypes until the matrix dimensions, names, and count relationships agree.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">dim</span>(ref_matrix), <span class="fu">dim</span>(size_matrix)),</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">dimnames</span>(ref_matrix), <span class="fu">dimnames</span>(size_matrix)),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(ref_matrix <span class="sc">&gt;=</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(size_matrix <span class="sc">&gt;=</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(ref_matrix <span class="sc">&lt;=</span> size_matrix, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">rownames</span>(ref_matrix), read_vcf<span class="sc">@</span>fix[, <span class="st">"ID"</span>])</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(ref_matrix)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(ref_matrix, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(size_matrix, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  size_matrix,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">probs =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>),</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Verified results:</p>
+<pre class="text"><code>[1] 32 10
+
+reference-count range: 0 to 1970
+total-depth range:     0 to 1972
+total-depth quartiles: 0, 28, 173, 311, 1972</code></pre>
+<p>Remove variants with no reads across all samples before calling. Updog also removes all-zero loci, but doing it explicitly makes the change auditable.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>has_reads <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(size_matrix, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>ref_matrix <span class="ot">&lt;-</span> ref_matrix[has_reads, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>size_matrix <span class="ot">&lt;-</span> size_matrix[has_reads, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">dim</span>(ref_matrix), <span class="fu">dim</span>(size_matrix)),</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">dimnames</span>(ref_matrix), <span class="fu">dimnames</span>(size_matrix))</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(ref_matrix)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Expected prepared dimensions:</p>
+<pre class="text"><code>[1] 31 10</code></pre>
+<div class="callout callout-style-default callout-warning callout-titled" title="Expected-depth checkpoint">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Expected-depth checkpoint
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The example’s high depth does not establish a required depth for other data. Higher ploidy creates more dosage classes with closer expected allele fractions, so adequate depth and clear class separation become more important. Extreme depth may also signal duplicated sequence rather than confidence.</p>
+</div>
+</div>
+<p>The <a href="https://dcgerard.github.io/updog/articles/multidog.html">official <code>multidog()</code> tutorial</a> documents these matrix requirements and multi-locus calling steps.</p>
+</section>
+<section id="call-genotypes-with-updog" class="level2">
+<h2 class="anchored" data-anchor-id="call-genotypes-with-updog">7. Call genotypes with Updog</h2>
+<p>Set the organism’s biological ploidy explicitly. The bundled example is called as diploid for reproducibility; replace <code>2</code> only after establishing the correct ploidy for your samples.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ploidy <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>seed <span class="ot">&lt;-</span> <span class="dv">20260713</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  ploidy <span class="sc">==</span> <span class="fu">as.integer</span>(ploidy),</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  ploidy <span class="sc">&gt;=</span> <span class="dv">1</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(seed)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>mout <span class="ot">&lt;-</span> updog<span class="sc">::</span><span class="fu">multidog</span>(</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">refmat =</span> ref_matrix,</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">sizemat =</span> size_matrix,</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">ploidy =</span> ploidy,</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="st">"norm"</span>,</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">nc =</span> <span class="dv">1</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>model = "norm"</code> uses a flexible normal prior on genotype distribution (<a href="#ref-gerard-ferrao-2020">Gerard and Ferrão 2020</a>). Updog can accommodate different population structures, but <code>norm</code> is still a modeling choice rather than an automatic best model for every population. Use the <a href="https://dcgerard.github.io/updog/articles/smells_like_updog.html">official Updog worked example</a> to compare model assumptions and interpret poor fits.</p>
+<p>Set <code>nc</code> no higher than the cores available to your R session. Keeping <code>nc = 1</code> and a fixed seed makes this small example portable and reproducible.</p>
+</section>
+<section id="inspect-updog-diagnostics" class="level2">
+<h2 class="anchored" data-anchor-id="inspect-updog-diagnostics">8. Inspect Updog diagnostics</h2>
+<p>Updog returns one table for locus-level estimates and another for sample-by-locus genotype results (<a href="#ref-gerard-2018">Gerard et al.&nbsp;2018</a>).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mout<span class="sc">$</span>snpdf)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mout<span class="sc">$</span>inddf)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mout<span class="sc">$</span>snpdf[, <span class="fu">c</span>(</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bias"</span>, <span class="st">"seq"</span>, <span class="st">"od"</span>, <span class="st">"prop_mis"</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>)])</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mout<span class="sc">$</span>inddf[, <span class="fu">c</span>(</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ref"</span>, <span class="st">"size"</span>, <span class="st">"geno"</span>, <span class="st">"maxpostprob"</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>)])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Interpret the diagnostics together:</p>
+<div class="table-responsive">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Diagnostic</th>
+<th>What it represents</th>
+<th>What to examine</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Allele bias (<code>bias</code>)</td>
+<td>Departure from equal sampling of reference and alternate alleles; values near 1 indicate little bias</td>
+<td>Extreme estimates and shifted dosage clusters</td>
+</tr>
+<tr class="even">
+<td>Overdispersion (<code>od</code>)</td>
+<td>Extra variability beyond ordinary binomial read sampling</td>
+<td>Large values and weak separation among dosage classes</td>
+</tr>
+<tr class="odd">
+<td>Sequencing error (<code>seq</code>)</td>
+<td>Estimated probability that a read reports the wrong allele</td>
+<td>High estimates or fits at an imposed boundary</td>
+</tr>
+<tr class="even">
+<td>Expected mis-genotyping (<code>prop_mis</code>)</td>
+<td>Model-estimated proportion of incorrectly classified individuals at the locus</td>
+<td>Loci with high expected error even when some individual calls look confident</td>
+</tr>
+<tr class="odd">
+<td>Posterior probability (<code>maxpostprob</code>)</td>
+<td>Probability assigned to the selected dosage for one sample and locus</td>
+<td>Low-confidence calls that should be set to missing</td>
+</tr>
+<tr class="even">
+<td>Depth (<code>size</code>)</td>
+<td>Total reads supporting one sample and locus</td>
+<td>Low evidence, extreme outliers, and ploidy-appropriate separation</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The verified run returns 31 loci and 310 sample-by-locus records. Diploid reference dosage spans 0 through 2, and maximum posterior probability spans approximately 0.674 through 1. The diagnostic ranges are characteristics of this tiny example, not recommended cutoffs.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(mout<span class="sc">$</span>snpdf<span class="sc">$</span>ploidy <span class="sc">==</span> ploidy),</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(mout<span class="sc">$</span>inddf<span class="sc">$</span>geno <span class="sc">&gt;=</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(mout<span class="sc">$</span>inddf<span class="sc">$</span>geno <span class="sc">&lt;=</span> ploidy, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(mout<span class="sc">$</span>inddf<span class="sc">$</span>maxpostprob <span class="sc">&gt;=</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(mout<span class="sc">$</span>inddf<span class="sc">$</span>maxpostprob <span class="sc">&lt;=</span> <span class="dv">1</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Ploidy and dosage-range checkpoint">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Ploidy and dosage-range checkpoint
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>At ploidy <span class="math inline">\(P\)</span>, Updog must return reference dosages from 0 through <span class="math inline">\(P\)</span>. A valid range does not by itself prove a good fit: inspect whether expected dosage classes are separable, depth is adequate, and bias, overdispersion, error, and posterior support are plausible.</p>
+</div>
+</div>
+</section>
+<section id="convert-updog-output-to-a-called-vcf" class="level2">
+<h2 class="anchored" data-anchor-id="convert-updog-output-to-a-called-vcf">9. Convert Updog output to a called VCF</h2>
+<p>Preserve the authoritative REF and ALT bases from the read-count VCF. Subset them with the same <code>has_reads</code> mask used for the Updog matrices.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ref_alt <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Chr =</span> read_vcf<span class="sc">@</span>fix[has_reads, <span class="st">"CHROM"</span>],</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Pos =</span> read_vcf<span class="sc">@</span>fix[has_reads, <span class="st">"POS"</span>],</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Ref =</span> read_vcf<span class="sc">@</span>fix[has_reads, <span class="st">"REF"</span>],</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Alt =</span> read_vcf<span class="sc">@</span>fix[has_reads, <span class="st">"ALT"</span>]</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>called_vcf_base <span class="ot">&lt;-</span> <span class="fu">file.path</span>(</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  output_dir,</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"madc_updog_called"</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>BIGr<span class="sc">::</span><span class="fu">updog2vcf</span>(</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">multidog.object =</span> mout,</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">output.file =</span> called_vcf_base,</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">updog_version =</span> <span class="fu">as.character</span>(<span class="fu">packageVersion</span>(<span class="st">"updog"</span>)),</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">RefAlt =</span> ref_alt,</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">compress =</span> <span class="cn">TRUE</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>called_vcf_file <span class="ot">&lt;-</span> <span class="fu">paste0</span>(called_vcf_base, <span class="st">".vcf.gz"</span>)</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">file.exists</span>(called_vcf_file))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="understand-the-dosage-direction" class="level3">
+<h3 class="anchored" data-anchor-id="understand-the-dosage-direction">Understand the dosage direction</h3>
+<p>Updog’s <code>geno</code> is <strong>reference-allele dosage</strong>. BIGr retains it in the called VCF’s <code>UD</code> field. Standard VCF <code>GT</code> uses allele index <code>0</code> for REF and <code>1</code> for ALT, so BIGr writes GT with:</p>
+<p><span class="math display">\[
+\text{alternate-allele dosage} = P - \text{UD}
+\]</span></p>
+<p>For example, at ploidy 4, <code>UD = 3</code> means three reference copies and one alternate copy, so GT is <code>0/0/0/1</code>. This direction matters when comparing the VCF to a dosage matrix; see <a href="../learn/what-is-allele-dosage.html">What is allele dosage?</a>.</p>
+</section>
+</section>
+<section id="reopen-validate-and-filter-the-called-vcf" class="level2">
+<h2 class="anchored" data-anchor-id="reopen-validate-and-filter-the-called-vcf">10. Reopen, validate, and filter the called VCF</h2>
+<p>Reopen the compressed result and validate its core structure.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>called_vcf <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">read.vcfR</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  called_vcf_file,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">variants =</span> <span class="fu">nrow</span>(called_vcf<span class="sc">@</span>fix),</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">samples =</span> <span class="fu">ncol</span>(called_vcf<span class="sc">@</span>gt) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(called_vcf<span class="sc">@</span>gt[, <span class="st">"FORMAT"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Expected output:</p>
+<pre class="text"><code>variants  samples
+      31       10
+
+[1] "GT:UD:DP:RA:AD:MPP"</code></pre>
+<p>Check REF/ALT recovery, dosage range, and the relationship between reference dosage and GT alternate dosage.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>called_key <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  called_vcf<span class="sc">@</span>fix[, <span class="st">"CHROM"</span>],</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.integer</span>(called_vcf<span class="sc">@</span>fix[, <span class="st">"POS"</span>]),</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">"_"</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>source_key <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  read_vcf<span class="sc">@</span>fix[, <span class="st">"CHROM"</span>],</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.integer</span>(read_vcf<span class="sc">@</span>fix[, <span class="st">"POS"</span>]),</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">"_"</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>source_row <span class="ot">&lt;-</span> <span class="fu">match</span>(called_key, source_key)</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>ud <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>  called_vcf,</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">element =</span> <span class="st">"UD"</span>,</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">as.numeric =</span> <span class="cn">TRUE</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>gt <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>  called_vcf,</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">element =</span> <span class="st">"GT"</span>,</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">as.numeric =</span> <span class="cn">FALSE</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>alt_dosage <span class="ot">&lt;-</span> <span class="fu">apply</span>(gt, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="cf">function</span>(x) {</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.na</span>(x) <span class="sc">||</span> <span class="fu">grepl</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, x)) {</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="cn">NA_real_</span>)</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(<span class="fu">strsplit</span>(x, <span class="st">"[/|]"</span>)[[<span class="dv">1</span>]] <span class="sc">==</span> <span class="st">"1"</span>)</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>called_dp <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(</span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>  called_vcf,</span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">element =</span> <span class="st">"DP"</span>,</span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">as.numeric =</span> <span class="cn">TRUE</span></span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="sc">!</span><span class="fu">is.na</span>(source_row)),</span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(</span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>    called_vcf<span class="sc">@</span>fix[, <span class="st">"REF"</span>],</span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>    read_vcf<span class="sc">@</span>fix[source_row, <span class="st">"REF"</span>]</span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(</span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>    called_vcf<span class="sc">@</span>fix[, <span class="st">"ALT"</span>],</span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a>    read_vcf<span class="sc">@</span>fix[source_row, <span class="st">"ALT"</span>]</span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(ud <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> ud <span class="sc">&lt;=</span> ploidy, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(ud <span class="sc">+</span> alt_dosage <span class="sc">==</span> ploidy, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(called_dp <span class="sc">&gt;=</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>No output means the VCF has matching variant identities, recovered alleles, valid diploid or polyploid dosage bounds, and consistent dosage direction.</p>
+<section id="apply-adjustable-quality-filters" class="level3">
+<h3 class="anchored" data-anchor-id="apply-adjustable-quality-filters">Apply adjustable quality filters</h3>
+<p>The <a href="https://knausb.github.io/vcfR_documentation/filtering_data.html">official vcfR filtering tutorial</a> explains general VCF quality-control operations. The filters demonstrated here are implemented by <strong>BIGr</strong>, not by vcfR (<a href="#ref-knaus-2017">Knaus and Grünwald 2017</a>).</p>
+<p>The following values are intentionally concrete so the example is reproducible, but they are <strong>not universal defaults</strong>. Apply the depth mask first. Updog fits a population model and can assign a dosage even when a sample has zero reads at a locus; that model-based call must not be retained as observed genotype evidence.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>min_genotype_depth <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>called_gt_before_depth <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  called_vcf,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">element =</span> <span class="st">"GT"</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">as.numeric =</span> <span class="cn">FALSE</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>called_dp_before_depth <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  called_vcf,</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">element =</span> <span class="st">"DP"</span>,</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">as.numeric =</span> <span class="cn">TRUE</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="co"># An absent DP must not accompany a retained genotype.</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">is.na</span>(</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    called_gt_before_depth[<span class="fu">is.na</span>(called_dp_before_depth)]</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>low_depth_calls <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">is.na</span>(called_dp_before_depth) <span class="sc">&amp;</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>  called_dp_before_depth <span class="sc">&lt;</span> min_genotype_depth</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>depth_filtered_vcf <span class="ot">&lt;-</span> BIGr<span class="sc">::</span><span class="fu">filterVCF</span>(</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">vcf.file =</span> called_vcf,</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter.DP =</span> min_genotype_depth,</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">ploidy =</span> ploidy,</span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">output.file =</span> <span class="cn">NULL</span></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>gt_after_depth <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(</span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>  depth_filtered_vcf,</span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">element =</span> <span class="st">"GT"</span>,</span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">as.numeric =</span> <span class="cn">FALSE</span></span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>ud_after_depth <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(</span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>  depth_filtered_vcf,</span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">element =</span> <span class="st">"UD"</span>,</span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">as.numeric =</span> <span class="cn">TRUE</span></span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a>dp_after_depth <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(</span>
+<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>  depth_filtered_vcf,</span>
+<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a>  <span class="at">element =</span> <span class="st">"DP"</span>,</span>
+<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a>  <span class="at">as.numeric =</span> <span class="cn">TRUE</span></span>
+<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">is.na</span>(gt_after_depth[low_depth_calls])),</span>
+<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">is.na</span>(ud_after_depth[low_depth_calls])),</span>
+<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">is.na</span>(dp_after_depth[low_depth_calls]))</span>
+<span id="cb23-54"><a href="#cb23-54" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-55"><a href="#cb23-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-56"><a href="#cb23-56" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(low_depth_calls)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Expected result:</p>
+<pre class="text"><code>[1] 49</code></pre>
+<p>In BIGr 0.7.2, <code>filter.DP</code> compares each original <code>DP</code> with the threshold using <code>DP &lt; filter.DP</code>. It converts the <strong>entire sample FORMAT entry</strong> to missing, not only <code>GT</code>; therefore <code>GT</code>, Updog’s reference dosage (<code>UD</code>), depth, allele counts, and posterior probability are all unavailable for the masked call. A zero-depth Updog call is included in this mask. The assertions above make that behavior visible and guard against accidentally retaining low-depth dosages.</p>
+<p>Run the remaining call-level and locus-level filters on <code>depth_filtered_vcf</code> so that MAF and missingness are calculated only after low-depth calls have been removed.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>filtered_vcf_base <span class="ot">&lt;-</span> <span class="fu">file.path</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  output_dir,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"madc_updog"</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>BIGr<span class="sc">::</span><span class="fu">filterVCF</span>(</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">vcf.file =</span> depth_filtered_vcf,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter.OD =</span> <span class="fl">0.05</span>,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter.BIAS.min =</span> <span class="fl">0.7</span>,</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter.BIAS.max =</span> <span class="fl">1.3</span>,</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter.MPP =</span> <span class="fl">0.80</span>,</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter.PMC =</span> <span class="fl">0.10</span>,</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter.MAF =</span> <span class="fl">0.05</span>,</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter.SAMPLE.miss =</span> <span class="fl">0.50</span>,</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter.SNP.miss =</span> <span class="fl">0.50</span>,</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">ploidy =</span> ploidy,</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">output.file =</span> filtered_vcf_base</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>filtered_vcf_file <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  filtered_vcf_base,</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">"_filtered.vcf.gz"</span></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>filtered_vcf <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">read.vcfR</span>(</span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>  filtered_vcf_file,</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The second pass turns genotype entries below the posterior-probability threshold into missing calls, then filters on locus-level overdispersion, allele bias, expected mis-genotyping, missingness, and minor allele frequency (MAF). MAF measures how common the less frequent allele is; missingness records the fraction of unavailable genotype calls for a marker or sample.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Choose filters from evidence, not this example">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Choose filters from evidence, not this example
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>At higher ploidy, adjacent dosage classes are closer together and may need more depth. Bias and overdispersion tolerances depend on model fit and the panel. MAF and missingness limits depend on sample size, population design, and downstream analysis. Compare reasonable settings and report the number of calls, loci, and samples removed at each stage.</p>
+</div>
+</div>
+<p>For this 10-sample example, the displayed thresholds retain <strong>3 variants and all 10 samples</strong>. Validate the written file one last time:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>required_format <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"GT"</span>, <span class="st">"UD"</span>, <span class="st">"DP"</span>, <span class="st">"RA"</span>, <span class="st">"AD"</span>, <span class="st">"MPP"</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>format_fields <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>(filtered_vcf<span class="sc">@</span>gt[, <span class="st">"FORMAT"</span>]),</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">":"</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixed =</span> <span class="cn">TRUE</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>)[[<span class="dv">1</span>]]</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>filtered_ud <span class="ot">&lt;-</span> vcfR<span class="sc">::</span><span class="fu">extract.gt</span>(</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  filtered_vcf,</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">element =</span> <span class="st">"UD"</span>,</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">as.numeric =</span> <span class="cn">TRUE</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(filtered_vcf<span class="sc">@</span>fix) <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ncol</span>(filtered_vcf<span class="sc">@</span>gt) <span class="sc">&gt;</span> <span class="dv">1</span>,</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(required_format <span class="sc">%in%</span> format_fields),</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">any</span>(<span class="fu">grepl</span>(<span class="st">","</span>, filtered_vcf<span class="sc">@</span>fix[, <span class="st">"ALT"</span>], <span class="at">fixed =</span> <span class="cn">TRUE</span>)),</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(filtered_ud <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> filtered_ud <span class="sc">&lt;=</span> ploidy, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">variants =</span> <span class="fu">nrow</span>(filtered_vcf<span class="sc">@</span>fix),</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">samples =</span> <span class="fu">ncol</span>(filtered_vcf<span class="sc">@</span>gt) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Expected output:</p>
+<pre class="text"><code>variants  samples
+       3       10</code></pre>
+</section>
+</section>
+<section id="alternative-retain-multiallelic-information-with-polyrad" class="level2">
+<h2 class="anchored" data-anchor-id="alternative-retain-multiallelic-information-with-polyrad">Alternative: retain multiallelic information with polyRAD</h2>
+<p>If retaining multiallelic variants is central to the analysis, BIGr also provides <code>madc2vcf_multi()</code>, which uses polyRAD rather than the biallelic Updog path. Read the <a href="https://polyploids.r-universe.dev/polyRAD/doc/polyRADtutorial.html">official polyRAD tutorial</a> and the <a href="https://cran.r-project.org/web/packages/BIGr/BIGr.pdf"><code>madc2vcf_multi()</code> arguments in the BIGr reference manual</a> before choosing that route (<a href="#ref-clark-2019">Clark, Lipka, and Sacks 2019</a>).</p>
+<p>This tutorial does not install or execute polyRAD. polyRAD can be substantially faster for large marker sets, but it can be more memory-intensive and requires an appropriate population model. The two workflows also make different choices about multiallelic evidence and diagnostics; select the path that matches the organism, panel, computing resources, and downstream goal.</p>
+</section>
+<section id="troubleshooting-checkpoints" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting-checkpoints">Troubleshooting checkpoints</h2>
+<div class="table-responsive">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symptom</th>
+<th>Check first</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BIGr reports unfixed allele IDs</td>
+<td>Stop and process the raw report with HapApp; do not rename suffixes manually</td>
+</tr>
+<tr class="even">
+<td>REF/ALT bases look complemented or reversed</td>
+<td>Confirm that the <code>.botloci</code> file belongs to this panel and that marker coordinates use the expected strand</td>
+</tr>
+<tr class="odd">
+<td>REF or ALT is <code>.</code> in the called VCF</td>
+<td>Pass the recovered REF/ALT table to <code>updog2vcf()</code> and match it by chromosome and position</td>
+</tr>
+<tr class="even">
+<td><code>multidog()</code> reports all SNPs missing</td>
+<td>Confirm that the reference field is <code>RA</code> in this BIGr VCF, that <code>DP</code> is present, and that counts were extracted as numeric matrices</td>
+</tr>
+<tr class="odd">
+<td>Matrix dimensions or names differ</td>
+<td>Stop; align the same variants and samples before calling</td>
+</tr>
+<tr class="even">
+<td>A dosage is outside 0 through ploidy</td>
+<td>Stop; verify ploidy and input orientation before conversion</td>
+</tr>
+<tr class="odd">
+<td>Dosage appears reversed</td>
+<td>Remember that Updog/<code>UD</code> counts REF while VCF allele index <code>1</code> counts ALT</td>
+</tr>
+<tr class="even">
+<td>Dosage classes overlap</td>
+<td>Reassess depth, ploidy, allele bias, overdispersion, sequencing error, and model choice</td>
+</tr>
+<tr class="odd">
+<td>Almost every locus disappears</td>
+<td>Inspect each threshold separately; this example’s values may be inappropriate for your data</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="continue-learning" class="level2">
+<h2 class="anchored" data-anchor-id="continue-learning">Continue learning</h2>
+<ul>
+<li><a href="../learn/what-is-allele-dosage.html">What is allele dosage?</a> explains dosage direction and uncertainty.</li>
+<li><a href="../learn/snp-filtering-polyploids.html">SNP filtering in polyploids</a> develops a ploidy-aware filtering strategy.</li>
+<li><a href="../learn/choosing-missing-data-threshold.html">Choosing a missing-data threshold</a> shows how to evaluate missingness sensitivity.</li>
+<li><a href="https://breeding-insight.github.io/Qploidy2/Qploidy_alfalfa_tutorial.html">Estimate copy number in alfalfa with Qploidy2</a> addresses ploidy, aneuploidy, and large copy-number changes.</li>
+</ul>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ul>
+<li><span id="ref-clark-2019"></span> Clark LV, Lipka AE, Sacks EJ. 2019. “polyRAD: Genotype Calling with Uncertainty from Sequencing Data in Polyploids and Diploids.” <em>G3: Genes, Genomes, Genetics</em> 9(3):663–673. <a href="https://doi.org/10.1534/g3.118.200913">doi:10.1534/g3.118.200913</a></li>
+<li><span id="ref-gerard-2018"></span> Gerard D, Ferrão LFV, Garcia AAF, Stephens M. 2018. “Genotyping Polyploids from Messy Sequencing Data.” <em>Genetics</em> 210(3):789–807. <a href="https://doi.org/10.1534/genetics.118.301468">doi:10.1534/genetics.118.301468</a></li>
+<li><span id="ref-gerard-ferrao-2020"></span> Gerard D, Ferrão LFV. 2020. “Priors for Genotyping Polyploids.” <em>Bioinformatics</em> 36(6):1795–1800. <a href="https://doi.org/10.1093/bioinformatics/btz852">doi:10.1093/bioinformatics/btz852</a></li>
+<li><span id="ref-knaus-2017"></span> Knaus BJ, Grünwald NJ. 2017. “vcfR: A Package to Manipulate and Visualize Variant Call Format Data in R.” <em>Molecular Ecology Resources</em> 17(1):44–53. <a href="https://doi.org/10.1111/1755-0998.12549">doi:10.1111/1755-0998.12549</a></li>
+<li><span id="ref-bigr-paper"></span> Sandercock AM, Peel M, Taniguti C, Chinchilla-Vargas J, Chen S, Sapkota M, Lin M, Zhao D, Ackerman A, Basnet B, Beil C, Sheehan M. 2025. “BIGapp: A User-Friendly Genomic Tool Kit Identified Quantitative Trait Loci for Creeping Rootedness in Alfalfa (<em>Medicago sativa</em> L.).” <em>The Plant Genome</em> 18(3):e70067. <a href="https://doi.org/10.1002/tpg2.70067">doi:10.1002/tpg2.70067</a></li>
+<li><span id="ref-bigr-package"></span> Sandercock AM, Taniguti C, Chinchilla-Vargas J, Chen S, Sapkota M, Lin M, Zhao D, University C. 2025. <em>BIGr: Breeding Insight Genomics Functions for Polyploid and Diploid Species</em>. R package citation supplied with CRAN BIGr 0.7.2; the citation file reports package version 0.6.2. <a href="https://github.com/Breeding-Insight/BIGr">BIGr source repository</a></li>
+<li><span id="ref-zhao-2026"></span> Zhao D, Lin M, Taniguti CH, Sandercock AM, et al.&nbsp;2026. “Development and Characterization of Microhaplotype Databases for Diverse Crop Species.” Research Square preprint. <a href="https://doi.org/10.21203/rs.3.rs-9292361/v1">doi:10.21203/rs.3.rs-9292361/v1</a></li>
+</ul>
 
 
 </section>
@@ -626,7 +1523,7 @@ ul.task-list li input[type="checkbox"] {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><strong>Breeding Insight</strong> — open-source tools for public plant and animal breeding.</p>
+<p><strong>Breeding Insight:</strong> open-source tools for public plant and animal breeding.</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

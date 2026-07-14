@@ -5,7 +5,11 @@ project:
     - "*.qmd"
     - "software/*.qmd"
     - "learn/*.qmd"
-    - "workshops/*.qmd"
+    - "workshops/**/*.qmd"
+    - "!workshops/*-template.qmd"
+  resources:
+    - "workshops/bigapp/data/**"
+    - "workshops/bigapp/images/**"
 
 website:
   title: "Breeding Insight Software"
@@ -38,9 +42,29 @@ website:
         aria-label: Breeding Insight on GitHub
       - text: Breeding Insight
         href: https://breedinginsight.org/
+  sidebar:
+    - id: bigapp-workshop
+      title: "BIGapp workshop"
+      style: docked
+      collapse-level: 1
+      contents:
+        - text: "Workshop overview"
+          href: workshops/bigapp/index.qmd
+        - text: "Required local setup"
+          href: workshops/bigapp/setup.qmd
+        - text: "1. Data quality control"
+          href: workshops/bigapp/data-quality-control.qmd
+        - text: "2. Population structure and PCA"
+          href: workshops/bigapp/pca.qmd
+        - text: "3. GWASpoly"
+          href: workshops/bigapp/gwas.qmd
+        - text: "4. Genomic selection (optional)"
+          href: workshops/bigapp/genomic-selection.qmd
+        - text: "Dataset guide"
+          href: workshops/bigapp/dataset-guide.qmd
   page-footer:
     left: |
-      **Breeding Insight** — open-source tools for public plant and animal breeding.
+      **Breeding Insight:** open-source tools for public plant and animal breeding.
     right:
       - text: GitHub
         href: https://github.com/Breeding-Insight
@@ -58,6 +82,8 @@ format:
     code-overflow: wrap
     smooth-scroll: true
     link-external-newwindow: true
+    canonical-url: true
+    date-format: "MMMM D, YYYY"
 
 execute:
   freeze: auto

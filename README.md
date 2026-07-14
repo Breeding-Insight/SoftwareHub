@@ -1,4 +1,4 @@
-# Breeding Insight Software Hub — Quarto starter
+# Breeding Insight Software Hub: Quarto starter
 
 A repo-ready starter for a unified Breeding Insight software, tutorial, workshop, and documentation portal.
 

@@ -1,37 +1,236 @@
 ---
 title: "Choose a genomic analysis path"
-description: "Start from the breeding question and identify the appropriate Breeding Insight tool or workflow."
+author: "Alexander M. Sandercock"
+date: 2026-07-13
+date-modified: 2026-07-14
+description: "Start with your breeding question and choose a path through genotype preparation, genomic analysis, pedigree or ancestry assessment, and mating decisions."
 categories:
   - Getting Started
 image: ../assets/tutorial-path.svg
+image-alt: "A sign reading Choose a path at the start of a genomic workflow."
 order: 10
 learning-type: Guide
 software:
   - BIGr
   - BIGapp
   - Qploidy2
-  - DeltaBreed
+  - Familia
+  - AlloMate
+  - BIGpopA
 level: Beginner
 keywords:
   - genomics
   - workflow
   - tool selection
   - analysis planning
+  - ploidy
+  - GWAS
+  - genomic prediction
+  - pedigree
+  - parentage
+  - ancestry
+  - mate allocation
 ---
 
-## Start with the question
+You do not need to choose software before you understand the breeding question. Start with the decision you want to make, then check whether you have the data needed to support it.
 
-A unified portal should help users choose tools without requiring them to know package names first.
+::: {.bi-callout}
+The useful question is not **“Which package should I use?”** It is **“What do I need to learn or decide, and what information do I already have?”**
+:::
 
-| Goal | Recommended starting point |
-|---|---|
-| Process and transform genotype data | BIGr |
-| Use an interactive genomic analysis interface | BIGapp |
-| Estimate ploidy, aneuploidy, or large CNV | Qploidy2 |
-| Manage breeding program data | DeltaBreed |
+This guide connects six Breeding Insight tools. You may use one tool for a bounded task or move through several as genotype data become breeding decisions. Not every program needs every step.
 
-## Example path
+## Start with the decision
 
-**Targeted genotyping data → quality control → analysis-ready VCF → population structure → GWAS or genomic prediction**
+Before opening an application or writing R code, state the immediate question in one sentence. For example:
 
-The value of the portal is that this sequence can link across packages while preserving each package's canonical reference documentation.
+- Are these genotype data ready for analysis?
+- What is the ploidy or large-scale copy number of each sample?
+- Are the samples genetically structured?
+- Which markers are associated with a measured trait?
+- How well can these data predict performance in the intended selection candidates?
+- Does the recorded pedigree agree with the marker data?
+- Which candidate parents balance expected gain and relatedness?
+
+Each question requires different inputs and produces a different kind of evidence. A principal component analysis cannot validate a recorded parent, and a parentage result does not provide the breeding values needed to optimize crosses.
+
+## Check what you have
+
+Use the following checklist before choosing a path.
+
+1. **Genotype evidence:** Do you have read counts, a genotype-called VCF, another marker matrix, or only raw sequence files?
+2. **Sample identity:** Do sample IDs match across genotype, phenotype, pedigree, and candidate files?
+3. **Ploidy:** Is the expected ploidy known, and is it plausible for every sample?
+4. **Genome information:** Do markers have chromosome and position information when the analysis requires it?
+5. **Phenotypes:** Do you have a measured trait for association analysis, prediction, or estimated breeding values from a suitable evaluation?
+6. **Relationships:** Do you have a pedigree, candidate-parent pool, reference populations, or other relationship information required by the question?
+
+If one of these is missing, the next step may be data preparation rather than analysis.
+
+## Follow the path that matches the question
+
+The diagram is a decision map, not a required sequence. Some projects enter at pedigree assessment or mate allocation because their genotype processing and genetic evaluation are already complete.
+
+::: {.madc-workflow-figure}
+```{mermaid}
+%%| fig-alt: "A breeding question leads to checks of available inputs and ploidy. Genotype preparation can use BIGr or BIGapp, ploidy and copy-number assessment can use Qploidy2, genomic analysis can use BIGr or BIGapp, pedigree and ancestry assessment can use BIGpopA or Familia, and candidates with pedigree and breeding values can continue to mate allocation with AlloMate."
+%%| fig-cap: "Choose tools from the question and required inputs, not from package names alone."
+%%{init: {"flowchart": {"rankSpacing": 34, "nodeSpacing": 46, "curve": "basis"}}}%%
+flowchart TB
+  accTitle: Breeding Insight genomic analysis decision path
+  accDescr: A breeding question leads to checks of available inputs and ploidy. Genotype preparation can use BIGr or BIGapp, ploidy and copy-number assessment can use Qploidy2, genomic analysis can use BIGr or BIGapp, pedigree and ancestry assessment can use BIGpopA or Familia, and candidates with pedigree and breeding values can continue to mate allocation with AlloMate.
+
+  A([Breeding question]) --> B{{Check inputs,<br/>IDs, and ploidy}}
+  B --> C[/Prepare and inspect<br/>genotype data/]
+  B --> D[/Estimate ploidy or<br/>large-scale copy number/]
+  C --> E([BIGr or BIGapp])
+  D --> F([Qploidy2])
+  E --> G{{What is the next<br/>breeding question?}}
+  F --> G
+  G --> H[/Structure, GWAS, or<br/>genomic prediction/]
+  G --> I[/Pedigree, parentage,<br/>or ancestry/]
+  H --> J([BIGr or BIGapp])
+  I --> K([BIGpopA or Familia])
+  J --> L{{Candidates, pedigree,<br/>and breeding values ready?}}
+  K --> L
+  L -->|yes| M([AlloMate])
+  L -->|not yet| N([Prepare the missing<br/>selection inputs])
+
+  classDef question fill:#EAF5F7,stroke:#2A6576,stroke-width:2px,color:#173D47
+  classDef task fill:#FFF7E8,stroke:#C98B2E,stroke-width:2px,color:#674615
+  classDef tool fill:#EEF8F0,stroke:#319B42,stroke-width:2px,color:#1E5D28
+  classDef check fill:#F3EFF9,stroke:#765C9E,stroke-width:2px,color:#493566
+
+  class A question
+  class C,D,H,I task
+  class E,F,J,K,M,N tool
+  class B,G,L check
+```
+:::
+
+## Choose the immediate task
+
+::: {.concept-decision-grid}
+::: {.concept-decision}
+#### Prepare or inspect marker data
+
+Start with [BIGr](../software/bigr.qmd) when you want a scripted R workflow that can be saved, reviewed, and adapted. Start with [BIGapp](../software/bigapp.qmd) when the supported analysis is available through its graphical interface and you prefer to work without command-line inputs.
+:::
+
+::: {.concept-decision}
+#### Estimate ploidy or copy number
+
+Use [Qploidy2](../software/qploidy2.qmd) when the question concerns individual ploidy, aneuploidy, or large-scale copy-number variation. Its workflow uses marker information such as allele ratios and depth or intensity across the genome.
+:::
+
+::: {.concept-decision}
+#### Explore structure or map a trait
+
+Use [BIGr](../software/bigr.qmd) for a scripted workflow or [BIGapp](../software/bigapp.qmd) for its graphical PCA, DAPC, GWASpoly, and genomic-prediction workflows. Phenotypes and marker positions are needed only for analyses that use them, but genotype quality and sample identity matter throughout.
+:::
+
+::: {.concept-decision}
+#### Check pedigrees or assign parents
+
+Use [BIGpopA](../software/bigpopa.qmd) when you want an R workflow for pedigree quality control, marker-based parentage assignment, or breed or line composition. Use [Familia](../software/familia.qmd) when you want a graphical interface to BIGpopA workflows and ancestry analyses.
+:::
+
+::: {.concept-decision}
+#### Assess ancestry
+
+Use [Familia](../software/familia.qmd) for interactive supervised breed or line composition and unsupervised ancestry inference. Use [BIGpopA](../software/bigpopa.qmd) when the supervised composition workflow needs to be run and recorded in R.
+:::
+
+::: {.concept-decision}
+#### Choose contributions and crosses
+
+Use [AlloMate](../software/allomate.qmd) after the candidate list, pedigree, and estimated breeding values are ready. It combines pedigree-based kinship, trait weights, contribution constraints, and mating rules to support selection and crossing decisions.
+:::
+:::
+
+## Compare the starting points
+
+::: {.table-responsive}
+| Immediate question | Have ready | Start with | What it contributes |
+|---|---|---|---|
+| How do I process or inspect genotype data? | Read counts, VCF, or another supported genotype input; sample IDs; expected ploidy | [BIGr](../software/bigr.qmd) or [BIGapp](../software/bigapp.qmd) | Scripted or graphical genotype processing, quality summaries, and supported downstream analyses |
+| Are ploidy or large chromosome-scale changes uncertain? | Genotyping-platform allele ratios plus depth or intensity and marker positions appropriate for the workflow | [Qploidy2](../software/qploidy2.qmd) | Ploidy, aneuploidy, and large-scale copy-number estimates |
+| Are samples structured, associated with a trait, or useful for prediction? | Quality-controlled genotypes; phenotypes and marker positions when required | [BIGr](../software/bigr.qmd) or [BIGapp](../software/bigapp.qmd) | Population summaries, trait-association evidence, or validated genomic predictions supported by the selected workflow |
+| Does the pedigree agree with marker data, or who are the likely parents? | Pedigree or candidate-parent pool plus compatible SNP genotypes | [BIGpopA](../software/bigpopa.qmd) or [Familia](../software/familia.qmd) | Pedigree checks, parentage assignments, and related diagnostics |
+| What is the genomic ancestry or breed or line composition? | Target genotypes and, for supervised analysis, suitable reference populations | [BIGpopA](../software/bigpopa.qmd) or [Familia](../software/familia.qmd) | Supervised composition estimates or, in Familia, unsupervised ancestry inference |
+| Which candidates should contribute, and how should they be mated? | Candidate IDs, pedigree, required candidate metadata, and estimated breeding values | [AlloMate](../software/allomate.qmd) | Kinship summaries, weighted selection information, contribution results, and mating plans |
+:::
+
+The two paired choices are mainly about how you want to work and which analysis is required:
+
+- **BIGr and BIGapp:** BIGr exposes R functions for scripted and adaptable workflows. BIGapp exposes supported genomic analyses through a graphical Shiny interface and uses BIGr within its software ecosystem.
+- **BIGpopA and Familia:** BIGpopA provides the underlying R analyses for pedigree, parentage, and supervised composition tasks. Familia provides an interactive interface to those workflows and adds unsupervised ancestry analysis.
+
+## Three example routes
+
+### Route 1: Explore diversity and map a measured trait
+
+Suppose you have a genotype-called VCF, sample metadata, a phenotype, and SNP positions. You want to inspect data quality, explore structure, and test marker-trait associations without writing R code.
+
+1. Install and run **BIGapp locally**. The public demo is for viewing the interface; use a local installation for the workshop and your own analysis.
+2. Confirm sample IDs and ploidy, then inspect and filter the genotype data.
+3. Run PCA and use the structure results to inform the GWAS model.
+4. Run GWASpoly and interpret the Manhattan, QQ, and linkage-disequilibrium results together.
+
+[Start the BIGapp workshop](../workshops/bigapp/index.qmd){.btn-bi-primary}
+
+### Route 2: Turn targeted read counts into analysis-ready genotypes
+
+Suppose you received a processed MADC file from targeted sequencing and want a reproducible VCF workflow.
+
+1. Confirm that the MADC has fixed allele IDs and that sample names match the project records.
+2. Use **BIGr** to recover biallelic read-count evidence, call genotypes with the correct ploidy, and evaluate the model diagnostics.
+3. Mask uncertain cells and filter markers and samples using evidence from the dataset.
+4. Continue in BIGr or load the genotype-called VCF into BIGapp for a supported graphical analysis.
+
+[Understand MADC files](what-is-a-madc-file.qmd){.btn-bi-secondary}
+[Follow the MADC-to-VCF workflow](madc-to-vcf.qmd){.btn-bi-primary}
+
+### Route 3: Validate records before choosing crosses
+
+Suppose you have SNP genotypes, a recorded pedigree, a candidate-parent pool, and estimated breeding values.
+
+1. Use **Familia** for an interactive workflow or **BIGpopA** for a scripted workflow to clean the pedigree, evaluate Mendelian errors, and assign parentage where the data support it.
+2. Review unresolved samples and update records only when the evidence and breeding-program context justify the change.
+3. Prepare the candidate list, pedigree, required candidate metadata, and breeding values for **AlloMate**.
+4. Use AlloMate to evaluate kinship, trait weights, contribution constraints, and proposed matings.
+
+Pedigree validation and mate allocation answer different questions. Do not treat a plausible parentage assignment as a breeding value or a mating recommendation.
+
+## Decisions the software cannot make for you
+
+The software can calculate, summarize, and visualize the evidence you provide. It cannot determine whether the biological design answers the breeding question.
+
+Before acting on a result, ask:
+
+- Does the sample set represent the population where the conclusion will be used?
+- Were ploidy, genotype encoding, and uncertainty handled correctly?
+- Are missingness, batch effects, and population structure changing the result?
+- Does the validation design represent the future candidates you intend to predict?
+- Are pedigree, reference-population, phenotype, and candidate IDs aligned across files?
+- Can the result be reproduced from recorded inputs, software versions, and settings?
+
+If the answer is uncertain, return to data checks or compare reasonable analysis choices before moving to the next tool.
+
+## Continue learning
+
+- [Get started with genomic data in R](get-started-genomic-data-r.qmd) for a worked BIGr and VCF introduction.
+- [What is allele dosage?](what-is-allele-dosage.qmd) before interpreting diploid or polyploid genotype states.
+- [Choosing a missing-data threshold](choosing-missing-data-threshold.qmd) before copying a filtering rule from another dataset.
+- [SNP filtering in polyploids](snp-filtering-polyploids.qmd) for depth, dosage uncertainty, and suspected duplicated-locus checks.
+- [What does cross-validation accuracy mean?](cross-validation-accuracy.qmd) before using a genomic-prediction result for selection.
+- [Estimate copy number in alfalfa with Qploidy2](https://breeding-insight.github.io/Qploidy2/Qploidy_alfalfa_tutorial.html) for a complete Qploidy2 example.
+
+## Official software references
+
+- [BIGr documentation](https://breeding-insight.github.io/BIGr_documentation/) and [source repository](https://github.com/Breeding-Insight/BIGr)
+- [BIGapp source repository](https://github.com/Breeding-Insight/BIGapp)
+- [Qploidy2 source repository](https://github.com/Breeding-Insight/Qploidy2)
+- [Familia source repository](https://github.com/Breeding-Insight/Familia)
+- [BIGpopA source repository](https://github.com/Breeding-Insight/BIGpopA)
+- [AlloMate source repository](https://github.com/Breeding-Insight/AlloMate)

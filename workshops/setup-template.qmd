@@ -1,6 +1,8 @@
 ---
 title: "Workshop setup template"
 description: "Reusable preflight instructions for hands-on Breeding Insight workshops."
+draft: true
+search: false
 ---
 
 ## Complete this before the workshop

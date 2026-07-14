@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Standards and reusable patterns for Breeding Insight documentation and training materials.">
+<meta name="description" content="Standards, support links, reproducibility guidance, citations, and example data for breeding and genomic analysis.">
 
 <title>Resources – Breeding Insight Software</title>
 <style>
@@ -80,9 +80,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-effba262e874657e83d0e513aa0f2f81.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-02507b1fe35468d4b588cb917142b773.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-02507b1fe35468d4b588cb917142b773.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-02507b1fe35468d4b588cb917142b773.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-8f94084065d81b420d84a6ed678fb97a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-8f94084065d81b420d84a6ed678fb97a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-8f94084065d81b420d84a6ed678fb97a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -113,8 +113,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <meta property="og:title" content="Resources – Breeding Insight Software">
-<meta property="og:description" content="Standards and reusable patterns for Breeding Insight documentation and training materials.">
+<meta property="og:description" content="Standards, support links, reproducibility guidance, citations, and example data for breeding and genomic analysis.">
 <meta property="og:site_name" content="Breeding Insight Software">
+<link rel="canonical" href="https://breeding-insight.github.io/software/resources.html">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -181,19 +182,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-belongs-where" id="toc-what-belongs-where" class="nav-link active" data-scroll-target="#what-belongs-where">What belongs where?</a></li>
-  <li><a href="#content-front-matter" id="toc-content-front-matter" class="nav-link" data-scroll-target="#content-front-matter">Content front matter</a></li>
-  <li><a href="#tutorial-writing-pattern" id="toc-tutorial-writing-pattern" class="nav-link" data-scroll-target="#tutorial-writing-pattern">Tutorial writing pattern</a>
+  <li><a href="#get-help" id="toc-get-help" class="nav-link active" data-scroll-target="#get-help">Get Help</a></li>
+  <li><a href="#standards-and-specifications" id="toc-standards-and-specifications" class="nav-link" data-scroll-target="#standards-and-specifications">Standards and Specifications</a></li>
+  <li><a href="#reproducibility-checklist" id="toc-reproducibility-checklist" class="nav-link" data-scroll-target="#reproducibility-checklist">Reproducibility Checklist</a>
   <ul class="collapse">
-  <li><a href="#goal" id="toc-goal" class="nav-link" data-scroll-target="#goal">1. Goal</a></li>
-  <li><a href="#what-you-need" id="toc-what-you-need" class="nav-link" data-scroll-target="#what-you-need">2. What you need</a></li>
-  <li><a href="#workflow-map" id="toc-workflow-map" class="nav-link" data-scroll-target="#workflow-map">3. Workflow map</a></li>
-  <li><a href="#reproducible-steps" id="toc-reproducible-steps" class="nav-link" data-scroll-target="#reproducible-steps">4. Reproducible steps</a></li>
-  <li><a href="#checkpoint" id="toc-checkpoint" class="nav-link" data-scroll-target="#checkpoint">5. Checkpoint</a></li>
-  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">6. Troubleshooting</a></li>
-  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">7. Next steps</a></li>
+  <li><a href="#before-the-analysis" id="toc-before-the-analysis" class="nav-link" data-scroll-target="#before-the-analysis">Before the Analysis</a></li>
+  <li><a href="#during-the-analysis" id="toc-during-the-analysis" class="nav-link" data-scroll-target="#during-the-analysis">During the Analysis</a></li>
+  <li><a href="#when-reporting-or-archiving" id="toc-when-reporting-or-archiving" class="nav-link" data-scroll-target="#when-reporting-or-archiving">When Reporting or Archiving</a></li>
   </ul></li>
-  <li><a href="#migration-principle" id="toc-migration-principle" class="nav-link" data-scroll-target="#migration-principle">Migration principle</a></li>
+  <li><a href="#citations-and-licenses" id="toc-citations-and-licenses" class="nav-link" data-scroll-target="#citations-and-licenses">Citations and Licenses</a></li>
+  <li><a href="#example-data-and-downloads" id="toc-example-data-and-downloads" class="nav-link" data-scroll-target="#example-data-and-downloads">Example Data and Downloads</a></li>
+  <li><a href="#for-contributors" id="toc-for-contributors" class="nav-link" data-scroll-target="#for-contributors">For Contributors</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/resources.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -207,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div>
   <div class="description">
-    Standards and reusable patterns for Breeding Insight documentation and training materials.
+    Standards, support links, reproducibility guidance, citations, and example data for breeding and genomic analysis.
   </div>
 </div>
 
@@ -224,106 +223,166 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="what-belongs-where" class="level2">
-<h2 class="anchored" data-anchor-id="what-belongs-where">What belongs where?</h2>
+<p>Use this page when you need a primary specification, a support route, or a checklist to make an analysis easier to reproduce. For explanations and worked examples, use the <a href="./learn.html">Learn library</a>. For installation and package documentation, start with <a href="./software.html">Software</a>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Breeding Insight Learning Hub
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <a href="https://breedinginsight.org/learning-hub/">Breeding Insight Learning Hub</a> brings together additional manuals, training materials, videos, and resources for Breeding Insight tools and services.</p>
+</div>
+</div>
+<section id="get-help" class="level2">
+<h2 class="anchored" data-anchor-id="get-help">Get Help</h2>
+<p>Report software problems in the repository that owns the code. Search existing issues first, then include the software version, operating system, the step that failed, and the complete error message.</p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Content</th>
-<th>Canonical home</th>
-<th>Portal role</th>
+<th>Software</th>
+<th>Issue tracker</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Function/API reference</td>
-<td>Package documentation</td>
-<td>Link and discovery</td>
+<td>AlloMate</td>
+<td><a href="https://github.com/Breeding-Insight/AlloMate/issues">Breeding-Insight/AlloMate issues</a></td>
 </tr>
 <tr class="even">
-<td>Installation</td>
-<td>Package documentation + package landing page</td>
-<td>Summarize and link</td>
+<td>BIGapp</td>
+<td><a href="https://github.com/Breeding-Insight/BIGapp/issues">Breeding-Insight/BIGapp issues</a></td>
 </tr>
 <tr class="odd">
-<td>Single-package tutorial</td>
-<td>Portal or package docs</td>
-<td>Prefer portal when broadly useful</td>
+<td>BIGpopA</td>
+<td><a href="https://github.com/Breeding-Insight/BIGpopA/issues">Breeding-Insight/BIGpopA issues</a></td>
 </tr>
 <tr class="even">
-<td>Cross-package workflow</td>
-<td>Portal</td>
-<td>Canonical home</td>
+<td>BIGr</td>
+<td><a href="https://github.com/Breeding-Insight/BIGr/issues">Breeding-Insight/BIGr issues</a></td>
 </tr>
 <tr class="odd">
-<td>Workshop</td>
-<td>Portal</td>
-<td>Canonical home</td>
+<td>Familia</td>
+<td><a href="https://github.com/Breeding-Insight/Familia/issues">Breeding-Insight/Familia issues</a></td>
 </tr>
 <tr class="even">
-<td>Release notes</td>
-<td>Package repository/site</td>
-<td>Link only</td>
-</tr>
-<tr class="odd">
-<td>FAQ</td>
-<td>Package or shared support page</td>
-<td>Keep close to issue ownership</td>
+<td>Qploidy2</td>
+<td><a href="https://github.com/Breeding-Insight/Qploidy2/issues">Breeding-Insight/Qploidy2 issues</a></td>
 </tr>
 </tbody>
 </table>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Protect Private Data
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do not attach private genotype files, phenotypes, pedigrees, sample identifiers, or breeding-program records to a public issue. Create a small simulated or de-identified example when the error cannot be reproduced with package example data.</p>
+</div>
+</div>
+<p>For workshop questions, return to the relevant <a href="./workshops.html">workshop setup or module</a>. Each maintained workshop lists its expected inputs, checkpoints, and software support route.</p>
 </section>
-<section id="content-front-matter" class="level2">
-<h2 class="anchored" data-anchor-id="content-front-matter">Content front matter</h2>
-<p>Every tutorial should use consistent metadata so Quarto listings can discover and filter it:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Process DArTag MADC data to an analysis-ready VCF"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Filter targeted sequencing data, call dosage, and write a sorted VCF."</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">categories</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">BIGr</span><span class="kw">,</span><span class="at"> DArTag</span><span class="kw">,</span><span class="at"> VCF</span><span class="kw">,</span><span class="at"> Genotype processing</span><span class="kw">]</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">level</span><span class="kw">:</span><span class="at"> intermediate</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">time</span><span class="kw">:</span><span class="at"> </span><span class="st">"45 min"</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">order</span><span class="kw">:</span><span class="at"> </span><span class="dv">20</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="standards-and-specifications" class="level2">
+<h2 class="anchored" data-anchor-id="standards-and-specifications">Standards and Specifications</h2>
+<p>These are the canonical references for formats and data exchange used across breeding and genomic workflows.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Resource</th>
+<th>Use it for</th>
+<th>Official reference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Variant Call Format</td>
+<td>Genomic variants, genotype fields, depth, and allele counts</td>
+<td><a href="https://samtools.github.io/hts-specs/">HTS specifications and current VCF documents</a></td>
+</tr>
+<tr class="even">
+<td>Breeding API</td>
+<td>Exchanging germplasm, trial, phenotype, and genotype data between breeding applications</td>
+<td><a href="https://brapi.org/documentation">BrAPI documentation</a></td>
+</tr>
+<tr class="odd">
+<td>MIAPPE</td>
+<td>Recording the metadata needed to understand and reuse a plant phenotyping experiment</td>
+<td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7317793/">MIAPPE 1.1 publication and data model</a></td>
+</tr>
+<tr class="even">
+<td>Crop Ontology</td>
+<td>Standard trait, method, and scale definitions for crop phenotyping</td>
+<td><a href="https://cropontology.org/">Crop Ontology</a></td>
+</tr>
+</tbody>
+</table>
+<p>Use the version of a standard that matches the tool and project requirements. Record that version with the analysis rather than writing only “VCF” or “BrAPI” in the methods.</p>
 </section>
-<section id="tutorial-writing-pattern" class="level2">
-<h2 class="anchored" data-anchor-id="tutorial-writing-pattern">Tutorial writing pattern</h2>
-<section id="goal" class="level3">
-<h3 class="anchored" data-anchor-id="goal">1. Goal</h3>
-<p>State the outcome in biological or analytical terms.</p>
+<section id="reproducibility-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="reproducibility-checklist">Reproducibility Checklist</h2>
+<section id="before-the-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="before-the-analysis">Before the Analysis</h3>
+<ul>
+<li>Preserve the original input files as read-only copies.</li>
+<li>Record where the data came from and whether they are observed, simulated, or transformed.</li>
+<li>Check sample IDs, marker IDs, ploidy, missing-value codes, reference assembly, and coordinate system.</li>
+<li>Calculate a checksum for every input that will be shared or archived.</li>
+<li>Define the biological question and the samples to which the result should apply.</li>
+</ul>
+<p>On macOS or Linux, calculate a SHA-256 checksum with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">shasum</span> <span class="at">-a</span> 256 path/to/file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="what-you-need" class="level3">
-<h3 class="anchored" data-anchor-id="what-you-need">2. What you need</h3>
-<p>List required files, versions, expected columns, and approximate compute needs.</p>
+<section id="during-the-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="during-the-analysis">During the Analysis</h3>
+<ul>
+<li>Save consequential filtering thresholds and model settings.</li>
+<li>Record retained marker and sample counts after major transformations.</li>
+<li>Keep diagnostic plots and tables, not only the final figure.</li>
+<li>Give outputs stable names that identify the analysis stage.</li>
+<li>Record warnings and failed attempts when they affected a later decision.</li>
+</ul>
 </section>
-<section id="workflow-map" class="level3">
-<h3 class="anchored" data-anchor-id="workflow-map">3. Workflow map</h3>
-<p>Show the sequence of steps before introducing code.</p>
-</section>
-<section id="reproducible-steps" class="level3">
-<h3 class="anchored" data-anchor-id="reproducible-steps">4. Reproducible steps</h3>
-<p>Use executable code where feasible. Keep incidental output hidden and preserve outputs that teach interpretation.</p>
-</section>
-<section id="checkpoint" class="level3">
-<h3 class="anchored" data-anchor-id="checkpoint">5. Checkpoint</h3>
-<p>After each major stage, show what a successful result looks like.</p>
-</section>
-<section id="troubleshooting" class="level3">
-<h3 class="anchored" data-anchor-id="troubleshooting">6. Troubleshooting</h3>
-<p>Document common failure modes and the diagnostic information users should collect before filing an issue.</p>
-</section>
-<section id="next-steps" class="level3">
-<h3 class="anchored" data-anchor-id="next-steps">7. Next steps</h3>
-<p>Link to the next workflow rather than ending at a package boundary.</p>
+<section id="when-reporting-or-archiving" class="level3">
+<h3 class="anchored" data-anchor-id="when-reporting-or-archiving">When Reporting or Archiving</h3>
+<ul>
+<li>Record the software and package versions.</li>
+<li>Describe the samples, trait, reference assembly, filtering, model, and validation design.</li>
+<li>Include checksums and a data dictionary with shared files.</li>
+<li>Separate known simulation truth from conclusions inferred by the analysis.</li>
+<li>State where code, data, and restricted materials can be accessed.</li>
+</ul>
+<p>For an R analysis, save the session information:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"BIGr"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="migration-principle" class="level2">
-<h2 class="anchored" data-anchor-id="migration-principle">Migration principle</h2>
-<p>Do not copy reference material into multiple places. Migrate durable teaching content, then link back to the package’s canonical reference documentation. Redirect old URLs when pages move so existing workshop handouts and publications do not break.</p>
+<section id="citations-and-licenses" class="level2">
+<h2 class="anchored" data-anchor-id="citations-and-licenses">Citations and Licenses</h2>
+<p>Use the citation supplied by the software repository or installed R package. In R, check whether a package provides a citation with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">"packageName"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Also record the exact software version and repository URL. A paper citation identifies the method or software project; the version identifies the code that produced the result.</p>
+<p>When reusing a figure, dataset, or other third-party asset, retain its creator, source link, and license. Confirm that the license permits the intended reuse and note whether the material was modified.</p>
+</section>
+<section id="example-data-and-downloads" class="level2">
+<h2 class="anchored" data-anchor-id="example-data-and-downloads">Example Data and Downloads</h2>
+<p>The <a href="./workshops/bigapp/dataset-guide.html">BIGapp workshop dataset guide</a> provides a fully simulated diversity panel with file definitions, direct downloads, checksums, expected record counts, and verified filtering results. It is suitable for learning and software checks, not for biological inference.</p>
+<ul>
+<li><a href="workshops/bigapp/data/atlantic_giant_pumpkin_diversity.vcf.gz" download="atlantic_giant_pumpkin_diversity.vcf.gz">Compressed genotype VCF</a></li>
+<li><a href="workshops/bigapp/data/atlantic_giant_pumpkin_diversity_phenotypes.csv" download="atlantic_giant_pumpkin_diversity_phenotypes.csv">Phenotypes and sample metadata CSV</a></li>
+<li><a href="workshops/bigapp/data/atlantic_giant_pumpkin_diversity_snp_info.csv" download="atlantic_giant_pumpkin_diversity_snp_info.csv">SNP-information CSV</a></li>
+</ul>
+<p>For package-specific example data, use the examples distributed with that package or linked from its <a href="./software.html">software page</a>. This keeps example files synchronized with the code that reads them.</p>
+</section>
+<section id="for-contributors" class="level2">
+<h2 class="anchored" data-anchor-id="for-contributors">For Contributors</h2>
+<p>Documentation authors and maintainers should use the repository’s <a href="https://github.com/Breeding-Insight/software/blob/main/CONTRIBUTING.md">contributor guide</a> for content types, learning metadata, writing expectations, and listing behavior. Contributor standards remain separate from this public reference page.</p>
 
 
 </section>
@@ -738,7 +797,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><strong>Breeding Insight</strong> — open-source tools for public plant and animal breeding.</p>
+<p><strong>Breeding Insight:</strong> open-source tools for public plant and animal breeding.</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

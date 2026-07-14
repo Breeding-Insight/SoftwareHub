@@ -1,101 +1,144 @@
 ---
 title: "Learn"
-description: "Tutorials, workflows, and practical guidance for breeding data and genomics."
+description: "Concepts, guides, tutorials, and workflows for breeding data and genomics."
 listing:
   id: learning-materials
   contents: "learn/*.qmd"
   template: assets/learn-listing.ejs.md
   sort: "order asc"
-  filter-ui: true
+  filter-ui: false
   sort-ui: false
-  page-size: 12
+  page-size: 1000
 toc: false
 format:
   html:
     include-after-body: assets/learn-filter.html
 ---
 
-::: {.learn-hero}
-::: {.learn-hero-inner}
-<div class="hero-kicker">Learning library</div>
-
-# Tutorials for breeding data and genomics
-
-Start with the task you need to complete, or search by software, data type, and analysis method.
-
-<div class="learn-hero-actions">
-<a class="btn-bi-primary" href="#all-learning-materials">Browse all materials</a>
-<a class="btn-bi-secondary" href="workshops.html">View workshops</a>
-</div>
-:::
-:::
-
-## What do you want to do? {.section-heading}
-
-Choose a goal to see the most relevant guides and tutorials.
-
-::: {.goal-grid}
-<div class="goal-card">
-  <span class="goal-number">01</span>
-  <h3><a class="learn-filter-link" data-learn-filter="Genotype Data" href="?filter=Genotype%20Data#all-learning-materials">Prepare genotype data</a></h3>
-  <p>Import, transform, standardize, and export genotype or variant data for downstream analysis.</p>
-  <a class="goal-link learn-filter-link" data-learn-filter="Genotype Data" href="?filter=Genotype%20Data#all-learning-materials">View tutorials</a>
+::: {.learn-library-tools}
+<div class="learn-filter-search learn-library-search">
+  <label for="learn-material-search">Search learning materials</label>
+  <input id="learn-material-search" type="search" autocomplete="off" placeholder="Try MADC, VCF, dosage, or missingness">
 </div>
 
-<div class="goal-card">
-  <span class="goal-number">02</span>
-  <h3><a class="learn-filter-link" data-learn-filter="Data Quality" href="?filter=Data%20Quality#all-learning-materials">Improve data quality</a></h3>
-  <p>Filter markers and samples, diagnose missingness, and validate analysis-ready datasets.</p>
-  <a class="goal-link learn-filter-link" data-learn-filter="Data Quality" href="?filter=Data%20Quality#all-learning-materials">View tutorials</a>
-</div>
-
-<div class="goal-card">
-  <span class="goal-number">03</span>
-  <h3><a class="learn-filter-link" data-learn-filter="Ploidy & Dosage" href="?filter=Ploidy%20%26%20Dosage#all-learning-materials">Analyze polyploids</a></h3>
-  <p>Work with allele dosage, ploidy, aneuploidy, and large-scale copy-number variation.</p>
-  <a class="goal-link learn-filter-link" data-learn-filter="Ploidy & Dosage" href="?filter=Ploidy%20%26%20Dosage#all-learning-materials">View tutorials</a>
-</div>
-
-<div class="goal-card">
-  <span class="goal-number">04</span>
-  <h3><a class="learn-filter-link" data-learn-filter="Population Analysis" href="?filter=Population%20Analysis#all-learning-materials">Understand populations</a></h3>
-  <p>Explore structure, diversity, relatedness, and other population-level patterns.</p>
-  <a class="goal-link learn-filter-link" data-learn-filter="Population Analysis" href="?filter=Population%20Analysis#all-learning-materials">View tutorials</a>
-</div>
-
-<div class="goal-card">
-  <span class="goal-number">05</span>
-  <h3><a class="learn-filter-link" data-learn-filter="Trait Mapping" href="?filter=Trait%20Mapping#all-learning-materials">Map traits</a></h3>
-  <p>Move from curated genotype and phenotype data toward GWAS, QTL, and association analyses.</p>
-  <a class="goal-link learn-filter-link" data-learn-filter="Trait Mapping" href="?filter=Trait%20Mapping#all-learning-materials">View tutorials</a>
-</div>
-
-<div class="goal-card">
-  <span class="goal-number">06</span>
-  <h3><a class="learn-filter-link" data-learn-filter="Genomic Prediction" href="?filter=Genomic%20Prediction#all-learning-materials">Predict performance</a></h3>
-  <p>Prepare data, fit genomic prediction models, and evaluate prediction accuracy.</p>
-  <a class="goal-link learn-filter-link" data-learn-filter="Genomic Prediction" href="?filter=Genomic%20Prediction#all-learning-materials">View tutorials</a>
+<div class="learn-library-links">
+  <a class="no-external" href="#all-learning-materials">Jump to filtered results</a>
+  <span>Looking for guided training? <a class="no-external" href="workshops.html">View workshops</a>.</span>
 </div>
 :::
 
-## Browse by topic {.section-heading}
+## Choose how to learn {.section-heading}
 
-Use a broad topic to narrow the list. The search also recognizes terms such as MADC, VCF, DArTag, GWAS, and PCA.
+The labels describe the purpose and scope of each resource, not its difficulty.
 
-::: {.topic-filter-row}
-<a class="topic-filter learn-filter-link" data-learn-filter="Getting Started" href="?filter=Getting%20Started#all-learning-materials">Getting Started</a>
-<a class="topic-filter learn-filter-link" data-learn-filter="Genotype Data" href="?filter=Genotype%20Data#all-learning-materials">Genotype Data</a>
-<a class="topic-filter learn-filter-link" data-learn-filter="Data Quality" href="?filter=Data%20Quality#all-learning-materials">Data Quality</a>
-<a class="topic-filter learn-filter-link" data-learn-filter="Ploidy & Dosage" href="?filter=Ploidy%20%26%20Dosage#all-learning-materials">Ploidy &amp; Dosage</a>
-<a class="topic-filter learn-filter-link" data-learn-filter="Population Analysis" href="?filter=Population%20Analysis#all-learning-materials">Population Analysis</a>
-<a class="topic-filter learn-filter-link" data-learn-filter="Trait Mapping" href="?filter=Trait%20Mapping#all-learning-materials">Trait Mapping</a>
-<a class="topic-filter learn-filter-link" data-learn-filter="Genomic Prediction" href="?filter=Genomic%20Prediction#all-learning-materials">Genomic Prediction</a>
-<a class="topic-filter topic-filter-reset" data-learn-filter="" href="#all-learning-materials">All topics</a>
-:::
+```{=html}
+<div class="learning-format-grid">
+<a class="learning-format-card learn-filter-trigger no-external" data-set-facet="type" data-set-value="Concept" href="?type=Concept#all-learning-materials">
+  <span class="learning-format-name">Concept</span>
+  <span>Understand what something means, why it matters, and how to interpret it.</span>
+</a>
 
-## All learning materials {#all-learning-materials .section-heading}
+<a class="learning-format-card learn-filter-trigger no-external" data-set-facet="type" data-set-value="Guide" href="?type=Guide#all-learning-materials">
+  <span class="learning-format-name">Guide</span>
+  <span>Choose an approach, tool, or next step based on your goal.</span>
+</a>
 
-Search by topic, software name, data type, or analysis method.
+<a class="learning-format-card learn-filter-trigger no-external" data-set-facet="type" data-set-value="Tutorial" href="?type=Tutorial#all-learning-materials">
+  <span class="learning-format-name">Tutorial</span>
+  <span>Complete one bounded task through a linear, worked example.</span>
+</a>
 
-::: {#learning-materials}
+<a class="learning-format-card learn-filter-trigger no-external" data-set-facet="type" data-set-value="Workflow" href="?type=Workflow#all-learning-materials">
+  <span class="learning-format-name">Workflow</span>
+  <span>Carry out an end-to-end analysis with decisions and validation checkpoints.</span>
+</a>
+</div>
+```
+
+## Start with a goal {.section-heading}
+
+Choose the outcome closest to what you need. You can refine the results with additional filters.
+
+```{=html}
+<div class="goal-grid">
+<a class="goal-card learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Getting Started" href="?topic=Getting%20Started#all-learning-materials">
+  <h3>Get started</h3>
+  <p>Choose an analysis path and learn the foundations for working with genomic data.</p>
+  <span class="goal-link">Browse this topic <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="goal-card learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Genotype Data" href="?topic=Genotype%20Data#all-learning-materials">
+  <h3>Prepare genotype data</h3>
+  <p>Import, inspect, transform, and export genotype or variant data for downstream analysis.</p>
+  <span class="goal-link">Browse this topic <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="goal-card learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Data Quality" href="?topic=Data%20Quality#all-learning-materials">
+  <h3>Improve data quality</h3>
+  <p>Evaluate depth, missingness, markers, samples, and uncertainty before analysis.</p>
+  <span class="goal-link">Browse this topic <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="goal-card learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Ploidy &amp; Dosage" href="?topic=Ploidy%20%26%20Dosage#all-learning-materials">
+  <h3>Analyze polyploids</h3>
+  <p>Work with allele dosage, ploidy, aneuploidy, and copy-number variation.</p>
+  <span class="goal-link">Browse this topic <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="goal-card learn-filter-trigger no-external" data-set-facet="topic" data-set-value="File Formats" href="?topic=File%20Formats#all-learning-materials">
+  <h3>Understand data formats</h3>
+  <p>Learn what specialized breeding-data files contain and how they relate to standard formats.</p>
+  <span class="goal-link">Browse this topic <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="goal-card learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Genomic Prediction" href="?topic=Genomic%20Prediction#all-learning-materials">
+  <h3>Predict performance</h3>
+  <p>Interpret validation designs and results used in genomic prediction.</p>
+  <span class="goal-link">Browse this topic <span aria-hidden="true">→</span></span>
+</a>
+</div>
+```
+
+## Browse all learning materials {#all-learning-materials .section-heading}
+
+Search across titles, descriptions, topics, software, and keywords. Select more than one pill within a group to broaden that part of the search.
+
+```{=html}
+<div class="learn-filter-panel" aria-label="Filter learning materials">
+  <div class="learn-facet-grid">
+    <fieldset class="learn-facet" data-learn-facet="type">
+      <legend>Format</legend>
+      <div class="learn-filter-pills" data-filter-options="type"></div>
+    </fieldset>
+    <fieldset class="learn-facet" data-learn-facet="topic">
+      <legend>Topic</legend>
+      <div class="learn-filter-pills" data-filter-options="topic"></div>
+    </fieldset>
+    <fieldset class="learn-facet" data-learn-facet="software">
+      <legend>Software</legend>
+      <div class="learn-filter-pills" data-filter-options="software"></div>
+    </fieldset>
+    <fieldset class="learn-facet" data-learn-facet="level">
+      <legend>Level</legend>
+      <div class="learn-filter-pills" data-filter-options="level"></div>
+    </fieldset>
+  </div>
+
+</div>
+
+<div class="learn-results-header">
+  <div class="learn-results-heading">
+    <h3 id="learning-results-title">Learning materials</h3>
+    <p id="learn-result-count" class="learn-result-count" aria-live="polite" aria-atomic="true"></p>
+  </div>
+  <button id="learn-clear-filters" class="learn-clear-filters" type="button">Clear all filters</button>
+</div>
+
+<p id="learn-no-results" class="learn-no-results" hidden>
+  <strong>No learning materials match those filters.</strong>
+  Try removing a filter or using a broader search term.
+</p>
+```
+
+::: {#learning-materials role="region" aria-labelledby="learning-results-title"}
 :::

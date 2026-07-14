@@ -1,23 +1,26 @@
 [
   {
+    "listing": "/software.html",
+    "items": [
+      "/software/allomate.html",
+      "/software/bigapp.html",
+      "/software/bigpopa.html",
+      "/software/bigr.html",
+      "/software/familia.html",
+      "/software/qploidy2.html"
+    ]
+  },
+  {
     "listing": "/learn.html",
     "items": [
       "/learn/genomics-path.html",
+      "/learn/get-started-genomic-data-r.html",
+      "/learn/what-is-a-madc-file.html",
       "/learn/madc-to-vcf.html",
-      "/learn/qploidy-alfalfa.html",
       "/learn/what-is-allele-dosage.html",
       "/learn/choosing-missing-data-threshold.html",
       "/learn/snp-filtering-polyploids.html",
       "/learn/cross-validation-accuracy.html"
-    ]
-  },
-  {
-    "listing": "/software.html",
-    "items": [
-      "/software/bigapp.html",
-      "/software/bigr.html",
-      "/software/deltabreed.html",
-      "/software/qploidy2.html"
     ]
   }
 ]

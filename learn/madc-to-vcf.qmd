@@ -1,11 +1,15 @@
 ---
-title: "Process MADC genotype data"
-description: "Use BIGr to filter targeted sequencing data and convert it into an analysis-ready VCF workflow."
+title: "Convert MADC data to a genotype-called VCF"
+author: "Alexander M. Sandercock"
+date: 2025-06-18
+date-modified: 2026-07-13
+description: "Use BIGr to recover biallelic read counts, call diploid or polyploid genotypes with Updog, and filter a validated VCF."
 categories:
   - Genotype Data
   - Data Quality
   - Ploidy & Dosage
 image: ../assets/tutorial-madc.svg
+image-alt: "MADC data converted to VCF."
 order: 20
 learning-type: Workflow
 software:
@@ -15,27 +19,723 @@ keywords:
   - DArTag
   - MADC
   - VCF
-  - genotype processing
+  - Updog
+  - vcfR
+  - genotype calling
   - dosage
+  - diploid
+  - polyploid
+execute:
+  enabled: false
 ---
 
 ## Goal
 
-Turn MADC-format targeted genotyping data into a clean representation suitable for downstream genomic analysis.
+Convert a HapApp-processed DArT MADC file into a **biallelic read-count VCF**, call reference-allele dosage with [Updog](https://dcgerard.github.io/updog/), convert those calls into a genotype-called VCF with BIGr, and apply documented quality filters.
 
-## Why this belongs in the portal
+This workflow supports both diploid and polyploid organisms. You must supply the correct ploidy and adjust the depth requirements, model evaluation, and filter interpretation to the number and separability of the expected dosage classes. If ploidy is uncertain, use the [Qploidy2 tutorial](https://breeding-insight.github.io/Qploidy2/Qploidy_alfalfa_tutorial.html) and [Qploidy2 software page](../software/qploidy2.qmd) before calling genotypes.
 
-This is a durable **workflow** rather than merely a function reference. Users need to understand quality filtering, dosage conventions, coordinate validity, sorting, and VCF expectations as a connected process.
+By the end, you will have validated:
 
-[Open the current BIGr tutorial](https://breeding-insight.github.io/BIGr_documentation/){.btn-bi-primary}
-[Explore BIGr](../software/bigr.qmd){.btn-bi-secondary}
+1. fixed allele IDs and sequence orientation;
+2. biallelic REF/ALT recovery;
+3. matching reference-count and total-depth matrices;
+4. Updog dosage calls in the expected ploidy range; and
+5. a filtered VCF that reopens with the expected samples, variants, and FORMAT fields.
 
-## Proposed migrated outline
+## Prerequisite: process raw MADC data with HapApp
 
-1. Inspect the MADC file and identify required metadata.
-2. Filter low-quality loci and samples.
-3. Standardize genotype/dosage conventions.
-4. Validate chromosome and position fields.
-5. Write, sort, compress, and index the VCF.
-6. Run checkpoints before downstream analysis.
-7. Continue to PCA, GWAS, genomic prediction, or other analyses.
+::: {.callout-important title="This tutorial starts from a processed MADC"}
+Do not use a raw DArT MADC file in the conversion step. Raw reports first require HapApp processing to assign fixed allele IDs and address duplicate, ambiguous, or poor-quality microhaplotypes.
+:::
+
+Breeding Insight provides the public [HapApp_utils repository](https://github.com/Breeding-Insight/HapApp_utils) for this preparation. Users may also use Breeding Insight's forthcoming online HapApp after it becomes publicly available, or contact Breeding Insight for support. No online HapApp link is provided here because that service is not yet public.
+
+The HapApp workflow does more than rename rows: it applies initial sequence quality control, reconciles known alleles with the panel's microhaplotype database, assigns standardized IDs to qualifying novel alleles, produces an updated fixed-ID MADC, and updates the FASTA database when new alleles are found ([Zhao et al. 2026](#ref-zhao-2026)).
+
+Possible paralog filtering also occurs before this tutorial when the organism, panel, and marker evidence make it appropriate. HapApp commands and paralog-filtering code are outside this workflow's scope. BIGr 0.7.2's `filterVCF()` applies a minimum-depth mask; it does not provide a maximum-depth filter and is not a substitute for this upstream paralog screen. Review [SNP filtering in polyploids](snp-filtering-polyploids.qmd) for the biological reasons that duplicate loci can create extreme depth and distorted allele ratios.
+
+If MADC terminology is new, first read [What is a MADC file?](what-is-a-madc-file.qmd). For VCF structure and R basics, use [Get started with genomic data in R](get-started-genomic-data-r.qmd).
+
+## Reproducible example
+
+Code execution is disabled during site builds. The displayed checkpoints were verified with:
+
+::: {.table-responsive}
+| Setting | Verified value |
+|---|---|
+| R | 4.5.1 |
+| BIGr | CRAN 0.7.2 |
+| Updog | 2.1.7 |
+| vcfR | 1.16.0 |
+| Random seed | `20260713` |
+| BIGr workers | `n.cores = 1` |
+| Updog workers | `nc = 1` |
+:::
+
+On the verification system, MADC conversion took about 10 seconds and Updog calling took under 1 second. Runtime varies with the number of loci and samples, available cores, and operating system.
+
+## 1. Install and load the packages
+
+BIGr requires R 4.4.0 or newer. `BiocManager` installs BIGr together with its Bioconductor dependencies; Updog performs genotype calling, and vcfR reads and extracts VCF data.
+
+```r
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+  install.packages("BiocManager")
+}
+
+BiocManager::install(
+  c("BIGr", "updog", "vcfR"),
+  ask = FALSE,
+  update = FALSE
+)
+```
+
+Restart R, then load the packages and record their versions.
+
+```r
+library(BIGr)
+library(updog)
+library(vcfR)
+
+stopifnot(getRversion() >= "4.4.0")
+
+R.version.string
+sapply(c("BIGr", "updog", "vcfR"), packageVersion)
+```
+
+Updog models allele bias, overdispersion, sequencing error, and genotype uncertainty rather than rounding read fractions. Its [official package site](https://dcgerard.github.io/updog/) introduces the package and its supported models ([Gerard et al. 2018](#ref-gerard-2018)).
+
+## 2. Locate and inspect the bundled inputs
+
+This tutorial uses a small processed MADC, `.botloci` file, and haplotype FASTA bundled with BIGr. `system.file()` finds them without a machine-specific path.
+
+```r
+madc_file <- system.file(
+  "example_MADC_FixedAlleleID.csv",
+  package = "BIGr"
+)
+
+botloci_file <- system.file(
+  "example_SNPs_DArTag-probe-design_f180bp.botloci",
+  package = "BIGr"
+)
+
+hap_seq_file <- system.file(
+  "example_allele_db.fa",
+  package = "BIGr"
+)
+
+stopifnot(
+  nzchar(madc_file), file.exists(madc_file),
+  nzchar(botloci_file), file.exists(botloci_file),
+  nzchar(hap_seq_file), file.exists(hap_seq_file)
+)
+
+madc <- read.csv(madc_file, check.names = FALSE)
+dim(madc)
+names(madc)
+head(madc[, c(1:3, 4:5)])
+```
+
+Expected dimensions:
+
+```text
+[1] 51 13
+```
+
+The file contains 51 microhaplotype rows, three identifying columns, and 10 sample read-count columns. Confirm that `AlleleID` contains fixed suffixes such as `_0001` and `_0002`.
+
+```r
+stopifnot(
+  all(c("AlleleID", "CloneID", "AlleleSequence") %in% names(madc)),
+  any(grepl("_0001", madc$AlleleID, fixed = TRUE)),
+  any(grepl("_0002", madc$AlleleID, fixed = TRUE))
+)
+
+head(readLines(botloci_file))
+head(readLines(hap_seq_file))
+```
+
+::: {.callout-tip title="Checkpoint: fixed IDs and strand information"}
+The processed MADC must have fixed allele IDs. The `.botloci` file identifies sequences that require reverse complementation; without correct strand orientation, recovered REF and ALT bases can be reversed or complemented incorrectly.
+:::
+
+## 3. Run the MADC sanity checks
+
+`check_madc_sanity()` returns named checks rather than one overall pass/fail flag.
+
+```r
+sanity <- BIGr::check_madc_sanity(madc)
+
+data.frame(
+  check = names(sanity$checks),
+  result = unname(sanity$checks),
+  row.names = NULL
+)
+```
+
+Verified results for the bundled file:
+
+::: {.table-responsive}
+| Check | Result | Readiness interpretation |
+|---|:---:|---|
+| `Columns` | `TRUE` | Required columns are present |
+| `FixAlleleIDs` | `TRUE` | HapApp-style fixed IDs are present |
+| `IUPACcodes` | `FALSE` | No unsupported ambiguous bases were found |
+| `LowerCase` | `FALSE` | No lowercase bases were found |
+| `Indels` | `FALSE` | This example contains no detected target indels |
+| `ChromPos` | `TRUE` | `CloneID` supplies chromosome and position |
+| `allNAcol` / `allNArow` | `FALSE` | No empty row or column was found |
+| `RefAltSeqs` | `FALSE` | One Alt sequence is absent from the MADC and will be recovered from FASTA |
+| `OtherAlleles` | `FALSE` | The example has no `Other` rows |
+:::
+
+Some names describe the **presence** of a condition, so `FALSE` can be the desired result. For conversion, required columns and fixed IDs must be `TRUE`, while `IUPACcodes` must be `FALSE`. A missing Ref or Alt can be acceptable for `madc2vcf_all()` when the supplied haplotype FASTA contains it; the verified run recovers one missing Alt sequence.
+
+::: {.callout-warning title="Indel and marker-metadata checkpoint"}
+Current BIGr supports target indels when you provide the required marker-information fields, including authoritative REF/ALT and indel position/length, together with `.botloci`. Off-target variants from that indel-containing tag are ignored. If `CloneID` does not encode chromosome and position, supply a marker-information CSV with compatible marker IDs, `Chr`, and `Pos`. Follow the [BIGr reference manual](https://cran.r-project.org/web/packages/BIGr/BIGr.pdf) for the exact current fields.
+:::
+
+## 4. Convert MADC counts to a biallelic VCF
+
+Create a project output directory and run `madc2vcf_all()`. Updog consumes one reference count and one total count per sample and locus, so this workflow removes multiallelic SNPs.
+
+```r
+output_dir <- "madc_updog_output"
+dir.create(output_dir, showWarnings = FALSE)
+
+read_count_vcf_file <- file.path(
+  output_dir,
+  "madc_read_counts.vcf"
+)
+
+BIGr::madc2vcf_all(
+  madc = madc_file,
+  botloci_file = botloci_file,
+  hap_seq_file = hap_seq_file,
+  n.cores = 1,
+  rm_multiallelic_SNP = TRUE,
+  alignment_score_thr = 40,
+  add_others = TRUE,
+  others_max_snps = 5,
+  others_rm_with_indels = TRUE,
+  out_vcf = read_count_vcf_file,
+  verbose = TRUE
+)
+```
+
+The verified run recovers the missing Alt sequence from FASTA, finds one multiallelic off-target SNP, removes it, and writes **32 biallelic variants for 10 samples**. It also writes the BIGr version and conversion parameters into VCF metadata.
+
+::: {.callout-tip title="Checkpoint: orientation, REF/ALT, and biallelic output"}
+Read the conversion messages. Confirm that strand handling used the intended `.botloci`, missing sequences were recovered or deliberately discarded, REF and ALT are not `.`, and the number of removed multiallelic sites is understood. `rm_multiallelic_SNP = TRUE` is a deliberate Updog compatibility choice, not a statement that multiallelic biology is unimportant.
+:::
+
+## 5. Reopen the read-count VCF and extract matrices
+
+Use vcfR to reopen the file, following the structure introduced in the [official vcfR quick introduction](https://knausb.github.io/vcfR_documentation/quick_intro.html) ([Knaus and Grünwald 2017](#ref-knaus-2017)).
+
+```r
+read_vcf <- vcfR::read.vcfR(
+  read_count_vcf_file,
+  verbose = FALSE
+)
+
+c(
+  variants = nrow(read_vcf@fix),
+  samples = ncol(read_vcf@gt) - 1
+)
+
+unique(read_vcf@gt[, "FORMAT"])
+head(read_vcf@fix[, c("CHROM", "POS", "ID", "REF", "ALT")])
+```
+
+Expected summary:
+
+```text
+variants  samples
+      32       10
+
+[1] "DP:RA:AD"
+```
+
+This is a **read-count VCF**, not a genotype-called VCF. Its FORMAT values are total depth (`DP`), reference-allele depth (`RA`), and ordered reference/alternate depths (`AD`). It has no `GT` or dosage field yet.
+
+Confirm that the conversion produced only biallelic variants with explicit alleles.
+
+```r
+stopifnot(
+  !any(read_vcf@fix[, "REF"] == "."),
+  !any(read_vcf@fix[, "ALT"] == "."),
+  !any(grepl(",", read_vcf@fix[, "ALT"], fixed = TRUE))
+)
+```
+
+Extract the matrices as described in the [official vcfR matrix-extraction tutorial](https://knausb.github.io/vcfR_documentation/matrices.html). BIGr 0.7.2 writes reference depth as `RA`; do not substitute `RO` unless your own VCF header actually defines it.
+
+```r
+ref_matrix <- vcfR::extract.gt(
+  read_vcf,
+  element = "RA",
+  as.numeric = TRUE
+)
+
+size_matrix <- vcfR::extract.gt(
+  read_vcf,
+  element = "DP",
+  as.numeric = TRUE
+)
+```
+
+Rows are variants and columns are samples, exactly as `multidog()` requires.
+
+## 6. Validate and prepare the count matrices
+
+Do not call genotypes until the matrix dimensions, names, and count relationships agree.
+
+```r
+stopifnot(
+  identical(dim(ref_matrix), dim(size_matrix)),
+  identical(dimnames(ref_matrix), dimnames(size_matrix)),
+  all(ref_matrix >= 0, na.rm = TRUE),
+  all(size_matrix >= 0, na.rm = TRUE),
+  all(ref_matrix <= size_matrix, na.rm = TRUE),
+  identical(rownames(ref_matrix), read_vcf@fix[, "ID"])
+)
+
+dim(ref_matrix)
+range(ref_matrix, na.rm = TRUE)
+range(size_matrix, na.rm = TRUE)
+quantile(
+  size_matrix,
+  probs = c(0, 0.25, 0.5, 0.75, 1),
+  na.rm = TRUE
+)
+```
+
+Verified results:
+
+```text
+[1] 32 10
+
+reference-count range: 0 to 1970
+total-depth range:     0 to 1972
+total-depth quartiles: 0, 28, 173, 311, 1972
+```
+
+Remove variants with no reads across all samples before calling. Updog also removes all-zero loci, but doing it explicitly makes the change auditable.
+
+```r
+has_reads <- rowSums(size_matrix, na.rm = TRUE) > 0
+
+ref_matrix <- ref_matrix[has_reads, , drop = FALSE]
+size_matrix <- size_matrix[has_reads, , drop = FALSE]
+
+stopifnot(
+  identical(dim(ref_matrix), dim(size_matrix)),
+  identical(dimnames(ref_matrix), dimnames(size_matrix))
+)
+
+dim(ref_matrix)
+```
+
+Expected prepared dimensions:
+
+```text
+[1] 31 10
+```
+
+::: {.callout-warning title="Expected-depth checkpoint"}
+The example's high depth does not establish a required depth for other data. Higher ploidy creates more dosage classes with closer expected allele fractions, so adequate depth and clear class separation become more important. Extreme depth may also signal duplicated sequence rather than confidence.
+:::
+
+The [official `multidog()` tutorial](https://dcgerard.github.io/updog/articles/multidog.html) documents these matrix requirements and multi-locus calling steps.
+
+## 7. Call genotypes with Updog
+
+Set the organism's biological ploidy explicitly. The bundled example is called as diploid for reproducibility; replace `2` only after establishing the correct ploidy for your samples.
+
+```r
+ploidy <- 2
+seed <- 20260713
+
+stopifnot(
+  ploidy == as.integer(ploidy),
+  ploidy >= 1
+)
+
+set.seed(seed)
+
+mout <- updog::multidog(
+  refmat = ref_matrix,
+  sizemat = size_matrix,
+  ploidy = ploidy,
+  model = "norm",
+  nc = 1
+)
+```
+
+`model = "norm"` uses a flexible normal prior on genotype distribution ([Gerard and Ferrão 2020](#ref-gerard-ferrao-2020)). Updog can accommodate different population structures, but `norm` is still a modeling choice rather than an automatic best model for every population. Use the [official Updog worked example](https://dcgerard.github.io/updog/articles/smells_like_updog.html) to compare model assumptions and interpret poor fits.
+
+Set `nc` no higher than the cores available to your R session. Keeping `nc = 1` and a fixed seed makes this small example portable and reproducible.
+
+## 8. Inspect Updog diagnostics
+
+Updog returns one table for locus-level estimates and another for sample-by-locus genotype results ([Gerard et al. 2018](#ref-gerard-2018)).
+
+```r
+dim(mout$snpdf)
+dim(mout$inddf)
+
+summary(mout$snpdf[, c(
+  "bias", "seq", "od", "prop_mis"
+)])
+
+summary(mout$inddf[, c(
+  "ref", "size", "geno", "maxpostprob"
+)])
+```
+
+Interpret the diagnostics together:
+
+::: {.table-responsive}
+| Diagnostic | What it represents | What to examine |
+|---|---|---|
+| Allele bias (`bias`) | Departure from equal sampling of reference and alternate alleles; values near 1 indicate little bias | Extreme estimates and shifted dosage clusters |
+| Overdispersion (`od`) | Extra variability beyond ordinary binomial read sampling | Large values and weak separation among dosage classes |
+| Sequencing error (`seq`) | Estimated probability that a read reports the wrong allele | High estimates or fits at an imposed boundary |
+| Expected mis-genotyping (`prop_mis`) | Model-estimated proportion of incorrectly classified individuals at the locus | Loci with high expected error even when some individual calls look confident |
+| Posterior probability (`maxpostprob`) | Probability assigned to the selected dosage for one sample and locus | Low-confidence calls that should be set to missing |
+| Depth (`size`) | Total reads supporting one sample and locus | Low evidence, extreme outliers, and ploidy-appropriate separation |
+:::
+
+The verified run returns 31 loci and 310 sample-by-locus records. Diploid reference dosage spans 0 through 2, and maximum posterior probability spans approximately 0.674 through 1. The diagnostic ranges are characteristics of this tiny example, not recommended cutoffs.
+
+```r
+stopifnot(
+  all(mout$snpdf$ploidy == ploidy),
+  all(mout$inddf$geno >= 0, na.rm = TRUE),
+  all(mout$inddf$geno <= ploidy, na.rm = TRUE),
+  all(mout$inddf$maxpostprob >= 0, na.rm = TRUE),
+  all(mout$inddf$maxpostprob <= 1, na.rm = TRUE)
+)
+```
+
+::: {.callout-tip title="Ploidy and dosage-range checkpoint"}
+At ploidy $P$, Updog must return reference dosages from 0 through $P$. A valid range does not by itself prove a good fit: inspect whether expected dosage classes are separable, depth is adequate, and bias, overdispersion, error, and posterior support are plausible.
+:::
+
+## 9. Convert Updog output to a called VCF
+
+Preserve the authoritative REF and ALT bases from the read-count VCF. Subset them with the same `has_reads` mask used for the Updog matrices.
+
+```r
+ref_alt <- data.frame(
+  Chr = read_vcf@fix[has_reads, "CHROM"],
+  Pos = read_vcf@fix[has_reads, "POS"],
+  Ref = read_vcf@fix[has_reads, "REF"],
+  Alt = read_vcf@fix[has_reads, "ALT"]
+)
+
+called_vcf_base <- file.path(
+  output_dir,
+  "madc_updog_called"
+)
+
+BIGr::updog2vcf(
+  multidog.object = mout,
+  output.file = called_vcf_base,
+  updog_version = as.character(packageVersion("updog")),
+  RefAlt = ref_alt,
+  compress = TRUE
+)
+
+called_vcf_file <- paste0(called_vcf_base, ".vcf.gz")
+stopifnot(file.exists(called_vcf_file))
+```
+
+### Understand the dosage direction
+
+Updog's `geno` is **reference-allele dosage**. BIGr retains it in the called VCF's `UD` field. Standard VCF `GT` uses allele index `0` for REF and `1` for ALT, so BIGr writes GT with:
+
+$$
+\text{alternate-allele dosage} = P - \text{UD}
+$$
+
+For example, at ploidy 4, `UD = 3` means three reference copies and one alternate copy, so GT is `0/0/0/1`. This direction matters when comparing the VCF to a dosage matrix; see [What is allele dosage?](what-is-allele-dosage.qmd).
+
+## 10. Reopen, validate, and filter the called VCF
+
+Reopen the compressed result and validate its core structure.
+
+```r
+called_vcf <- vcfR::read.vcfR(
+  called_vcf_file,
+  verbose = FALSE
+)
+
+c(
+  variants = nrow(called_vcf@fix),
+  samples = ncol(called_vcf@gt) - 1
+)
+
+unique(called_vcf@gt[, "FORMAT"])
+```
+
+Expected output:
+
+```text
+variants  samples
+      31       10
+
+[1] "GT:UD:DP:RA:AD:MPP"
+```
+
+Check REF/ALT recovery, dosage range, and the relationship between reference dosage and GT alternate dosage.
+
+```r
+called_key <- paste(
+  called_vcf@fix[, "CHROM"],
+  as.integer(called_vcf@fix[, "POS"]),
+  sep = "_"
+)
+
+source_key <- paste(
+  read_vcf@fix[, "CHROM"],
+  as.integer(read_vcf@fix[, "POS"]),
+  sep = "_"
+)
+
+source_row <- match(called_key, source_key)
+
+ud <- vcfR::extract.gt(
+  called_vcf,
+  element = "UD",
+  as.numeric = TRUE
+)
+
+gt <- vcfR::extract.gt(
+  called_vcf,
+  element = "GT",
+  as.numeric = FALSE
+)
+
+alt_dosage <- apply(gt, c(1, 2), function(x) {
+  if (is.na(x) || grepl("\\.", x)) {
+    return(NA_real_)
+  }
+
+  sum(strsplit(x, "[/|]")[[1]] == "1")
+})
+
+called_dp <- vcfR::extract.gt(
+  called_vcf,
+  element = "DP",
+  as.numeric = TRUE
+)
+
+stopifnot(
+  all(!is.na(source_row)),
+  identical(
+    called_vcf@fix[, "REF"],
+    read_vcf@fix[source_row, "REF"]
+  ),
+  identical(
+    called_vcf@fix[, "ALT"],
+    read_vcf@fix[source_row, "ALT"]
+  ),
+  all(ud >= 0 & ud <= ploidy, na.rm = TRUE),
+  all(ud + alt_dosage == ploidy, na.rm = TRUE),
+  all(called_dp >= 0, na.rm = TRUE)
+)
+```
+
+No output means the VCF has matching variant identities, recovered alleles, valid diploid or polyploid dosage bounds, and consistent dosage direction.
+
+### Apply adjustable quality filters
+
+The [official vcfR filtering tutorial](https://knausb.github.io/vcfR_documentation/filtering_data.html) explains general VCF quality-control operations. The filters demonstrated here are implemented by **BIGr**, not by vcfR ([Knaus and Grünwald 2017](#ref-knaus-2017)).
+
+The following values are intentionally concrete so the example is reproducible, but they are **not universal defaults**. Apply the depth mask first. Updog fits a population model and can assign a dosage even when a sample has zero reads at a locus; that model-based call must not be retained as observed genotype evidence.
+
+```r
+min_genotype_depth <- 20
+
+called_gt_before_depth <- vcfR::extract.gt(
+  called_vcf,
+  element = "GT",
+  as.numeric = FALSE
+)
+
+called_dp_before_depth <- vcfR::extract.gt(
+  called_vcf,
+  element = "DP",
+  as.numeric = TRUE
+)
+
+# An absent DP must not accompany a retained genotype.
+stopifnot(
+  all(is.na(
+    called_gt_before_depth[is.na(called_dp_before_depth)]
+  ))
+)
+
+low_depth_calls <- !is.na(called_dp_before_depth) &
+  called_dp_before_depth < min_genotype_depth
+
+depth_filtered_vcf <- BIGr::filterVCF(
+  vcf.file = called_vcf,
+  filter.DP = min_genotype_depth,
+  ploidy = ploidy,
+  output.file = NULL
+)
+
+gt_after_depth <- vcfR::extract.gt(
+  depth_filtered_vcf,
+  element = "GT",
+  as.numeric = FALSE
+)
+
+ud_after_depth <- vcfR::extract.gt(
+  depth_filtered_vcf,
+  element = "UD",
+  as.numeric = TRUE
+)
+
+dp_after_depth <- vcfR::extract.gt(
+  depth_filtered_vcf,
+  element = "DP",
+  as.numeric = TRUE
+)
+
+stopifnot(
+  all(is.na(gt_after_depth[low_depth_calls])),
+  all(is.na(ud_after_depth[low_depth_calls])),
+  all(is.na(dp_after_depth[low_depth_calls]))
+)
+
+sum(low_depth_calls)
+```
+
+Expected result:
+
+```text
+[1] 49
+```
+
+In BIGr 0.7.2, `filter.DP` compares each original `DP` with the threshold using `DP < filter.DP`. It converts the **entire sample FORMAT entry** to missing, not only `GT`; therefore `GT`, Updog's reference dosage (`UD`), depth, allele counts, and posterior probability are all unavailable for the masked call. A zero-depth Updog call is included in this mask. The assertions above make that behavior visible and guard against accidentally retaining low-depth dosages.
+
+Run the remaining call-level and locus-level filters on `depth_filtered_vcf` so that MAF and missingness are calculated only after low-depth calls have been removed.
+
+```r
+filtered_vcf_base <- file.path(
+  output_dir,
+  "madc_updog"
+)
+
+BIGr::filterVCF(
+  vcf.file = depth_filtered_vcf,
+  filter.OD = 0.05,
+  filter.BIAS.min = 0.7,
+  filter.BIAS.max = 1.3,
+  filter.MPP = 0.80,
+  filter.PMC = 0.10,
+  filter.MAF = 0.05,
+  filter.SAMPLE.miss = 0.50,
+  filter.SNP.miss = 0.50,
+  ploidy = ploidy,
+  output.file = filtered_vcf_base
+)
+
+filtered_vcf_file <- paste0(
+  filtered_vcf_base,
+  "_filtered.vcf.gz"
+)
+
+filtered_vcf <- vcfR::read.vcfR(
+  filtered_vcf_file,
+  verbose = FALSE
+)
+```
+
+The second pass turns genotype entries below the posterior-probability threshold into missing calls, then filters on locus-level overdispersion, allele bias, expected mis-genotyping, missingness, and minor allele frequency (MAF). MAF measures how common the less frequent allele is; missingness records the fraction of unavailable genotype calls for a marker or sample.
+
+::: {.callout-note title="Choose filters from evidence, not this example"}
+At higher ploidy, adjacent dosage classes are closer together and may need more depth. Bias and overdispersion tolerances depend on model fit and the panel. MAF and missingness limits depend on sample size, population design, and downstream analysis. Compare reasonable settings and report the number of calls, loci, and samples removed at each stage.
+:::
+
+For this 10-sample example, the displayed thresholds retain **3 variants and all 10 samples**. Validate the written file one last time:
+
+```r
+required_format <- c("GT", "UD", "DP", "RA", "AD", "MPP")
+format_fields <- strsplit(
+  unique(filtered_vcf@gt[, "FORMAT"]),
+  ":",
+  fixed = TRUE
+)[[1]]
+
+filtered_ud <- vcfR::extract.gt(
+  filtered_vcf,
+  element = "UD",
+  as.numeric = TRUE
+)
+
+stopifnot(
+  nrow(filtered_vcf@fix) > 0,
+  ncol(filtered_vcf@gt) > 1,
+  all(required_format %in% format_fields),
+  !any(grepl(",", filtered_vcf@fix[, "ALT"], fixed = TRUE)),
+  all(filtered_ud >= 0 & filtered_ud <= ploidy, na.rm = TRUE)
+)
+
+c(
+  variants = nrow(filtered_vcf@fix),
+  samples = ncol(filtered_vcf@gt) - 1
+)
+```
+
+Expected output:
+
+```text
+variants  samples
+       3       10
+```
+
+## Alternative: retain multiallelic information with polyRAD
+
+If retaining multiallelic variants is central to the analysis, BIGr also provides `madc2vcf_multi()`, which uses polyRAD rather than the biallelic Updog path. Read the [official polyRAD tutorial](https://polyploids.r-universe.dev/polyRAD/doc/polyRADtutorial.html) and the [`madc2vcf_multi()` arguments in the BIGr reference manual](https://cran.r-project.org/web/packages/BIGr/BIGr.pdf) before choosing that route ([Clark, Lipka, and Sacks 2019](#ref-clark-2019)).
+
+This tutorial does not install or execute polyRAD. polyRAD can be substantially faster for large marker sets, but it can be more memory-intensive and requires an appropriate population model. The two workflows also make different choices about multiallelic evidence and diagnostics; select the path that matches the organism, panel, computing resources, and downstream goal.
+
+## Troubleshooting checkpoints
+
+::: {.table-responsive}
+| Symptom | Check first |
+|---|---|
+| BIGr reports unfixed allele IDs | Stop and process the raw report with HapApp; do not rename suffixes manually |
+| REF/ALT bases look complemented or reversed | Confirm that the `.botloci` file belongs to this panel and that marker coordinates use the expected strand |
+| REF or ALT is `.` in the called VCF | Pass the recovered REF/ALT table to `updog2vcf()` and match it by chromosome and position |
+| `multidog()` reports all SNPs missing | Confirm that the reference field is `RA` in this BIGr VCF, that `DP` is present, and that counts were extracted as numeric matrices |
+| Matrix dimensions or names differ | Stop; align the same variants and samples before calling |
+| A dosage is outside 0 through ploidy | Stop; verify ploidy and input orientation before conversion |
+| Dosage appears reversed | Remember that Updog/`UD` counts REF while VCF allele index `1` counts ALT |
+| Dosage classes overlap | Reassess depth, ploidy, allele bias, overdispersion, sequencing error, and model choice |
+| Almost every locus disappears | Inspect each threshold separately; this example's values may be inappropriate for your data |
+:::
+
+## Continue learning
+
+- [What is allele dosage?](what-is-allele-dosage.qmd) explains dosage direction and uncertainty.
+- [SNP filtering in polyploids](snp-filtering-polyploids.qmd) develops a ploidy-aware filtering strategy.
+- [Choosing a missing-data threshold](choosing-missing-data-threshold.qmd) shows how to evaluate missingness sensitivity.
+- [Estimate copy number in alfalfa with Qploidy2](https://breeding-insight.github.io/Qploidy2/Qploidy_alfalfa_tutorial.html) addresses ploidy, aneuploidy, and large copy-number changes.
+
+## References
+
+- []{#ref-clark-2019} Clark LV, Lipka AE, Sacks EJ. 2019. “polyRAD: Genotype Calling with Uncertainty from Sequencing Data in Polyploids and Diploids.” *G3: Genes, Genomes, Genetics* 9(3):663–673. [doi:10.1534/g3.118.200913](https://doi.org/10.1534/g3.118.200913)
+- []{#ref-gerard-2018} Gerard D, Ferrão LFV, Garcia AAF, Stephens M. 2018. “Genotyping Polyploids from Messy Sequencing Data.” *Genetics* 210(3):789–807. [doi:10.1534/genetics.118.301468](https://doi.org/10.1534/genetics.118.301468)
+- []{#ref-gerard-ferrao-2020} Gerard D, Ferrão LFV. 2020. “Priors for Genotyping Polyploids.” *Bioinformatics* 36(6):1795–1800. [doi:10.1093/bioinformatics/btz852](https://doi.org/10.1093/bioinformatics/btz852)
+- []{#ref-knaus-2017} Knaus BJ, Grünwald NJ. 2017. “vcfR: A Package to Manipulate and Visualize Variant Call Format Data in R.” *Molecular Ecology Resources* 17(1):44–53. [doi:10.1111/1755-0998.12549](https://doi.org/10.1111/1755-0998.12549)
+- []{#ref-bigr-paper} Sandercock AM, Peel M, Taniguti C, Chinchilla-Vargas J, Chen S, Sapkota M, Lin M, Zhao D, Ackerman A, Basnet B, Beil C, Sheehan M. 2025. “BIGapp: A User-Friendly Genomic Tool Kit Identified Quantitative Trait Loci for Creeping Rootedness in Alfalfa (*Medicago sativa* L.).” *The Plant Genome* 18(3):e70067. [doi:10.1002/tpg2.70067](https://doi.org/10.1002/tpg2.70067)
+- []{#ref-bigr-package} Sandercock AM, Taniguti C, Chinchilla-Vargas J, Chen S, Sapkota M, Lin M, Zhao D, University C. 2025. *BIGr: Breeding Insight Genomics Functions for Polyploid and Diploid Species*. R package citation supplied with CRAN BIGr 0.7.2; the citation file reports package version 0.6.2. [BIGr source repository](https://github.com/Breeding-Insight/BIGr)
+- []{#ref-zhao-2026} Zhao D, Lin M, Taniguti CH, Sandercock AM, et al. 2026. “Development and Characterization of Microhaplotype Databases for Diverse Crop Species.” Research Square preprint. [doi:10.21203/rs.3.rs-9292361/v1](https://doi.org/10.21203/rs.3.rs-9292361/v1)

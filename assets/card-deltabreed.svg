@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="DeltaBreed">
-  <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#319B42"/><stop offset="1" stop-color="#B5DDE8"/></linearGradient></defs>
-  <rect width="1200" height="675" fill="#F7FBFB"/>
-  <circle cx="1000" cy="90" r="300" fill="#319B42" opacity=".14"/>
-  <circle cx="170" cy="650" r="330" fill="#B5DDE8" opacity=".13"/>
-  <rect x="90" y="105" width="1020" height="465" rx="42" fill="url(#g)" opacity=".13"/>
-  <text x="110" y="385" font-family="Arial, sans-serif" font-size="118" font-weight="700" fill="#2A6576">DeltaBreed</text>
-  <path d="M110 435 H590" stroke="#319B42" stroke-width="12" stroke-linecap="round"/>
-</svg>

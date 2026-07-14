@@ -1,0 +1,201 @@
+Sample_ID,State,Region,Breeding_Program,Sequencing_Year,Sequencing_Lane,Plate,Well,Eastern_Ancestry,Midwest_Ancestry,Western_Ancestry,Fruit_Weight_lbs
+AGP_001,Michigan,Midwest,University_Program,2024,Lane_3,Plate_1,A1,0.339,0.574,0.086,831.2
+AGP_002,Rhode Island,Eastern,Grower_Selection,2022,Lane_2,Plate_1,B1,0.8,0.062,0.138,846.7
+AGP_003,Indiana,Midwest,Private_Breeder,2022,Lane_1,Plate_1,C1,0.209,0.726,0.065,949.4
+AGP_004,Illinois,Midwest,ISU_Horticulture,2023,Lane_8,Plate_1,D1,0.148,0.816,0.036,993.1
+AGP_005,Washington,Western,OSU_Veg,2024,Lane_6,Plate_1,E1,0.334,0.053,0.613,999.3
+AGP_006,Missouri,Midwest,Grower_Selection,2023,Lane_2,Plate_1,F1,0.191,0.527,0.282,1194.7
+AGP_007,California,Western,West_Coast_Seeds,2024,Lane_8,Plate_1,G1,0.062,0.107,0.831,763.2
+AGP_008,Iowa,Midwest,ISU_Horticulture,2024,Lane_4,Plate_1,H1,0.16,0.814,0.026,1065.5
+AGP_009,Minnesota,Midwest,University_Program,2021,Lane_4,Plate_1,A2,0.162,0.564,0.273,1079.3
+AGP_010,Wisconsin,Midwest,ISU_Horticulture,2023,Lane_4,Plate_1,B2,0.066,0.726,0.208,704.0
+AGP_011,New Jersey,Eastern,Grower_Selection,2024,Lane_5,Plate_1,C2,0.875,0.111,0.014,1047.4
+AGP_012,Indiana,Midwest,Grower_Selection,2024,Lane_7,Plate_1,D2,0.47,0.504,0.026,1122.2
+AGP_013,Nebraska,Midwest,University_Program,2024,Lane_2,Plate_1,E2,0.183,0.686,0.131,859.0
+AGP_014,California,Western,WSU_Horticulture,2023,Lane_4,Plate_1,F2,0.105,0.174,0.721,956.7
+AGP_015,Indiana,Midwest,University_Program,2023,Lane_6,Plate_1,G2,0.58,0.405,0.014,939.0
+AGP_016,Arizona,Western,Grower_Selection,2024,Lane_3,Plate_1,H2,0.211,0.056,0.733,850.3
+AGP_017,Missouri,Midwest,Grower_Selection,2023,Lane_4,Plate_1,A3,0.083,0.826,0.091,1024.0
+AGP_018,Arizona,Western,Grower_Selection,2022,Lane_8,Plate_1,B3,0.095,0.086,0.819,1019.7
+AGP_019,Missouri,Midwest,University_Program,2024,Lane_8,Plate_1,C3,0.18,0.725,0.095,1015.5
+AGP_020,Connecticut,Eastern,Private_Breeder,2023,Lane_1,Plate_1,D3,0.703,0.064,0.234,960.5
+AGP_021,New Jersey,Eastern,Grower_Selection,2024,Lane_1,Plate_1,E3,0.957,0.025,0.017,1055.4
+AGP_022,New York,Eastern,Private_Breeder,2021,Lane_2,Plate_1,F3,0.796,0.196,0.008,1375.1
+AGP_023,Rhode Island,Eastern,University_Program,2023,Lane_2,Plate_1,G3,0.814,0.186,0.0,1140.8
+AGP_024,Minnesota,Midwest,Private_Breeder,2024,Lane_2,Plate_1,H3,0.268,0.376,0.356,1085.6
+AGP_025,California,Western,OSU_Veg,2024,Lane_8,Plate_1,A4,0.072,0.402,0.526,928.8
+AGP_026,Minnesota,Midwest,Private_Breeder,2023,Lane_8,Plate_1,B4,0.411,0.411,0.178,868.5
+AGP_027,Arizona,Western,Grower_Selection,2022,Lane_1,Plate_1,C4,0.096,0.157,0.747,965.1
+AGP_028,Michigan,Midwest,Private_Breeder,2021,Lane_3,Plate_1,D4,0.081,0.791,0.129,703.1
+AGP_029,Illinois,Midwest,Midwest_Giant_Assoc,2022,Lane_7,Plate_1,E4,0.025,0.975,0.0,823.5
+AGP_030,Oregon,Western,WSU_Horticulture,2024,Lane_6,Plate_1,F4,0.467,0.213,0.32,874.1
+AGP_031,Connecticut,Eastern,Private_Breeder,2021,Lane_8,Plate_1,G4,0.897,0.039,0.064,1056.7
+AGP_032,New York,Eastern,Private_Breeder,2023,Lane_7,Plate_1,H4,0.866,0.126,0.008,892.6
+AGP_033,Colorado,Western,Grower_Selection,2023,Lane_8,Plate_1,A5,0.242,0.117,0.641,892.1
+AGP_034,New York,Eastern,Private_Breeder,2023,Lane_3,Plate_1,B5,0.859,0.122,0.019,1036.1
+AGP_035,Oregon,Western,UCD_Cucurbit,2024,Lane_6,Plate_1,C5,0.103,0.212,0.685,974.7
+AGP_036,Oregon,Western,WSU_Horticulture,2024,Lane_4,Plate_1,D5,0.04,0.529,0.431,758.2
+AGP_037,New York,Eastern,PSU_Cucurbit,2024,Lane_7,Plate_1,E5,0.907,0.069,0.024,871.8
+AGP_038,New Jersey,Eastern,Private_Breeder,2022,Lane_1,Plate_1,F5,0.689,0.185,0.126,996.6
+AGP_039,Washington,Western,West_Coast_Seeds,2023,Lane_3,Plate_1,G5,0.069,0.07,0.861,871.2
+AGP_040,Ohio,Eastern,OSU_Giant,2022,Lane_7,Plate_1,H5,0.981,0.018,0.0,1122.3
+AGP_041,Michigan,Midwest,Grower_Selection,2024,Lane_6,Plate_1,A6,0.066,0.888,0.046,1025.1
+AGP_042,Missouri,Midwest,Private_Breeder,2022,Lane_6,Plate_1,B6,0.163,0.821,0.016,750.0
+AGP_043,Oregon,Western,WSU_Horticulture,2023,Lane_1,Plate_1,C6,0.156,0.262,0.583,922.4
+AGP_044,Ohio,Eastern,PSU_Cucurbit,2021,Lane_5,Plate_1,D6,0.863,0.11,0.027,974.5
+AGP_045,Colorado,Western,University_Program,2024,Lane_4,Plate_1,E6,0.082,0.207,0.711,851.2
+AGP_046,Nebraska,Midwest,Grower_Selection,2022,Lane_2,Plate_1,F6,0.4,0.553,0.047,866.2
+AGP_047,Colorado,Western,Grower_Selection,2023,Lane_6,Plate_1,G6,0.208,0.118,0.674,766.9
+AGP_048,Arizona,Western,Grower_Selection,2021,Lane_8,Plate_1,H6,0.182,0.043,0.776,1125.5
+AGP_049,Minnesota,Midwest,Private_Breeder,2023,Lane_6,Plate_1,A7,0.129,0.849,0.022,953.5
+AGP_050,Oregon,Western,OSU_Veg,2022,Lane_3,Plate_1,B7,0.02,0.255,0.725,813.7
+AGP_051,California,Western,OSU_Veg,2021,Lane_7,Plate_1,C7,0.077,0.204,0.719,841.2
+AGP_052,California,Western,West_Coast_Seeds,2022,Lane_3,Plate_1,D7,0.196,0.03,0.774,1001.5
+AGP_053,New York,Eastern,Private_Breeder,2021,Lane_4,Plate_1,E7,0.941,0.059,0.0,1093.4
+AGP_054,Ohio,Eastern,OSU_Giant,2024,Lane_5,Plate_1,F7,0.853,0.129,0.017,956.3
+AGP_055,Colorado,Western,Grower_Selection,2024,Lane_1,Plate_1,G7,0.041,0.23,0.729,798.4
+AGP_056,Illinois,Midwest,UW_Cucurbit,2022,Lane_1,Plate_1,H7,0.033,0.907,0.061,962.2
+AGP_057,Connecticut,Eastern,University_Program,2023,Lane_8,Plate_1,A8,0.893,0.061,0.046,1015.4
+AGP_058,Massachusetts,Eastern,Grower_Selection,2024,Lane_1,Plate_1,B8,0.669,0.017,0.314,951.1
+AGP_059,New York,Eastern,Cornell_Pumpkin,2023,Lane_6,Plate_1,C8,0.979,0.013,0.008,1181.1
+AGP_060,Wisconsin,Midwest,Midwest_Giant_Assoc,2023,Lane_3,Plate_1,D8,0.256,0.541,0.203,1005.0
+AGP_061,Nebraska,Midwest,University_Program,2023,Lane_8,Plate_1,E8,0.078,0.384,0.538,1202.8
+AGP_062,Wisconsin,Midwest,UI_Pumpkin,2023,Lane_3,Plate_1,F8,0.033,0.961,0.006,918.2
+AGP_063,New Jersey,Eastern,Grower_Selection,2022,Lane_5,Plate_1,G8,0.757,0.233,0.01,1035.8
+AGP_064,Michigan,Midwest,Grower_Selection,2022,Lane_7,Plate_1,H8,0.402,0.553,0.044,994.5
+AGP_065,Pennsylvania,Eastern,Cornell_Pumpkin,2023,Lane_6,Plate_1,A9,0.939,0.061,0.0,1125.3
+AGP_066,Iowa,Midwest,UW_Cucurbit,2022,Lane_3,Plate_1,B9,0.023,0.556,0.421,901.1
+AGP_067,Ohio,Eastern,Private_Breeder,2023,Lane_7,Plate_1,C9,0.719,0.273,0.008,914.3
+AGP_068,Connecticut,Eastern,Private_Breeder,2024,Lane_5,Plate_1,D9,0.954,0.016,0.029,1105.3
+AGP_069,New Jersey,Eastern,University_Program,2023,Lane_4,Plate_1,E9,0.858,0.113,0.029,1050.5
+AGP_070,Connecticut,Eastern,Grower_Selection,2023,Lane_6,Plate_1,F9,0.88,0.025,0.095,1038.3
+AGP_071,Oregon,Western,OSU_Veg,2024,Lane_5,Plate_1,G9,0.104,0.416,0.48,1168.1
+AGP_072,Pennsylvania,Eastern,OSU_Giant,2024,Lane_6,Plate_1,H9,0.569,0.036,0.395,1130.7
+AGP_073,Iowa,Midwest,UI_Pumpkin,2023,Lane_4,Plate_1,A10,0.162,0.669,0.17,852.7
+AGP_074,Rhode Island,Eastern,Private_Breeder,2024,Lane_8,Plate_1,B10,0.982,0.017,0.001,1228.5
+AGP_075,California,Western,WSU_Horticulture,2022,Lane_1,Plate_1,C10,0.101,0.071,0.828,933.6
+AGP_076,Connecticut,Eastern,Grower_Selection,2021,Lane_7,Plate_1,D10,0.916,0.056,0.028,973.6
+AGP_077,Massachusetts,Eastern,University_Program,2024,Lane_5,Plate_1,E10,0.947,0.048,0.005,1302.3
+AGP_078,Washington,Western,OSU_Veg,2022,Lane_7,Plate_1,F10,0.153,0.168,0.679,780.9
+AGP_079,Nebraska,Midwest,Grower_Selection,2024,Lane_5,Plate_1,G10,0.386,0.589,0.026,1145.3
+AGP_080,Connecticut,Eastern,Grower_Selection,2024,Lane_8,Plate_1,H10,0.693,0.063,0.244,1164.6
+AGP_081,Illinois,Midwest,Midwest_Giant_Assoc,2022,Lane_6,Plate_1,A11,0.51,0.458,0.033,837.4
+AGP_082,New Jersey,Eastern,Grower_Selection,2024,Lane_1,Plate_1,B11,0.868,0.123,0.009,1137.0
+AGP_083,Oregon,Western,OSU_Veg,2022,Lane_4,Plate_1,C11,0.192,0.022,0.786,878.2
+AGP_084,Wisconsin,Midwest,UI_Pumpkin,2021,Lane_4,Plate_1,D11,0.225,0.499,0.276,959.6
+AGP_085,Connecticut,Eastern,Grower_Selection,2022,Lane_1,Plate_1,E11,0.781,0.218,0.001,1019.8
+AGP_086,New York,Eastern,OSU_Giant,2021,Lane_3,Plate_1,F11,0.812,0.188,0.0,1123.4
+AGP_087,Indiana,Midwest,Private_Breeder,2023,Lane_1,Plate_1,G11,0.501,0.255,0.244,936.8
+AGP_088,Rhode Island,Eastern,Private_Breeder,2024,Lane_8,Plate_1,H11,0.887,0.089,0.024,1057.3
+AGP_089,Arizona,Western,University_Program,2021,Lane_3,Plate_1,A12,0.076,0.044,0.881,848.8
+AGP_090,Arizona,Western,University_Program,2023,Lane_2,Plate_1,B12,0.082,0.046,0.872,854.9
+AGP_091,Colorado,Western,Grower_Selection,2024,Lane_6,Plate_1,C12,0.017,0.127,0.856,981.8
+AGP_092,Rhode Island,Eastern,Grower_Selection,2024,Lane_4,Plate_1,D12,0.888,0.06,0.051,1353.3
+AGP_093,Connecticut,Eastern,Grower_Selection,2023,Lane_1,Plate_1,E12,0.885,0.039,0.076,900.9
+AGP_094,Oregon,Western,WSU_Horticulture,2023,Lane_3,Plate_1,F12,0.262,0.012,0.727,886.1
+AGP_095,Indiana,Midwest,Private_Breeder,2024,Lane_6,Plate_1,G12,0.063,0.888,0.049,1051.7
+AGP_096,Arizona,Western,Private_Breeder,2024,Lane_8,Plate_1,H12,0.002,0.377,0.621,909.7
+AGP_097,Michigan,Midwest,University_Program,2024,Lane_3,Plate_2,A1,0.116,0.795,0.089,999.5
+AGP_098,Michigan,Midwest,University_Program,2023,Lane_8,Plate_2,B1,0.166,0.788,0.046,1124.1
+AGP_099,Connecticut,Eastern,Private_Breeder,2022,Lane_5,Plate_2,C1,0.656,0.29,0.053,979.0
+AGP_100,Washington,Western,UCD_Cucurbit,2024,Lane_2,Plate_2,D1,0.094,0.257,0.649,892.4
+AGP_101,Rhode Island,Eastern,Grower_Selection,2024,Lane_4,Plate_2,E1,0.905,0.051,0.044,1040.8
+AGP_102,Massachusetts,Eastern,Private_Breeder,2022,Lane_4,Plate_2,F1,0.831,0.14,0.029,1090.8
+AGP_103,New York,Eastern,OSU_Giant,2024,Lane_4,Plate_2,G1,0.79,0.175,0.034,1274.0
+AGP_104,Nebraska,Midwest,University_Program,2022,Lane_1,Plate_2,H1,0.037,0.904,0.059,1081.1
+AGP_105,Rhode Island,Eastern,University_Program,2024,Lane_8,Plate_2,A2,0.696,0.173,0.131,1021.0
+AGP_106,Washington,Western,WSU_Horticulture,2024,Lane_5,Plate_2,B2,0.132,0.191,0.676,966.7
+AGP_107,Ohio,Eastern,Private_Breeder,2024,Lane_5,Plate_2,C2,0.831,0.104,0.066,1208.8
+AGP_108,Connecticut,Eastern,Grower_Selection,2023,Lane_4,Plate_2,D2,0.605,0.276,0.119,1029.6
+AGP_109,Arizona,Western,University_Program,2021,Lane_3,Plate_2,E2,0.023,0.042,0.935,782.4
+AGP_110,Pennsylvania,Eastern,PSU_Cucurbit,2021,Lane_1,Plate_2,F2,0.79,0.102,0.108,1119.3
+AGP_111,Pennsylvania,Eastern,Cornell_Pumpkin,2024,Lane_6,Plate_2,G2,0.844,0.062,0.094,976.5
+AGP_112,Washington,Western,West_Coast_Seeds,2022,Lane_3,Plate_2,H2,0.126,0.055,0.818,695.0
+AGP_113,Indiana,Midwest,Grower_Selection,2024,Lane_1,Plate_2,A3,0.456,0.516,0.029,928.3
+AGP_114,Rhode Island,Eastern,Private_Breeder,2023,Lane_5,Plate_2,B3,0.773,0.224,0.004,1118.1
+AGP_115,Missouri,Midwest,Private_Breeder,2024,Lane_8,Plate_2,C3,0.153,0.594,0.253,833.1
+AGP_116,Connecticut,Eastern,University_Program,2024,Lane_6,Plate_2,D3,0.955,0.045,0.0,955.7
+AGP_117,Michigan,Midwest,Private_Breeder,2023,Lane_2,Plate_2,E3,0.076,0.823,0.101,1074.1
+AGP_118,Michigan,Midwest,University_Program,2024,Lane_1,Plate_2,F3,0.126,0.859,0.015,874.6
+AGP_119,Oregon,Western,OSU_Veg,2023,Lane_5,Plate_2,G3,0.131,0.284,0.585,1011.2
+AGP_120,Missouri,Midwest,University_Program,2023,Lane_6,Plate_2,H3,0.23,0.707,0.063,1011.4
+AGP_121,Massachusetts,Eastern,Private_Breeder,2024,Lane_2,Plate_2,A4,0.816,0.05,0.133,1103.7
+AGP_122,Wisconsin,Midwest,UW_Cucurbit,2023,Lane_6,Plate_2,B4,0.261,0.647,0.092,854.9
+AGP_123,Michigan,Midwest,Private_Breeder,2023,Lane_8,Plate_2,C4,0.207,0.716,0.077,867.9
+AGP_124,Nebraska,Midwest,Private_Breeder,2023,Lane_3,Plate_2,D4,0.288,0.484,0.229,743.4
+AGP_125,Oregon,Western,West_Coast_Seeds,2024,Lane_6,Plate_2,E4,0.176,0.029,0.794,856.8
+AGP_126,Washington,Western,OSU_Veg,2022,Lane_5,Plate_2,F4,0.034,0.072,0.895,681.3
+AGP_127,Rhode Island,Eastern,University_Program,2024,Lane_7,Plate_2,G4,0.736,0.25,0.014,1134.2
+AGP_128,Illinois,Midwest,UI_Pumpkin,2023,Lane_5,Plate_2,H4,0.038,0.928,0.034,948.8
+AGP_129,Washington,Western,West_Coast_Seeds,2024,Lane_2,Plate_2,A5,0.015,0.185,0.799,787.5
+AGP_130,Washington,Western,WSU_Horticulture,2024,Lane_8,Plate_2,B5,0.23,0.123,0.648,1053.6
+AGP_131,Massachusetts,Eastern,University_Program,2021,Lane_6,Plate_2,C5,0.685,0.144,0.171,1083.6
+AGP_132,Illinois,Midwest,Midwest_Giant_Assoc,2024,Lane_3,Plate_2,D5,0.007,0.918,0.075,857.9
+AGP_133,Iowa,Midwest,Midwest_Giant_Assoc,2022,Lane_2,Plate_2,E5,0.264,0.519,0.218,1071.2
+AGP_134,Arizona,Western,University_Program,2024,Lane_8,Plate_2,F5,0.157,0.095,0.748,946.8
+AGP_135,Pennsylvania,Eastern,PSU_Cucurbit,2023,Lane_6,Plate_2,G5,0.954,0.041,0.005,908.8
+AGP_136,Missouri,Midwest,University_Program,2023,Lane_1,Plate_2,H5,0.194,0.582,0.224,1135.5
+AGP_137,Michigan,Midwest,Grower_Selection,2024,Lane_1,Plate_2,A6,0.172,0.744,0.084,1053.3
+AGP_138,Ohio,Eastern,Private_Breeder,2023,Lane_5,Plate_2,B6,0.921,0.021,0.058,881.2
+AGP_139,Pennsylvania,Eastern,Private_Breeder,2024,Lane_4,Plate_2,C6,0.848,0.141,0.011,1194.2
+AGP_140,Arizona,Western,Private_Breeder,2024,Lane_6,Plate_2,D6,0.175,0.175,0.65,869.7
+AGP_141,Rhode Island,Eastern,Private_Breeder,2022,Lane_5,Plate_2,E6,0.531,0.443,0.027,1018.5
+AGP_142,Michigan,Midwest,Private_Breeder,2024,Lane_7,Plate_2,F6,0.136,0.647,0.217,880.7
+AGP_143,Oregon,Western,OSU_Veg,2024,Lane_8,Plate_2,G6,0.001,0.266,0.733,971.0
+AGP_144,Missouri,Midwest,University_Program,2024,Lane_4,Plate_2,H6,0.015,0.932,0.053,1008.5
+AGP_145,New Jersey,Eastern,Grower_Selection,2021,Lane_5,Plate_2,A7,0.832,0.151,0.018,1130.9
+AGP_146,Ohio,Eastern,Private_Breeder,2024,Lane_6,Plate_2,B7,0.693,0.301,0.006,898.0
+AGP_147,New York,Eastern,Cornell_Pumpkin,2023,Lane_3,Plate_2,C7,0.662,0.317,0.022,1300.8
+AGP_148,Connecticut,Eastern,Private_Breeder,2022,Lane_6,Plate_2,D7,0.614,0.163,0.223,968.7
+AGP_149,Colorado,Western,University_Program,2021,Lane_1,Plate_2,E7,0.03,0.318,0.651,783.8
+AGP_150,Massachusetts,Eastern,Private_Breeder,2024,Lane_3,Plate_2,F7,0.695,0.288,0.017,1217.6
+AGP_151,California,Western,WSU_Horticulture,2024,Lane_4,Plate_2,G7,0.045,0.369,0.586,1170.1
+AGP_152,Oregon,Western,UCD_Cucurbit,2024,Lane_2,Plate_2,H7,0.111,0.389,0.5,904.4
+AGP_153,California,Western,WSU_Horticulture,2023,Lane_8,Plate_2,A8,0.388,0.195,0.417,919.1
+AGP_154,Nebraska,Midwest,Private_Breeder,2022,Lane_3,Plate_2,B8,0.144,0.623,0.234,942.5
+AGP_155,Arizona,Western,Grower_Selection,2023,Lane_8,Plate_2,C8,0.371,0.186,0.443,940.2
+AGP_156,Minnesota,Midwest,Grower_Selection,2024,Lane_8,Plate_2,D8,0.016,0.748,0.236,1079.3
+AGP_157,Oregon,Western,West_Coast_Seeds,2024,Lane_6,Plate_2,E8,0.245,0.136,0.618,920.5
+AGP_158,California,Western,WSU_Horticulture,2023,Lane_3,Plate_2,F8,0.013,0.237,0.75,817.0
+AGP_159,Michigan,Midwest,Grower_Selection,2024,Lane_4,Plate_2,G8,0.156,0.807,0.036,1047.1
+AGP_160,California,Western,West_Coast_Seeds,2023,Lane_7,Plate_2,H8,0.012,0.392,0.596,1022.2
+AGP_161,Michigan,Midwest,Grower_Selection,2021,Lane_8,Plate_2,A9,0.243,0.562,0.195,1122.4
+AGP_162,Indiana,Midwest,Private_Breeder,2021,Lane_3,Plate_2,B9,0.168,0.753,0.079,1038.4
+AGP_163,New Jersey,Eastern,Grower_Selection,2024,Lane_7,Plate_2,C9,0.805,0.165,0.03,936.0
+AGP_164,New Jersey,Eastern,Grower_Selection,2024,Lane_7,Plate_2,D9,0.933,0.039,0.028,1243.5
+AGP_165,Colorado,Western,Private_Breeder,2024,Lane_4,Plate_2,E9,0.009,0.102,0.888,725.6
+AGP_166,Oregon,Western,UCD_Cucurbit,2024,Lane_3,Plate_2,F9,0.4,0.049,0.551,944.2
+AGP_167,Oregon,Western,UCD_Cucurbit,2024,Lane_5,Plate_2,G9,0.029,0.133,0.838,694.4
+AGP_168,Missouri,Midwest,University_Program,2024,Lane_6,Plate_2,H9,0.06,0.655,0.285,922.4
+AGP_169,New Jersey,Eastern,Grower_Selection,2022,Lane_8,Plate_2,A10,0.907,0.087,0.006,1228.9
+AGP_170,Michigan,Midwest,Grower_Selection,2023,Lane_2,Plate_2,B10,0.359,0.636,0.006,1051.8
+AGP_171,New York,Eastern,Private_Breeder,2024,Lane_1,Plate_2,C10,0.822,0.176,0.002,1238.2
+AGP_172,Colorado,Western,University_Program,2024,Lane_5,Plate_2,D10,0.026,0.435,0.538,784.2
+AGP_173,New York,Eastern,PSU_Cucurbit,2021,Lane_6,Plate_2,E10,0.774,0.172,0.055,842.5
+AGP_174,California,Western,OSU_Veg,2024,Lane_2,Plate_2,F10,0.044,0.508,0.448,871.5
+AGP_175,Michigan,Midwest,University_Program,2023,Lane_4,Plate_2,G10,0.142,0.426,0.432,971.2
+AGP_176,Pennsylvania,Eastern,Cornell_Pumpkin,2023,Lane_1,Plate_2,H10,0.966,0.03,0.004,1022.8
+AGP_177,Massachusetts,Eastern,Private_Breeder,2024,Lane_4,Plate_2,A11,0.512,0.457,0.031,1045.5
+AGP_178,Nebraska,Midwest,University_Program,2024,Lane_7,Plate_2,B11,0.26,0.603,0.137,839.6
+AGP_179,Iowa,Midwest,UW_Cucurbit,2024,Lane_7,Plate_2,C11,0.161,0.7,0.138,818.1
+AGP_180,Indiana,Midwest,Private_Breeder,2021,Lane_3,Plate_2,D11,0.465,0.466,0.069,944.4
+AGP_181,Indiana,Midwest,University_Program,2022,Lane_5,Plate_2,E11,0.131,0.797,0.072,896.7
+AGP_182,Pennsylvania,Eastern,PSU_Cucurbit,2023,Lane_5,Plate_2,F11,0.838,0.161,0.001,1069.3
+AGP_183,Washington,Western,OSU_Veg,2023,Lane_5,Plate_2,G11,0.262,0.096,0.643,996.1
+AGP_184,Illinois,Midwest,UI_Pumpkin,2023,Lane_5,Plate_2,H11,0.048,0.736,0.215,1095.8
+AGP_185,Nebraska,Midwest,University_Program,2022,Lane_1,Plate_2,A12,0.129,0.806,0.065,804.5
+AGP_186,Iowa,Midwest,ISU_Horticulture,2024,Lane_3,Plate_2,B12,0.174,0.818,0.008,1131.5
+AGP_187,Illinois,Midwest,UW_Cucurbit,2023,Lane_7,Plate_2,C12,0.136,0.844,0.02,832.8
+AGP_188,Washington,Western,WSU_Horticulture,2024,Lane_8,Plate_2,D12,0.276,0.315,0.409,878.2
+AGP_189,Rhode Island,Eastern,Private_Breeder,2023,Lane_1,Plate_2,E12,0.641,0.333,0.026,852.7
+AGP_190,Minnesota,Midwest,University_Program,2024,Lane_4,Plate_2,F12,0.175,0.802,0.023,796.2
+AGP_191,Massachusetts,Eastern,Grower_Selection,2021,Lane_7,Plate_2,G12,0.971,0.027,0.002,951.2
+AGP_192,Washington,Western,WSU_Horticulture,2023,Lane_1,Plate_2,H12,0.081,0.12,0.799,962.8
+AGP_193,Indiana,Midwest,Grower_Selection,2024,Lane_8,Plate_3,A1,0.078,0.871,0.051,982.7
+AGP_194,California,Western,OSU_Veg,2023,Lane_6,Plate_3,B1,0.069,0.135,0.796,870.2
+AGP_195,Connecticut,Eastern,University_Program,2022,Lane_8,Plate_3,C1,0.854,0.135,0.011,1299.9
+AGP_196,Michigan,Midwest,Private_Breeder,2021,Lane_1,Plate_3,D1,0.282,0.714,0.004,1007.8
+AGP_197,Colorado,Western,Private_Breeder,2024,Lane_8,Plate_3,E1,0.019,0.022,0.959,876.5
+AGP_198,Oregon,Western,UCD_Cucurbit,2023,Lane_4,Plate_3,F1,0.018,0.261,0.722,805.1
+AGP_199,Connecticut,Eastern,Grower_Selection,2021,Lane_8,Plate_3,G1,0.687,0.226,0.086,897.7
+AGP_200,Michigan,Midwest,Grower_Selection,2023,Lane_6,Plate_3,H1,0.482,0.437,0.081,1205.5

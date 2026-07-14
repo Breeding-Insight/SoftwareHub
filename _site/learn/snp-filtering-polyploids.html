@@ -6,6 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Alexander M. Sandercock">
+<meta name="dcterms.date" content="2026-07-13">
 <meta name="keywords" content="SNP filtering, polyploid, allele dosage, dosage uncertainty, read depth, paralogs, homoeologs, MAF">
 <meta name="description" content="Build a polyploid-aware SNP filtering strategy that considers sequence evidence, dosage uncertainty, duplicated genomes, and downstream goals.">
 
@@ -46,9 +48,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-effba262e874657e83d0e513aa0f2f81.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-02507b1fe35468d4b588cb917142b773.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-02507b1fe35468d4b588cb917142b773.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-02507b1fe35468d4b588cb917142b773.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-8f94084065d81b420d84a6ed678fb97a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-8f94084065d81b420d84a6ed678fb97a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-8f94084065d81b420d84a6ed678fb97a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -83,9 +85,10 @@ ul.task-list li input[type="checkbox"] {
 <meta property="og:image" content="https://breeding-insight.github.io/software/assets/concept-snp-filtering.svg">
 <meta property="og:site_name" content="Breeding Insight Software">
 <meta property="og:image:alt" content="Layered filtering pipeline from sequence evidence through dosage and dataset quality to analysis-ready SNPs.">
+<link rel="canonical" href="https://breeding-insight.github.io/software/learn/snp-filtering-polyploids.html">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed learning-material-page quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -156,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#dosage-call-quality" id="toc-dosage-call-quality" class="nav-link" data-scroll-target="#dosage-call-quality">2. Dosage-call quality</a></li>
   <li><a href="#sample-and-marker-missingness" id="toc-sample-and-marker-missingness" class="nav-link" data-scroll-target="#sample-and-marker-missingness">3. Sample and marker missingness</a></li>
   <li><a href="#frequency-and-informativeness" id="toc-frequency-and-informativeness" class="nav-link" data-scroll-target="#frequency-and-informativeness">4. Frequency and informativeness</a></li>
-  <li><a href="#mendelian-or-segregation-behaviorwhen-appropriate" id="toc-mendelian-or-segregation-behaviorwhen-appropriate" class="nav-link" data-scroll-target="#mendelian-or-segregation-behaviorwhen-appropriate">5. Mendelian or segregation behavior—when appropriate</a></li>
+  <li><a href="#mendelian-or-segregation-behavior-when-appropriate" id="toc-mendelian-or-segregation-behavior-when-appropriate" class="nav-link" data-scroll-target="#mendelian-or-segregation-behavior-when-appropriate">5. Mendelian or segregation behavior, when appropriate</a></li>
   <li><a href="#analysis-specific-filtering" id="toc-analysis-specific-filtering" class="nav-link" data-scroll-target="#analysis-specific-filtering">6. Analysis-specific filtering</a></li>
   </ul></li>
   <li><a href="#a-practical-order-of-operations" id="toc-a-practical-order-of-operations" class="nav-link" data-scroll-target="#a-practical-order-of-operations">A practical order of operations</a></li>
@@ -189,7 +192,19 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Alexander M. Sandercock </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 13, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -283,8 +298,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>Do not apply a MAF threshold simply because it is conventional. Record the value, the number of loci removed, and the reason the downstream method needs it.</p>
 </section>
-<section id="mendelian-or-segregation-behaviorwhen-appropriate" class="level3">
-<h3 class="anchored" data-anchor-id="mendelian-or-segregation-behaviorwhen-appropriate">5. Mendelian or segregation behavior—when appropriate</h3>
+<section id="mendelian-or-segregation-behavior-when-appropriate" class="level3">
+<h3 class="anchored" data-anchor-id="mendelian-or-segregation-behavior-when-appropriate">5. Mendelian or segregation behavior, when appropriate</h3>
 <p>Family information can reveal loci that do not behave as expected. However, the expected segregation pattern depends on:</p>
 <ul>
 <li>ploidy;</li>
@@ -784,7 +799,7 @@ ul.task-list li input[type="checkbox"] {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><strong>Breeding Insight</strong> — open-source tools for public plant and animal breeding.</p>
+<p><strong>Breeding Insight:</strong> open-source tools for public plant and animal breeding.</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

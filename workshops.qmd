@@ -4,44 +4,29 @@ description: "Hands-on training materials, exercises, and workshop resources."
 toc: true
 ---
 
-Find participant setup, exercises, example data, recordings, and other materials from Breeding Insight training events.
+Use a workshop when you want a guided sequence of explanations and hands-on exercises. The example files are included so every participant can follow the same analysis.
 
-## Recommended workshop structure
+## Available workshops
 
-1. **Overview** — audience, prerequisites, learning objectives, instructors, and date.
-2. **Before the workshop** — installation checks, accounts, data downloads, and a short validation exercise.
-3. **Modules** — slides, live-code notes, exercises, and solutions.
-4. **Example data** — versioned and small enough for participants to reproduce the exercises.
-5. **After the workshop** — recordings, FAQ, updates, and links to maintained tutorials.
+```{=html}
+<div class="workshop-grid">
+  <a class="workshop-card no-external" href="workshops/bigapp/">
+    <div class="workshop-card-image">
+      <img src="assets/card-bigapp.svg" alt="BIGapp interface represented by a browser window with genomic charts">
+    </div>
+    <div class="workshop-card-body">
+      <h3>Introduction to BIGapp for Plant Breeding</h3>
+      <p>Import and filter genotype data, explore population structure, run GWASpoly, and try genomic prediction in a two-hour, point-and-click workshop. Local BIGapp installation is required.</p>
+      <div class="meta-row" aria-label="Workshop details">
+        <span class="pill">Workshop</span>
+        <span class="pill">Beginner</span>
+        <span class="pill">BIGapp</span>
+        <span class="pill">2 hours</span>
+      </div>
+      <span class="workshop-card-link">Open workshop</span>
+    </div>
+  </a>
+</div>
+```
 
-::: {.path-grid}
-::: {.path-card}
-<div class="path-icon">A</div>
-
-### Participant setup
-
-A reusable preflight page for R, package versions, command-line tools, and example data.
-
-[Open the setup template](workshops/setup-template.qmd){.card-link}
-:::
-
-::: {.path-card}
-<div class="path-icon">B</div>
-
-### Workshop template
-
-A consistent structure for objectives, modules, exercises, solutions, and recordings.
-
-[Open the workshop template](workshops/workshop-template.qmd){.card-link}
-:::
-
-::: {.path-card}
-<div class="path-icon">C</div>
-
-### Teaching conventions
-
-Guidance for code visibility, callouts, checkpoints, exercise blocks, and reproducibility.
-
-[View resource standards](resources.qmd){.card-link}
-:::
-:::
+Looking for a shorter resource? Browse the [Learn library](learn.qmd) for focused concepts, guides, tutorials, and workflows.

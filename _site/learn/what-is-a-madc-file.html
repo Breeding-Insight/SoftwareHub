@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alexander M. Sandercock">
+<meta name="author" content="Cristiane H. Taniguti">
+<meta name="author" content="Dongyan Zhao">
+<meta name="dcterms.date" content="2025-06-18">
+<meta name="keywords" content="DArT, DArTag, MADC, microhaplotype, read counts, VCF, fixed allele IDs">
+<meta name="description" content="Understand how DArT MADC files represent microhaplotype read counts and how BIGr turns those counts into variant data.">
+
+<title>What is a MADC file? – Breeding Insight Software</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/bi-mark.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-effba262e874657e83d0e513aa0f2f81.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-d91cad2d03a615406a95b06d6a4aebb9.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-effba262e874657e83d0e513aa0f2f81.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8f94084065d81b420d84a6ed678fb97a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-8f94084065d81b420d84a6ed678fb97a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-8f94084065d81b420d84a6ed678fb97a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 30,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+<meta property="og:title" content="What is a MADC file? – Breeding Insight Software">
+<meta property="og:description" content="Understand how DArT MADC files represent microhaplotype read counts and how BIGr turns those counts into variant data.">
+<meta property="og:image" content="https://breeding-insight.github.io/software/assets/concept-madc.svg">
+<meta property="og:site_name" content="Breeding Insight Software">
+<meta property="og:image:alt" content="A MADC table with fixed allele IDs and per-sample read counts.">
+<link rel="canonical" href="https://breeding-insight.github.io/software/learn/what-is-a-madc-file.html">
+</head>
+
+<body class="nav-fixed learning-material-page quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../assets/breeding-insight.png" alt="Breeding Insight" class="navbar-logo light-content">
+    <img src="../assets/breeding-insight.png" alt="Breeding Insight" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Breeding Insight Software</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../software.html"> 
+<span class="menu-text">Software</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../learn.html"> 
+<span class="menu-text">Learn</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../workshops.html"> 
+<span class="menu-text">Workshops</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../resources.html"> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Breeding-Insight"> <i class="bi bi-github" role="img" aria-label="Breeding Insight on GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://breedinginsight.org/"> 
+<span class="menu-text">Breeding Insight</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#where-madc-fits" id="toc-where-madc-fits" class="nav-link active" data-scroll-target="#where-madc-fits">Where MADC fits</a></li>
+  <li><a href="#read-one-madc-row" id="toc-read-one-madc-row" class="nav-link" data-scroll-target="#read-one-madc-row">Read one MADC row</a></li>
+  <li><a href="#ref-alt-match-and-other-alleles" id="toc-ref-alt-match-and-other-alleles" class="nav-link" data-scroll-target="#ref-alt-match-and-other-alleles">Ref, Alt, Match, and Other alleles</a></li>
+  <li><a href="#why-fixed-allele-ids-matter" id="toc-why-fixed-allele-ids-matter" class="nav-link" data-scroll-target="#why-fixed-allele-ids-matter">Why fixed allele IDs matter</a></li>
+  <li><a href="#the-supporting-files" id="toc-the-supporting-files" class="nav-link" data-scroll-target="#the-supporting-files">The supporting files</a></li>
+  <li><a href="#madc-counts-are-not-vcf-genotypes" id="toc-madc-counts-are-not-vcf-genotypes" class="nav-link" data-scroll-target="#madc-counts-are-not-vcf-genotypes">MADC counts are not VCF genotypes</a></li>
+  <li><a href="#practical-takeaway" id="toc-practical-takeaway" class="nav-link" data-scroll-target="#practical-takeaway">Practical takeaway</a></li>
+  <li><a href="#continue-to-the-workflow" id="toc-continue-to-the-workflow" class="nav-link" data-scroll-target="#continue-to-the-workflow">Continue to the workflow</a></li>
+  <li><a href="#attribution" id="toc-attribution" class="nav-link" data-scroll-target="#attribution">Attribution</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/learn/what-is-a-madc-file.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">What is a MADC file?</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Genotype Data</div>
+    <div class="quarto-category">File Formats</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Understand how DArT MADC files represent microhaplotype read counts and how BIGr turns those counts into variant data.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Alexander M. Sandercock </p>
+             <p>Cristiane H. Taniguti </p>
+             <p>Dongyan Zhao </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 18, 2025</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">July 13, 2026</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>DArT, DArTag, MADC, microhaplotype, read counts, VCF, fixed allele IDs</p>
+  </div>
+</div>
+
+</header>
+
+
+<div class="concept-definition">
+<p>A <strong>MADC file</strong> is a comma-separated <strong>Missing Allele Discovery Counts</strong> report from DArT targeted sequencing. It records the read count for each observed microhaplotype in each sample; it does not contain genotype calls.</p>
+</div>
+<p>A microhaplotype is a short amplified genomic segment containing one or more tightly linked variants. Because the variants are observed together on the same sequencing read, a microhaplotype can represent more than two alleles at one targeted region. DArTag returns raw FASTQ reads and a semi-processed MADC report that summarizes this sequence-level evidence (<a href="https://doi.org/10.21203/rs.3.rs-9292361/v1">Zhao et al.&nbsp;2026</a>).</p>
+<section id="where-madc-fits" class="level2">
+<h2 class="anchored" data-anchor-id="where-madc-fits">Where MADC fits</h2>
+<div class="madc-workflow-figure">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"flowchart": {"rankSpacing": 32, "nodeSpacing": 60, "curve": "basis"}}}%%
+flowchart TB
+  accTitle: MADC processing and genotype-calling workflow
+  accDescr: Targeted genotype sequencing produces a raw MADC file. HapApp assigns fixed allele IDs and resolves problematic microhaplotypes. The processed MADC can then be used for a kinship matrix or converted by BIGr into a read-count VCF, called with Updog, and written as a genotype-called VCF.
+
+  A([Targeted&lt;br/&gt;sequencing]) --&gt; B[/Raw MADC&lt;br/&gt;read counts/]
+  B --&gt; C{{HapApp&lt;br/&gt;processing}}
+  C --&gt; D[(Processed MADC&lt;br/&gt;fixed allele IDs)]
+  D --&gt;|relationship analysis| E([Kinship&lt;br/&gt;matrix])
+  D --&gt;|variant recovery| F[/BIGr&lt;br/&gt;read-count VCF/]
+  F --&gt; G{{Updog&lt;br/&gt;dosage model}}
+  G --&gt; H([Genotype-called&lt;br/&gt;VCF])
+
+  classDef source fill:#EAF5F7,stroke:#2A6576,stroke-width:2px,color:#173D47
+  classDef raw fill:#FFF7E8,stroke:#C98B2E,stroke-width:2px,color:#674615
+  classDef process fill:#EEF8F0,stroke:#319B42,stroke-width:2px,color:#1E5D28
+  classDef data fill:#EDF6F8,stroke:#48A9C5,stroke-width:2px,color:#214F5C
+  classDef result fill:#F3EFF9,stroke:#765C9E,stroke-width:2px,color:#493566
+
+  class A source
+  class B raw
+  class C,G process
+  class D,F data
+  class E,H result
+</pre>
+</div>
+<p></p><figcaption> MADC data move through preparation before relationship analysis or genotype calling.</figcaption> </figure><p></p>
+</div>
+</div>
+</div>
+</div>
+<p>The raw report can include duplicate, ambiguous, or poor-quality microhaplotypes. Breeding Insight processes it with HapApp before BIGr conversion so that allele identities remain stable across files and analyses. The standardized IDs support marker tracking and cross-project comparison rather than merely recording the order in which alleles appeared in one report.</p>
+</section>
+<section id="read-one-madc-row" class="level2">
+<h2 class="anchored" data-anchor-id="read-one-madc-row">Read one MADC row</h2>
+<p>Every row describes one observed allele sequence. The first three columns identify that sequence; the remaining columns give its read count in each sample.</p>
+<div class="table-responsive">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>AlleleID</code></td>
+<td>Marker ID, allele role, and fixed allele number, such as <code>chr1.1_000194324|Ref_0001</code></td>
+</tr>
+<tr class="even">
+<td><code>CloneID</code></td>
+<td>Target-region identifier, commonly encoded as chromosome and position</td>
+</tr>
+<tr class="odd">
+<td><code>AlleleSequence</code></td>
+<td>Amplicon or microhaplotype sequence observed for that allele</td>
+</tr>
+<tr class="even">
+<td>Sample columns</td>
+<td>Non-negative read counts for that allele in each named sample</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The following accessible excerpt is based on <code>example_MADC_FixedAlleleID.csv</code>, which is bundled with BIGr. Sequences are shortened only for display.</p>
+<div class="table-responsive">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><code>AlleleID</code></th>
+<th><code>CloneID</code></th>
+<th><code>AlleleSequence</code> excerpt</th>
+<th style="text-align: right;"><code>Sample_1</code></th>
+<th style="text-align: right;"><code>Sample_2</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>chr1.1_000194324|AltMatch_0001</code></td>
+<td><code>chr1.1_000194324</code></td>
+<td><code>CGAAATAA…GACAAC</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">139</td>
+</tr>
+<tr class="even">
+<td><code>chr1.1_000194324|Alt_0002</code></td>
+<td><code>chr1.1_000194324</code></td>
+<td><code>CGAAATAA…AAGTAA</code></td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td><code>chr1.1_000194324|Ref_0001</code></td>
+<td><code>chr1.1_000194324</code></td>
+<td><code>CGAAATAA…AAGTAA</code></td>
+<td style="text-align: right;">152</td>
+<td style="text-align: right;">171</td>
+</tr>
+<tr class="even">
+<td><code>chr1.1_000309952|AltMatch_0001</code></td>
+<td><code>chr1.1_000309952</code></td>
+<td><code>TGGTATTG…ATATTCA</code></td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">82</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Rows that share a <code>CloneID</code> belong to the same targeted region. To obtain the total evidence at a variant, BIGr reconciles the sequences, their strand orientation, and the bases they carry at each polymorphic position.</p>
+</section>
+<section id="ref-alt-match-and-other-alleles" class="level2">
+<h2 class="anchored" data-anchor-id="ref-alt-match-and-other-alleles">Ref, Alt, Match, and Other alleles</h2>
+<p>The MADC’s four core classes are Ref, Alt, RefMatch, and AltMatch. The part of <code>AlleleID</code> after the vertical bar describes how a microhaplotype relates to the designed marker.</p>
+<div class="table-responsive">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Label</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Ref</code></td>
+<td>The designated reference microhaplotype at the target polymorphism</td>
+</tr>
+<tr class="even">
+<td><code>Alt</code></td>
+<td>The designated alternate microhaplotype at the target polymorphism</td>
+</tr>
+<tr class="odd">
+<td><code>RefMatch</code></td>
+<td>A discovered microhaplotype that carries the target reference state but differs elsewhere in the amplicon</td>
+</tr>
+<tr class="even">
+<td><code>AltMatch</code></td>
+<td>A discovered microhaplotype that carries the target alternate state but differs elsewhere in the amplicon</td>
+</tr>
+<tr class="odd">
+<td><code>Other</code></td>
+<td>An additional sequence label recognized by current BIGr outside the four core MADC classes; verify its provenance in the HapApp output and panel database</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A <strong>target allele</strong> is defined at the polymorphism for which the probe was designed. An <strong>off-target allele</strong> arises from another polymorphic position discovered within the same amplified sequence. A Match or Other microhaplotype can therefore contribute read evidence at the target and can also reveal off-target SNPs.</p>
+<p>Current <code>madc2vcf_all()</code> behavior is more capable than the original MADC description:</p>
+<ul>
+<li><code>Other</code> alleles can be included in off-target discovery and filtered by sequence difference or indel status;</li>
+<li>an <code>Other</code> allele carrying a third base at the target can make that target multiallelic;</li>
+<li>multiallelic sites can be removed or evaluated with read-depth and sample-count thresholds; and</li>
+<li>target indels are supported when the required marker information is supplied, although off-target sites from an indel-containing tag are not extracted.</li>
+</ul>
+<p>The <a href="../learn/madc-to-vcf.html">Updog conversion workflow</a> deliberately removes multiallelic SNPs because its two count matrices represent one reference and one alternate allele.</p>
+</section>
+<section id="why-fixed-allele-ids-matter" class="level2">
+<h2 class="anchored" data-anchor-id="why-fixed-allele-ids-matter">Why fixed allele IDs matter</h2>
+<p>The suffixes in <code>Ref_0001</code>, <code>Alt_0002</code>, and Match labels are fixed identifiers assigned against a haplotype database. They prevent a sequence from changing identity merely because a different batch contains a different set or order of observed haplotypes.</p>
+<p>BIGr requires fixed IDs for its MADC-to-VCF functions. A raw DArT report may use unfixed labels such as <code>|Ref</code> and <code>|Alt</code>, include seven placeholder rows, or contain ambiguous sequences. Renaming those labels by hand is not equivalent to HapApp processing. The standardized workflow cleans and filters sequences, matches previously cataloged alleles, assigns new IDs to qualifying novel alleles, writes those IDs back to the MADC, and updates the haplotype database when new alleles are found (<a href="https://doi.org/10.21203/rs.3.rs-9292361/v1">Zhao et al.&nbsp;2026</a>).</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Do not send a raw MADC directly to dosage calling">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Do not send a raw MADC directly to dosage calling
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A raw MADC has neither stable allele identities nor called genotypes. Process it with HapApp, validate it with <code>check_madc_sanity()</code>, and convert its read evidence to a biallelic read-count VCF before using Updog.</p>
+</div>
+</div>
+</section>
+<section id="the-supporting-files" class="level2">
+<h2 class="anchored" data-anchor-id="the-supporting-files">The supporting files</h2>
+<p>MADC conversion may require files that supply information not safely inferable from the count table alone.</p>
+<div class="table-responsive">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>What BIGr uses it for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>.botloci</code></td>
+<td>Lists tags designed from the bottom strand so BIGr can reverse-complement them and recover the correct genomic orientation</td>
+</tr>
+<tr class="even">
+<td>Haplotype FASTA</td>
+<td>Provides the panel’s known allele sequences and can recover a missing Ref or Alt sequence</td>
+</tr>
+<tr class="odd">
+<td>Marker-information CSV</td>
+<td>Supplies marker coordinates or authoritative REF/ALT details when <code>CloneID</code> is not in <code>Chromosome_Position</code> form; target indels additionally require the documented indel fields</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Current BIGr writes conversion provenance and parameters into VCF metadata. It can also remap nonstandard marker IDs with a marker-information file. Consult the <a href="https://cran.r-project.org/web/packages/BIGr/BIGr.pdf">current BIGr reference manual</a> for the columns required by the function and data type you use.</p>
+<p>Paralogous microhaplotypes require context. Curated databases may retain and flag them so that recurring sequences can be recognized in later projects, while a breeding analysis may remove likely paralogous markers before genotype calling. A very large number of microhaplotypes or extreme depth at one locus can indicate unintended amplification of duplicated genomic regions, but high allelic diversity alone is not proof of paralogy (<a href="https://doi.org/10.21203/rs.3.rs-9292361/v1">Zhao et al.&nbsp;2026</a>).</p>
+</section>
+<section id="madc-counts-are-not-vcf-genotypes" class="level2">
+<h2 class="anchored" data-anchor-id="madc-counts-are-not-vcf-genotypes">MADC counts are not VCF genotypes</h2>
+<div class="table-responsive">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Data state</th>
+<th>What the sample values mean</th>
+<th>Genotypes present?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Processed MADC</td>
+<td>One read count per microhaplotype row</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>Read-count VCF</td>
+<td>Reference-allele depth, alternate-allele depth, and total depth at each biallelic variant</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>Genotype-called VCF</td>
+<td>Allele depths plus a model-based dosage/genotype and its uncertainty</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A read fraction is not itself an allele dosage. Allele bias, sequencing error, overdispersion, depth, and population information all affect how strongly the reads support a dosage class. See <a href="../learn/what-is-allele-dosage.html">What is allele dosage?</a> before interpreting a called polyploid VCF.</p>
+</section>
+<section id="practical-takeaway" class="level2">
+<h2 class="anchored" data-anchor-id="practical-takeaway">Practical takeaway</h2>
+<div class="bi-callout">
+<p>Treat MADC as <strong>sequence-level count evidence</strong>. Fixed allele IDs establish what each row represents; <code>.botloci</code>, FASTA, and marker information establish orientation and variant identity; a dosage caller turns the resulting biallelic counts into uncertain genotype calls.</p>
+</div>
+</section>
+<section id="continue-to-the-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="continue-to-the-workflow">Continue to the workflow</h2>
+<p><a href="../learn/madc-to-vcf.html" class="btn-bi-primary">Convert MADC data to a genotype-called VCF</a> <a href="../learn/get-started-genomic-data-r.html" class="btn-bi-secondary">Get started with genomic data in R</a></p>
+</section>
+<section id="attribution" class="level2">
+<h2 class="anchored" data-anchor-id="attribution">Attribution</h2>
+<p>This page adapts <a href="https://breeding-insight.github.io/BIGr_documentation/posts/madc-file-format/">“MADC File Format”</a> by Alexander M. Sandercock and Cristiane H. Taniguti. The source and this adaptation are licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/breeding-insight\.github\.io\/software\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><strong>Breeding Insight:</strong> open-source tools for public plant and animal breeding.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/learn/what-is-a-madc-file.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/Breeding-Insight">
+<p>GitHub</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://breedinginsight.org/">
+<p>Main website</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
