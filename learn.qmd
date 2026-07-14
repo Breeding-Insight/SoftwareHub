@@ -15,7 +15,9 @@ format:
     include-after-body: assets/learn-filter.html
 ---
 
-Search the full library, filter by format, topic, software, or level, or jump straight to a goal.
+Search the full library, filter by format, topic, software, or level, or jump straight to a goal. For guided training, see the [workshops](workshops.html).
+
+## Browse learning materials {#all-learning-materials .section-heading}
 
 ```{=html}
 <div class="learn-goal-chips" aria-label="Start with a goal">
@@ -27,41 +29,17 @@ Search the full library, filter by format, topic, software, or level, or jump st
   <a class="learn-goal-chip learn-filter-trigger no-external" data-set-facet="topic" data-set-value="File Formats" href="?topic=File%20Formats#all-learning-materials">Understand data formats</a>
   <a class="learn-goal-chip learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Genomic Prediction" href="?topic=Genomic%20Prediction#all-learning-materials">Predict performance</a>
 </div>
-```
 
-## Browse learning materials {#all-learning-materials .section-heading}
+<div class="learn-filter-panel" aria-label="Search and filter learning materials">
+  <div class="learn-filter-search">
+    <label for="learn-material-search">Search learning materials</label>
+    <input id="learn-material-search" type="search" autocomplete="off" placeholder="Try MADC, VCF, dosage, or missingness">
+  </div>
 
-::: {.learn-library-tools}
-<div class="learn-filter-search learn-library-search">
-  <label for="learn-material-search">Search learning materials</label>
-  <input id="learn-material-search" type="search" autocomplete="off" placeholder="Try MADC, VCF, dosage, or missingness">
-</div>
-
-<div class="learn-library-links">
-  <span>Looking for guided training? <a class="no-external" href="workshops.html">View workshops</a>.</span>
-</div>
-:::
-
-```{=html}
-<div class="learn-filter-panel" aria-label="Filter learning materials">
   <div class="learn-facet-grid">
     <fieldset class="learn-facet" data-learn-facet="type">
       <legend>Format</legend>
       <div class="learn-filter-pills" data-filter-options="type"></div>
-      <details class="learn-format-legend">
-        <summary>What do these formats mean?</summary>
-        <dl>
-          <dt>Concept</dt>
-          <dd>Understand what something means, why it matters, and how to interpret it.</dd>
-          <dt>Guide</dt>
-          <dd>Choose an approach, tool, or next step based on your goal.</dd>
-          <dt>Tutorial</dt>
-          <dd>Complete one bounded task through a linear, worked example.</dd>
-          <dt>Workflow</dt>
-          <dd>Carry out an end-to-end analysis with decisions and validation checkpoints.</dd>
-        </dl>
-        <p class="learn-format-legend-note">The labels describe the purpose and scope of each resource, not its difficulty.</p>
-      </details>
     </fieldset>
     <fieldset class="learn-facet" data-learn-facet="topic">
       <legend>Topic</legend>
@@ -77,6 +55,20 @@ Search the full library, filter by format, topic, software, or level, or jump st
     </fieldset>
   </div>
 
+  <details class="learn-format-legend">
+    <summary>What do the formats mean?</summary>
+    <dl>
+      <dt>Concept</dt>
+      <dd>Understand what something means, why it matters, and how to interpret it.</dd>
+      <dt>Guide</dt>
+      <dd>Choose an approach, tool, or next step based on your goal.</dd>
+      <dt>Tutorial</dt>
+      <dd>Complete one bounded task through a linear, worked example.</dd>
+      <dt>Workflow</dt>
+      <dd>Carry out an end-to-end analysis with decisions and validation checkpoints.</dd>
+    </dl>
+    <p class="learn-format-legend-note">The labels describe the purpose and scope of each resource, not its difficulty.</p>
+  </details>
 </div>
 
 <div class="learn-results-header">

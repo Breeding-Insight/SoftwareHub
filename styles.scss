@@ -671,31 +671,6 @@ h2.section-heading {
 }
 
 /* Learn discovery page */
-.learn-library-tools {
-  margin: 0 0 2rem;
-  padding: 1rem 1.1rem;
-  border: 1px solid rgba(42, 101, 118, .16);
-  border-radius: .375rem;
-  background: #fff;
-}
-
-.learn-library-search {
-  max-width: 42rem;
-}
-
-.learn-library-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .4rem 1.25rem;
-  margin-top: .65rem;
-  color: $bi-gray;
-  font-size: .9rem;
-}
-
-.learn-library-links a {
-  font-weight: 700;
-}
-
 /* Goal quick-jump chips (Learn = green, reusing the pill motif). */
 .learn-goal-chips {
   display: flex;
@@ -738,10 +713,25 @@ h2.section-heading {
   outline-offset: 2px;
 }
 
-/* Collapsible "what do these formats mean?" legend on the Format facet. */
+/* Collapsible format legend — sits full-width at the foot of the filter panel
+   so expanding it never distorts the facet grid. */
 .learn-format-legend {
-  margin-top: .6rem;
+  margin-top: 1rem;
+  padding-top: .9rem;
+  border-top: 1px solid rgba(42, 101, 118, .14);
   font-size: .84rem;
+}
+
+.learn-format-legend[open] > summary {
+  margin-bottom: .2rem;
+}
+
+.learn-format-legend dl {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: .3rem 1rem;
+  margin: .6rem 0 0;
+  max-width: 46rem;
 }
 
 .learn-format-legend > summary {
@@ -755,17 +745,13 @@ h2.section-heading {
   outline-offset: 2px;
 }
 
-.learn-format-legend dl {
-  margin: .55rem 0 0;
-}
-
 .learn-format-legend dt {
   color: $bi-charcoal;
   font-weight: 740;
 }
 
 .learn-format-legend dd {
-  margin: 0 0 .5rem;
+  margin: 0;
   color: $bi-gray;
   line-height: 1.4;
 }
@@ -820,8 +806,9 @@ h2.section-heading {
 .learn-facet-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: .9rem 1.25rem;
-  margin-top: 1rem;
+  align-items: start;
+  gap: 1.1rem 1.25rem;
+  margin-top: 1.1rem;
 }
 
 .learn-facet {
@@ -937,10 +924,6 @@ h2.section-heading {
 }
 
 @media (max-width: 640px) {
-  .learn-library-links {
-    flex-direction: column;
-  }
-
   .learn-facet-grid {
     grid-template-columns: 1fr;
   }
