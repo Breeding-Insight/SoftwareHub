@@ -56,8 +56,7 @@ h6,
   font-family: $font-family-sans-serif;
 }
 
-body:has(.hero) #title-block-header,
-body:has(.learn-library-header) #title-block-header {
+body:has(.hero) #title-block-header {
   display: none;
 }
 
@@ -639,30 +638,12 @@ h2.section-heading {
 }
 
 /* Learn discovery page */
-.learn-library-header {
-  margin: -.75rem calc(50% - 50vw) 2rem;
-  padding: 1.75rem max(1.5rem, calc((100vw - 1120px) / 2));
-  border-bottom: 1px solid rgba(42, 101, 118, .14);
-  background: #f4f8f8;
-}
-
-.learn-library-header-inner {
-  max-width: 880px;
-}
-
-.learn-library-header h1 {
-  max-width: 760px;
-  margin: 0 0 .55rem;
-  color: $bi-charcoal;
-  font-size: 2.4rem;
-  line-height: 1.08;
-}
-
-.learn-library-header p {
-  max-width: 760px;
-  margin-bottom: 1rem;
-  color: #53605d;
-  font-size: 1rem;
+.learn-library-tools {
+  margin: 0 0 2rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(42, 101, 118, .16);
+  border-radius: .375rem;
+  background: #fff;
 }
 
 .learn-library-search {
@@ -944,15 +925,6 @@ h2.section-heading {
 
   .goal-card {
     min-height: auto;
-  }
-
-  .learn-library-header {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-  }
-
-  .learn-library-header h1 {
-    font-size: 2rem;
   }
 
   .learn-library-links {

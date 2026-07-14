@@ -15,14 +15,7 @@ format:
     include-after-body: assets/learn-filter.html
 ---
 
-::: {.learn-library-header}
-::: {.learn-library-header-inner}
-<div class="hero-kicker">Learning library</div>
-
-# Learn breeding and genomic analysis
-
-Find a concept, follow a focused example, or work through a complete analysis from raw inputs to validated results.
-
+::: {.learn-library-tools}
 <div class="learn-filter-search learn-library-search">
   <label for="learn-material-search">Search learning materials</label>
   <input id="learn-material-search" type="search" autocomplete="off" placeholder="Try MADC, VCF, dosage, or missingness">
@@ -32,7 +25,6 @@ Find a concept, follow a focused example, or work through a complete analysis fr
   <a class="no-external" href="#all-learning-materials">Jump to filtered results</a>
   <span>Looking for guided training? <a class="no-external" href="workshops.html">View workshops</a>.</span>
 </div>
-:::
 :::
 
 ## Choose how to learn {.section-heading}
