@@ -859,14 +859,21 @@ h2.section-heading {
   outline-offset: 2px;
 }
 
-.learn-filter-summary {
+.learn-results-header {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 1rem;
-  margin-top: 1rem;
-  padding-top: .8rem;
-  border-top: 1px solid rgba(42, 101, 118, .12);
+  margin: 2rem 0 .8rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(42, 101, 118, .2);
+}
+
+.learn-results-heading h3 {
+  margin: 0 0 .2rem;
+  color: $bi-charcoal;
+  font-size: 1.22rem;
+  line-height: 1.25;
 }
 
 .learn-result-count {
@@ -935,7 +942,7 @@ h2.section-heading {
     grid-template-columns: 1fr;
   }
 
-  .learn-filter-summary {
+  .learn-results-header {
     align-items: flex-start;
     flex-direction: column;
     gap: .45rem;
@@ -947,7 +954,7 @@ h2.section-heading {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.15rem;
-  margin: 1.25rem 0 2rem;
+  margin: .8rem 0 2rem;
 }
 
 .learn-listing-card {

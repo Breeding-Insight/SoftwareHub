@@ -47,9 +47,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-effba262e874657e83d0e513aa0f2f81.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-03e9a8fee849950769345037914e3c68.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-03e9a8fee849950769345037914e3c68.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-03e9a8fee849950769345037914e3c68.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-8f94084065d81b420d84a6ed678fb97a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-8f94084065d81b420d84a6ed678fb97a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-8f94084065d81b420d84a6ed678fb97a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -329,17 +329,21 @@ window.Quarto = {
     </fieldset>
   </div>
 
-  <div class="learn-filter-summary">
-    <p id="learn-result-count" class="learn-result-count" aria-live="polite"></p>
-    <button id="learn-clear-filters" class="learn-clear-filters" type="button">Clear all filters</button>
+</div>
+
+<div class="learn-results-header">
+  <div class="learn-results-heading">
+    <h3 id="learning-results-title" class="anchored">Learning materials</h3>
+    <p id="learn-result-count" class="learn-result-count" aria-live="polite" aria-atomic="true"></p>
   </div>
+  <button id="learn-clear-filters" class="learn-clear-filters" type="button">Clear all filters</button>
 </div>
 
 <p id="learn-no-results" class="learn-no-results" hidden="">
   <strong>No learning materials match those filters.</strong>
   Try removing a filter or using a broader search term.
 </p>
-<div id="listing-learning-materials" class="quarto-listing quarto-listing-container-custom">
+<div id="listing-learning-materials" role="region" aria-labelledby="learning-results-title" class="quarto-listing quarto-listing-container-custom">
 
 <div class="learn-listing-grid">
 
@@ -717,6 +721,7 @@ window.Quarto = {
     level: ["Beginner", "Intermediate", "Advanced"]
   };
   const LISTING_ANCHOR = "all-learning-materials";
+  const SEARCH_PARAM = "learn-q";
 
   const state = {
     filters: new Map(FACETS.map((facet) => [facet, new Set()])),
@@ -831,9 +836,10 @@ window.Quarto = {
         url.searchParams.append(facet, value);
       }
     }
+    url.searchParams.delete(SEARCH_PARAM);
     url.searchParams.delete("q");
     url.searchParams.delete("filter");
-    if (state.query.trim()) url.searchParams.set("q", state.query.trim());
+    if (state.query.trim()) url.searchParams.set(SEARCH_PARAM, state.query.trim());
     if (includeAnchor) url.hash = LISTING_ANCHOR;
     window.history[historyMethod]({}, "", url);
   }
@@ -851,7 +857,7 @@ window.Quarto = {
       );
       state.filters.set(facet, selected);
     }
-    state.query = params.get("q") || "";
+    state.query = params.get(SEARCH_PARAM) || params.get("q") || "";
   }
 
   function clearState() {

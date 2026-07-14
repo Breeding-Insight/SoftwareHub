@@ -17,6 +17,7 @@
     level: ["Beginner", "Intermediate", "Advanced"]
   };
   const LISTING_ANCHOR = "all-learning-materials";
+  const SEARCH_PARAM = "learn-q";
 
   const state = {
     filters: new Map(FACETS.map((facet) => [facet, new Set()])),
@@ -131,9 +132,10 @@
         url.searchParams.append(facet, value);
       }
     }
+    url.searchParams.delete(SEARCH_PARAM);
     url.searchParams.delete("q");
     url.searchParams.delete("filter");
-    if (state.query.trim()) url.searchParams.set("q", state.query.trim());
+    if (state.query.trim()) url.searchParams.set(SEARCH_PARAM, state.query.trim());
     if (includeAnchor) url.hash = LISTING_ANCHOR;
     window.history[historyMethod]({}, "", url);
   }
@@ -151,7 +153,7 @@
       );
       state.filters.set(facet, selected);
     }
-    state.query = params.get("q") || "";
+    state.query = params.get(SEARCH_PARAM) || params.get("q") || "";
   }
 
   function clearState() {

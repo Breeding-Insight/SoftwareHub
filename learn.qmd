@@ -124,10 +124,14 @@ Search across titles, descriptions, topics, software, and keywords. Select more 
     </fieldset>
   </div>
 
-  <div class="learn-filter-summary">
-    <p id="learn-result-count" class="learn-result-count" aria-live="polite"></p>
-    <button id="learn-clear-filters" class="learn-clear-filters" type="button">Clear all filters</button>
+</div>
+
+<div class="learn-results-header">
+  <div class="learn-results-heading">
+    <h3 id="learning-results-title">Learning materials</h3>
+    <p id="learn-result-count" class="learn-result-count" aria-live="polite" aria-atomic="true"></p>
   </div>
+  <button id="learn-clear-filters" class="learn-clear-filters" type="button">Clear all filters</button>
 </div>
 
 <p id="learn-no-results" class="learn-no-results" hidden>
@@ -136,5 +140,5 @@ Search across titles, descriptions, topics, software, and keywords. Select more 
 </p>
 ```
 
-::: {#learning-materials}
+::: {#learning-materials role="region" aria-labelledby="learning-results-title"}
 :::
