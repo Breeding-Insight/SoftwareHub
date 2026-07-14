@@ -60,8 +60,12 @@ const encoded = (value) => encodeURIComponent(JSON.stringify(value));
 <% if (isExternal) { %>
         <span class="learn-badge learn-badge-external">External</span>
 <% } %>
-<% for (const tool of software) { %>
+<% const shownSoftware = software.slice(0, 3); %>
+<% for (const tool of shownSoftware) { %>
         <span class="learn-badge learn-badge-software">Uses <%- tool %></span>
+<% } %>
+<% if (software.length > shownSoftware.length) { %>
+        <span class="learn-badge learn-badge-more">+<%- software.length - shownSoftware.length %></span>
 <% } %>
 <% if (level) { %>
         <span class="learn-badge learn-badge-level"><%- level %></span>

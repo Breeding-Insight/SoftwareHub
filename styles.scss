@@ -33,6 +33,12 @@ $border-radius: .375rem;
   --bi-charcoal: #{$bi-charcoal};
   --bi-gray: #{$bi-gray};
   --bi-mist: #{$bi-mist};
+
+  /* Surface tokens: keep the pale-neutral set small and intentional. */
+  --bi-surface: #ffffff;   /* card / page base */
+  --bi-panel: #f7fafb;     /* subtle raised panel (progress, next, filter blocks) */
+  --bi-wash: #eef5f5;      /* teal-tinted accent band (hero, title banner) */
+  --bi-surface-hover: #fafcfc; /* shared card hover */
 }
 
 html {
@@ -94,7 +100,7 @@ body:has(.hero) #title-block-header {
 }
 
 .quarto-title-banner {
-  background: #eef5f5;
+  background: var(--bi-wash);
 }
 
 .quarto-title h1.title {
@@ -118,7 +124,7 @@ main.content h3 {
 .hero {
   margin: -.75rem calc(50% - 50vw) 2.5rem;
   padding: 3.75rem max(1.5rem, calc((100vw - 1120px) / 2));
-  background: #edf5f5;
+  background: var(--bi-wash);
   border-bottom: 1px solid rgba(42, 101, 118, .12);
 }
 
@@ -231,7 +237,29 @@ h2.section-heading {
 .path-card:hover,
 .package-card:hover {
   border-color: rgba(42, 101, 118, .32);
-  background: #fafcfc;
+  background: var(--bi-surface-hover);
+}
+
+/* Featured software cards read as primary: hairline shadow + teal top rule. */
+.package-card {
+  padding-top: 1.3rem;
+  box-shadow: 0 1px 2px rgba(42, 101, 118, .06);
+  transition: background-color .16s ease, border-color .16s ease, box-shadow .16s ease;
+}
+
+.package-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: .375rem .375rem 0 0;
+  background: $bi-teal-dark;
+}
+
+.package-card:hover {
+  box-shadow: 0 2px 6px rgba(42, 101, 118, .09);
 }
 
 .path-icon,
@@ -245,6 +273,11 @@ h2.section-heading {
   background: rgba(181, 221, 232, .38);
   color: $bi-teal-dark;
   font-weight: 800;
+}
+
+.path-icon i {
+  font-size: 1.3rem;
+  line-height: 1;
 }
 
 .package-mark {
@@ -332,7 +365,7 @@ h2.section-heading {
 .workshop-card:hover,
 .workshop-card:focus-visible {
   border-color: rgba(42, 101, 118, .45);
-  background: #fafcfc;
+  background: var(--bi-surface-hover);
 }
 
 .workshop-card:focus-visible {
@@ -419,7 +452,7 @@ h2.section-heading {
   padding: 1rem;
   border: 1px solid rgba(42, 101, 118, .22);
   border-radius: .5rem;
-  background: #f7fafb;
+  background: var(--bi-panel);
 }
 
 .workshop-progress-title {
@@ -508,7 +541,7 @@ h2.section-heading {
   padding: 1rem 1.1rem;
   border: 1px solid rgba(42, 101, 118, .22);
   border-radius: .5rem;
-  background: #f7fafb;
+  background: var(--bi-panel);
 }
 
 .workshop-next > :last-child {
@@ -552,7 +585,7 @@ h2.section-heading {
 
 .quarto-listing-container-grid .card:hover {
   border-color: rgba(42, 101, 118, .34);
-  background: #fafcfc;
+  background: var(--bi-surface-hover);
 }
 
 .quarto-listing-container-grid .card-img-top {
@@ -663,95 +696,84 @@ h2.section-heading {
   font-weight: 700;
 }
 
-.learning-format-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: .8rem;
-  margin: 1.25rem 0 2.8rem;
-}
-
-.learning-format-card {
+/* Goal quick-jump chips (Learn = green, reusing the pill motif). */
+.learn-goal-chips {
   display: flex;
-  min-width: 0;
-  flex-direction: column;
-  gap: .4rem;
-  padding: 1rem 1.05rem;
-  border: 1px solid rgba(42, 101, 118, .18);
-  border-radius: .375rem;
-  background: #fff;
-  color: $bi-gray !important;
-  font-size: .91rem;
-  line-height: 1.42;
-  text-decoration: none !important;
-  transition: background-color .16s ease, border-color .16s ease;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .45rem;
+  margin: 1.1rem 0 1.6rem;
 }
 
-.learning-format-card:hover,
-.learning-format-card:focus-visible {
-  border-color: rgba(42, 101, 118, .48);
-  background: #f7fbfb;
-}
-
-.learning-format-card:focus-visible {
-  outline: 3px solid rgba(72, 169, 197, .32);
-  outline-offset: 2px;
-}
-
-.learning-format-name {
+.learn-goal-chips-label {
+  margin-right: .15rem;
   color: $bi-charcoal;
-  font-size: 1.05rem;
-  font-weight: 760;
+  font-size: .9rem;
+  font-weight: 740;
 }
 
-.goal-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-  margin: 1.4rem 0 2.8rem;
-}
-
-.goal-card {
-  display: flex;
-  flex-direction: column;
-  min-height: 11.25rem;
-  padding: 1.1rem;
-  border: 1px solid rgba(42, 101, 118, .15);
-  border-radius: .375rem;
+.learn-goal-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.05rem;
+  padding: .34rem .7rem;
+  border: 1px solid rgba(30, 93, 40, .28);
+  border-radius: 999px;
   background: #fff;
-  color: $bi-charcoal !important;
+  color: $bi-green-dark !important;
+  font-size: .84rem;
+  font-weight: 710;
+  line-height: 1.15;
   text-decoration: none !important;
   transition: background-color .16s ease, border-color .16s ease;
 }
 
-.goal-card:hover,
-.goal-card:focus-visible {
-  border-color: rgba(42, 101, 118, .4);
-  background: #fafcfc;
+.learn-goal-chip:hover {
+  border-color: $bi-green-dark;
+  background: rgba(163, 217, 172, .18);
 }
 
-.goal-card:focus-visible {
+.learn-goal-chip:focus-visible {
+  outline: 3px solid rgba(49, 155, 66, .32);
+  outline-offset: 2px;
+}
+
+/* Collapsible "what do these formats mean?" legend on the Format facet. */
+.learn-format-legend {
+  margin-top: .6rem;
+  font-size: .84rem;
+}
+
+.learn-format-legend > summary {
+  color: $bi-teal-dark;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.learn-format-legend > summary:focus-visible {
   outline: 3px solid rgba(72, 169, 197, .32);
   outline-offset: 2px;
 }
 
-.goal-card h3 {
+.learn-format-legend dl {
+  margin: .55rem 0 0;
+}
+
+.learn-format-legend dt {
+  color: $bi-charcoal;
+  font-weight: 740;
+}
+
+.learn-format-legend dd {
   margin: 0 0 .5rem;
-  font-size: 1.2rem;
-  letter-spacing: 0;
-}
-
-.goal-card p {
-  margin: 0 0 1rem;
   color: $bi-gray;
-  font-size: .96rem;
-  line-height: 1.45;
+  line-height: 1.4;
 }
 
-.goal-link {
-  margin-top: auto;
-  color: $bi-teal-dark;
-  font-size: .9rem;
-  font-weight: 750;
+.learn-format-legend-note {
+  margin: 0;
+  color: $bi-gray;
+  font-style: italic;
 }
 
 #all-learning-materials {
@@ -763,7 +785,7 @@ h2.section-heading {
   padding: 1.1rem 1.15rem;
   border: 1px solid rgba(42, 101, 118, .16);
   border-radius: .375rem;
-  background: #f8fbfb;
+  background: var(--bi-panel);
 }
 
 .learn-filter-search {
@@ -914,26 +936,7 @@ h2.section-heading {
   color: $bi-charcoal;
 }
 
-@media (max-width: 980px) {
-  .learning-format-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .goal-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 @media (max-width: 640px) {
-  .learning-format-grid,
-  .goal-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .goal-card {
-    min-height: auto;
-  }
-
   .learn-library-links {
     flex-direction: column;
   }
@@ -971,7 +974,7 @@ h2.section-heading {
 
 .learn-listing-card:hover {
   border-color: rgba(42, 101, 118, .35);
-  background: #fafcfc;
+  background: var(--bi-surface-hover);
 }
 
 .learn-listing-card:focus-within {
@@ -1000,7 +1003,7 @@ h2.section-heading {
   justify-content: center;
   overflow: hidden;
   border-bottom: 1px solid rgba(42, 101, 118, .1);
-  background: #f2f7f7;
+  background: $bi-mist;
 }
 
 .learn-listing-image img {
@@ -1052,6 +1055,12 @@ h2.section-heading {
   border: 1px solid rgba(112, 115, 114, .16);
   background: rgba(112, 115, 114, .08);
   color: #59605e;
+}
+
+.learn-badge-more {
+  border: 1px solid rgba(30, 93, 40, .18);
+  background: rgba(163, 217, 172, .18);
+  color: $bi-green-dark;
 }
 
 .learn-badge-external {
@@ -1112,7 +1121,7 @@ h2.section-heading {
   border: 1px solid rgba(42, 101, 118, .16);
   border-left: 5px solid $bi-teal;
   border-radius: .375rem;
-  background: #f3f8f8;
+  background: var(--bi-panel);
   font-size: 1rem;
 }
 

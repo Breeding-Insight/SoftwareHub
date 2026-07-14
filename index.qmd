@@ -7,7 +7,7 @@ title-block-banner: false
 
 ::: {.hero}
 ::: {.hero-inner}
-<div class="hero-kicker">Breeding Insight software</div>
+<div class="hero-kicker">Open-source · Plant &amp; animal breeding</div>
 
 # Software and training for breeding programs
 
@@ -26,7 +26,7 @@ Choose a tool, follow a practical workflow, or return to material from a trainin
 
 ::: {.path-grid}
 ::: {.path-card}
-<div class="path-icon">01</div>
+<div class="path-icon"><i class="bi bi-box-seam" aria-hidden="true"></i></div>
 
 ### Browse software
 
@@ -36,7 +36,7 @@ Compare packages and applications by task, data type, language, and analysis are
 :::
 
 ::: {.path-card}
-<div class="path-icon">02</div>
+<div class="path-icon"><i class="bi bi-diagram-3" aria-hidden="true"></i></div>
 
 ### Follow a workflow
 
@@ -46,7 +46,7 @@ Work through practical tutorials that may span more than one package, from raw g
 :::
 
 ::: {.path-card}
-<div class="path-icon">03</div>
+<div class="path-icon"><i class="bi bi-mortarboard" aria-hidden="true"></i></div>
 
 ### Revisit a workshop
 
