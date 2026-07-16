@@ -1,0 +1,120 @@
+---
+title: "Pedigree validation or parentage assignment?"
+author: "Josue Chinchilla-Vargas"
+date: 2026-07-16
+date-modified: 2026-07-16
+description: "Understand the difference between testing recorded parents and searching a candidate-parent pool with SNP genotype data."
+categories:
+  - Pedigree & Parentage
+  - Genotype Data
+image: ../assets/software-bigpopa.png
+image-alt: "BIGpopA hexagonal logo with pedigree symbols and a stacked composition chart."
+order: 80
+learning-type: Concept
+software:
+  - BIGpopA
+  - Familia
+level: Beginner
+keywords:
+  - pedigree validation
+  - parentage assignment
+  - Mendelian error
+  - candidate parents
+  - SNP genotype
+  - pedigree quality control
+---
+
+::: {.concept-definition}
+**Pedigree validation** tests whether the parents already recorded for an individual are compatible with the SNP genotype data. **Parentage assignment** starts with one or both parents unknown and searches a supplied candidate-parent pool for the most compatible assignment.
+:::
+
+The two analyses use related genetic evidence, but they answer different questions. A validation result addresses a recorded relationship. An assignment result compares the candidates that were provided to the analysis.
+
+## Start with the question
+
+| If your question is... | The task is... | BIGpopA function |
+|---|---|---|
+| Is the pedigree table structurally consistent? | Pedigree checking and correction | `check_ped()` |
+| Do the recorded parents fit the offspring genotype? | Pedigree validation | `validate_pedigree()` |
+| Which supplied candidate parent or parent pair best fits the offspring genotype? | Parentage assignment | `find_parentage()` |
+
+These steps are complementary. Structural pedigree checking does not use SNP genotypes. Validation and assignment do.
+
+## What does pedigree validation test?
+
+BIGpopA compares each recorded parent-offspring trio with a genotype matrix coded as `0`, `1`, and `2`. At a marker, an incompatibility occurs when the observed offspring genotype is not possible from the recorded parental genotypes under Mendelian transmission, as described in the official [`validate_pedigree()` documentation](https://github.com/Breeding-Insight/BIGpopA/blob/main/man/validate_pedigree.Rd).
+
+For example, if both recorded parents have genotype `0` at a diploid marker, an offspring genotype of `2` is incompatible at that marker. BIGpopA summarizes incompatibilities across the non-missing markers tested for the trio.
+
+The validation report can distinguish:
+
+- a trio that passes the configured Mendelian-error threshold;
+- a trio that fails that threshold;
+- a trio with too few non-missing markers;
+- an individual without genotype data; and
+- records with missing parent information.
+
+The status depends on the data and the function settings. The numerical defaults supplied by BIGpopA are software defaults, not universal biological recommendations.
+
+## What does parentage assignment test?
+
+Parentage assignment does not begin by testing one recorded pair. BIGpopA searches the candidate parents supplied to `find_parentage()` and reports the parent or pair with the lowest Mendelian-error or homozygous-mismatch rate for the selected method, as documented for [`find_parentage()`](https://github.com/Breeding-Insight/BIGpopA/blob/main/man/find_parentage.Rd).
+
+The available methods search for:
+
+- the best male parent;
+- the best female parent;
+- the best parent without using a sex role; or
+- the best male and female parent pair.
+
+The result is conditional on the candidate pool. If a biological parent is absent from that pool, the analysis cannot select that parent. When multiple candidates tie, BIGpopA can report the tied solutions.
+
+## Why a mismatch is not a diagnosis by itself
+
+A Mendelian incompatibility can be evidence that a recorded relationship is wrong, but genotype error and missing or poor-quality genotype data can also affect pedigree inference. Published pedigree-reconstruction work therefore treats marker quality, missingness, available relatives, and the analysis model as part of the interpretation rather than treating a single mismatch count as proof ([Wang 2019](https://doi.org/10.1038/s41437-018-0178-7); [Huisman 2017](https://doi.org/10.1111/1755-0998.12665)).
+
+BIGpopA reflects this distinction by reporting statuses such as `low_markers`, `no_genotype_data`, and `high_error` rather than forcing every record into a parentage conclusion.
+
+## Read the two results differently
+
+::: {.concept-decision-grid}
+::: {.concept-decision}
+#### Validation result
+
+Read it as: **Do the recorded parents fit the available marker evidence under these settings?**
+
+A failure identifies a recorded trio that needs review. It does not by itself identify why the conflict occurred.
+:::
+
+::: {.concept-decision}
+#### Assignment result
+
+Read it as: **Which of the supplied candidates best fits the available marker evidence under these settings?**
+
+The selected candidate is the best result within the searched pool. Review ties, marker counts, and error status before changing a pedigree record.
+:::
+:::
+
+## Where structural checking fits
+
+Run `check_ped()` before genotype-based validation when the pedigree may contain duplicate rows, conflicting parent records, inconsistent parent-sex roles, missing parent records, or cycles. The official [`check_ped()` documentation](https://github.com/Breeding-Insight/BIGpopA/blob/main/man/check_ped.Rd) lists the returned issue tables and corrected pedigree and specifies that cycles are reported for manual resolution.
+
+This step prepares the pedigree structure. It does not determine whether the recorded biological relationships are supported by SNP data.
+
+## Practical takeaway
+
+::: {.bi-callout}
+Use pedigree validation when the parents are recorded and you want to test those records. Use parentage assignment when a parent is unknown and you have a candidate pool to search. In either case, the available marker evidence and candidate set define what the analysis can evaluate.
+:::
+
+## Continue learning
+
+[Run the BIGpopA tutorial](bigpopa-pedigree-parentage.qmd){.btn-bi-primary}
+[Choose a genomic analysis path](genomics-path.qmd){.btn-bi-secondary}
+
+## Sources and further reading
+
+- Chinchilla-Vargas J. 2026. *BIGpopA Tutorial: Pedigree cleaning, validation, and parentage assignment from SNP genotype data*. Material supplied for adaptation to Software Hub.
+- Chinchilla-Vargas J, Sandercock A, University of Florida. 2026. *BIGpopA: Pedigree Validation Genetic Composition of Diploids & Polyploids*, version 1.0.5. [Official source and function documentation](https://github.com/Breeding-Insight/BIGpopA)
+- Huisman J. 2017. *Pedigree reconstruction from SNP data: parentage assignment, sibship clustering and beyond*. **Molecular Ecology Resources** 17:1009-1024. [doi:10.1111/1755-0998.12665](https://doi.org/10.1111/1755-0998.12665)
+- Wang J. 2019. *Pedigree reconstruction from poor quality genotype data*. **Heredity** 122:719-728. [doi:10.1038/s41437-018-0178-7](https://doi.org/10.1038/s41437-018-0178-7)

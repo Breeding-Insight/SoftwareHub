@@ -47,9 +47,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-effba262e874657e83d0e513aa0f2f81.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8f94084065d81b420d84a6ed678fb97a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-8f94084065d81b420d84a6ed678fb97a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-8f94084065d81b420d84a6ed678fb97a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-32a4aaf5085f193f5ae11caa6aca1532.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-32a4aaf5085f193f5ae11caa6aca1532.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-32a4aaf5085f193f5ae11caa6aca1532.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -86,9 +86,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-project','listing-website','listing-format','listing-execute','listing-engines','listing-language','listing-title','listing-author','listing-date','listing-description','listing-categories','listing-image','listing-image-alt','listing-order','listing-learning-type','listing-software','listing-level','listing-keywords','listing-path','listing-outputHref','listing-date-modified','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      valueNames: ['listing-project','listing-website','listing-format','listing-execute','listing-engines','listing-language','listing-title','listing-author','listing-date','listing-date-modified','listing-description','listing-categories','listing-image','listing-image-alt','listing-order','listing-learning-type','listing-software','listing-level','listing-keywords','listing-path','listing-outputHref','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
-      searchColumns: ["listing-project","listing-website","listing-format","listing-execute","listing-engines","listing-language","listing-title","listing-author","listing-date","listing-description","listing-categories","listing-image","listing-image-alt","listing-order","listing-learning-type","listing-software","listing-level","listing-keywords","listing-path","listing-outputHref","listing-date-modified","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
+      searchColumns: ["listing-project","listing-website","listing-format","listing-execute","listing-engines","listing-language","listing-title","listing-author","listing-date","listing-date-modified","listing-description","listing-categories","listing-image","listing-image-alt","listing-order","listing-learning-type","listing-software","listing-level","listing-keywords","listing-path","listing-outputHref","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -232,84 +232,26 @@ window.Quarto = {
 </header>
 
 
-<div class="learn-library-tools">
-<div class="learn-filter-search learn-library-search">
-<p><label for="learn-material-search">Search learning materials</label> <input id="learn-material-search" type="search" autocomplete="off" placeholder="Try MADC, VCF, dosage, or missingness"></p>
-</div>
-<div class="learn-library-links">
-<p><a class="no-external" href="#all-learning-materials">Jump to filtered results</a> <span>Looking for guided training? <a class="no-external" href="workshops.html">View workshops</a>.</span></p>
-</div>
-</div>
-<section id="choose-how-to-learn" class="level2 section-heading">
-<h2 class="section-heading anchored" data-anchor-id="choose-how-to-learn">Choose how to learn</h2>
-<p>The labels describe the purpose and scope of each resource, not its difficulty.</p>
-<div class="learning-format-grid">
-<a class="learning-format-card learn-filter-trigger no-external" data-set-facet="type" data-set-value="Concept" href="?type=Concept#all-learning-materials">
-  <span class="learning-format-name">Concept</span>
-  <span>Understand what something means, why it matters, and how to interpret it.</span>
-</a>
-
-<a class="learning-format-card learn-filter-trigger no-external" data-set-facet="type" data-set-value="Guide" href="?type=Guide#all-learning-materials">
-  <span class="learning-format-name">Guide</span>
-  <span>Choose an approach, tool, or next step based on your goal.</span>
-</a>
-
-<a class="learning-format-card learn-filter-trigger no-external" data-set-facet="type" data-set-value="Tutorial" href="?type=Tutorial#all-learning-materials">
-  <span class="learning-format-name">Tutorial</span>
-  <span>Complete one bounded task through a linear, worked example.</span>
-</a>
-
-<a class="learning-format-card learn-filter-trigger no-external" data-set-facet="type" data-set-value="Workflow" href="?type=Workflow#all-learning-materials">
-  <span class="learning-format-name">Workflow</span>
-  <span>Carry out an end-to-end analysis with decisions and validation checkpoints.</span>
-</a>
-</div>
-</section>
-<section id="start-with-a-goal" class="level2 section-heading">
-<h2 class="section-heading anchored" data-anchor-id="start-with-a-goal">Start with a goal</h2>
-<p>Choose the outcome closest to what you need. You can refine the results with additional filters.</p>
-<div class="goal-grid">
-<a class="goal-card learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Getting Started" href="?topic=Getting Started#all-learning-materials">
-  <h3 class="anchored">Get started</h3>
-  <p>Choose an analysis path and learn the foundations for working with genomic data.</p>
-  <span class="goal-link">Browse this topic <span aria-hidden="true">→</span></span>
-</a>
-
-<a class="goal-card learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Genotype Data" href="?topic=Genotype Data#all-learning-materials">
-  <h3 class="anchored">Prepare genotype data</h3>
-  <p>Import, inspect, transform, and export genotype or variant data for downstream analysis.</p>
-  <span class="goal-link">Browse this topic <span aria-hidden="true">→</span></span>
-</a>
-
-<a class="goal-card learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Data Quality" href="?topic=Data Quality#all-learning-materials">
-  <h3 class="anchored">Improve data quality</h3>
-  <p>Evaluate depth, missingness, markers, samples, and uncertainty before analysis.</p>
-  <span class="goal-link">Browse this topic <span aria-hidden="true">→</span></span>
-</a>
-
-<a class="goal-card learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Ploidy &amp; Dosage" href="?topic=Ploidy %26 Dosage#all-learning-materials">
-  <h3 class="anchored">Analyze polyploids</h3>
-  <p>Work with allele dosage, ploidy, aneuploidy, and copy-number variation.</p>
-  <span class="goal-link">Browse this topic <span aria-hidden="true">→</span></span>
-</a>
-
-<a class="goal-card learn-filter-trigger no-external" data-set-facet="topic" data-set-value="File Formats" href="?topic=File Formats#all-learning-materials">
-  <h3 class="anchored">Understand data formats</h3>
-  <p>Learn what specialized breeding-data files contain and how they relate to standard formats.</p>
-  <span class="goal-link">Browse this topic <span aria-hidden="true">→</span></span>
-</a>
-
-<a class="goal-card learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Genomic Prediction" href="?topic=Genomic Prediction#all-learning-materials">
-  <h3 class="anchored">Predict performance</h3>
-  <p>Interpret validation designs and results used in genomic prediction.</p>
-  <span class="goal-link">Browse this topic <span aria-hidden="true">→</span></span>
-</a>
-</div>
-</section>
+<p>Search the full library, filter by format, topic, software, or level, or jump straight to a goal. For guided training, see the <a href="workshops.html">workshops</a>.</p>
 <section id="all-learning-materials" class="level2 section-heading">
-<h2 class="section-heading anchored" data-anchor-id="all-learning-materials">Browse all learning materials</h2>
-<p>Search across titles, descriptions, topics, software, and keywords. Select more than one pill within a group to broaden that part of the search.</p>
-<div class="learn-filter-panel" aria-label="Filter learning materials">
+<h2 class="section-heading anchored" data-anchor-id="all-learning-materials">Browse learning materials</h2>
+<div class="learn-goal-chips" aria-label="Start with a goal">
+  <span class="learn-goal-chips-label">Start with a goal:</span>
+  <a class="learn-goal-chip learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Getting Started" href="?topic=Getting Started#all-learning-materials">Get started</a>
+  <a class="learn-goal-chip learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Genotype Data" href="?topic=Genotype Data#all-learning-materials">Prepare genotype data</a>
+  <a class="learn-goal-chip learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Data Quality" href="?topic=Data Quality#all-learning-materials">Improve data quality</a>
+  <a class="learn-goal-chip learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Ploidy &amp; Dosage" href="?topic=Ploidy %26 Dosage#all-learning-materials">Analyze polyploids</a>
+  <a class="learn-goal-chip learn-filter-trigger no-external" data-set-facet="topic" data-set-value="File Formats" href="?topic=File Formats#all-learning-materials">Understand data formats</a>
+  <a class="learn-goal-chip learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Pedigree &amp; Parentage" href="?topic=Pedigree %26 Parentage#all-learning-materials">Validate pedigrees</a>
+  <a class="learn-goal-chip learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Genomic Prediction" href="?topic=Genomic Prediction#all-learning-materials">Predict performance</a>
+</div>
+
+<div class="learn-filter-panel" aria-label="Search and filter learning materials">
+  <div class="learn-filter-search">
+    <label for="learn-material-search">Search learning materials</label>
+    <input id="learn-material-search" type="search" autocomplete="off" placeholder="Try MADC, VCF, dosage, parentage, or missingness">
+  </div>
+
   <div class="learn-facet-grid">
     <fieldset class="learn-facet" data-learn-facet="type">
       <legend>Format</legend>
@@ -329,6 +271,20 @@ window.Quarto = {
     </fieldset>
   </div>
 
+  <details class="learn-format-legend">
+    <summary>What do the formats mean?</summary>
+    <dl>
+      <dt>Concept</dt>
+      <dd>Understand what something means, why it matters, and how to interpret it.</dd>
+      <dt>Guide</dt>
+      <dd>Choose an approach, tool, or next step based on your goal.</dd>
+      <dt>Tutorial</dt>
+      <dd>Complete one bounded task through a linear, worked example.</dd>
+      <dt>Workflow</dt>
+      <dd>Carry out an end-to-end analysis with decisions and validation checkpoints.</dd>
+    </dl>
+    <p class="learn-format-legend-note">The labels describe the purpose and scope of each resource, not its difficulty.</p>
+  </details>
 </div>
 
 <div class="learn-results-header">
@@ -364,11 +320,7 @@ window.Quarto = {
 
         <span class="learn-badge learn-badge-software">Uses Qploidy2</span>
 
-        <span class="learn-badge learn-badge-software">Uses Familia</span>
-
-        <span class="learn-badge learn-badge-software">Uses AlloMate</span>
-
-        <span class="learn-badge learn-badge-software">Uses BIGpopA</span>
+        <span class="learn-badge learn-badge-more">+3</span>
 
         <span class="learn-badge learn-badge-level">Beginner</span>
 
@@ -689,6 +641,80 @@ window.Quarto = {
       </div>
 
       <span class="learn-card-open" aria-hidden="true">Open concept →</span>
+    </div>
+    </a>
+  </article>
+
+  <article class="learn-listing-card" data-learn-type="%5B%22Concept%22%5D" data-learn-topic="%5B%22Pedigree%20%26%20Parentage%22%2C%22Genotype%20Data%22%5D" data-learn-software="%5B%22BIGpopA%22%2C%22Familia%22%5D" data-learn-level="%5B%22Beginner%22%5D" data-learn-search="%22Pedigree%20validation%20or%20parentage%20assignment%3F%20Understand%20the%20difference%20between%20testing%20recorded%20parents%20and%20searching%20a%20candidate-parent%20pool%20with%20SNP%20genotype%20data.%20Concept%20Beginner%20Josue%20Chinchilla-Vargas%20BIGpopA%20Familia%20Pedigree%20%26%20Parentage%20Genotype%20Data%20pedigree%20validation%20parentage%20assignment%20Mendelian%20error%20candidate%20parents%20SNP%20genotype%20pedigree%20quality%20control%22">
+    <a class="learn-listing-link no-external" href="./learn/pedigree-validation-vs-parentage-assignment.html">
+
+    <div class="learn-listing-image">
+      <img src="./assets/software-bigpopa.png" alt="BIGpopA hexagonal logo with pedigree symbols and a stacked composition chart." loading="lazy">
+    </div>
+
+    <div class="learn-listing-body">
+      <div class="learn-card-badges" aria-label="Learning material metadata">
+        <span class="learn-badge learn-badge-type">Concept</span>
+
+        <span class="learn-badge learn-badge-software">Uses BIGpopA</span>
+
+        <span class="learn-badge learn-badge-software">Uses Familia</span>
+
+        <span class="learn-badge learn-badge-level">Beginner</span>
+
+      </div>
+
+      <div class="learn-listing-title" role="heading" aria-level="3">
+        Pedigree validation or parentage assignment?
+      </div>
+
+      <p class="learn-listing-description">Understand the difference between testing recorded parents and searching a candidate-parent pool with SNP genotype data.</p>
+
+      <div class="learn-card-topics" aria-label="Topics">
+
+        <span class="learn-topic-tag">Pedigree &amp; Parentage</span>
+
+        <span class="learn-topic-tag">Genotype Data</span>
+
+      </div>
+
+      <span class="learn-card-open" aria-hidden="true">Open concept →</span>
+    </div>
+    </a>
+  </article>
+
+  <article class="learn-listing-card" data-learn-type="%5B%22Tutorial%22%5D" data-learn-topic="%5B%22Pedigree%20%26%20Parentage%22%2C%22Genotype%20Data%22%5D" data-learn-software="%5B%22BIGpopA%22%5D" data-learn-level="%5B%22Beginner%22%5D" data-learn-search="%22Validate%20pedigrees%20and%20assign%20parentage%20with%20BIGpopA%20Use%20a%20worked%20SNP%20dataset%20to%20clean%20a%20pedigree%2C%20validate%20recorded%20parent-offspring%20trios%2C%20and%20search%20candidate%20parents%20with%20BIGpopA.%20Tutorial%20Beginner%20Josue%20Chinchilla-Vargas%20BIGpopA%20Pedigree%20%26%20Parentage%20Genotype%20Data%20BIGpopA%20pedigree%20cleaning%20pedigree%20validation%20parentage%20assignment%20Mendelian%20error%20SNP%20genotype%20R%22">
+    <a class="learn-listing-link no-external" href="./learn/bigpopa-pedigree-parentage.html">
+
+    <div class="learn-listing-image">
+      <img src="./assets/software-bigpopa.png" alt="BIGpopA hexagonal logo with pedigree symbols and a stacked composition chart." loading="lazy">
+    </div>
+
+    <div class="learn-listing-body">
+      <div class="learn-card-badges" aria-label="Learning material metadata">
+        <span class="learn-badge learn-badge-type">Tutorial</span>
+
+        <span class="learn-badge learn-badge-software">Uses BIGpopA</span>
+
+        <span class="learn-badge learn-badge-level">Beginner</span>
+
+      </div>
+
+      <div class="learn-listing-title" role="heading" aria-level="3">
+        Validate pedigrees and assign parentage with BIGpopA
+      </div>
+
+      <p class="learn-listing-description">Use a worked SNP dataset to clean a pedigree, validate recorded parent-offspring trios, and search candidate parents with BIGpopA.</p>
+
+      <div class="learn-card-topics" aria-label="Topics">
+
+        <span class="learn-topic-tag">Pedigree &amp; Parentage</span>
+
+        <span class="learn-topic-tag">Genotype Data</span>
+
+      </div>
+
+      <span class="learn-card-open" aria-hidden="true">Open tutorial →</span>
     </div>
     </a>
   </article>

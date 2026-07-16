@@ -41,16 +41,20 @@
     <lastmod>2026-07-13T18:04:12.524Z</lastmod>
   </url>
   <url>
-    <loc>https://breeding-insight.github.io/software/learn/get-started-genomic-data-r.html</loc>
-    <lastmod>2026-07-13T17:58:51.783Z</lastmod>
+    <loc>https://breeding-insight.github.io/software/learn/madc-to-vcf.html</loc>
+    <lastmod>2026-07-13T17:58:51.966Z</lastmod>
   </url>
   <url>
-    <loc>https://breeding-insight.github.io/software/learn/cross-validation-accuracy.html</loc>
-    <lastmod>2026-07-13T18:04:12.327Z</lastmod>
+    <loc>https://breeding-insight.github.io/software/learn/genomics-path.html</loc>
+    <lastmod>2026-07-16T12:15:29.777Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/learn/choosing-missing-data-threshold.html</loc>
+    <lastmod>2026-07-13T18:04:12.142Z</lastmod>
   </url>
   <url>
     <loc>https://breeding-insight.github.io/software/learn.html</loc>
-    <lastmod>2026-07-14T17:03:01.330Z</lastmod>
+    <lastmod>2026-07-16T12:15:29.235Z</lastmod>
   </url>
   <url>
     <loc>https://breeding-insight.github.io/software/about.html</loc>
@@ -58,19 +62,23 @@
   </url>
   <url>
     <loc>https://breeding-insight.github.io/software/index.html</loc>
-    <lastmod>2026-07-13T13:21:39.055Z</lastmod>
+    <lastmod>2026-07-14T19:08:40.248Z</lastmod>
   </url>
   <url>
-    <loc>https://breeding-insight.github.io/software/learn/choosing-missing-data-threshold.html</loc>
-    <lastmod>2026-07-13T18:04:12.142Z</lastmod>
+    <loc>https://breeding-insight.github.io/software/learn/bigpopa-pedigree-parentage.html</loc>
+    <lastmod>2026-07-16T12:16:36.134Z</lastmod>
   </url>
   <url>
-    <loc>https://breeding-insight.github.io/software/learn/genomics-path.html</loc>
-    <lastmod>2026-07-14T18:03:06.655Z</lastmod>
+    <loc>https://breeding-insight.github.io/software/learn/cross-validation-accuracy.html</loc>
+    <lastmod>2026-07-13T18:04:12.327Z</lastmod>
   </url>
   <url>
-    <loc>https://breeding-insight.github.io/software/learn/madc-to-vcf.html</loc>
-    <lastmod>2026-07-13T17:58:51.966Z</lastmod>
+    <loc>https://breeding-insight.github.io/software/learn/get-started-genomic-data-r.html</loc>
+    <lastmod>2026-07-13T17:58:51.783Z</lastmod>
+  </url>
+  <url>
+    <loc>https://breeding-insight.github.io/software/learn/pedigree-validation-vs-parentage-assignment.html</loc>
+    <lastmod>2026-07-16T12:16:35.953Z</lastmod>
   </url>
   <url>
     <loc>https://breeding-insight.github.io/software/learn/what-is-a-madc-file.html</loc>
@@ -86,11 +94,11 @@
   </url>
   <url>
     <loc>https://breeding-insight.github.io/software/software/bigpopa.html</loc>
-    <lastmod>2026-07-13T13:21:40.686Z</lastmod>
+    <lastmod>2026-07-16T12:15:29.423Z</lastmod>
   </url>
   <url>
     <loc>https://breeding-insight.github.io/software/software/familia.html</loc>
-    <lastmod>2026-07-13T13:21:40.319Z</lastmod>
+    <lastmod>2026-07-16T12:15:29.601Z</lastmod>
   </url>
   <url>
     <loc>https://breeding-insight.github.io/software/workshops.html</loc>
