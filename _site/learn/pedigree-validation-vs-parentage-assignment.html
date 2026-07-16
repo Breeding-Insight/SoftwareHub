@@ -6,9 +6,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Pedigree validation, parentage assignment, and ancestry assessment for plant and animal populations.">
+<meta name="author" content="Josue Chinchilla-Vargas">
+<meta name="dcterms.date" content="2026-07-16">
+<meta name="keywords" content="pedigree validation, parentage assignment, Mendelian error, candidate parents, SNP genotype, pedigree quality control">
+<meta name="description" content="Understand the difference between testing recorded parents and searching a candidate-parent pool with SNP genotype data.">
 
-<title>Familia – Breeding Insight Software</title>
+<title>Pedigree validation or parentage assignment? – Breeding Insight Software</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,41 +26,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -112,17 +80,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <style>html{ scroll-behavior: smooth; }</style>
 
 
-<meta property="og:title" content="Familia – Breeding Insight Software">
-<meta property="og:description" content="Pedigree validation, parentage assignment, and ancestry assessment for plant and animal populations.">
-<meta property="og:image" content="https://breeding-insight.github.io/software/assets/software-familia.png">
+<meta property="og:title" content="Pedigree validation or parentage assignment? – Breeding Insight Software">
+<meta property="og:description" content="Understand the difference between testing recorded parents and searching a candidate-parent pool with SNP genotype data.">
+<meta property="og:image" content="https://breeding-insight.github.io/software/assets/software-bigpopa.png">
 <meta property="og:site_name" content="Breeding Insight Software">
-<meta property="og:image:height" content="1411">
-<meta property="og:image:width" content="1219">
-<meta property="og:image:alt" content="Familia hexagonal logo.">
-<link rel="canonical" href="https://breeding-insight.github.io/software/software/familia.html">
+<meta property="og:image:height" content="1938">
+<meta property="og:image:width" content="1682">
+<meta property="og:image:alt" content="BIGpopA hexagonal logo with pedigree symbols and a stacked composition chart.">
+<link rel="canonical" href="https://breeding-insight.github.io/software/learn/pedigree-validation-vs-parentage-assignment.html">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed learning-material-page quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -186,75 +154,180 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#start-here" id="toc-start-here" class="nav-link active" data-scroll-target="#start-here">Start here</a></li>
-  <li><a href="#good-fit-for" id="toc-good-fit-for" class="nav-link" data-scroll-target="#good-fit-for">Good fit for</a></li>
-  <li><a href="#related-learning" id="toc-related-learning" class="nav-link" data-scroll-target="#related-learning">Related learning</a></li>
+  <li><a href="#start-with-the-question" id="toc-start-with-the-question" class="nav-link active" data-scroll-target="#start-with-the-question">Start with the question</a></li>
+  <li><a href="#what-does-pedigree-validation-test" id="toc-what-does-pedigree-validation-test" class="nav-link" data-scroll-target="#what-does-pedigree-validation-test">What does pedigree validation test?</a></li>
+  <li><a href="#what-does-parentage-assignment-test" id="toc-what-does-parentage-assignment-test" class="nav-link" data-scroll-target="#what-does-parentage-assignment-test">What does parentage assignment test?</a></li>
+  <li><a href="#why-a-mismatch-is-not-a-diagnosis-by-itself" id="toc-why-a-mismatch-is-not-a-diagnosis-by-itself" class="nav-link" data-scroll-target="#why-a-mismatch-is-not-a-diagnosis-by-itself">Why a mismatch is not a diagnosis by itself</a></li>
+  <li><a href="#read-the-two-results-differently" id="toc-read-the-two-results-differently" class="nav-link" data-scroll-target="#read-the-two-results-differently">Read the two results differently</a></li>
+  <li><a href="#where-structural-checking-fits" id="toc-where-structural-checking-fits" class="nav-link" data-scroll-target="#where-structural-checking-fits">Where structural checking fits</a></li>
+  <li><a href="#practical-takeaway" id="toc-practical-takeaway" class="nav-link" data-scroll-target="#practical-takeaway">Practical takeaway</a></li>
+  <li><a href="#continue-learning" id="toc-continue-learning" class="nav-link" data-scroll-target="#continue-learning">Continue learning</a></li>
+  <li><a href="#sources-and-further-reading" id="toc-sources-and-further-reading" class="nav-link" data-scroll-target="#sources-and-further-reading">Sources and further reading</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/software/familia.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/learn/pedigree-validation-vs-parentage-assignment.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Familia</h1>
+<h1 class="title">Pedigree validation or parentage assignment?</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">R Shiny</div>
-    <div class="quarto-category">Pedigree</div>
-    <div class="quarto-category">Parentage</div>
-    <div class="quarto-category">Population structure</div>
-    <div class="quarto-category">Ancestry</div>
+    <div class="quarto-category">Pedigree &amp; Parentage</div>
+    <div class="quarto-category">Genotype Data</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Pedigree validation, parentage assignment, and ancestry assessment for plant and animal populations.
+    Understand the difference between testing recorded parents and searching a candidate-parent pool with SNP genotype data.
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Josue Chinchilla-Vargas </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 16, 2026</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">July 16, 2026</p>
+    </div>
+  </div>
     
   </div>
   
 
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>pedigree validation, parentage assignment, Mendelian error, candidate parents, SNP genotype, pedigree quality control</p>
+  </div>
+</div>
 
 </header>
 
 
-<div class="software-header">
-<div>
-<p>Familia is a Shiny application for validating pedigrees, assigning parentage, and assessing supervised or unsupervised ancestry in plant and animal breeding populations.</p>
-<div class="meta-row">
-<span class="pill">R Shiny</span><span class="pill">Pedigree</span><span class="pill">Ancestry</span>
+<div class="concept-definition">
+<p><strong>Pedigree validation</strong> tests whether the parents already recorded for an individual are compatible with the SNP genotype data. <strong>Parentage assignment</strong> starts with one or both parents unknown and searches a supplied candidate-parent pool for the most compatible assignment.</p>
 </div>
-</div>
-<p><img class="software-logo" src="../assets/software-familia.png" alt="Familia logo"></p>
-</div>
-<section id="start-here" class="level2">
-<h2 class="anchored" data-anchor-id="start-here">Start here</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"Breeding-Insight/Familia"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Familia<span class="sc">::</span><span class="fu">run_app</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="https://github.com/Breeding-Insight/Familia" class="btn-bi-primary">Source code</a> <a href="https://github.com/Breeding-Insight/Familia/releases" class="btn-bi-secondary">Releases</a></p>
+<p>The two analyses use related genetic evidence, but they answer different questions. A validation result addresses a recorded relationship. An assignment result compares the candidates that were provided to the analysis.</p>
+<section id="start-with-the-question" class="level2">
+<h2 class="anchored" data-anchor-id="start-with-the-question">Start with the question</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>If your question is…</th>
+<th>The task is…</th>
+<th>BIGpopA function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Is the pedigree table structurally consistent?</td>
+<td>Pedigree checking and correction</td>
+<td><code>check_ped()</code></td>
+</tr>
+<tr class="even">
+<td>Do the recorded parents fit the offspring genotype?</td>
+<td>Pedigree validation</td>
+<td><code>validate_pedigree()</code></td>
+</tr>
+<tr class="odd">
+<td>Which supplied candidate parent or parent pair best fits the offspring genotype?</td>
+<td>Parentage assignment</td>
+<td><code>find_parentage()</code></td>
+</tr>
+</tbody>
+</table>
+<p>These steps are complementary. Structural pedigree checking does not use SNP genotypes. Validation and assignment do.</p>
 </section>
-<section id="good-fit-for" class="level2">
-<h2 class="anchored" data-anchor-id="good-fit-for">Good fit for</h2>
+<section id="what-does-pedigree-validation-test" class="level2">
+<h2 class="anchored" data-anchor-id="what-does-pedigree-validation-test">What does pedigree validation test?</h2>
+<p>BIGpopA compares each recorded parent-offspring trio with a genotype matrix coded as <code>0</code>, <code>1</code>, and <code>2</code>. At a marker, an incompatibility occurs when the observed offspring genotype is not possible from the recorded parental genotypes under Mendelian transmission, as described in the official <a href="https://github.com/Breeding-Insight/BIGpopA/blob/main/man/validate_pedigree.Rd"><code>validate_pedigree()</code> documentation</a>.</p>
+<p>For example, if both recorded parents have genotype <code>0</code> at a diploid marker, an offspring genotype of <code>2</code> is incompatible at that marker. BIGpopA summarizes incompatibilities across the non-missing markers tested for the trio.</p>
+<p>The validation report can distinguish:</p>
 <ul>
-<li>Pedigree cleaning and Mendelian error checks</li>
-<li>Parentage assignment from candidate parent pools</li>
-<li>Breed, line, and population ancestry assessment</li>
+<li>a trio that passes the configured Mendelian-error threshold;</li>
+<li>a trio that fails that threshold;</li>
+<li>a trio with too few non-missing markers;</li>
+<li>an individual without genotype data; and</li>
+<li>records with missing parent information.</li>
 </ul>
+<p>The status depends on the data and the function settings. The numerical defaults supplied by BIGpopA are software defaults, not universal biological recommendations.</p>
 </section>
-<section id="related-learning" class="level2">
-<h2 class="anchored" data-anchor-id="related-learning">Related learning</h2>
+<section id="what-does-parentage-assignment-test" class="level2">
+<h2 class="anchored" data-anchor-id="what-does-parentage-assignment-test">What does parentage assignment test?</h2>
+<p>Parentage assignment does not begin by testing one recorded pair. BIGpopA searches the candidate parents supplied to <code>find_parentage()</code> and reports the parent or pair with the lowest Mendelian-error or homozygous-mismatch rate for the selected method, as documented for <a href="https://github.com/Breeding-Insight/BIGpopA/blob/main/man/find_parentage.Rd"><code>find_parentage()</code></a>.</p>
+<p>The available methods search for:</p>
 <ul>
-<li><a href="../learn/genomics-path.html">Choose a genomic analysis path</a></li>
-<li><a href="../learn/pedigree-validation-vs-parentage-assignment.html">Pedigree validation or parentage assignment?</a></li>
-<li><a href="../learn/bigpopa-pedigree-parentage.html">Validate pedigrees and assign parentage with BIGpopA</a></li>
+<li>the best male parent;</li>
+<li>the best female parent;</li>
+<li>the best parent without using a sex role; or</li>
+<li>the best male and female parent pair.</li>
+</ul>
+<p>The result is conditional on the candidate pool. If a biological parent is absent from that pool, the analysis cannot select that parent. When multiple candidates tie, BIGpopA can report the tied solutions.</p>
+</section>
+<section id="why-a-mismatch-is-not-a-diagnosis-by-itself" class="level2">
+<h2 class="anchored" data-anchor-id="why-a-mismatch-is-not-a-diagnosis-by-itself">Why a mismatch is not a diagnosis by itself</h2>
+<p>A Mendelian incompatibility can be evidence that a recorded relationship is wrong, but genotype error and missing or poor-quality genotype data can also affect pedigree inference. Published pedigree-reconstruction work therefore treats marker quality, missingness, available relatives, and the analysis model as part of the interpretation rather than treating a single mismatch count as proof (<a href="https://doi.org/10.1038/s41437-018-0178-7">Wang 2019</a>; <a href="https://doi.org/10.1111/1755-0998.12665">Huisman 2017</a>).</p>
+<p>BIGpopA reflects this distinction by reporting statuses such as <code>low_markers</code>, <code>no_genotype_data</code>, and <code>high_error</code> rather than forcing every record into a parentage conclusion.</p>
+</section>
+<section id="read-the-two-results-differently" class="level2">
+<h2 class="anchored" data-anchor-id="read-the-two-results-differently">Read the two results differently</h2>
+<div class="concept-decision-grid">
+<section id="validation-result" class="level4 concept-decision">
+<h4 class="anchored" data-anchor-id="validation-result">Validation result</h4>
+<p>Read it as: <strong>Do the recorded parents fit the available marker evidence under these settings?</strong></p>
+<p>A failure identifies a recorded trio that needs review. It does not by itself identify why the conflict occurred.</p>
+</section>
+<section id="assignment-result" class="level4 concept-decision">
+<h4 class="anchored" data-anchor-id="assignment-result">Assignment result</h4>
+<p>Read it as: <strong>Which of the supplied candidates best fits the available marker evidence under these settings?</strong></p>
+<p>The selected candidate is the best result within the searched pool. Review ties, marker counts, and error status before changing a pedigree record.</p>
+</section>
+</div>
+</section>
+<section id="where-structural-checking-fits" class="level2">
+<h2 class="anchored" data-anchor-id="where-structural-checking-fits">Where structural checking fits</h2>
+<p>Run <code>check_ped()</code> before genotype-based validation when the pedigree may contain duplicate rows, conflicting parent records, inconsistent parent-sex roles, missing parent records, or cycles. The official <a href="https://github.com/Breeding-Insight/BIGpopA/blob/main/man/check_ped.Rd"><code>check_ped()</code> documentation</a> lists the returned issue tables and corrected pedigree and specifies that cycles are reported for manual resolution.</p>
+<p>This step prepares the pedigree structure. It does not determine whether the recorded biological relationships are supported by SNP data.</p>
+</section>
+<section id="practical-takeaway" class="level2">
+<h2 class="anchored" data-anchor-id="practical-takeaway">Practical takeaway</h2>
+<div class="bi-callout">
+<p>Use pedigree validation when the parents are recorded and you want to test those records. Use parentage assignment when a parent is unknown and you have a candidate pool to search. In either case, the available marker evidence and candidate set define what the analysis can evaluate.</p>
+</div>
+</section>
+<section id="continue-learning" class="level2">
+<h2 class="anchored" data-anchor-id="continue-learning">Continue learning</h2>
+<p><a href="../learn/bigpopa-pedigree-parentage.html" class="btn-bi-primary">Run the BIGpopA tutorial</a> <a href="../learn/genomics-path.html" class="btn-bi-secondary">Choose a genomic analysis path</a></p>
+</section>
+<section id="sources-and-further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="sources-and-further-reading">Sources and further reading</h2>
+<ul>
+<li>Chinchilla-Vargas J. 2026. <em>BIGpopA Tutorial: Pedigree cleaning, validation, and parentage assignment from SNP genotype data</em>. Material supplied for adaptation to Software Hub.</li>
+<li>Chinchilla-Vargas J, Sandercock A, University of Florida. 2026. <em>BIGpopA: Pedigree Validation Genetic Composition of Diploids &amp; Polyploids</em>, version 1.0.5. <a href="https://github.com/Breeding-Insight/BIGpopA">Official source and function documentation</a></li>
+<li>Huisman J. 2017. <em>Pedigree reconstruction from SNP data: parentage assignment, sibship clustering and beyond</em>. <strong>Molecular Ecology Resources</strong> 17:1009-1024. <a href="https://doi.org/10.1111/1755-0998.12665">doi:10.1111/1755-0998.12665</a></li>
+<li>Wang J. 2019. <em>Pedigree reconstruction from poor quality genotype data</em>. <strong>Heredity</strong> 122:719-728. <a href="https://doi.org/10.1038/s41437-018-0178-7">doi:10.1038/s41437-018-0178-7</a></li>
 </ul>
 
 
@@ -674,7 +747,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/software/familia.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Breeding-Insight/software/edit/main/learn/pedigree-validation-vs-parentage-assignment.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Breeding-Insight/software/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">

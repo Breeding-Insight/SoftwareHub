@@ -27,13 +27,14 @@ Search the full library, filter by format, topic, software, or level, or jump st
   <a class="learn-goal-chip learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Data Quality" href="?topic=Data%20Quality#all-learning-materials">Improve data quality</a>
   <a class="learn-goal-chip learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Ploidy &amp; Dosage" href="?topic=Ploidy%20%26%20Dosage#all-learning-materials">Analyze polyploids</a>
   <a class="learn-goal-chip learn-filter-trigger no-external" data-set-facet="topic" data-set-value="File Formats" href="?topic=File%20Formats#all-learning-materials">Understand data formats</a>
+  <a class="learn-goal-chip learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Pedigree &amp; Parentage" href="?topic=Pedigree%20%26%20Parentage#all-learning-materials">Validate pedigrees</a>
   <a class="learn-goal-chip learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Genomic Prediction" href="?topic=Genomic%20Prediction#all-learning-materials">Predict performance</a>
 </div>
 
 <div class="learn-filter-panel" aria-label="Search and filter learning materials">
   <div class="learn-filter-search">
     <label for="learn-material-search">Search learning materials</label>
-    <input id="learn-material-search" type="search" autocomplete="off" placeholder="Try MADC, VCF, dosage, or missingness">
+    <input id="learn-material-search" type="search" autocomplete="off" placeholder="Try MADC, VCF, dosage, parentage, or missingness">
   </div>
 
   <div class="learn-facet-grid">

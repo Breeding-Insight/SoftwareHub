@@ -34,3 +34,5 @@ Familia::run_app()
 ## Related learning
 
 - [Choose a genomic analysis path](../learn/genomics-path.qmd)
+- [Pedigree validation or parentage assignment?](../learn/pedigree-validation-vs-parentage-assignment.qmd)
+- [Validate pedigrees and assign parentage with BIGpopA](../learn/bigpopa-pedigree-parentage.qmd)

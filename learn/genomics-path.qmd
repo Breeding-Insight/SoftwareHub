@@ -202,6 +202,9 @@ Suppose you have SNP genotypes, a recorded pedigree, a candidate-parent pool, an
 
 Pedigree validation and mate allocation answer different questions. Do not treat a plausible parentage assignment as a breeding value or a mating recommendation.
 
+[Understand validation and assignment](pedigree-validation-vs-parentage-assignment.qmd){.btn-bi-secondary}
+[Run the BIGpopA tutorial](bigpopa-pedigree-parentage.qmd){.btn-bi-primary}
+
 ## Decisions the software cannot make for you
 
 The software can calculate, summarize, and visualize the evidence you provide. It cannot determine whether the biological design answers the breeding question.
@@ -224,6 +227,8 @@ If the answer is uncertain, return to data checks or compare reasonable analysis
 - [Choosing a missing-data threshold](choosing-missing-data-threshold.qmd) before copying a filtering rule from another dataset.
 - [SNP filtering in polyploids](snp-filtering-polyploids.qmd) for depth, dosage uncertainty, and suspected duplicated-locus checks.
 - [What does cross-validation accuracy mean?](cross-validation-accuracy.qmd) before using a genomic-prediction result for selection.
+- [Pedigree validation or parentage assignment?](pedigree-validation-vs-parentage-assignment.qmd) before interpreting a pedigree conflict or candidate-parent result.
+- [Validate pedigrees and assign parentage with BIGpopA](bigpopa-pedigree-parentage.qmd) for a worked R example.
 - [Estimate copy number in alfalfa with Qploidy2](https://breeding-insight.github.io/Qploidy2/Qploidy_alfalfa_tutorial.html) for a complete Qploidy2 example.
 
 ## Official software references
