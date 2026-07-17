@@ -13,7 +13,7 @@ project:
 
 website:
   title: "Breeding Insight Software"
-  site-url: "https://breeding-insight.github.io/software/"
+  site-url: "https://breeding-insight.github.io/SoftwareHub/"
   description: "Software, tutorials, workshops, and documentation from Breeding Insight."
   favicon: assets/bi-mark.png
   open-graph: true
@@ -70,7 +70,7 @@ website:
         href: https://github.com/Breeding-Insight
       - text: Main website
         href: https://breedinginsight.org/
-  repo-url: https://github.com/Breeding-Insight/software
+  repo-url: https://github.com/Breeding-Insight/SoftwareHub
   repo-actions: [edit, issue]
 
 format:
