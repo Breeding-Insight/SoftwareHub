@@ -51,3 +51,4 @@ rsconnect/
 /.quarto/
 **/*.quarto_ipynb
 /.playwright-mcp/
+/_site/
