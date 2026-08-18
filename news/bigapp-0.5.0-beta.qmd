@@ -1,0 +1,19 @@
+---
+title: "BIGapp 0.5.0-beta"
+date: 2024-08-09
+description: "Original code was updated into the R Golem format"
+categories: [BIGapp]
+image: ../assets/software-bigapp.png
+image-alt: "BIGapp logo"
+toc: false
+---
+
+- Original code was updated into the R Golem format
+- System checks added
+- Improved app stability
+- New user warnings
+- Updates to UI
+- New plot added to PCA tab
+- New Genomic Selection tab
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGapp/releases/tag/v0.5.0-beta) · [About BIGapp](../software/bigapp.qmd)

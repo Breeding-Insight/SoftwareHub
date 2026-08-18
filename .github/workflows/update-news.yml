@@ -1,0 +1,42 @@
+name: Update news from releases
+
+# Regenerates news/ from the package repositories and commits the result, so the
+# site build itself stays offline and never depends on the GitHub API being up.
+# The commit to main triggers the existing publish workflow.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-news
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Regenerate news entries
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/fetch-releases.py
+
+      - name: Commit changes
+        run: |
+          if [ -z "$(git status --porcelain news/)" ]; then
+            echo "No new releases."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add news/
+          git commit -m "Update news from package releases"
+          git push

@@ -1,0 +1,13 @@
+---
+title: "BIGpopA 1.0.6"
+date: 2026-07-16
+description: "Added a \"BIGpopA Tutorial\" vignette demonstrating the pedigree cleaning, validation, parentage assignment, and breed/line composition workflow"
+categories: [BIGpopA]
+image: ../assets/software-bigpopa.png
+image-alt: "BIGpopA logo"
+toc: false
+---
+
+- Added a "BIGpopA Tutorial" vignette demonstrating the pedigree cleaning, validation, parentage assignment, and breed/line composition workflow
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGpopA/releases/tag/v1.0.6) · [About BIGpopA](../software/bigpopa.qmd)

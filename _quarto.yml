@@ -5,6 +5,7 @@ project:
     - "*.qmd"
     - "software/*.qmd"
     - "learn/*.qmd"
+    - "news/*.qmd"
     - "workshops/**/*.qmd"
     - "!workshops/*-template.qmd"
   resources:
@@ -36,6 +37,8 @@ website:
         href: workshops.qmd
       - text: Resources
         href: resources.qmd
+      - text: News
+        href: news.qmd
     right:
       - icon: github
         href: https://github.com/Breeding-Insight
@@ -64,12 +67,27 @@ website:
           href: workshops/bigapp/dataset-guide.qmd
   page-footer:
     left: |
-      **Breeding Insight:** open-source tools for public plant and animal breeding.
-    right:
+      <div class="footer-identity">
+      <img class="footer-identity-mark" src="assets/bi-mark.png" alt="">
+      <div class="footer-identity-text">
+      <div class="footer-identity-name">Breeding Insight</div>
+      <div class="footer-identity-copy">&copy; 2026 Breeding Insight</div>
+      </div>
+      </div>
+    center:
       - text: GitHub
         href: https://github.com/Breeding-Insight
       - text: Main website
         href: https://breedinginsight.org/
+    right: |
+      <div class="footer-funding">
+      <p class="footer-funding-copy">Funded by USDA-ARS through the University of Florida (UF/IFAS)</p>
+      <div class="footer-funding-logos">
+      <a href="https://www.ars.usda.gov/"><img class="footer-logo footer-logo-usda" src="assets/funder-usda.png" alt="USDA Agricultural Research Service"></a>
+      <a href="https://ifas.ufl.edu/"><img class="footer-logo footer-logo-ifas" src="assets/funder-uf-ifas.png" alt="University of Florida Institute of Food and Agricultural Sciences"></a>
+      <a href="https://www.cornell.edu/"><img class="footer-logo footer-logo-cornell" src="assets/funder-cornell.png" alt="Cornell University"></a>
+      </div>
+      </div>
   repo-url: https://github.com/Breeding-Insight/SoftwareHub
   repo-actions: [edit, issue]
 

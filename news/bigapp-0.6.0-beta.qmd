@@ -1,0 +1,15 @@
+---
+title: "BIGapp 0.6.0-beta"
+date: 2024-09-19
+description: "Bug fixes and feature enhancements:"
+categories: [BIGapp]
+image: ../assets/software-bigapp.png
+image-alt: "BIGapp logo"
+toc: false
+---
+
+Bug fixes and feature enhancements:
+- Updated Dosage Calling tab to allow user to subset genotyping data and select parental genotypes depending on Updog model
+- Genomic Selection can now use pedigree information for generating the relationship matrices
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGapp/releases/tag/v0.6.0-beta) · [About BIGapp](../software/bigapp.qmd)

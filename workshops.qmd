@@ -6,6 +6,12 @@ toc: true
 
 Use a workshop when you want a guided sequence of explanations and hands-on exercises. The example files are included so every participant can follow the same analysis.
 
+::: {.callout-note}
+## Request a workshop
+
+Interested in a workshop for your program or group? Email us at [bi-science@ufl.edu](mailto:bi-science@ufl.edu) and we can discuss options.
+:::
+
 ## Available workshops
 
 ```{=html}

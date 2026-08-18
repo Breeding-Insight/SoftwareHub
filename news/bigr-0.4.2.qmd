@@ -1,0 +1,13 @@
+---
+title: "BIGr 0.4.2"
+date: 2025-03-18
+description: "Minor update to the check_ped() function"
+categories: [BIGr]
+image: ../assets/software-bigr.png
+image-alt: "BIGr logo"
+toc: false
+---
+
+- Minor update to the check_ped() function
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGr/releases/tag/v0.4.2) · [About BIGr](../software/bigr.qmd)

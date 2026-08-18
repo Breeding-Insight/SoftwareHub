@@ -1,0 +1,13 @@
+---
+title: "BIGr 0.0.3"
+date: 2024-06-10
+description: "Initial versioned release of the Breeding Insight Genomics R package."
+categories: [BIGr]
+image: ../assets/software-bigr.png
+image-alt: "BIGr logo"
+toc: false
+---
+
+Initial versioned release of the Breeding Insight Genomics R package.
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGr/releases/tag/v0.0.3) · [About BIGr](../software/bigr.qmd)

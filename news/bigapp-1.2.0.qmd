@@ -1,0 +1,19 @@
+---
+title: "BIGapp 1.2.0"
+date: 2025-03-27
+description: "Feature updates and bug fixes:"
+categories: [BIGapp]
+image: ../assets/software-bigapp.png
+image-alt: "BIGapp logo"
+toc: false
+---
+
+Feature updates and bug fixes:
+- When a trait file is uploaded the user is prompted to select the missing data variable, and select the column containing the sample IDs
+- Updated the VCF Filtering tab to allow sample subsetting in the _Advanced Options_
+- Added option to subset samples for the PolyRAD dosage calling method
+- Added support for genotype matrix to VCF conversion
+- Fixed a UI bug when extracting target SNPs from MADC file
+- Added new user warnings to PCA tab
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGapp/releases/tag/v1.2.0) · [About BIGapp](../software/bigapp.qmd)
