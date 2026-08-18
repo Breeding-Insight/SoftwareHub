@@ -117,9 +117,16 @@ body:has(.hero) #title-block-header {
   gap: .7rem;
 }
 
+/* Background images, not <img>: Quarto does not rewrite relative paths inside
+   page-footer, so an <img src="assets/..."> 404s on every nested page. It does
+   copy SCSS-referenced assets next to the compiled stylesheet, which resolves
+   at any depth. Width comes from aspect-ratio so only the height needs tuning. */
 .footer-identity-mark {
+  display: block;
   height: 2rem;
   width: auto;
+  aspect-ratio: 756 / 745;
+  background: url("assets/bi-mark.png") center / contain no-repeat;
 }
 
 .footer-identity-text {
@@ -174,12 +181,27 @@ $footer-logo-height: 2.25rem;
 
 .footer-logo {
   display: block;
-  width: auto;
   height: $footer-logo-height;
+  width: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.footer-logo-usda {
+  aspect-ratio: 613 / 419;
+  background-image: url("assets/funder-usda.png");
+}
+
+.footer-logo-ifas {
+  aspect-ratio: 480 / 159;
+  background-image: url("assets/funder-uf-ifas.png");
 }
 
 .footer-logo-cornell {
   height: $footer-logo-height * 1.1;
+  aspect-ratio: 1;
+  background-image: url("assets/funder-cornell.png");
 }
 
 @media (max-width: 991px) {
