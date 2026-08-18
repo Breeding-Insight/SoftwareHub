@@ -1,0 +1,18 @@
+---
+title: "BIGr 0.2.0"
+date: 2024-06-13
+description: "Two functions have been added for this release:"
+categories: [BIGr]
+image: ../assets/software-bigr.png
+image-alt: "BIGr logo"
+toc: false
+---
+
+Two functions have been added for this release:
+
+- The clean_pedigree function was changed to the check_ped function.
+  - The function now alerts the user to the errors present within the pedigree and provides the sample IDs in conflict.
+- The dosage2vcf function was added
+  - This function produces a VCF file from the DArT Dose Report and DArT Counts file.
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGr/releases/tag/v0.2.0) · [About BIGr](../software/bigr.qmd)

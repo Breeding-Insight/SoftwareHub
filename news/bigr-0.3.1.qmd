@@ -1,0 +1,13 @@
+---
+title: "BIGr 0.3.1"
+date: 2024-06-27
+description: "Fixed a bug with the filterVCF function where values in the INFO column were causing errors."
+categories: [BIGr]
+image: ../assets/software-bigr.png
+image-alt: "BIGr logo"
+toc: false
+---
+
+Fixed a bug with the filterVCF function where values in the INFO column were causing errors.
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGr/releases/tag/v0.3.1) · [About BIGr](../software/bigr.qmd)

@@ -1,0 +1,17 @@
+---
+title: "BIGapp 1.3.0"
+date: 2025-06-04
+description: "Introduced several feature updates and bug fixes for BIGapp including documentation improvements, enhanced data processing and visualization options, and updated UI text."
+categories: [BIGapp]
+image: ../assets/software-bigapp.png
+image-alt: "BIGapp logo"
+toc: false
+---
+
+Introduced several feature updates and bug fixes for BIGapp including documentation improvements, enhanced data processing and visualization options, and updated UI text.
+
+- Updated help file documentation with clearer examples and formatting.
+- Enhanced data conversion in dosage2vcf with revised input validations and updated function calls, and improved PCA plotting with added shape options and dynamic aesthetics.
+- Minor UI and version updates in home, GSAcc modules, and the application descriptor.
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGapp/releases/tag/v1.3.0) · [About BIGapp](../software/bigapp.qmd)

@@ -1,0 +1,15 @@
+---
+title: "BIGr 0.4.0"
+date: 2025-02-20
+description: "New functions and bug fixes:"
+categories: [BIGr]
+image: ../assets/software-bigr.png
+image-alt: "BIGr logo"
+toc: false
+---
+
+New functions and bug fixes:
+- get_offTargets: obtain the target and off-target SNPs from a fixedAllele MADC file
+- madc2vcf: obtain the read count information for target SNPs only from a fixedAllele MADC file and convert to VCF format
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGr/releases/tag/v0.4.0) · [About BIGr](../software/bigr.qmd)

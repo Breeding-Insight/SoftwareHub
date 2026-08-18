@@ -1,0 +1,20 @@
+---
+title: "BIGapp 1.1.0"
+date: 2025-02-21
+description: "This includes many feature updates - including:"
+categories: [BIGapp]
+image: ../assets/software-bigapp.png
+image-alt: "BIGapp logo"
+toc: false
+---
+
+This includes many feature updates - including:
+- The ability to get target + off-target SNPs from MADC files
+- Support added for PolyRAD dosage calling (this is 100x faster than Updog at the expense of slightly more memory usage)
+- Support for SVG figure download
+- Export VCF as bgzipped files for interoperability with other tools
+- UI improvements and bug fixes
+
+This version will require R 4.4.0
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGapp/releases/tag/v1.1.0) · [About BIGapp](../software/bigapp.qmd)

@@ -1,0 +1,21 @@
+---
+title: "BIGapp 1.8.0"
+date: 2026-08-04
+description: "updated minor edits"
+categories: [BIGapp]
+image: ../assets/software-bigapp.png
+image-alt: "BIGapp logo"
+toc: false
+---
+
+#### What's Changed
+* updated minor edits by @alex-sandercock in https://github.com/Breeding-Insight/BIGapp/pull/150
+* include main updates by @alex-sandercock in https://github.com/Breeding-Insight/BIGapp/pull/152
+* madc2vcf updates by @Cristianetaniguti in https://github.com/Breeding-Insight/BIGapp/pull/154
+* Merge GS-Amat support to development by @alex-sandercock in https://github.com/Breeding-Insight/BIGapp/pull/153
+* Implement UI and madc2vcf updates with GS-Amat support by @alex-sandercock in https://github.com/Breeding-Insight/BIGapp/pull/155
+
+
+**Full Changelog**: https://github.com/Breeding-Insight/BIGapp/compare/v1.6.0...v1.8.0
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGapp/releases/tag/v1.8.0) · [About BIGapp](../software/bigapp.qmd)

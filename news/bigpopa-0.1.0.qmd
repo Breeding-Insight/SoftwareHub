@@ -1,0 +1,13 @@
+---
+title: "BIGpopA 0.1.0"
+date: 2026-06-05
+description: "Release notes for BIGpopA 0.1.0."
+categories: [BIGpopA]
+image: ../assets/software-bigpopa.png
+image-alt: "BIGpopA logo"
+toc: false
+---
+
+_No release notes were provided._
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGpopA/releases/tag/0.1.0) · [About BIGpopA](../software/bigpopa.qmd)

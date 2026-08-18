@@ -1,0 +1,13 @@
+---
+title: "BIGapp 0.6.1-beta"
+date: 2024-09-19
+description: "-Minor bug fixes"
+categories: [BIGapp]
+image: ../assets/software-bigapp.png
+image-alt: "BIGapp logo"
+toc: false
+---
+
+-Minor bug fixes
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGapp/releases/tag/v0.6.1-beta) · [About BIGapp](../software/bigapp.qmd)

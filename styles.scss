@@ -99,6 +99,138 @@ body:has(.hero) #title-block-header {
   font-weight: 600;
 }
 
+/* Funding acknowledgement: order matches the Breedverse application footer. */
+.nav-footer {
+  align-items: center;
+  gap: 1.25rem;
+  padding-block: 1rem;
+}
+
+.nav-footer-center {
+  white-space: nowrap;
+}
+
+/* Mark + name on the left balances the funder marks on the right. */
+.footer-identity {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+}
+
+.footer-identity-mark {
+  height: 2rem;
+  width: auto;
+}
+
+.footer-identity-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.35;
+}
+
+.footer-identity-name {
+  font-weight: 600;
+}
+
+.footer-identity-copy {
+  color: $bi-gray;
+  font-size: .76rem;
+}
+
+/* Logos are trimmed to their artwork, so a shared height reads as equal weight.
+   The circular Cornell seal gets a small bump for optical parity with the
+   rectangular wordmarks. */
+$footer-logo-height: 2.25rem;
+
+.footer-funding {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: .55rem;
+}
+
+.footer-funding-copy {
+  margin: 0;
+  color: $bi-gray;
+  font-size: .76rem;
+  line-height: 1.35;
+  text-align: right;
+  max-width: 22rem;
+}
+
+/* Pandoc wraps the inline links in a <p>, so the flex row has to be declared on
+   both the container and that wrapper or the gap silently does nothing. */
+.footer-funding-logos,
+.footer-funding-logos > p {
+  display: flex;
+  align-items: center;
+  gap: 1.9rem;
+  margin: 0;
+}
+
+.footer-funding-logos a {
+  display: inline-flex;
+}
+
+.footer-logo {
+  display: block;
+  width: auto;
+  height: $footer-logo-height;
+}
+
+.footer-logo-cornell {
+  height: $footer-logo-height * 1.1;
+}
+
+@media (max-width: 991px) {
+  .nav-footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .nav-footer-left,
+  .nav-footer-center,
+  .nav-footer-right {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* .nav-footer gap already spaces the stacked columns. */
+  .nav-footer-center {
+    margin-top: .25rem;
+    white-space: normal;
+  }
+
+  .footer-identity,
+  .footer-funding {
+    align-items: center;
+  }
+
+  .footer-identity {
+    justify-content: center;
+  }
+
+  .footer-funding-copy {
+    text-align: center;
+  }
+}
+
+@media (max-width: 575px) {
+  .footer-funding-logos,
+  .footer-funding-logos > p {
+    gap: 1.1rem;
+  }
+
+  .footer-logo {
+    height: $footer-logo-height * .9;
+  }
+
+  .footer-logo-cornell {
+    height: $footer-logo-height * .99;
+  }
+}
+
 .quarto-title-banner {
   background: var(--bi-wash);
 }

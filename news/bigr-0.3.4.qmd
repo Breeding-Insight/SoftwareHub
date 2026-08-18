@@ -1,0 +1,13 @@
+---
+title: "BIGr 0.3.4"
+date: 2024-12-28
+description: "Bug fixes"
+categories: [BIGr]
+image: ../assets/software-bigr.png
+image-alt: "BIGr logo"
+toc: false
+---
+
+- Bug fixes
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGr/releases/tag/v0.3.4) · [About BIGr](../software/bigr.qmd)

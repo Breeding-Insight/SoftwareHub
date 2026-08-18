@@ -1,0 +1,16 @@
+---
+title: "BIGapp 1.5.1"
+date: 2025-09-23
+description: "This release includes bug fixes and new feature updates:"
+categories: [BIGapp]
+image: ../assets/software-bigapp.png
+image-alt: "BIGapp logo"
+toc: false
+---
+
+This release includes bug fixes and new feature updates:
+- Genotype files are now validated for proper formatting when uploaded
+- The correct Ref and Alt bases are retained in the VCF through the genotype processing steps
+- The list of removed samples is provided in the VCF Filtering tab
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGapp/releases/tag/v1.5.1) · [About BIGapp](../software/bigapp.qmd)

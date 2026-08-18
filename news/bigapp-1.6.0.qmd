@@ -1,0 +1,13 @@
+---
+title: "BIGapp 1.6.0"
+date: 2026-03-13
+description: "Improved user warnings and addressed minor bug fixes"
+categories: [BIGapp]
+image: ../assets/software-bigapp.png
+image-alt: "BIGapp logo"
+toc: false
+---
+
+Improved user warnings and addressed minor bug fixes
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGapp/releases/tag/v1.6.0) · [About BIGapp](../software/bigapp.qmd)

@@ -1,0 +1,13 @@
+---
+title: "AlloMate 2.1.0"
+date: 2026-06-03
+description: "Release notes for AlloMate 2.1.0."
+categories: [AlloMate]
+image: ../assets/software-allomate.png
+image-alt: "AlloMate logo"
+toc: false
+---
+
+_No release notes were provided._
+
+[Release on GitHub](https://github.com/Breeding-Insight/AlloMate/releases/tag/v2.1.0) · [About AlloMate](../software/allomate.qmd)

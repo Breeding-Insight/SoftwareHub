@@ -1,0 +1,21 @@
+---
+title: "BIGapp 1.0.0"
+date: 2024-12-22
+description: "This full public release of BIGapp includes:"
+categories: [BIGapp]
+image: ../assets/software-bigapp.png
+image-alt: "BIGapp logo"
+toc: false
+---
+
+This full public release of BIGapp includes:
+
+- Bug fixes
+- Updated genomic selection methods to use relationship matrices
+- Improved error handling
+- Updated GWAS functions
+- Updated PCA figure customization
+- Improved Help tab information and links within each analysis tab
+- Updated UI to be more consistent throughout
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGapp/releases/tag/v1.0.0) · [About BIGapp](../software/bigapp.qmd)

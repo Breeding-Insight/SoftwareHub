@@ -1,0 +1,22 @@
+---
+title: "Familia 1.0.0"
+date: 2026-06-02
+description: "Josue adds"
+categories: [Familia]
+image: ../assets/software-familia.png
+image-alt: "Familia logo"
+toc: false
+---
+
+#### What's Changed
+* Josue adds by @josuechinchilla in https://github.com/Breeding-Insight/familia/pull/3
+* Add ped cleaner by @josuechinchilla in https://github.com/Breeding-Insight/familia/pull/5
+* Add parentage functions+breedverse panel by @josuechinchilla in https://github.com/Breeding-Insight/familia/pull/6
+* Development by @josuechinchilla in https://github.com/Breeding-Insight/familia/pull/7
+
+#### New Contributors
+* @josuechinchilla made their first contribution in https://github.com/Breeding-Insight/familia/pull/3
+
+**Full Changelog**: https://github.com/Breeding-Insight/familia/compare/v0.1.0...v1.0.0
+
+[Release on GitHub](https://github.com/Breeding-Insight/familia/releases/tag/v1.0.0) · [About Familia](../software/familia.qmd)

@@ -1,0 +1,16 @@
+---
+title: "Familia 1.0.4"
+date: 2026-08-13
+description: "Updated the funding attribution banner on the Home tab to read \"University of Florida\" instead of \"Cornell University\", reflecting the correct institution."
+categories: [Familia]
+image: ../assets/software-familia.png
+image-alt: "Familia logo"
+toc: false
+---
+
+* Updated the funding attribution banner on the Home tab to read
+  "University of Florida" instead of "Cornell University", reflecting the
+  correct institution.
+* Added `URL` and `BugReports` fields to DESCRIPTION.
+
+[Release on GitHub](https://github.com/Breeding-Insight/familia/releases/tag/v1.0.4) · [About Familia](../software/familia.qmd)

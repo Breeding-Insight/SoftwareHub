@@ -1,0 +1,13 @@
+---
+title: "BIGr 0.6.2"
+date: 2025-09-18
+description: "Fixed the doi and name list in the CITATION file"
+categories: [BIGr]
+image: ../assets/software-bigr.png
+image-alt: "BIGr logo"
+toc: false
+---
+
+- Fixed the doi and name list in the CITATION file
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGr/releases/tag/v0.6.2) · [About BIGr](../software/bigr.qmd)
