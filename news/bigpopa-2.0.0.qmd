@@ -1,0 +1,16 @@
+---
+title: "BIGpopA 2.0.0"
+date: 2026-08-20
+description: "find_parentage() and validate_pedigree() now support any ploidy through a new ploidy argument (default 2)."
+categories: [BIGpopA]
+image: ../assets/software-bigpopa.png
+image-alt: "BIGpopA logo"
+toc: false
+---
+
+- `find_parentage()` and `validate_pedigree()` now support any ploidy through a new `ploidy` argument (default 2). Genotypes may be coded as allele-B dosage (0, 1, ..., ploidy).
+- Even ploidy uses a generalized polysomic gamete-range Mendelian test; it is exact for autopolyploids and conservative for allopolyploids (correct trios are never wrongly flagged).
+- Odd ploidy (e.g. triploid), where balanced gametes are undefined, automatically falls back to a model-free opposite-homozygote exclusion evaluated on homozygous-informative markers only.
+- Diploid results (`ploidy = 2`) are unchanged from previous versions.
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGpopA/releases/tag/v2.0.0) · [About BIGpopA](../software/bigpopa.qmd)
