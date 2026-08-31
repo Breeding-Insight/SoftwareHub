@@ -1,0 +1,19 @@
+---
+title: "Familia 2.0.0"
+date: 2026-08-24
+description: "Added a Ploidy selector to the Find Parentage and Validate Pedigree tabs, passed through to 'BIGpopA' so pedigree validation and parentage assignment now support any ploidy."
+categories: [Familia]
+image: ../assets/software-familia.png
+image-alt: "Familia logo"
+toc: false
+---
+
+* Added a **Ploidy** selector to the Find Parentage and Validate Pedigree tabs,
+  passed through to 'BIGpopA' so pedigree validation and parentage assignment
+  now support any ploidy. Even ploidy uses the full polysomic Mendelian test;
+  odd ploidy (e.g. triploid) uses a homozygosity-based check. Default is 2 (diploid).
+* Updated the in-app Instructions and Help panels to document the Ploidy option
+  and to generalize genotype dosage coding to 0, 1, ..., ploidy.
+* Requires 'BIGpopA' (>= 2.0.0).
+
+[Release on GitHub](https://github.com/Breeding-Insight/familia/releases/tag/v2.0.0) · [About Familia](../software/familia.qmd)
