@@ -1,0 +1,13 @@
+---
+title: "BIGpopA .2.1.0"
+date: 2026-10-05
+description: "vcf and .ped .map inputs accepted. pedigree header is not case-sensitive"
+categories: [BIGpopA]
+image: ../assets/software-bigpopa.png
+image-alt: "BIGpopA logo"
+toc: false
+---
+
+vcf and .ped .map inputs accepted. pedigree header is not case-sensitive
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGpopA/releases/tag/v.2.1.0) · [About BIGpopA](../software/bigpopa.qmd)
