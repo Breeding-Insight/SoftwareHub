@@ -1,0 +1,319 @@
+<script>
+(() => {
+  const VIEW_KEY = "software-hub-view";
+  const OPEN_KEY = "software-hub-open-facets";
+  const COLLAPSED_LIMIT = 8;
+
+  // Facets: domain and form match a card field; task and tag share one selection that
+  // matches a card's tasks or tags, so clicking a tag on a card works for either kind.
+  const state = {
+    query: "",
+    online: false,
+    status: new Set(),
+    domain: new Set(),
+    form: new Set(),
+    tag: new Set(),
+    view: "grid"
+  };
+  const expanded = new Set();
+
+  let catalog;
+  let cards = [];
+  let groups = [];
+  let options = { status: [], domain: [], form: [], task: [], tag: [] };
+
+  const decode = (value, fallback) => {
+    try {
+      return JSON.parse(decodeURIComponent(value || ""));
+    } catch (_error) {
+      return fallback;
+    }
+  };
+
+  const escapeHtml = (value) => String(value).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  const storage = {
+    get(key) {
+      try {
+        return window.localStorage.getItem(key);
+      } catch (_error) {
+        return null;
+      }
+    },
+    set(key, value) {
+      try {
+        window.localStorage.setItem(key, value);
+      } catch (_error) {}
+    }
+  };
+
+  function readCard(element) {
+    const tasks = decode(element.dataset.tasks, []);
+    const tags = decode(element.dataset.tags, []);
+    return {
+      element,
+      status: element.dataset.status,
+      domain: element.dataset.domain,
+      form: element.dataset.form,
+      online: element.dataset.online === "true",
+      tasks,
+      tags,
+      allTags: tasks.concat(tags),
+      search: String(decode(element.dataset.search, "")).toLowerCase()
+    };
+  }
+
+  function matches(card, skip) {
+    if (skip !== "status" && state.status.size && !state.status.has(card.status)) return false;
+    if (skip !== "domain" && state.domain.size && !state.domain.has(card.domain)) return false;
+    if (skip !== "form" && state.form.size && !state.form.has(card.form)) return false;
+    if (skip !== "tag" && state.tag.size && !card.allTags.some((tag) => state.tag.has(tag))) return false;
+    if (state.online && !card.online) return false;
+    if (state.query) {
+      const words = state.query.toLowerCase().split(/\s+/).filter(Boolean);
+      if (!words.every((word) => card.search.includes(word))) return false;
+    }
+    return true;
+  }
+
+  function countFor(facet, value) {
+    const key = facet === "task" ? "tag" : facet;
+    return cards.filter((card) => {
+      if (!matches(card, key)) return false;
+      if (key === "tag") return card.allTags.includes(value);
+      return card[key] === value;
+    }).length;
+  }
+
+  function renderFacet(facet) {
+    const key = facet === "task" ? "tag" : facet;
+    const selected = state[key];
+    const container = document.querySelector(`[data-options="${facet}"]`);
+    let values = options[facet].map((value) => ({ value, count: countFor(facet, value) }));
+
+    // Long tag lists: drop values with no matches (unless selected) and put the most used first.
+    if (facet === "tag") {
+      values = values
+        .filter((entry) => entry.count > 0 || selected.has(entry.value))
+        .sort((a, b) => b.count - a.count || a.value.localeCompare(b.value));
+    }
+    // Tasks keep their listed order, but ones with matches come before ones without.
+    if (facet === "task") {
+      values = values.filter((entry) => entry.count > 0 || selected.has(entry.value))
+        .concat(values.filter((entry) => entry.count === 0 && !selected.has(entry.value)));
+    }
+
+    const limit = expanded.has(facet) ? values.length : COLLAPSED_LIMIT;
+    const shown = values.filter((entry, index) => index < limit || selected.has(entry.value));
+    let html = shown.map((entry) => {
+      const id = `hub-opt-${facet}-${entry.value.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+      const isChecked = selected.has(entry.value);
+      const isDisabled = entry.count === 0 && !isChecked;
+      return `<label class="hub-option${isDisabled ? " is-empty" : ""}" for="${id}">
+        <input type="checkbox" id="${id}" data-facet="${key}" value="${escapeHtml(entry.value)}"${isChecked ? " checked" : ""}${isDisabled ? " disabled" : ""}>
+        <span class="hub-option-name">${escapeHtml(entry.value)}</span>
+        <span class="hub-count">${entry.count}</span>
+      </label>`;
+    }).join("");
+    if (values.length > COLLAPSED_LIMIT) {
+      html += `<button type="button" class="hub-show-more" data-expand="${facet}">${expanded.has(facet) ? "Show fewer" : `Show all ${values.length}`}</button>`;
+    }
+    container.innerHTML = html;
+
+    const details = container.closest("details");
+    const selectedHere = options[facet].filter((value) => selected.has(value)).length;
+    details.querySelector(".hub-facet-selected").textContent = selectedHere ? `${selectedHere} selected` : "";
+  }
+
+  function writeUrl() {
+    const params = new URLSearchParams();
+    if (state.query) params.set("q", state.query);
+    if (state.online) params.set("online", "1");
+    for (const value of state.status) params.append("status", value);
+    for (const value of state.domain) params.append("domain", value);
+    for (const value of state.form) params.append("type", value);
+    for (const value of state.tag) params.append("tag", value);
+    const search = params.toString();
+    window.history.replaceState(null, "", `${window.location.pathname}${search ? `?${search}` : ""}${window.location.hash}`);
+  }
+
+  function readUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const allTags = options.task.concat(options.tag);
+    state.query = params.get("q") || "";
+    state.online = params.get("online") === "1";
+    state.status = new Set(params.getAll("status").filter((value) => options.status.includes(value)));
+    state.domain = new Set(params.getAll("domain").filter((value) => options.domain.includes(value)));
+    state.form = new Set(params.getAll("type").filter((value) => options.form.includes(value)));
+    state.tag = new Set(params.getAll("tag").filter((value) => allTags.includes(value)));
+  }
+
+  function activeFilterCount() {
+    return state.status.size + state.domain.size + state.form.size + state.tag.size + (state.online ? 1 : 0) + (state.query ? 1 : 0);
+  }
+
+  function render() {
+    ["status", "domain", "form", "task", "tag"].forEach(renderFacet);
+
+    let shown = 0;
+    for (const card of cards) {
+      const visible = matches(card);
+      card.element.hidden = !visible;
+      if (visible) shown += 1;
+      for (const button of card.element.querySelectorAll(".hub-tag")) {
+        button.setAttribute("aria-pressed", String(state.tag.has(button.dataset.tag)));
+      }
+    }
+    for (const group of groups) {
+      const visibleCards = group.querySelectorAll(".hub-card:not([hidden])").length;
+      group.hidden = visibleCards === 0;
+      const count = group.querySelector(".hub-group-count");
+      if (count) count.textContent = String(visibleCards);
+    }
+
+    const active = activeFilterCount();
+    let line = `<strong>${shown}</strong> ${shown === 1 ? "tool" : "tools"}`;
+    for (const value of state.tag) {
+      line += ` <button type="button" class="hub-active-tag" data-remove-tag="${escapeHtml(value)}" aria-label="Remove filter ${escapeHtml(value)}">${escapeHtml(value)} <i class="bi bi-x" aria-hidden="true"></i></button>`;
+    }
+    if (active) line += ` <button type="button" class="hub-clear" id="hub-clear">Clear filters</button>`;
+    document.getElementById("hub-result-line").innerHTML = line;
+    document.getElementById("hub-no-results").hidden = shown > 0;
+    document.getElementById("hub-filter-toggle-count").textContent = active ? `(${active})` : "";
+
+    catalog.classList.toggle("is-list", state.view === "list");
+    document.getElementById("hub-view-grid").setAttribute("aria-pressed", String(state.view === "grid"));
+    document.getElementById("hub-view-list").setAttribute("aria-pressed", String(state.view === "list"));
+
+    const search = document.getElementById("hub-search-input");
+    if (search.value.trim() !== state.query) search.value = state.query;
+    document.getElementById("hub-online-only").checked = state.online;
+    writeUrl();
+  }
+
+  function openFacetFor(tag) {
+    const facet = options.task.includes(tag) ? "task" : "tag";
+    const details = document.querySelector(`details[data-facet="${facet}"]`);
+    if (details && !details.open) details.open = true;
+  }
+
+  function syncStickyOffset() {
+    const header = document.getElementById("quarto-header");
+    const height = header ? header.getBoundingClientRect().height : 0;
+    document.documentElement.style.setProperty("--hub-header-height", `${Math.round(height)}px`);
+  }
+
+  function init() {
+    catalog = document.querySelector(".hub-catalog");
+    if (!catalog) return;
+
+    cards = Array.from(catalog.querySelectorAll(".hub-card")).map(readCard);
+    groups = Array.from(catalog.querySelectorAll(".hub-group"));
+
+    const taskOrder = decode(catalog.dataset.tasks, []);
+    const usedTasks = new Set(cards.flatMap((card) => card.allTags));
+    const otherTags = new Set(cards.flatMap((card) => card.tags).filter((tag) => !taskOrder.includes(tag)));
+    options = {
+      status: decode(catalog.dataset.statuses, []),
+      domain: decode(catalog.dataset.domains, []),
+      form: decode(catalog.dataset.forms, []),
+      task: taskOrder.filter((task) => usedTasks.has(task)),
+      tag: Array.from(otherTags).sort((a, b) => a.localeCompare(b))
+    };
+
+    const savedView = storage.get(VIEW_KEY);
+    if (savedView === "grid" || savedView === "list") state.view = savedView;
+
+    readUrl();
+
+    // Restore which sections were open; a section with an active filter always opens.
+    const savedOpen = storage.get(OPEN_KEY);
+    for (const details of document.querySelectorAll(".hub-facet")) {
+      const facet = details.dataset.facet;
+      if (savedOpen) details.open = savedOpen.split(",").includes(facet);
+      const key = facet === "task" ? "tag" : facet;
+      if (options[facet].some((value) => state[key].has(value))) details.open = true;
+      details.addEventListener("toggle", () => {
+        const open = Array.from(document.querySelectorAll(".hub-facet")).filter((el) => el.open).map((el) => el.dataset.facet);
+        storage.set(OPEN_KEY, open.join(","));
+      });
+    }
+
+    document.getElementById("hub-search-input").addEventListener("input", (event) => {
+      state.query = event.target.value.trim();
+      render();
+    });
+    document.getElementById("hub-online-only").addEventListener("change", (event) => {
+      state.online = event.target.checked;
+      render();
+    });
+    document.getElementById("hub-filter-panel").addEventListener("change", (event) => {
+      const input = event.target.closest("input[data-facet]");
+      if (!input) return;
+      const selected = state[input.dataset.facet];
+      if (input.checked) selected.add(input.value);
+      else selected.delete(input.value);
+      render();
+    });
+    document.getElementById("hub-filter-panel").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-expand]");
+      if (!button) return;
+      const facet = button.dataset.expand;
+      if (expanded.has(facet)) expanded.delete(facet);
+      else expanded.add(facet);
+      render();
+    });
+    catalog.addEventListener("click", (event) => {
+      const button = event.target.closest(".hub-tag");
+      if (!button) return;
+      const tag = button.dataset.tag;
+      if (state.tag.has(tag)) state.tag.delete(tag);
+      else {
+        state.tag.add(tag);
+        openFacetFor(tag);
+      }
+      render();
+    });
+    document.getElementById("hub-result-line").addEventListener("click", (event) => {
+      const remove = event.target.closest("[data-remove-tag]");
+      if (remove) {
+        state.tag.delete(remove.dataset.removeTag);
+        render();
+        return;
+      }
+      if (!event.target.closest("#hub-clear")) return;
+      state.query = "";
+      state.online = false;
+      state.status = new Set();
+      state.domain = new Set();
+      state.form = new Set();
+      state.tag = new Set();
+      render();
+    });
+    document.getElementById("hub-view-grid").addEventListener("click", () => {
+      state.view = "grid";
+      storage.set(VIEW_KEY, "grid");
+      render();
+    });
+    document.getElementById("hub-view-list").addEventListener("click", () => {
+      state.view = "list";
+      storage.set(VIEW_KEY, "list");
+      render();
+    });
+
+    const toggle = document.getElementById("hub-filter-toggle");
+    toggle.addEventListener("click", () => {
+      const open = toggle.getAttribute("aria-expanded") !== "true";
+      toggle.setAttribute("aria-expanded", String(open));
+      document.getElementById("hub-filter-panel").classList.toggle("is-open", open);
+    });
+
+    syncStickyOffset();
+    window.addEventListener("resize", syncStickyOffset);
+    render();
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+</script>

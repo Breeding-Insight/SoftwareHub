@@ -1,7 +1,18 @@
 ---
 title: "BIGpopA"
 description: "Pedigree quality control, parentage assignment, and breed or line composition estimation."
-categories: [R package, Pedigree, Parentage, Population structure, Polyploid]
+domain: Pedigree & Mating
+status: released
+version: "2.2.0"
+version-date: 2026-10-12
+version-url: https://github.com/Breeding-Insight/BIGpopA/releases/tag/v2.2.0
+form: R package
+tasks: [Pedigree, Parentage]
+tags: [Population structure, Polyploid]
+ecosystem: breedverse
+links:
+  source: https://github.com/Breeding-Insight/BIGpopA
+  releases: https://github.com/Breeding-Insight/BIGpopA/releases
 image: ../assets/software-bigpopa.png
 image-alt: "BIGpopA hexagonal logo."
 ---
@@ -10,7 +21,7 @@ image-alt: "BIGpopA hexagonal logo."
 ::: {}
 BIGpopA is an R package for pedigree quality control, parentage assignment from SNP data, and genomic breed or line composition estimation in diploid and polyploid populations.
 
-<div class="meta-row"><span class="pill">R package</span><span class="pill">Parentage</span><span class="pill">Population analysis</span></div>
+{{< tool-tags >}}
 :::
 <img class="software-logo" src="../assets/software-bigpopa.png" alt="BIGpopA logo">
 :::
@@ -22,8 +33,8 @@ remotes::install_github("Breeding-Insight/BIGpopA", dependencies = TRUE)
 library(BIGpopA)
 ```
 
-[Source code](https://github.com/Breeding-Insight/BIGpopA){.btn-bi-primary}
-[Releases](https://github.com/Breeding-Insight/BIGpopA/releases){.btn-bi-secondary}
+[<i class="bi bi-github" aria-hidden="true"></i> Source code](https://github.com/Breeding-Insight/BIGpopA){.btn-bi-primary}
+[<i class="bi bi-tag" aria-hidden="true"></i> Releases](https://github.com/Breeding-Insight/BIGpopA/releases){.btn-bi-secondary}
 
 ## Good fit for
 

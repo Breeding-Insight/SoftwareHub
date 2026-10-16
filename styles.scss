@@ -22,6 +22,10 @@ $navbar-hl: $bi-teal-dark;
 $font-size-base: 1rem;
 $border-radius: .375rem;
 
+// Quarto footer colors: the dark teal footer from the BI landing pages.
+$footer-bg: #0c3237;
+$footer-fg: #c9dcdd;
+
 /*-- scss:rules --*/
 :root {
   --bi-teal-dark: #{$bi-teal-dark};
@@ -94,90 +98,158 @@ body:has(.hero) #title-block-header {
   width: auto;
 }
 
+/* Breeding Insight wordmark | SoftwareHub, matching the BI landing-page header. */
+.navbar-brand-logo {
+  margin-right: 0;
+  padding-right: .9rem;
+  border-right: 1px solid #d3e0e1;
+}
+
+.navbar-brand-logo img {
+  max-height: 40px;
+}
+
+.navbar-brand-logo + .navbar-brand {
+  padding-left: .9rem;
+}
+
+.navbar-brand-logo + .navbar-brand .navbar-title {
+  font-weight: 700;
+  color: $bi-charcoal;
+}
+
+.navbar-brand-logo {
+  flex-shrink: 0;
+}
+
+/* Quarto caps the brand at 100% - 115px on phones; shrink both parts so neither is clipped. */
+@media (max-width: 575px) {
+  .navbar-brand-logo {
+    padding-right: .6rem;
+  }
+
+  .navbar-brand-logo img {
+    max-height: 30px;
+  }
+
+  .navbar-brand-logo + .navbar-brand {
+    flex-shrink: 0;
+    overflow: visible;
+    padding-left: .6rem;
+  }
+
+  .navbar-brand-container {
+    max-width: calc(100% - 96px) !important;
+  }
+
+  .navbar-brand-logo + .navbar-brand .navbar-title {
+    font-size: 1rem;
+  }
+}
+
 .navbar .nav-link {
   font-size: .94rem;
   font-weight: 600;
 }
 
-/* Funding acknowledgement: order matches the Breedverse application footer. */
+/* Footer: the BI landing-page footer (partner logos, funding line, then a bottom bar
+   with copyright on the left and links on the right). Quarto renders page-footer as
+   three columns; the grid below re-stacks them into that layout. */
+$footer-ink: #ffffff;
+$footer-muted: #c9dcdd;
+
+.page-footer,
+footer.footer {
+  margin-top: 4rem;
+  border-top: 0 !important;
+  background: $footer-bg !important;
+  color: $footer-ink;
+}
+
 .nav-footer {
-  align-items: center;
-  gap: 1.25rem;
-  padding-block: 1rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "partners partners"
+    "copyright links";
+  gap: 0 1.5rem;
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-block: 2.5rem 1.5rem;
+  border-top: 0 !important;
+  color: $footer-muted;
+}
+
+.nav-footer-left {
+  grid-area: partners;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(201, 220, 221, .35);
+  text-align: center;
+}
+
+.nav-footer-right {
+  grid-area: copyright;
+  justify-self: start;
+  text-align: left;
 }
 
 .nav-footer-center {
-  white-space: nowrap;
+  grid-area: links;
+  justify-self: end;
+  text-align: right;
 }
 
-/* Mark + name on the left balances the funder marks on the right. */
-.footer-identity {
+.nav-footer a,
+.nav-footer .nav-link,
+.nav-footer .toc-actions a {
+  color: $footer-ink !important;
+}
+
+.nav-footer a:hover,
+.nav-footer .nav-link:hover {
+  color: $footer-muted !important;
+}
+
+.nav-footer .footer-items {
+  justify-content: flex-end;
+}
+
+.nav-footer .toc-actions ul {
+  justify-content: flex-end;
+}
+
+.footer-copyright {
+  font-size: .9rem;
+}
+
+.footer-funding-copy {
+  max-width: 70ch;
+  margin: 0 auto;
+  color: $footer-ink;
+  font-size: .95rem;
+}
+
+.footer-partner-logos {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: .7rem;
+  justify-content: center;
+  gap: 1.5rem 2.75rem;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-partner-logos a {
+  display: inline-flex;
 }
 
 /* Background images, not <img>: Quarto does not rewrite relative paths inside
    page-footer, so an <img src="assets/..."> 404s on every nested page. It does
    copy SCSS-referenced assets next to the compiled stylesheet, which resolves
    at any depth. Width comes from aspect-ratio so only the height needs tuning. */
-.footer-identity-mark {
-  display: block;
-  height: 2rem;
-  width: auto;
-  aspect-ratio: 756 / 745;
-  background: url("assets/bi-mark.png") center / contain no-repeat;
-}
-
-.footer-identity-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.35;
-}
-
-.footer-identity-name {
-  font-weight: 600;
-}
-
-.footer-identity-copy {
-  color: $bi-gray;
-  font-size: .76rem;
-}
-
-/* Logos are trimmed to their artwork, so a shared height reads as equal weight.
-   The circular Cornell seal gets a small bump for optical parity with the
-   rectangular wordmarks. */
-$footer-logo-height: 2.25rem;
-
-.footer-funding {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: .55rem;
-}
-
-.footer-funding-copy {
-  margin: 0;
-  color: $bi-gray;
-  font-size: .76rem;
-  line-height: 1.35;
-  text-align: right;
-  max-width: 22rem;
-}
-
-/* Pandoc wraps the inline links in a <p>, so the flex row has to be declared on
-   both the container and that wrapper or the gap silently does nothing. */
-.footer-funding-logos,
-.footer-funding-logos > p {
-  display: flex;
-  align-items: center;
-  gap: 1.9rem;
-  margin: 0;
-}
-
-.footer-funding-logos a {
-  display: inline-flex;
-}
+$footer-logo-height: 2.5rem;
 
 .footer-logo {
   display: block;
@@ -188,68 +260,64 @@ $footer-logo-height: 2.25rem;
   background-size: contain;
 }
 
+.footer-logo-bi {
+  height: $footer-logo-height * 1.3;
+  aspect-ratio: 516 / 188;
+  background-image: url("assets/footer-bi-white.png");
+}
+
 .footer-logo-usda {
-  aspect-ratio: 613 / 419;
-  background-image: url("assets/funder-usda.png");
+  aspect-ratio: 640 / 203;
+  background-image: url("assets/footer-usda-ars-white.png");
 }
 
 .footer-logo-ifas {
-  aspect-ratio: 480 / 159;
-  background-image: url("assets/funder-uf-ifas.png");
+  aspect-ratio: 168 / 56;
+  background-image: url("assets/footer-uf-ifas.svg");
+  filter: brightness(0) invert(1);
 }
 
 .footer-logo-cornell {
-  height: $footer-logo-height * 1.1;
-  aspect-ratio: 1;
-  background-image: url("assets/funder-cornell.png");
+  aspect-ratio: 640 / 163;
+  background-image: url("assets/footer-cornell-white.png");
 }
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
   .nav-footer {
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "partners"
+      "links"
+      "copyright";
+    row-gap: .75rem;
     text-align: center;
   }
 
-  .nav-footer-left,
+  .nav-footer-left {
+    margin-bottom: 0;
+  }
+
   .nav-footer-center,
   .nav-footer-right {
-    width: 100%;
+    justify-self: center;
     text-align: center;
   }
 
-  /* .nav-footer gap already spaces the stacked columns. */
-  .nav-footer-center {
-    margin-top: .25rem;
-    white-space: normal;
-  }
-
-  .footer-identity,
-  .footer-funding {
-    align-items: center;
-  }
-
-  .footer-identity {
+  .nav-footer .footer-items,
+  .nav-footer .toc-actions ul {
     justify-content: center;
   }
 
-  .footer-funding-copy {
-    text-align: center;
-  }
-}
-
-@media (max-width: 575px) {
-  .footer-funding-logos,
-  .footer-funding-logos > p {
-    gap: 1.1rem;
+  .footer-partner-logos {
+    gap: 1.1rem 1.75rem;
   }
 
   .footer-logo {
-    height: $footer-logo-height * .9;
+    height: $footer-logo-height * .8;
   }
 
-  .footer-logo-cornell {
-    height: $footer-logo-height * .99;
+  .footer-logo-bi {
+    height: $footer-logo-height * 1.05;
   }
 }
 
@@ -799,12 +867,6 @@ h2.section-heading {
 
 .software-logo-wide {
   width: 9rem;
-}
-
-.page-footer {
-  margin-top: 4rem;
-  border-top: 1px solid rgba(42, 101, 118, .14) !important;
-  background: $bi-mist;
 }
 
 @media (max-width: 900px) {
@@ -1371,5 +1433,1070 @@ h2.section-heading {
     align-items: center;
     justify-content: space-between;
     text-align: left;
+  }
+}
+
+/* Software catalog page: BI landing-page styling (tokens from the bi-cloud-run-app landing
+   template), scoped to software.qmd. Filtering lives in assets/software-filter.html. */
+/* Shared tokens for the Software page and the tool pages under software/. */
+@mixin hub-tokens {
+  --hub-ink: #1b2733;
+  --hub-ink-muted: #4a5663;
+  --hub-surface: #ffffff;
+  --hub-surface-alt: #f4f8f8;
+  --hub-surface-tint: #e6f2f2;
+  --hub-border: #d3e0e1;
+  --hub-primary: #066a73;
+  --hub-primary-strong: #054f56;
+  --hub-online: #1e7d34;
+  --hub-online-bg: #e7f5ea;
+  --hub-online-border: #b9e0c2;
+  --hub-dev: #7a4b00;
+  --hub-dev-bg: #fff4d6;
+  --hub-dev-border: #e3b54a;
+  --hub-radius: 10px;
+  --hub-shadow: 0 1px 2px rgba(12, 50, 55, .06), 0 6px 20px rgba(12, 50, 55, .06);
+}
+
+.software-hub-page {
+  @include hub-tokens;
+
+  #title-block-header {
+    display: none;
+  }
+
+  main.content {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .hub-wrap {
+    width: min(1240px, 100% - 32px);
+    margin-inline: auto;
+  }
+
+  :focus-visible {
+    outline: 3px solid #1b64dd;
+    outline-offset: 2px;
+  }
+
+  /* Title strip: existing page text, compact */
+  .hub-head {
+    background: var(--hub-surface-alt);
+    border-bottom: 1px solid var(--hub-border);
+    padding-block: 1.75rem 1.25rem;
+
+    .hub-wrap > p {
+      max-width: 75ch;
+      color: var(--hub-ink);
+    }
+  }
+
+  .hub-title {
+    margin: 0 0 .5rem;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -.015em;
+    color: var(--hub-ink);
+  }
+
+  .hub-subtitle {
+    font-size: 1.0625rem;
+    color: var(--hub-ink-muted) !important;
+  }
+
+  .listing-actions {
+    margin: .5rem 0 0;
+
+    .btn-bi-secondary {
+      min-height: 2.5rem;
+      padding: .45rem 1.1rem;
+      border: 2px solid var(--hub-primary);
+      border-radius: 999px;
+      background: var(--hub-surface);
+      color: var(--hub-primary-strong) !important;
+    }
+
+    .btn-bi-secondary:hover {
+      background: var(--hub-surface-tint);
+      color: var(--hub-primary-strong) !important;
+    }
+  }
+
+  /* Sidebar + results. Quarto adds .page-columns to this wrapper, so match its
+     specificity and reset the column placement it gives to the children. */
+  .hub-layout,
+  .hub-layout.page-columns {
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+    padding-block: 1.5rem 3rem;
+  }
+
+  .hub-layout > .hub-sidebar,
+  .hub-layout > .hub-main {
+    grid-row: 1;
+    min-width: 0;
+  }
+
+  .hub-layout > .hub-sidebar {
+    grid-column: 1;
+  }
+
+  .hub-layout > .hub-main {
+    grid-column: 2;
+  }
+
+  .hub-sidebar {
+    position: sticky;
+    top: calc(var(--hub-header-height, 60px) + 1rem);
+    max-height: calc(100vh - var(--hub-header-height, 60px) - 2rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: .25rem;
+  }
+
+  .hub-filter-toggle {
+    display: none;
+  }
+
+  .hub-filter-panel {
+    display: grid;
+    gap: .75rem;
+  }
+
+  .hub-search {
+    position: relative;
+    min-width: 0;
+    margin: 0;
+
+    .bi-search {
+      position: absolute;
+      left: .8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--hub-ink-muted);
+    }
+
+    input {
+      width: 100%;
+      min-height: 2.5rem;
+      padding: .45rem .75rem .45rem 2.3rem;
+      border: 1px solid var(--hub-border);
+      border-radius: 999px;
+      color: var(--hub-ink);
+      background: var(--hub-surface);
+    }
+
+    input:focus {
+      border-color: var(--hub-primary);
+      outline: none;
+      box-shadow: 0 0 0 3px var(--hub-surface-tint);
+    }
+  }
+
+  .hub-toggle {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin: 0;
+    padding: .5rem .25rem;
+    border-bottom: 1px solid var(--hub-border);
+    font-weight: 600;
+    color: var(--hub-ink);
+    cursor: pointer;
+
+    input {
+      width: 1.05rem;
+      height: 1.05rem;
+      accent-color: var(--hub-primary);
+    }
+  }
+
+  .hub-facet {
+    border-bottom: 1px solid var(--hub-border);
+    padding-bottom: .5rem;
+
+    summary {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .35rem .25rem;
+      font-size: .8125rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--hub-ink);
+      cursor: pointer;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "\F282";
+      margin-left: auto;
+      font-family: "bootstrap-icons";
+      font-size: .8rem;
+      transition: transform .15s ease;
+    }
+
+    &[open] summary::after {
+      transform: rotate(180deg);
+    }
+  }
+
+  .hub-facet-selected {
+    padding: 0 .45rem;
+    border-radius: 999px;
+    background: var(--hub-primary);
+    color: #fff;
+    font-size: .7rem;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .hub-facet-selected:empty {
+    display: none;
+  }
+
+  .hub-options {
+    display: grid;
+    gap: .05rem;
+  }
+
+  .hub-option {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: .55rem;
+    margin: 0;
+    padding: .25rem .25rem;
+    border-radius: 6px;
+    color: var(--hub-ink);
+    font-size: .9375rem;
+    cursor: pointer;
+
+    input {
+      width: 1rem;
+      height: 1rem;
+      margin: 0;
+      accent-color: var(--hub-primary);
+    }
+  }
+
+  .hub-option:hover {
+    background: var(--hub-surface-alt);
+  }
+
+  .hub-option.is-empty {
+    color: var(--hub-ink-muted);
+    opacity: .55;
+    cursor: default;
+  }
+
+  .hub-option-name {
+    overflow-wrap: anywhere;
+  }
+
+  .hub-count {
+    color: var(--hub-ink-muted);
+    font-size: .8125rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hub-show-more {
+    justify-self: start;
+    margin: .2rem 0 0 .25rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--hub-primary);
+    font-size: .875rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Results toolbar */
+  .hub-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .75rem;
+    margin-bottom: .25rem;
+  }
+
+  .hub-result-line {
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem;
+    min-width: 0;
+    font-size: .9375rem;
+    color: var(--hub-ink-muted);
+  }
+
+  .hub-active-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: .2rem;
+    padding: .1rem .35rem .1rem .65rem;
+    border: 1px solid var(--hub-primary);
+    border-radius: 999px;
+    background: var(--hub-surface-tint);
+    color: var(--hub-primary-strong);
+    font-size: .8125rem;
+    font-weight: 600;
+  }
+
+  .hub-clear {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--hub-primary);
+    font-size: .875rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .hub-view-switch {
+    display: inline-flex;
+    margin-left: auto;
+    overflow: hidden;
+    border: 1px solid var(--hub-border);
+    border-radius: 8px;
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .35rem .75rem;
+      border: 0;
+      background: var(--hub-surface);
+      color: var(--hub-ink-muted);
+      font-size: .875rem;
+      font-weight: 600;
+    }
+
+    button + button {
+      border-left: 1px solid var(--hub-border);
+    }
+
+    button[aria-pressed="true"] {
+      background: var(--hub-surface-tint);
+      color: var(--hub-primary-strong);
+    }
+  }
+
+  /* Domain groups */
+  .hub-group {
+    padding-top: 1.25rem;
+  }
+
+  .hub-group-head {
+    display: flex;
+    align-items: baseline;
+    gap: .6rem;
+    margin-bottom: 1rem;
+    padding-bottom: .6rem;
+    border-bottom: 1px solid var(--hub-border);
+
+    h2 {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--hub-ink);
+    }
+  }
+
+  .hub-group-count {
+    color: var(--hub-ink-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hub-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  /* Cards: the title link stretches over the whole card, so a click anywhere opens the
+     tool page; tags and link buttons sit above it and keep their own actions. */
+  .hub-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: .625rem;
+    min-width: 0;
+    padding: 1.1rem;
+    border: 1px solid var(--hub-border);
+    border-radius: var(--hub-radius);
+    background: var(--hub-surface);
+    box-shadow: var(--hub-shadow);
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+
+  .hub-card:hover {
+    border-color: var(--hub-primary);
+    box-shadow: 0 1px 2px rgba(12, 50, 55, .08), 0 10px 26px rgba(12, 50, 55, .12);
+  }
+
+  .hub-card:hover .hub-card-link {
+    color: var(--hub-primary-strong);
+    text-decoration: underline;
+  }
+
+  .hub-card-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: var(--hub-radius);
+  }
+
+  .hub-card-link:focus-visible {
+    outline: none;
+  }
+
+  .hub-card-link:focus-visible::after {
+    outline: 3px solid #1b64dd;
+    outline-offset: 2px;
+  }
+
+  .hub-tags {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hub-card-head {
+    display: flex;
+    align-items: center;
+    gap: .875rem;
+  }
+
+  .hub-logo {
+    display: block;
+    flex: none;
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+  }
+
+  .hub-logo.wide {
+    width: 96px;
+  }
+
+  .hub-logo-fallback {
+    display: grid;
+    place-items: center;
+    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+    background: var(--hub-primary);
+    color: #fff;
+    font-weight: 800;
+  }
+
+  .hub-card-title {
+    display: grid;
+    gap: .1rem;
+    min-width: 0;
+
+    h3 {
+      margin: 0;
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+
+    h3 a {
+      font-weight: 700;
+      color: var(--hub-ink);
+      text-decoration: none;
+    }
+  }
+
+  .hub-version {
+    margin-left: .35rem;
+    color: var(--hub-ink-muted);
+    font-size: .8125rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hub-domain-label {
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--hub-primary-strong);
+  }
+
+  .hub-card-mid {
+    display: contents;
+  }
+
+  .hub-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .375rem;
+  }
+
+  .hub-badge {
+    padding: .05rem .5rem;
+    border: 1px solid var(--hub-border);
+    border-radius: 6px;
+    background: var(--hub-surface-alt);
+    color: var(--hub-ink-muted);
+    font-size: .8125rem;
+    font-weight: 600;
+  }
+
+  .hub-badge-online {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    border-color: var(--hub-online-border);
+    background: var(--hub-online-bg);
+    color: var(--hub-online);
+  }
+
+  .hub-badge-online::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--hub-online);
+  }
+
+  .hub-badge-eco {
+    background: var(--hub-surface-tint);
+    color: var(--hub-primary-strong);
+  }
+
+  .hub-badge-dev {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    border-color: var(--hub-dev-border);
+    background: var(--hub-dev-bg);
+    color: var(--hub-dev);
+  }
+
+  /* In-development tools: their own section below every released domain, on an amber
+     panel, with dashed amber cards, so they can't be mistaken for released tools. */
+  .hub-dev-group {
+    margin-top: 2.5rem;
+    padding: 1.25rem 1.25rem 1.5rem;
+    border: 1px dashed var(--hub-dev-border);
+    border-radius: var(--hub-radius);
+    background: var(--hub-dev-bg);
+
+    .hub-group-head {
+      border-bottom-color: var(--hub-dev-border);
+    }
+
+    .hub-group-head h2 {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      color: var(--hub-dev);
+    }
+  }
+
+  .hub-card.is-dev {
+    border: 1px dashed var(--hub-dev-border);
+  }
+
+  .hub-card.is-dev:hover {
+    border-color: var(--hub-dev);
+  }
+
+  .hub-catalog.is-list .hub-dev-group .hub-items {
+    border-color: var(--hub-dev-border);
+    border-style: dashed;
+  }
+
+  .hub-desc {
+    flex: 1;
+    margin: 0;
+    color: var(--hub-ink-muted);
+    font-size: .96rem;
+  }
+
+  .hub-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .375rem;
+  }
+
+  .hub-tag {
+    padding: .05rem .625rem;
+    border: 1px solid var(--hub-border);
+    border-radius: 999px;
+    background: var(--hub-surface);
+    color: var(--hub-ink-muted);
+    font-size: .8125rem;
+    font-weight: 600;
+  }
+
+  .hub-tag:hover,
+  .hub-tag[aria-pressed="true"] {
+    border-color: var(--hub-primary);
+    background: var(--hub-surface-tint);
+    color: var(--hub-primary-strong);
+  }
+
+  .hub-no-results {
+    padding: 2.5rem 0;
+    color: var(--hub-ink-muted);
+  }
+
+  /* List view: one row per tool for scanning, tags included. */
+  .hub-catalog.is-list {
+    .hub-items {
+      display: block;
+      overflow: hidden;
+      border: 1px solid var(--hub-border);
+      border-radius: var(--hub-radius);
+    }
+
+    .hub-card {
+      display: grid;
+      grid-template-columns: 40px minmax(110px, 150px) minmax(0, 1fr);
+      grid-template-areas:
+        "logo title mid"
+        "logo title tags";
+      align-items: center;
+      gap: .3rem 1rem;
+      padding: .7rem 1rem;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .hub-card:hover {
+      background: var(--hub-surface-alt);
+    }
+
+    .hub-card + .hub-card {
+      border-top: 1px solid var(--hub-border);
+    }
+
+    .hub-card-link::after {
+      border-radius: 0;
+    }
+
+    .hub-card-head {
+      display: contents;
+    }
+
+    .hub-logo,
+    .hub-logo.wide {
+      grid-area: logo;
+      width: 40px;
+      height: 40px;
+    }
+
+    .hub-card-title {
+      grid-area: title;
+    }
+
+    .hub-card-title h3 {
+      font-size: 1rem;
+    }
+
+    .hub-card-mid {
+      grid-area: mid;
+      display: grid;
+      gap: .25rem;
+      min-width: 0;
+    }
+
+    .hub-tags {
+      grid-area: tags;
+    }
+
+    .hub-domain-label {
+      display: none;
+    }
+
+    .hub-desc {
+      font-size: .9375rem;
+    }
+  }
+
+  /* Narrow screens: filters fold into a panel above the results. */
+  @media (max-width: 991px) {
+    .hub-layout,
+    .hub-layout.page-columns {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .hub-layout > .hub-sidebar,
+    .hub-layout > .hub-main {
+      grid-column: 1;
+      grid-row: auto;
+    }
+
+    .hub-sidebar {
+      position: static;
+      max-height: none;
+      overflow: visible;
+      padding-right: 0;
+    }
+
+    .hub-filter-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .45rem 1rem;
+      border: 2px solid var(--hub-primary);
+      border-radius: 999px;
+      background: var(--hub-surface);
+      color: var(--hub-primary-strong);
+      font-weight: 700;
+    }
+
+    .hub-filter-panel {
+      display: none;
+      margin-top: .75rem;
+      padding: 1rem;
+      border: 1px solid var(--hub-border);
+      border-radius: var(--hub-radius);
+      background: var(--hub-surface);
+    }
+
+    .hub-filter-panel.is-open {
+      display: grid;
+    }
+
+    .hub-catalog.is-list .hub-card {
+      grid-template-columns: 40px minmax(0, 1fr);
+      grid-template-areas:
+        "logo title"
+        "mid mid"
+        "tags tags";
+    }
+  }
+}
+
+/* Software tool pages (software/*.qmd, via software/_metadata.yml): same look as the
+   Software page: light title banner, landing-page buttons, bordered badges and code. */
+.software-tool-page {
+  @include hub-tokens;
+
+  .quarto-title-banner {
+    margin-bottom: 0;
+    padding-block: 1.75rem 1.25rem;
+    border-bottom: 1px solid var(--hub-border);
+    background: var(--hub-surface-alt);
+    color: var(--hub-ink);
+
+    .quarto-title .title {
+      margin-bottom: .5rem;
+      color: var(--hub-ink);
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -.015em;
+    }
+
+    .description,
+    .subtitle {
+      color: var(--hub-ink-muted);
+      font-size: 1.0625rem;
+    }
+  }
+
+  main.content {
+    color: var(--hub-ink);
+  }
+
+  .software-header {
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .software-logo {
+    width: 7.5rem;
+    height: 7.5rem;
+  }
+
+  .software-logo-wide {
+    width: 11rem;
+  }
+
+  .meta-row {
+    gap: .375rem;
+  }
+
+  .pill {
+    padding: .05rem .5rem;
+    border: 1px solid var(--hub-border);
+    border-radius: 6px;
+    background: var(--hub-surface-alt);
+    color: var(--hub-ink-muted);
+    font-size: .8125rem;
+    font-weight: 600;
+  }
+
+  /* Badges and tags from {{< tool-tags >}}: the same look as on the tool's card. */
+  .hub-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .375rem;
+    margin-top: .75rem;
+  }
+
+  .hub-badge {
+    padding: .05rem .5rem;
+    border: 1px solid var(--hub-border);
+    border-radius: 6px;
+    background: var(--hub-surface-alt);
+    color: var(--hub-ink-muted);
+    font-size: .8125rem;
+    font-weight: 600;
+  }
+
+  .hub-badge-online {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    border-color: var(--hub-online-border);
+    background: var(--hub-online-bg);
+    color: var(--hub-online);
+  }
+
+  .hub-badge-online::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--hub-online);
+  }
+
+  .hub-badge-eco {
+    background: var(--hub-surface-tint);
+    color: var(--hub-primary-strong);
+  }
+
+  .tool-tags {
+    margin-top: .5rem !important;
+  }
+
+  .hub-badge-dev {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    border-color: var(--hub-dev-border);
+    background: var(--hub-dev-bg);
+    color: var(--hub-dev);
+  }
+
+  a.hub-badge-version {
+    color: var(--hub-primary-strong);
+    font-variant-numeric: tabular-nums;
+    text-decoration: none;
+  }
+
+  a.hub-badge-version:hover {
+    border-color: var(--hub-primary);
+    background: var(--hub-surface-tint);
+  }
+
+  .tool-dev-notice {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin-bottom: 1.5rem;
+    padding: .75rem 1rem;
+    border: 1px dashed var(--hub-dev-border);
+    border-radius: var(--hub-radius);
+    background: var(--hub-dev-bg);
+    color: var(--hub-dev);
+
+    .bi {
+      font-size: 1.15rem;
+    }
+  }
+
+  .tool-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .375rem;
+    margin-top: .25rem;
+  }
+
+  .tool-tag {
+    padding: .05rem .625rem;
+    border: 1px solid var(--hub-border);
+    border-radius: 999px;
+    background: var(--hub-surface);
+    color: var(--hub-ink-muted);
+    font-size: .8125rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .tool-tag:hover {
+    border-color: var(--hub-primary);
+    background: var(--hub-surface-tint);
+    color: var(--hub-primary-strong);
+  }
+
+  main.content h2 {
+    margin-top: 2.25rem;
+    padding-bottom: .6rem;
+    border-bottom: 1px solid var(--hub-border);
+    color: var(--hub-ink);
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  /* Numbered options under "Start here" (e.g. 1 Run locally, 2 Run online):
+     ### Run locally {.start-option data-step="1"} */
+  main.content h3.start-option {
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+    margin-top: 1.75rem;
+    color: var(--hub-ink);
+    font-size: 1.0625rem;
+    font-weight: 700;
+  }
+
+  main.content h3.start-option::before {
+    content: attr(data-step);
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 1.9rem;
+    height: 1.9rem;
+    border: 2px solid var(--hub-primary);
+    border-radius: 50%;
+    background: var(--hub-surface-tint);
+    color: var(--hub-primary-strong);
+    font-size: .9375rem;
+  }
+
+  main.content h2 + h3.start-option {
+    margin-top: 1rem;
+  }
+
+  /* Keep email addresses on one line (they would otherwise break at the hyphen). */
+  a[href^="mailto:"] {
+    white-space: nowrap;
+  }
+
+  /* Source code, Releases, etc., set off below the "Use online" button by a divider. */
+  .start-links {
+    margin-top: 1.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--hub-border);
+  }
+
+  /* Sign-in note (from the page's `access` field) directly above the "Use online" button. */
+  p:has(> .access-note) {
+    margin-bottom: .5rem;
+  }
+
+  .access-note {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    color: var(--hub-ink-muted);
+    font-size: .875rem;
+    font-weight: 600;
+  }
+
+  /* ORCID iD mark on "Use online" buttons, on a white disc as on the app landing pages. */
+  .orcid-icon {
+    width: 1.35rem;
+    height: 1.35rem;
+    flex: none;
+    border-radius: 50%;
+    background: #fff;
+  }
+
+  /* Button rows: Pandoc puts consecutive buttons in one <p>. */
+  p:has(> .btn-bi-primary, > .btn-bi-secondary) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+  }
+
+  .btn-bi-primary,
+  .btn-bi-secondary {
+    gap: .5rem;
+    min-height: 2.5rem;
+    padding: .45rem 1.1rem;
+    border: 2px solid var(--hub-primary);
+    border-radius: 999px;
+    font-size: .9375rem;
+  }
+
+  .btn-bi-primary {
+    background: var(--hub-primary);
+    color: #fff !important;
+  }
+
+  .btn-bi-primary:hover {
+    border-color: var(--hub-primary-strong);
+    background: var(--hub-primary-strong);
+    color: #fff !important;
+  }
+
+  .btn-bi-secondary {
+    background: var(--hub-surface);
+    color: var(--hub-primary-strong) !important;
+  }
+
+  .btn-bi-secondary:hover {
+    background: var(--hub-surface-tint);
+    color: var(--hub-primary-strong) !important;
+  }
+
+  /* Quarto marks external links with its own icon; the button icons already do. */
+  .btn-bi-primary.external::after,
+  .btn-bi-secondary.external::after {
+    display: none;
+  }
+
+  div.sourceCode {
+    border: 1px solid var(--hub-border);
+    border-radius: var(--hub-radius);
+    background: var(--hub-surface-alt);
+  }
+
+  div.sourceCode pre {
+    background: transparent;
+  }
+
+  /* Phones: logo first and smaller, so it doesn't sit alone between the intro and Start here. */
+  @media (max-width: 900px) {
+    .software-header {
+      gap: 1rem;
+    }
+
+    /* Pandoc wraps the logo <img> in a <p>, so reorder that wrapper. */
+    .software-header > p:has(> .software-logo) {
+      order: -1;
+      margin: 0;
+    }
+
+    .software-logo {
+      width: 5rem;
+      height: 5rem;
+    }
+
+    .software-logo-wide {
+      width: 8rem;
+    }
   }
 }

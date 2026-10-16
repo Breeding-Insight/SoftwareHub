@@ -1,0 +1,33 @@
+---
+title: "HapSearch"
+description: "A web-based microhaplotype analysis platform for searching, visualizing, and sharing haplotype data across breeding projects and species."
+domain: Markers & Haplotypes
+status: in-development
+# HapSearch has no GitHub release yet, so its version is set by hand. Remove these two
+# lines once a release is published and the weekly sync will take over.
+version-source: manual
+version: "0.3.0"
+form: Web app
+tasks: [Microhaplotypes]
+tags: [Sequence alignment, Variant annotation]
+links:
+  source: https://github.com/Breeding-Insight/HapSearch
+---
+
+::: {.software-header}
+::: {}
+HapSearch provides overview dashboards for species, marker, haplotype, sample, and project coverage, marker exploration with multiple sequence alignment and variant annotation views, and haplotype exploration with sample and project context.
+
+{{< tool-tags >}}
+:::
+:::
+
+## Start here
+
+[<i class="bi bi-github" aria-hidden="true"></i> Source code](https://github.com/Breeding-Insight/HapSearch){.btn-bi-primary}
+
+## Good fit for
+
+- Searching microhaplotypes across breeding projects and species
+- Comparing marker sequences with multiple sequence alignment
+- Reviewing which samples and projects carry a haplotype

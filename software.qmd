@@ -2,21 +2,89 @@
 title: "Software"
 description: "Open-source packages and applications developed and supported by Breeding Insight."
 listing:
+  id: software-catalog
   contents: "software/*.qmd"
-  type: grid
+  template: assets/software-listing.ejs.md
   sort: "title asc"
-  categories: true
-  sort-ui: [title]
-  filter-ui: true
-  fields: [image, title, description, categories]
-  grid-columns: 3
-  page-size: 12
+  filter-ui: false
+  sort-ui: false
+  page-size: 1000
+page-layout: full
 toc: false
+body-classes: software-hub-page
+format:
+  html:
+    include-after-body: assets/software-filter.html
 ---
+
+::: {.hub-head .column-screen}
+::: {.hub-wrap}
+<h1 class="hub-title">{{< meta title >}}</h1>
+
+<p class="hub-subtitle">{{< meta description >}}</p>
 
 Breeding Insight develops software across genomics, breeding data management, phenotyping, and decision support. Use the filters to narrow the catalog by task or technology.
 
 ::: {.listing-actions}
 [See learning materials →](learn.qmd){.btn-bi-secondary}
-[Breeding Insight GitHub](https://github.com/Breeding-Insight){.btn-bi-secondary}
+[<i class="bi bi-github" aria-hidden="true"></i> Breeding Insight GitHub](https://github.com/Breeding-Insight){.btn-bi-secondary}
+:::
+:::
+:::
+
+::: {.hub-body .column-screen}
+::: {.hub-wrap .hub-layout}
+```{=html}
+<div class="hub-sidebar" role="region" aria-label="Filter software">
+  <button type="button" class="hub-filter-toggle" id="hub-filter-toggle" aria-expanded="false" aria-controls="hub-filter-panel">
+    <i class="bi bi-funnel" aria-hidden="true"></i>Filters <span class="hub-filter-toggle-count" id="hub-filter-toggle-count"></span>
+  </button>
+  <div class="hub-filter-panel" id="hub-filter-panel">
+    <label class="hub-search" for="hub-search-input">
+      <span class="visually-hidden">Search software</span>
+      <i class="bi bi-search" aria-hidden="true"></i>
+      <input id="hub-search-input" type="search" placeholder="Filter" autocomplete="off">
+    </label>
+    <details class="hub-facet" data-facet="domain" open>
+      <summary>Domain <span class="hub-facet-selected"></span></summary>
+      <div class="hub-options" data-options="domain"></div>
+    </details>
+    <details class="hub-facet" data-facet="status">
+      <summary>Status <span class="hub-facet-selected"></span></summary>
+      <div class="hub-options" data-options="status"></div>
+    </details>
+    <details class="hub-facet" data-facet="task" open>
+      <summary>Task <span class="hub-facet-selected"></span></summary>
+      <div class="hub-options" data-options="task"></div>
+    </details>
+    <details class="hub-facet" data-facet="form" open>
+      <summary>Type <span class="hub-facet-selected"></span></summary>
+      <div class="hub-options" data-options="form"></div>
+    </details>
+    <label class="hub-toggle" for="hub-online-only"><input id="hub-online-only" type="checkbox"> Runs online</label>
+    <details class="hub-facet" data-facet="tag">
+      <summary>Other tags <span class="hub-facet-selected"></span></summary>
+      <div class="hub-options" data-options="tag"></div>
+    </details>
+  </div>
+</div>
+```
+
+::: {.hub-main}
+```{=html}
+<div class="hub-toolbar">
+  <div class="hub-result-line" id="hub-result-line" aria-live="polite"></div>
+  <div class="hub-view-switch" role="group" aria-label="View">
+    <button type="button" id="hub-view-grid" aria-pressed="true"><i class="bi bi-grid-fill" aria-hidden="true"></i>Cards</button>
+    <button type="button" id="hub-view-list" aria-pressed="false"><i class="bi bi-list-ul" aria-hidden="true"></i>List</button>
+  </div>
+</div>
+```
+
+::: {#software-catalog}
+:::
+
+<p class="hub-no-results" id="hub-no-results" hidden>No tools match these filters.</p>
+:::
+:::
 :::

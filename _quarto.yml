@@ -18,6 +18,15 @@ website:
   description: "Software, tutorials, workshops, and documentation from Breeding Insight."
   favicon: assets/bi-mark.png
   open-graph: true
+  # Google Analytics 4 (UF's standard). Uncomment and set the Measurement ID from the GA4 data
+  # stream (Admin > Data streams). "Use online" clicks are sent as a use_online event by
+  # assets/analytics-events.html. cookie-consent shows Quarto's notice; "implied" keeps
+  # tracking on unless the visitor opts out.
+  # google-analytics: "G-XXXXXXXXXX"
+  # cookie-consent:
+  #   type: implied
+  #   style: simple
+  #   palette: light
   page-navigation: true
   back-to-top-navigation: true
   search:
@@ -26,8 +35,10 @@ website:
     limit: 30
   navbar:
     pinned: true
-    logo: assets/breeding-insight.png
+    title: "SoftwareHub"
+    logo: assets/breeding-insight-wordmark.png
     logo-alt: "Breeding Insight"
+    logo-href: https://breedinginsight.org/
     left:
       - text: Software
         href: software.qmd
@@ -67,12 +78,14 @@ website:
           href: workshops/bigapp/dataset-guide.qmd
   page-footer:
     left: |
-      <div class="footer-identity">
-      <span class="footer-identity-mark" aria-hidden="true"></span>
-      <div class="footer-identity-text">
-      <div class="footer-identity-name">Breeding Insight</div>
-      <div class="footer-identity-copy">&copy; 2026 Breeding Insight</div>
-      </div>
+      <div class="footer-partners">
+      <ul class="footer-partner-logos" aria-label="Partner organizations">
+      <li><a href="https://breedinginsight.org/"><span class="footer-logo footer-logo-bi" aria-hidden="true"></span><span class="visually-hidden">Breeding Insight</span></a></li>
+      <li><a href="https://www.ars.usda.gov/"><span class="footer-logo footer-logo-usda" aria-hidden="true"></span><span class="visually-hidden">USDA Agricultural Research Service</span></a></li>
+      <li><a href="https://ifas.ufl.edu/"><span class="footer-logo footer-logo-ifas" aria-hidden="true"></span><span class="visually-hidden">University of Florida Institute of Food and Agricultural Sciences</span></a></li>
+      <li><a href="https://www.cornell.edu/"><span class="footer-logo footer-logo-cornell" aria-hidden="true"></span><span class="visually-hidden">Cornell University</span></a></li>
+      </ul>
+      <div class="footer-funding-copy">Funded by USDA-ARS through the University of Florida (UF/IFAS)</div>
       </div>
     center:
       - text: GitHub
@@ -80,20 +93,16 @@ website:
       - text: Main website
         href: https://breedinginsight.org/
     right: |
-      <div class="footer-funding">
-      <div class="footer-funding-copy">Funded by USDA-ARS through the University of Florida (UF/IFAS)</div>
-      <div class="footer-funding-logos">
-      <a href="https://www.ars.usda.gov/"><span class="footer-logo footer-logo-usda" aria-hidden="true"></span><span class="visually-hidden">USDA Agricultural Research Service</span></a>
-      <a href="https://ifas.ufl.edu/"><span class="footer-logo footer-logo-ifas" aria-hidden="true"></span><span class="visually-hidden">University of Florida Institute of Food and Agricultural Sciences</span></a>
-      <a href="https://www.cornell.edu/"><span class="footer-logo footer-logo-cornell" aria-hidden="true"></span><span class="visually-hidden">Cornell University</span></a>
-      </div>
-      </div>
+      <div class="footer-copyright">&copy; 2026 Breeding Insight</div>
   repo-url: https://github.com/Breeding-Insight/SoftwareHub
   repo-actions: [edit, issue]
 
 format:
   html:
     theme: [cosmo, styles.scss]
+    include-in-header:
+      - assets/analytics-events.html
+      - assets/navbar-brand.html
     toc: true
     toc-depth: 3
     code-copy: true

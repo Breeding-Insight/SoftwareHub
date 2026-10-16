@@ -1,7 +1,8 @@
 name: Update news from releases
 
-# Regenerates news/ from the package repositories and commits the result, so the
-# site build itself stays offline and never depends on the GitHub API being up.
+# Regenerates news/ and the software pages' version fields from the package
+# repositories' GitHub releases and commits the result, so the site build itself
+# stays offline and never depends on the GitHub API being up.
 # The commit to main triggers the existing publish workflow.
 
 on:
@@ -24,19 +25,19 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Regenerate news entries
+      - name: Regenerate news entries and software versions
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 scripts/fetch-releases.py
 
       - name: Commit changes
         run: |
-          if [ -z "$(git status --porcelain news/)" ]; then
+          if [ -z "$(git status --porcelain news/ software/)" ]; then
             echo "No new releases."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add news/
-          git commit -m "Update news from package releases"
+          git add news/ software/
+          git commit -m "Update news and versions from package releases"
           git push

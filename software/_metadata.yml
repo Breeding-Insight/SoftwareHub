@@ -1,0 +1,7 @@
+# Tool pages share the Software page's styling (see "Software tool pages" in styles.scss).
+body-classes: software-tool-page
+title-block-banner: true
+shortcodes:
+  - ../assets/tool-tags.lua
+filters:
+  - ../assets/tool-status.lua

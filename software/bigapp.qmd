@@ -1,7 +1,18 @@
 ---
 title: "BIGapp"
 description: "A user-friendly Shiny application for genomic analysis without command-line tools."
-categories: [R Shiny, Genomics, GWAS, Genomic selection, Visualization]
+domain: Genomic Analysis
+status: released
+version: "1.8.0"
+version-date: 2026-08-04
+version-url: https://github.com/Breeding-Insight/BIGapp/releases/tag/v1.8.0
+form: R Shiny app
+tasks: [GWAS, Genomic selection]
+tags: [Genomics, Visualization]
+ecosystem: breedverse
+links:
+  website: https://breedinginsight.org/software/bigapp/
+  source: https://github.com/Breeding-Insight/BIGapp
 image: ../assets/software-bigapp.png
 image-alt: "BIGapp hexagonal logo."
 ---
@@ -10,15 +21,15 @@ image-alt: "BIGapp hexagonal logo."
 ::: {}
 BIGapp provides a graphical interface for common genomic analyses, including workflows for population structure, association analysis, genomic prediction, and related tasks.
 
-<div class="meta-row"><span class="pill">R Shiny</span><span class="pill">Interactive</span><span class="pill">Diploid + polyploid</span></div>
+{{< tool-tags >}}
 :::
 <img class="software-logo" src="../assets/software-bigapp.png" alt="BIGapp logo">
 :::
 
 ## Start here
 
-[Source code](https://github.com/Breeding-Insight/BIGapp){.btn-bi-primary}
-[Breeding Insight software page](https://breedinginsight.org/software/bigapp/){.btn-bi-secondary}
+[<i class="bi bi-github" aria-hidden="true"></i> Source code](https://github.com/Breeding-Insight/BIGapp){.btn-bi-primary}
+[<i class="bi bi-globe" aria-hidden="true"></i> Breeding Insight software page](https://breedinginsight.org/software/bigapp/){.btn-bi-secondary}
 
 ## Good fit for
 

@@ -1,0 +1,16 @@
+<!--
+  Sends a GA4 event when a link tagged with data-analytics-event is clicked, e.g. the "Use
+  online" buttons on tool pages. GA4's automatic outbound-click tracking skips these because
+  the app landing pages share the breeding-insight.github.io domain with this site. Does
+  nothing until google-analytics is set in _quarto.yml (gtag is only defined then).
+-->
+<script>
+document.addEventListener("click", (event) => {
+  const link = event.target.closest("a[data-analytics-event]");
+  if (!link || typeof window.gtag !== "function") return;
+  window.gtag("event", link.dataset.analyticsEvent, {
+    tool: link.dataset.analyticsTool || "",
+    link_url: link.href
+  });
+});
+</script>
