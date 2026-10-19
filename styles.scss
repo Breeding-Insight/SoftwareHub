@@ -2057,8 +2057,10 @@ h2.section-heading {
     color: var(--hub-ink-muted);
   }
 
-  /* List view: one row per tool for scanning, tags included. */
-  .hub-catalog.is-list {
+  /* List view: one row per tool for scanning, tags included. Compact groups (Utilities)
+     always use these rows, in either view. */
+  .hub-catalog.is-list,
+  .hub-compact-group {
     .hub-items {
       display: block;
       overflow: hidden;
@@ -2183,6 +2185,56 @@ h2.section-heading {
         "logo title"
         "mid mid"
         "tags tags";
+    }
+  }
+
+  /* Compact groups: simpler tools, so tighter rows with no logo column. */
+  .hub-compact-group {
+    .hub-card {
+      grid-template-columns: minmax(110px, 150px) minmax(0, 1fr) auto;
+      grid-template-areas: "title mid tags";
+      gap: .2rem 1rem;
+      padding: .45rem 1rem;
+    }
+
+    .hub-card-mid {
+      display: flex;
+      align-items: center;
+      gap: .625rem;
+    }
+
+    .hub-tags {
+      justify-content: flex-end;
+      max-width: 16rem;
+    }
+
+    .hub-card-title h3 {
+      font-size: .9375rem;
+    }
+
+    .hub-desc {
+      font-size: .875rem;
+    }
+
+    @media (max-width: 991px) {
+      .hub-card {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+          "title"
+          "mid"
+          "tags";
+      }
+
+      .hub-card-mid {
+        display: grid;
+        justify-items: start;
+        gap: .25rem;
+      }
+
+      .hub-tags {
+        justify-content: flex-start;
+        max-width: none;
+      }
     }
   }
 }

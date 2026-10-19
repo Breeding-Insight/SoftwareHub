@@ -8,8 +8,10 @@ const DOMAINS = [
   'Pedigree & Mating',
   'Markers & Haplotypes',
   'Phenomics',
-  'Utilities'
+  'Utilities'  // keep last: its section sits just above "In development"
 ];
+// Domains of simpler tools, always shown as compact rows without logos, whatever the view.
+const COMPACT_DOMAINS = ['Utilities'];
 const FORMS = ['Web app', 'R Shiny app', 'R package', 'Python package', 'Mobile app'];
 const TASKS = [
   'GWAS', 'Genomic selection', 'Population structure', 'Ploidy', 'CNV',
@@ -48,7 +50,7 @@ const inDevelopment = sorted
   .sort((a, b) => DOMAINS.indexOf(a.domain) - DOMAINS.indexOf(b.domain) || String(a.title).localeCompare(String(b.title)));
 const usedForms = FORMS.filter((form) => sorted.some((item) => item.form === form));
 %>
-<% function renderCard(item) {
+<% function renderCard(item, compact) {
      const tasks = asArray(item.tasks);
      const tags = asArray(item.tags).filter((tag) => !tasks.includes(tag));
      const allTags = tasks.concat(tags);
@@ -67,7 +69,8 @@ const usedForms = FORMS.filter((form) => sorted.some((item) => item.form === for
         data-tags="<%- encoded(tags) %>"
         data-search="<%- encoded(searchText) %>">
         <div class="hub-card-head">
-<% if (item.image) { %>
+<% if (compact) { %>
+<% } else if (item.image) { %>
           <img class="hub-logo<%= item['image-wide'] ? ' wide' : '' %>" src="<%- item.image %>" alt="" loading="lazy">
 <% } else { %>
           <span class="hub-logo hub-logo-fallback" aria-hidden="true"><%= initials(item.title) %></span>
@@ -108,14 +111,15 @@ const usedForms = FORMS.filter((form) => sorted.some((item) => item.form === for
      const group = released.filter((item) => item.domain === domain);
      if (!group.length) continue;
      const groupId = 'domain-' + domain.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+     const compact = COMPACT_DOMAINS.includes(domain);
 %>
-  <section class="hub-group" data-domain="<%= domain %>" aria-labelledby="<%- groupId %>">
+  <section class="hub-group<%= compact ? ' hub-compact-group' : '' %>" data-domain="<%= domain %>" aria-labelledby="<%- groupId %>">
     <div class="hub-group-head">
       <h2 id="<%- groupId %>" class="anchored"><%= domain %></h2>
       <span class="hub-group-count"><%= group.length %></span>
     </div>
     <div class="hub-items">
-<% for (const item of group) { renderCard(item); } %>
+<% for (const item of group) { renderCard(item, compact); } %>
     </div>
   </section>
 <% } %>
