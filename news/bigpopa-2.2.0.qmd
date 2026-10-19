@@ -1,0 +1,21 @@
+---
+title: "BIGpopA 2.2.0"
+date: 2026-10-12
+description: "validate_pedigree() and find_parentage(): founders_file now also accepts a character vector of ids or a data.frame (first column), in addition to a file path."
+categories: [BIGpopA]
+image: ../assets/software-bigpopa.png
+image-alt: "BIGpopA logo"
+toc: false
+---
+
+- `validate_pedigree()` and `find_parentage()`: `founders_file` now also accepts a character vector of ids or a data.frame (first column), in addition to a file path. All inputs can now be supplied from memory.
+- `validate_pedigree()`: removed the suggested replacement parents (`best_male_candidate`, `best_male_candidate_error_pct`, `best_female_candidate`, `best_female_candidate_error_pct`) from `full_results` and the per-status tables. Use `find_parentage(method = "fill_pedigree")` on `corrected_pedigree` to fill in missing parents.
+- `validate_pedigree()`: new `marker_summary` element in the returned list gives, for every marker, the number of trios tested, the number with a Mendelian mismatch and the mismatch percentage, sorted worst first. It covers all trios with both parents known and genotyped, and helps spot markers (e.g. paralogous or miscalled) that cause many failures.
+- `find_parentage()`: new `method = "fill_pedigree"` fills in missing parents of a pedigree. `progeny_file` must have `id`, `male_parent` and `female_parent` columns (e.g. `validate_pedigree()$corrected_pedigree`); parents coded `0`/`NA`/empty are unknown. A known male searches only females, a known female only males, and rows with both unknown get the full pair search (skip founders with the new `founders_file`). Rows with both parents known are skipped. Results gain `search_mode` and `known_parent_error_pct`, and a known parent without genotypes gets `status = "known_parent_no_genotype"`.
+- `find_parentage()`: new `top_n` argument reports the best `top_n` candidates per progeny, ranked by Mendelian error (ties broken by markers tested). Rank 1 stays in the base columns and ranks 2 to `top_n` are added as suffix columns (`male_parent_2`, `female_parent_2`, `mendelian_error_pct_2`, `markers_tested_2` for `best_pair`; `best_match_2` and the same error/marker columns for the other methods). The default `top_n = 1` keeps the previous output, including `show_ties`.
+- `find_parentage()`: new `tied_candidates` column gives the number of candidates (pairs for `best_pair`) that share each progeny's lowest error. Values above 1 mean the best assignment is ambiguous, including for the single-parent methods, which previously did not report ties.
+- `validate_pedigree()`: fixed `corrected_pedigree` for `low_markers_remove_female_parent`, which also set the male parent to `0`. Low-marker trios now remove only the identified parent(s).
+- New `assign_composition_line()` turns the output of `solve_composition_poly()` into the composition table used by Familia: percentages per reference population and a `Predicted line`, labelled `Undetermined` when the highest proportion is below `assign_threshold` (default 50). `solve_composition_poly()` is unchanged.
+- `validate_pedigree()`: new `marker_trio_table = FALSE` argument. When TRUE the result includes `marker_trio_table`, a marker-by-trio table with one column per trio (`id_male_parent_female_parent`) giving each marker's status: `match`, `mismatch_male`, `mismatch_female`, `mismatch_both`, `mismatch_combination` (each parent compatible alone but not the pair), `untestable` (odd ploidy) or `missing_*` named after the individuals without a call (e.g. `missing_male`, `missing_male_female`, `missing_progeny`).
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGpopA/releases/tag/v2.2.0) · [About BIGpopA](../software/bigpopa.qmd)
