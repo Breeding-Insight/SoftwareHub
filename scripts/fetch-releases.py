@@ -13,8 +13,9 @@ good NEWS.md entry. The release body is the fallback.
 A version with a NEWS.md entry but no release cannot be dated, so it is skipped
 and reported. Cutting a release for it on GitHub is the fix.
 
-Everything in news/ is generated. Do not hand-edit it; edit the release notes or
-NEWS.md upstream and re-run this script.
+Every news/*.qmd is generated. Do not hand-edit them; edit the release notes or
+NEWS.md upstream and re-run this script. news/_metadata.yml (page styling) is
+hand-written and left alone.
 
 The script also syncs each software page's `version`, `version-date`, and
 `version-url` front matter from the latest published release of the repository in

@@ -1,0 +1,8 @@
+# Release-note pages share the hub styling (see "Release-note pages" in styles.scss). This
+# file is hand-written; scripts/fetch-releases.py regenerates only news/*.qmd.
+format:
+  html:
+    body-classes: learning-material-page release-note-page
+    title-block-banner: true
+    template-partials:
+      - ../assets/release-partials/title-block.html

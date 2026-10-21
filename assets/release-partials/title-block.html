@@ -1,0 +1,27 @@
+<header id="title-block-header" class="quarto-title-block default">
+  <div class="quarto-title-banner">
+    <div class="quarto-title column-body">
+      <div class="release-head">
+        $if(image)$<img class="release-logo" src="$image$" alt="">$endif$
+        <div>
+          $if(categories)$
+          <div class="hub-badges" aria-label="Package">
+            $for(categories)$<a class="hub-badge hub-badge-eco release-package" href="../news.html?package=$categories$">$categories$</a>$endfor$
+          </div>
+          $endif$
+          $if(title)$<h1 class="title">$title$</h1>$endif$
+        </div>
+      </div>
+      $if(description)$
+      <div>
+        <div class="description">
+          $description$
+        </div>
+      </div>
+      $endif$
+    </div>
+  </div>
+
+  $title-metadata.html()$
+
+</header>
