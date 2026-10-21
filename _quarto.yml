@@ -85,7 +85,7 @@ website:
       <li><a href="https://ifas.ufl.edu/"><span class="footer-logo footer-logo-ifas" aria-hidden="true"></span><span class="visually-hidden">University of Florida Institute of Food and Agricultural Sciences</span></a></li>
       <li><a href="https://www.cornell.edu/"><span class="footer-logo footer-logo-cornell" aria-hidden="true"></span><span class="visually-hidden">Cornell University</span></a></li>
       </ul>
-      <div class="footer-funding-copy">Funded by USDA-ARS through the University of Florida (UF/IFAS)</div>
+      <div class="footer-funding-copy">Breeding Insight is funded by the U.S. Department of Agriculture (USDA) Agricultural Research Service (ARS) through University of Florida/IFAS. Formerly at Cornell University.</div>
       </div>
     center:
       - text: GitHub
