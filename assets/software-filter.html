@@ -127,7 +127,7 @@
 
   function writeUrl() {
     const params = new URLSearchParams();
-    if (state.query) params.set("q", state.query);
+    if (state.query) params.set("search", state.query);
     if (state.online) params.set("online", "1");
     for (const value of state.status) params.append("status", value);
     for (const value of state.domain) params.append("domain", value);
@@ -140,7 +140,8 @@
   function readUrl() {
     const params = new URLSearchParams(window.location.search);
     const allTags = options.task.concat(options.tag);
-    state.query = params.get("q") || "";
+    // Not "q": Quarto's site search claims ?q= and strips it from the address.
+    state.query = params.get("search") || "";
     state.online = params.get("online") === "1";
     state.status = new Set(params.getAll("status").filter((value) => options.status.includes(value)));
     state.domain = new Set(params.getAll("domain").filter((value) => options.domain.includes(value)));
