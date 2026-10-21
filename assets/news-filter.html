@@ -1,0 +1,140 @@
+<script>
+// News page filters: search and a Package checklist with counts. State is kept in the
+// URL (?package=BIGr, repeatable; ?search=) so filtered views can be shared. Not ?q=:
+// Quarto's site search claims that and strips it from the address.
+(() => {
+  const state = { packages: new Set(), query: "" };
+  let items = [];
+
+  function decode(value) {
+    try {
+      return JSON.parse(decodeURIComponent(value || "%5B%5D"));
+    } catch (_error) {
+      return [];
+    }
+  }
+
+  const normalize = (value) => value.toLocaleLowerCase().replace(/\s+/g, " ").trim();
+
+  function matchesQuery(item) {
+    const terms = normalize(state.query).split(" ").filter(Boolean);
+    return terms.every((term) => item.text.includes(term));
+  }
+
+  function matches(item, ignorePackages) {
+    if (!ignorePackages && state.packages.size && !item.packages.some((pkg) => state.packages.has(pkg))) return false;
+    return matchesQuery(item);
+  }
+
+  function activeCount() {
+    return state.packages.size + (state.query.trim() ? 1 : 0);
+  }
+
+  function writeUrl() {
+    const url = new URL(window.location.href);
+    url.searchParams.delete("package");
+    url.searchParams.delete("search");
+    for (const pkg of state.packages) url.searchParams.append("package", pkg);
+    if (state.query.trim()) url.searchParams.set("search", state.query.trim());
+    window.history.replaceState(null, "", url);
+  }
+
+  function render() {
+    let shown = 0;
+    for (const item of items) {
+      const visible = matches(item);
+      item.element.hidden = !visible;
+      if (visible) shown += 1;
+    }
+
+    const pool = items.filter((item) => matches(item, true));
+    document.querySelectorAll("#news-package-options input").forEach((input) => {
+      const count = pool.filter((item) => item.packages.includes(input.value)).length;
+      input.checked = state.packages.has(input.value);
+      input.disabled = count === 0 && !input.checked;
+      const label = input.closest(".hub-option");
+      label.classList.toggle("is-empty", input.disabled);
+      label.querySelector(".hub-count").textContent = count;
+    });
+
+    document.querySelector(".hub-facet .hub-facet-selected").textContent = state.packages.size ? `${state.packages.size} selected` : "";
+    document.getElementById("news-result-count").textContent = `${shown} ${shown === 1 ? "release" : "releases"}`;
+    document.getElementById("news-no-results").hidden = shown !== 0;
+    document.getElementById("news-clear").hidden = activeCount() === 0;
+    document.getElementById("hub-filter-toggle-count").textContent = activeCount() ? `(${activeCount()})` : "";
+    writeUrl();
+  }
+
+  function syncStickyOffset() {
+    const header = document.getElementById("quarto-header");
+    const height = header ? header.getBoundingClientRect().height : 0;
+    document.documentElement.style.setProperty("--hub-header-height", `${Math.round(height)}px`);
+  }
+
+  function init() {
+    items = Array.from(document.querySelectorAll(".news-item")).map((element) => ({
+      element,
+      packages: decode(element.dataset.package),
+      text: normalize(decodeURIComponent(element.dataset.search || ""))
+    }));
+    if (!items.length) return;
+
+    // Packages with the most releases first.
+    const counts = new Map();
+    for (const item of items) for (const pkg of item.packages) counts.set(pkg, (counts.get(pkg) || 0) + 1);
+    const packages = [...counts.keys()].sort((a, b) => counts.get(b) - counts.get(a) || a.localeCompare(b));
+    const container = document.getElementById("news-package-options");
+    for (const pkg of packages) {
+      const label = document.createElement("label");
+      label.className = "hub-option";
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.value = pkg;
+      const name = document.createElement("span");
+      name.className = "hub-option-name";
+      name.textContent = pkg;
+      const count = document.createElement("span");
+      count.className = "hub-count";
+      label.append(input, name, count);
+      container.append(label);
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    state.packages = new Set(params.getAll("package").filter((pkg) => counts.has(pkg)));
+    state.query = params.get("search") || "";
+    const search = document.getElementById("news-search");
+    search.value = state.query;
+
+    container.addEventListener("change", (event) => {
+      const input = event.target.closest("input");
+      if (!input) return;
+      if (input.checked) state.packages.add(input.value);
+      else state.packages.delete(input.value);
+      render();
+    });
+    search.addEventListener("input", () => {
+      state.query = search.value;
+      render();
+    });
+    document.getElementById("news-clear").addEventListener("click", () => {
+      state.packages.clear();
+      state.query = "";
+      search.value = "";
+      render();
+    });
+    const toggle = document.getElementById("hub-filter-toggle");
+    toggle.addEventListener("click", () => {
+      const open = toggle.getAttribute("aria-expanded") !== "true";
+      toggle.setAttribute("aria-expanded", String(open));
+      document.getElementById("hub-filter-panel").classList.toggle("is-open", open);
+    });
+
+    syncStickyOffset();
+    window.addEventListener("resize", syncStickyOffset);
+    render();
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+</script>

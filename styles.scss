@@ -604,9 +604,9 @@ h2.section-heading {
 .workshop-progress {
   margin: 0 0 1.75rem;
   padding: 1rem;
-  border: 1px solid rgba(42, 101, 118, .22);
-  border-radius: .5rem;
-  background: var(--bi-panel);
+  border: 1px solid var(--hub-border);
+  border-radius: var(--hub-radius);
+  background: var(--hub-surface-alt);
 }
 
 .workshop-progress-title {
@@ -817,7 +817,6 @@ h2.section-heading {
 .concept-definition {
   margin: 1.2rem 0 1.8rem;
   padding: 1.15rem 1.25rem;
-  background: var(--bi-panel);
   font-size: 1rem;
 }
 
