@@ -1,0 +1,22 @@
+<header id="title-block-header" class="quarto-title-block default">
+  <div class="quarto-title-banner">
+    <div class="quarto-title column-body">
+      $if(learn-badges)$$learn-badges$$endif$
+      $if(learn-topics)$$learn-topics$$endif$
+      $if(title)$<h1 class="title">$title$</h1>$endif$
+      $if(subtitle)$
+      <p class="subtitle lead">$subtitle$</p>
+      $endif$
+      $if(description)$
+      <div>
+        <div class="description">
+          $description$
+        </div>
+      </div>
+      $endif$
+    </div>
+  </div>
+
+  $title-metadata.html()$
+
+</header>

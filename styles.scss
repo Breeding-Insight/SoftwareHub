@@ -70,24 +70,6 @@ body:has(.hero) #title-block-header {
   display: none;
 }
 
-.learning-material-page .quarto-title-meta {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-}
-
-.learning-material-page .quarto-title-meta > div:first-child {
-  grid-row: 1 / span 2;
-}
-
-@media (max-width: 575px) {
-  .learning-material-page .quarto-title-meta {
-    grid-template-columns: 1fr;
-  }
-
-  .learning-material-page .quarto-title-meta > div:first-child {
-    grid-row: auto;
-  }
-}
-
 .navbar {
   min-height: 3.75rem;
   border-bottom: 1px solid rgba(42, 101, 118, .15);
@@ -557,10 +539,11 @@ h2.section-heading {
 
 .bi-callout {
   margin: 1.5rem 0;
-  padding: 1rem 1.1rem;
-  border-left: 4px solid $bi-green;
-  border-radius: .4rem;
-  background: rgba(163, 217, 172, .16);
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--hub-online-border, rgba(163, 217, 172, .6));
+  border-left: 4px solid var(--hub-online, $bi-green);
+  border-radius: var(--hub-radius, .4rem);
+  background: var(--hub-online-bg, rgba(163, 217, 172, .16));
 }
 
 /* Workshop lesson pages */
@@ -612,10 +595,10 @@ h2.section-heading {
 .workshop-progress-title {
   display: block;
   margin-bottom: .6rem;
-  color: $bi-teal-dark;
-  font-size: .78rem;
-  font-weight: 800;
-  letter-spacing: .04em;
+  color: var(--hub-ink);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .06em;
   text-transform: uppercase;
 }
 
@@ -643,12 +626,12 @@ h2.section-heading {
   align-items: center;
   justify-content: center;
   padding: .45rem .35rem;
-  border: 1px solid rgba(42, 101, 118, .2);
-  border-radius: .35rem;
-  background: #fff;
-  color: $bi-teal-dark;
-  font-size: .77rem;
-  font-weight: 700;
+  border: 1px solid var(--hub-border);
+  border-radius: 8px;
+  background: var(--hub-surface);
+  color: var(--hub-primary-strong);
+  font-size: .75rem;
+  font-weight: 600;
   line-height: 1.2;
   overflow-wrap: anywhere;
   text-align: center;
@@ -656,27 +639,28 @@ h2.section-heading {
 }
 
 .workshop-progress a:hover {
-  border-color: $bi-teal;
-  background: $bi-mist;
+  border-color: var(--hub-primary);
+  background: var(--hub-surface-tint);
 }
 
 .workshop-progress a:focus-visible {
-  outline: 3px solid rgba(72, 169, 197, .4);
+  outline: 3px solid #1b64dd;
   outline-offset: 2px;
 }
 
 .workshop-progress a[aria-current="page"] {
-  border-color: $bi-teal-dark;
-  background: $bi-teal-dark;
+  border-color: var(--hub-primary);
+  background: var(--hub-primary);
   color: #fff;
 }
 
 .lesson-overview {
   margin: 0 0 1.75rem;
   padding: 1rem 1.1rem;
-  border-left: 4px solid $bi-green;
-  border-radius: .35rem;
-  background: rgba(163, 217, 172, .14);
+  border: 1px solid var(--hub-online-border);
+  border-left: 4px solid var(--hub-online);
+  border-radius: var(--hub-radius);
+  background: var(--hub-online-bg);
 }
 
 .lesson-overview > :last-child {
@@ -693,9 +677,36 @@ h2.section-heading {
 .workshop-next {
   margin-top: 2rem;
   padding: 1rem 1.1rem;
-  border: 1px solid rgba(42, 101, 118, .22);
-  border-radius: .5rem;
-  background: var(--bi-panel);
+  border: 1px solid var(--hub-border);
+  border-left: 4px solid var(--hub-primary);
+  border-radius: var(--hub-radius);
+  background: var(--hub-surface-alt);
+}
+
+/* Workshop sidebar: the module list styled like the Resources section list. The navbar
+   already carries the logo Quarto would repeat at the top of a docked sidebar. */
+.workshop-page {
+  #quarto-sidebar .sidebar-logo-link {
+    display: none;
+  }
+
+  #quarto-sidebar .sidebar-item .sidebar-link {
+    padding: .3rem .6rem;
+    border-left: 2px solid var(--hub-border);
+    color: var(--hub-ink-muted);
+    font-size: .9375rem;
+  }
+
+  #quarto-sidebar .sidebar-item .sidebar-link:hover {
+    background: var(--hub-surface-alt);
+    color: var(--hub-primary-strong);
+  }
+
+  #quarto-sidebar .sidebar-item .sidebar-link.active {
+    border-left-color: var(--hub-primary);
+    color: var(--hub-primary-strong);
+    font-weight: 600;
+  }
 }
 
 .workshop-next > :last-child {
@@ -703,14 +714,6 @@ h2.section-heading {
 }
 
 @media (max-width: 760px) {
-  body.learning-material-page .quarto-title-meta {
-    grid-template-columns: minmax(0, 1fr) !important;
-  }
-
-  body.learning-material-page .quarto-title-meta > div:first-child {
-    grid-row: auto;
-  }
-
   .workshop-progress ol {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -814,14 +817,20 @@ h2.section-heading {
   }
 }
 
+/* Concept pages: hub colours (tokens from the learning-page scope) so definitions and
+   cards sit with the callouts and panels. */
 .concept-definition {
   margin: 1.2rem 0 1.8rem;
   padding: 1.15rem 1.25rem;
+  border: 1px solid var(--hub-border);
+  border-left: 4px solid var(--hub-primary);
+  border-radius: var(--hub-radius);
+  background: var(--hub-surface-alt);
   font-size: 1rem;
 }
 
 .concept-definition strong:first-child {
-  color: $bi-teal-dark;
+  color: var(--hub-primary-strong);
 }
 
 .concept-example-grid,
@@ -834,24 +843,26 @@ h2.section-heading {
 
 .concept-example,
 .concept-decision {
-  padding: 1rem 1.05rem;
-  border: 1px solid rgba(42, 101, 118, .13);
-  border-radius: .375rem;
-  background: #fff;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--hub-border);
+  border-radius: var(--hub-radius);
+  background: var(--hub-surface);
+  box-shadow: var(--hub-shadow);
 }
 
 .concept-example h4,
 .concept-decision h4 {
   margin: 0 0 .35rem;
-  color: $bi-charcoal;
-  font-size: 1rem;
+  color: var(--hub-ink);
+  font-size: 1.0625rem;
+  font-weight: 700;
 }
 
 .concept-example p,
 .concept-decision p {
   margin: 0;
-  color: $bi-gray;
-  font-size: .93rem;
+  color: var(--hub-ink-muted);
+  font-size: .9375rem;
 }
 
 .dosage-scale {
@@ -863,21 +874,21 @@ h2.section-heading {
 
 .dosage-state {
   padding: .7rem .4rem;
-  border: 1px solid rgba(42, 101, 118, .14);
-  border-radius: .3rem;
-  background: $bi-mist;
+  border: 1px solid var(--hub-border);
+  border-radius: 8px;
+  background: var(--hub-surface-tint);
   text-align: center;
 }
 
 .dosage-state strong {
   display: block;
-  color: $bi-teal-dark;
+  color: var(--hub-primary-strong);
   font-size: 1.05rem;
 }
 
 .dosage-state span {
-  color: $bi-gray;
-  font-size: .78rem;
+  color: var(--hub-ink-muted);
+  font-size: .8125rem;
 }
 
 .concept-checklist li {
@@ -893,17 +904,18 @@ h2.section-heading {
   max-width: 38rem;
   margin: .8rem auto 0;
   padding: .65rem .85rem;
-  border-left: 4px solid $bi-teal;
-  border-radius: .25rem;
-  background: rgba($bi-teal-light, .18);
-  color: $bi-charcoal;
-  font-size: .9rem;
+  border: 1px solid var(--hub-border);
+  border-left: 4px solid var(--hub-primary);
+  border-radius: var(--hub-radius);
+  background: var(--hub-surface-alt);
+  color: var(--hub-ink);
+  font-size: .9375rem;
   line-height: 1.45;
 }
 
 .madc-workflow-figure figcaption::before {
   content: "Figure · ";
-  color: $bi-teal-dark;
+  color: var(--hub-primary-strong);
   font-weight: 700;
 }
 
