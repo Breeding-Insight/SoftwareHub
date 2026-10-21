@@ -1,0 +1,10 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "site",
+      "url": "http://localhost:8097",
+      "port": 8097
+    }
+  ]
+}
