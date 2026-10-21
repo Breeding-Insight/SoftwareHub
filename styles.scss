@@ -1465,7 +1465,8 @@ h2.section-heading {
     display: none;
   }
 
-  main.content {
+  /* Beat Quarto's #quarto-content > * padding so the title strip meets the navbar. */
+  #quarto-content > main.content {
     margin-top: 0;
     padding-top: 0;
   }
@@ -2236,6 +2237,104 @@ h2.section-heading {
         max-width: none;
       }
     }
+  }
+}
+
+/* Home page (index.qmd): uses the Software page styles above (body class
+   software-hub-page) plus these additions for its sections and path cards. */
+.hub-home-page {
+  .hub-kicker {
+    margin-bottom: .5rem;
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--hub-primary-strong);
+  }
+
+  .hub-head .hub-title {
+    max-width: 30ch;
+  }
+
+  .hub-head .hub-subtitle {
+    max-width: 75ch;
+  }
+
+  .listing-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+
+    .btn-bi-primary {
+      min-height: 2.5rem;
+      padding: .45rem 1.1rem;
+      border: 2px solid var(--hub-primary);
+      border-radius: 999px;
+      background: var(--hub-primary);
+      color: #fff !important;
+    }
+
+    .btn-bi-primary:hover {
+      border-color: var(--hub-primary-strong);
+      background: var(--hub-primary-strong);
+    }
+  }
+
+  .hub-home {
+    padding-block: 1rem 3rem;
+  }
+
+  .hub-group {
+    padding-top: 1.75rem;
+
+    > p {
+      max-width: 75ch;
+      margin-bottom: 1rem;
+      color: var(--hub-ink-muted);
+    }
+  }
+
+  .hub-items {
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  }
+
+  .hub-path-card h3 {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--hub-ink);
+  }
+
+  .hub-path-icon {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 8px;
+    background: var(--hub-surface-tint);
+    color: var(--hub-primary-strong);
+    font-size: 1.25rem;
+  }
+
+  /* Path cards: the link sits at the bottom and stretches over the whole card. */
+  .hub-path-card .hub-card-link {
+    margin-top: auto;
+    font-weight: 700;
+    color: var(--hub-primary);
+    text-decoration: none;
+  }
+
+  .hub-path-card p:has(> .hub-card-link) {
+    margin: auto 0 0;
+  }
+
+  .hub-path-card:hover .hub-card-link {
+    color: var(--hub-primary-strong);
+  }
+
+  /* Featured tools' tags are links to the filtered catalog. */
+  a.hub-tag {
+    text-decoration: none;
   }
 }
 
