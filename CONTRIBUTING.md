@@ -153,7 +153,7 @@ Each card's markup lives in `assets/software-card.ejs.md`, shared with the Featu
 
 ## Discovery behavior on `learn.qmd`
 
-The Learn page uses a custom Quarto listing template (`assets/learn-listing.ejs.md`) with native listing filtering and pagination. The template renders `learning-type`, `software`, and `level` as separate badges, prefixes software badges with `Uses`, and keeps broad `categories` visible as topic tags. Goal cards and topic chips write a `?filter=` query parameter and use `assets/learn-filter.html` to apply that value to the listing filter. This keeps deep links shareable while allowing the underlying listing to remain metadata-driven.
+The Learn page uses the Software page's layout (body class `software-hub-page`) and a custom listing template (`assets/learn-listing.ejs.md`). Each card shows `learning-type`, `level`, and `software` as badges (software prefixed with `Uses`) and broad `categories` as topic tags. `assets/learn-filter.html` builds the sidebar from the materials present: search, then Format, Topic, Software, and Level checkboxes with counts. Checking several values in one section widens the results; checking values in different sections narrows them. Clicking a topic tag on a card, or a goal chip under the title, selects that topic. Filter state is kept in the URL (`?type=`, `?topic=`, `?software=`, `?level=`, `?learn-q=`, repeatable), so links such as `learn.html?topic=Genomic%20Prediction#all-learning-materials` open a filtered view.
 
 
 ## Concept page pattern
