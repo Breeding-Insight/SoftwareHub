@@ -886,433 +886,6 @@ h2.section-heading {
   }
 }
 
-/* Learn discovery page */
-/* Goal quick-jump chips (Learn = green, reusing the pill motif). */
-.learn-goal-chips {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: .45rem;
-  margin: 1.1rem 0 1.6rem;
-}
-
-.learn-goal-chips-label {
-  margin-right: .15rem;
-  color: $bi-charcoal;
-  font-size: .9rem;
-  font-weight: 740;
-}
-
-.learn-goal-chip {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.05rem;
-  padding: .34rem .7rem;
-  border: 1px solid rgba(30, 93, 40, .28);
-  border-radius: 999px;
-  background: #fff;
-  color: $bi-green-dark !important;
-  font-size: .84rem;
-  font-weight: 710;
-  line-height: 1.15;
-  text-decoration: none !important;
-  transition: background-color .16s ease, border-color .16s ease;
-}
-
-.learn-goal-chip:hover {
-  border-color: $bi-green-dark;
-  background: rgba(163, 217, 172, .18);
-}
-
-.learn-goal-chip:focus-visible {
-  outline: 3px solid rgba(49, 155, 66, .32);
-  outline-offset: 2px;
-}
-
-/* Collapsible format legend — sits full-width at the foot of the filter panel
-   so expanding it never distorts the facet grid. */
-.learn-format-legend {
-  margin-top: 1rem;
-  padding-top: .9rem;
-  border-top: 1px solid rgba(42, 101, 118, .14);
-  font-size: .84rem;
-}
-
-.learn-format-legend[open] > summary {
-  margin-bottom: .2rem;
-}
-
-.learn-format-legend dl {
-  display: grid;
-  grid-template-columns: max-content minmax(0, 1fr);
-  gap: .3rem 1rem;
-  margin: .6rem 0 0;
-  max-width: 46rem;
-}
-
-.learn-format-legend > summary {
-  color: $bi-teal-dark;
-  cursor: pointer;
-  font-weight: 700;
-}
-
-.learn-format-legend > summary:focus-visible {
-  outline: 3px solid rgba(72, 169, 197, .32);
-  outline-offset: 2px;
-}
-
-.learn-format-legend dt {
-  color: $bi-charcoal;
-  font-weight: 740;
-}
-
-.learn-format-legend dd {
-  margin: 0;
-  color: $bi-gray;
-  line-height: 1.4;
-}
-
-.learn-format-legend-note {
-  margin: 0;
-  color: $bi-gray;
-  font-style: italic;
-}
-
-#all-learning-materials {
-  scroll-margin-top: 5.5rem;
-}
-
-.learn-filter-panel {
-  margin: 1.1rem 0 1.4rem;
-  padding: 1.1rem 1.15rem;
-  border: 1px solid rgba(42, 101, 118, .16);
-  border-radius: .375rem;
-  background: var(--bi-panel);
-}
-
-.learn-filter-search {
-  max-width: 46rem;
-}
-
-.learn-filter-search label {
-  display: block;
-  margin-bottom: .35rem;
-  color: $bi-charcoal;
-  font-size: .9rem;
-  font-weight: 740;
-}
-
-.learn-filter-search input {
-  width: 100%;
-  min-height: 2.8rem;
-  padding: .55rem .72rem;
-  border: 1px solid rgba(42, 101, 118, .24);
-  border-color: rgba(42, 101, 118, .22);
-  border-radius: .3rem;
-  background: #fff;
-  color: $bi-charcoal;
-}
-
-.learn-filter-search input:focus {
-  border-color: $bi-teal;
-  outline: 0;
-  box-shadow: 0 0 0 .2rem rgba(72, 169, 197, .15);
-}
-
-.learn-facet-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: start;
-  gap: 1.1rem 1.25rem;
-  margin-top: 1.1rem;
-}
-
-.learn-facet {
-  min-width: 0;
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-.learn-facet legend {
-  margin-bottom: .42rem;
-  color: $bi-charcoal;
-  font-size: .84rem;
-  font-weight: 760;
-}
-
-.learn-filter-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .38rem;
-}
-
-.learn-filter-pill {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.05rem;
-  padding: .34rem .64rem;
-  border: 1px solid rgba(42, 101, 118, .22);
-  border-radius: 999px;
-  background: #fff;
-  color: $bi-teal-dark;
-  font-size: .8rem;
-  font-weight: 710;
-  line-height: 1.15;
-}
-
-.learn-filter-pill:hover {
-  border-color: rgba(42, 101, 118, .52);
-  background: #f2f8f8;
-}
-
-.learn-filter-pill[aria-pressed="true"] {
-  border-color: $bi-teal-dark;
-  background: $bi-teal-dark;
-  color: #fff;
-}
-
-.learn-filter-pill[aria-pressed="true"]::before {
-  content: "✓";
-  margin-right: .34rem;
-  font-size: .78rem;
-}
-
-.learn-filter-pill:focus-visible,
-.learn-clear-filters:focus-visible {
-  outline: 3px solid rgba(72, 169, 197, .32);
-  outline-offset: 2px;
-}
-
-.learn-results-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 1rem;
-  margin: 2rem 0 .8rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid rgba(42, 101, 118, .2);
-}
-
-.learn-results-heading h3 {
-  margin: 0 0 .2rem;
-  color: $bi-charcoal;
-  font-size: 1.22rem;
-  line-height: 1.25;
-}
-
-.learn-result-count {
-  margin: 0;
-  color: $bi-charcoal;
-  font-size: .9rem;
-  font-weight: 730;
-}
-
-.learn-clear-filters {
-  padding: .25rem .1rem;
-  border: 0;
-  background: transparent;
-  color: $bi-teal-dark;
-  font-size: .86rem;
-  font-weight: 720;
-  text-decoration: underline;
-  text-underline-offset: .18rem;
-}
-
-.learn-clear-filters:disabled {
-  color: $bi-gray;
-  cursor: default;
-  opacity: .55;
-  text-decoration: none;
-}
-
-.learn-no-results {
-  margin: 1rem 0 1.4rem;
-  padding: 1rem 1.1rem;
-  border-left: 4px solid $bi-teal;
-  background: $bi-mist;
-  color: $bi-gray;
-}
-
-.learn-no-results strong {
-  display: block;
-  color: $bi-charcoal;
-}
-
-@media (max-width: 640px) {
-  .learn-facet-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .learn-results-header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: .45rem;
-  }
-}
-
-/* Metadata-rich Learn listing */
-.learn-listing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.15rem;
-  margin: .8rem 0 2rem;
-}
-
-.learn-listing-card {
-  position: relative;
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  overflow: hidden;
-  border: 1px solid rgba(42, 101, 118, .15);
-  border-radius: .375rem;
-  background: #fff;
-  transition: background-color .16s ease, border-color .16s ease;
-}
-
-.learn-listing-card:hover {
-  border-color: rgba(42, 101, 118, .35);
-  background: var(--bi-surface-hover);
-}
-
-.learn-listing-card:focus-within {
-  border-color: $bi-teal-dark;
-  outline: 3px solid rgba(72, 169, 197, .25);
-  outline-offset: 2px;
-}
-
-.learn-listing-link {
-  display: flex;
-  flex: 1;
-  min-width: 0;
-  flex-direction: column;
-  color: inherit !important;
-  text-decoration: none !important;
-}
-
-.learn-listing-link:focus-visible {
-  outline: 0;
-}
-
-.learn-listing-image {
-  display: flex;
-  aspect-ratio: 16 / 8.5;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-bottom: 1px solid rgba(42, 101, 118, .1);
-  background: $bi-mist;
-}
-
-.learn-listing-image img {
-  width: 100%;
-  height: 100%;
-  padding: .3rem;
-  object-fit: contain;
-}
-
-.learn-listing-body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 1.05rem 1.1rem 1.15rem;
-}
-
-.learn-card-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .36rem;
-  margin-bottom: .8rem;
-}
-
-.learn-badge {
-  display: inline-flex;
-  align-items: center;
-  min-height: 1.55rem;
-  padding: .18rem .5rem;
-  border-radius: 999px;
-  font-size: .73rem;
-  font-weight: 780;
-  line-height: 1.1;
-  letter-spacing: 0;
-}
-
-.learn-badge-type {
-  border: 1px solid rgba(42, 101, 118, .22);
-  background: rgba(181, 221, 232, .3);
-  color: $bi-teal-dark;
-}
-
-.learn-badge-software {
-  border: 1px solid rgba(30, 93, 40, .18);
-  background: rgba(163, 217, 172, .25);
-  color: $bi-green-dark;
-}
-
-.learn-badge-level {
-  border: 1px solid rgba(112, 115, 114, .16);
-  background: rgba(112, 115, 114, .08);
-  color: #59605e;
-}
-
-.learn-badge-more {
-  border: 1px solid rgba(30, 93, 40, .18);
-  background: rgba(163, 217, 172, .18);
-  color: $bi-green-dark;
-}
-
-.learn-badge-external {
-  border: 1px solid #b42318;
-  border-radius: .2rem;
-  background: #fff1f0;
-  color: #8a1c1c;
-}
-
-.learn-listing-title {
-  margin: 0 0 .5rem;
-  font-size: 1.2rem;
-  line-height: 1.22;
-  letter-spacing: 0;
-}
-
-.learn-listing-card:hover .learn-listing-title {
-  color: $bi-teal-dark !important;
-}
-
-.learn-listing-description {
-  margin: 0 0 .9rem;
-  color: $bi-gray;
-  font-size: .94rem;
-  line-height: 1.5;
-}
-
-.learn-card-topics {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .32rem;
-  margin-top: auto;
-  padding-top: .2rem;
-}
-
-.learn-topic-tag {
-  display: inline-flex;
-  padding: .17rem .43rem;
-  border-radius: .35rem;
-  background: $bi-mist;
-  color: $bi-gray;
-  font-size: .7rem;
-  font-weight: 690;
-  line-height: 1.2;
-}
-
-.learn-card-open {
-  margin-top: .95rem;
-  color: $bi-teal-dark !important;
-  font-size: .88rem;
-  font-weight: 760;
-}
-
 /* Concept pages */
 .concept-definition {
   margin: 1.2rem 0 1.8rem;
@@ -1411,14 +984,7 @@ h2.section-heading {
   font-weight: 700;
 }
 
-@media (max-width: 980px) {
-  .learn-listing-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 @media (max-width: 680px) {
-  .learn-listing-grid,
   .concept-example-grid,
   .concept-decision-grid {
     grid-template-columns: 1fr;
@@ -2263,6 +1829,218 @@ h2.section-heading {
     max-width: 75ch;
   }
 
+  /* Hero: text and buttons on the left, the Breeding Insight mark on the right, over a
+     faint dot grid. */
+  .hub-hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: 2.75rem 2.5rem;
+    background-color: var(--hub-surface-alt);
+    background-image: radial-gradient(circle, rgba(6, 106, 115, .12) 1px, transparent 1.2px);
+    background-size: 22px 22px;
+  }
+
+  .hub-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .hub-hero .hub-title {
+    font-size: 2.5rem;
+    line-height: 1.15;
+  }
+
+  .hub-hero .hub-subtitle {
+    max-width: 60ch;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Hub ring (assets/hub-ring.ejs.md): the BI mark in the centre and a dashed spoke to
+     each software domain, whose tools sit together at its end (hex logos as a honeycomb,
+     wide logos as a tile). Cluster positions come from the template as percentages of this
+     square box; their sizes are in em, so the font size here scales the whole hub. */
+  .hub-ring {
+    position: relative;
+    width: clamp(20rem, 34vw, 27rem);
+    aspect-ratio: 1;
+    margin: .5rem 0;
+    font-size: clamp(13px, 1.25vw, 16px);
+  }
+
+  .hub-ring-spokes {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+
+    line {
+      stroke: var(--hub-primary);
+      stroke-width: 1.5;
+      stroke-dasharray: 3 5;
+      stroke-linecap: round;
+      opacity: .5;
+      vector-effect: non-scaling-stroke;
+    }
+  }
+
+  .hub-ring-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    place-items: center;
+    width: 26%;
+    aspect-ratio: 1;
+    border: 1px solid var(--hub-border);
+    border-radius: 50%;
+    background: var(--hub-surface);
+    box-shadow: var(--hub-shadow), 0 0 0 10px rgba(255, 255, 255, .6);
+    transform: translate(-50%, -50%);
+
+    img {
+      width: 64%;
+      height: auto;
+    }
+  }
+
+  .hub-ring-cluster {
+    position: absolute;
+    display: grid;
+    justify-items: center;
+    gap: .45em;
+    transform: translate(-50%, -50%);
+  }
+
+  .hub-comb {
+    position: relative;
+  }
+
+  /* A hex logo: the logos are already hexagons on a transparent background, drawn full
+     height and centred, so each is shown as drawn at the cell's height (no clipping, which
+     shaved their outlines); the drop shadow follows the hex edge. */
+  .hub-hex {
+    position: absolute;
+    display: block;
+    filter: drop-shadow(0 1px 2px rgba(12, 50, 55, .2));
+    transition: transform .15s ease, filter .15s ease;
+  }
+
+  .hub-hex-shape {
+    position: absolute;
+    inset: 0;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: auto;
+      max-width: none;
+      height: 100%;
+      transform: translateX(-50%);
+    }
+  }
+
+  .hub-tiles {
+    display: flex;
+    gap: .35em;
+  }
+
+  /* Square tile by default (`image-shape: square`); wide for wordmarks (`image-wide`). */
+  .hub-tile {
+    display: grid;
+    place-items: center;
+    width: 4em;
+    height: 4em;
+    padding: .45em;
+    border: 1px solid var(--hub-border);
+    border-radius: var(--hub-radius);
+    background: var(--hub-surface);
+    box-shadow: var(--hub-shadow);
+    transition: transform .15s ease, border-color .15s ease;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .hub-tile.is-wide {
+    width: 9em;
+    padding: .5em .8em;
+  }
+
+  .hub-hex:hover,
+  .hub-hex:focus-visible {
+    z-index: 1;
+    transform: scale(1.08);
+    filter: drop-shadow(0 4px 8px rgba(12, 50, 55, .25));
+  }
+
+  .hub-tile:hover,
+  .hub-tile:focus-visible {
+    border-color: var(--hub-primary);
+    transform: scale(1.05);
+  }
+
+  .hub-hex:focus-visible,
+  .hub-tile:focus-visible {
+    outline: 3px solid #1b64dd;
+    outline-offset: 2px;
+  }
+
+  .hub-ring-domain {
+    padding: .05em .55em;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .85);
+    color: var(--hub-primary-strong);
+    font-size: .72em;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 767px) {
+    .hub-hero {
+      padding-block: 1.75rem 1.5rem;
+    }
+
+    /* Phones: a small mark above the text instead of a column of its own. */
+    .hub-hero-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    /* Phones: just the BI mark, small, above the text; no spokes or tool nodes. */
+    .hub-hero-ring {
+      order: -1;
+    }
+
+    .hub-ring {
+      width: 4.5rem;
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .hub-ring-spokes,
+    .hub-ring-cluster {
+      display: none;
+    }
+
+    .hub-ring-center {
+      width: 100%;
+      box-shadow: var(--hub-shadow);
+    }
+
+    .hub-hero .hub-title {
+      font-size: 1.9rem;
+    }
+  }
+
   .listing-actions {
     display: flex;
     flex-wrap: wrap;
@@ -2341,9 +2119,581 @@ h2.section-heading {
   }
 }
 
-/* Software tool pages (software/*.qmd, via software/_metadata.yml): same look as the
-   Software page: light title banner, landing-page buttons, bordered badges and code. */
-.software-tool-page {
+/* Learn page (learn.qmd): the Software page layout (body class software-hub-page) with
+   goal chips in the title strip, a format legend in the sidebar, and image cards.
+   Filtering lives in assets/learn-filter.html. */
+.learn-hub-page {
+  .learn-goal-chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem;
+    margin-top: .75rem;
+  }
+
+  .learn-goal-chips-label {
+    margin-right: .25rem;
+    color: var(--hub-ink-muted);
+    font-size: .875rem;
+    font-weight: 700;
+  }
+
+  .learn-goal-chip {
+    padding: .2rem .8rem;
+    border: 1px solid var(--hub-border);
+    border-radius: 999px;
+    background: var(--hub-surface);
+    color: var(--hub-primary-strong);
+    font-size: .875rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .learn-goal-chip:hover {
+    border-color: var(--hub-primary);
+    background: var(--hub-surface-tint);
+  }
+
+  #all-learning-materials {
+    scroll-margin-top: var(--hub-header-height, 60px);
+  }
+
+  .learn-format-legend {
+    margin: .4rem .25rem 0;
+    font-size: .875rem;
+
+    /* Undo the facet heading style it inherits from .hub-facet summary. */
+    > summary {
+      display: list-item;
+      padding: .25rem 0;
+      color: var(--hub-primary);
+      font-size: .875rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      text-transform: none;
+      list-style: revert;
+    }
+
+    > summary::after {
+      content: none;
+    }
+
+    dl {
+      margin: .5rem 0 0;
+    }
+
+    dt {
+      color: var(--hub-ink);
+      font-weight: 700;
+    }
+
+    dd {
+      margin: 0 0 .4rem;
+      color: var(--hub-ink-muted);
+    }
+  }
+
+  .learn-format-legend-note {
+    margin: 0;
+    color: var(--hub-ink-muted);
+    font-style: italic;
+  }
+
+  .hub-result-line #learn-result-count {
+    margin-right: .25rem;
+  }
+
+  .hub-no-results strong {
+    display: block;
+    color: var(--hub-ink);
+  }
+
+  .hub-items {
+    margin-top: 1rem;
+  }
+
+}
+
+/* Image cards on the Learn and Workshops pages: hub cards with an image on top and an
+   "Open ..." line at the bottom. */
+.learn-hub-page,
+.workshops-hub-page {
+  /* Cards: image flush with the card's top edge. Images have different shapes (wide
+     illustrations, tall logos), so each is shown whole inside the same-size box. */
+  .hub-card-image {
+    margin: -1.1rem -1.1rem .1rem;
+    overflow: hidden;
+    border-bottom: 1px solid var(--hub-border);
+    border-radius: var(--hub-radius) var(--hub-radius) 0 0;
+    background: var(--hub-surface-alt);
+    aspect-ratio: 16 / 9;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    img[src$=".png"] {
+      padding: .75rem;
+    }
+  }
+
+  .hub-card h3 {
+    margin: 0;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    line-height: 1.3;
+
+    a {
+      color: var(--hub-ink);
+      text-decoration: none;
+    }
+  }
+
+  .hub-card-open {
+    margin-top: auto;
+    color: var(--hub-primary);
+    font-size: .875rem;
+    font-weight: 700;
+  }
+
+  .hub-card:hover .hub-card-open {
+    color: var(--hub-primary-strong);
+  }
+}
+
+/* Workshops page (workshops.qmd): the Software page layout with a request panel. */
+.workshops-hub-page {
+  .hub-home {
+    padding-block: 1rem 3rem;
+  }
+
+  .hub-group > p {
+    max-width: 75ch;
+    margin-top: 1.25rem;
+    color: var(--hub-ink-muted);
+  }
+
+  .hub-items {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 1rem;
+  }
+
+  /* Few workshops, so each card spans the column: image left, details right. */
+  .hub-card-wide {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 1.5rem;
+    padding: 0;
+    overflow: hidden;
+
+    .hub-card-image {
+      flex: 0 0 min(42%, 440px);
+      margin: 0;
+      border-bottom: 0;
+      border-right: 1px solid var(--hub-border);
+      border-radius: var(--hub-radius) 0 0 var(--hub-radius);
+    }
+
+    .hub-card-body {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      justify-content: center;
+      gap: .75rem;
+      min-width: 0;
+      padding: 1.25rem 1.5rem 1.25rem 0;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+    }
+
+    .hub-desc {
+      flex: none;
+      max-width: 65ch;
+    }
+
+    .hub-card-open {
+      margin-top: .25rem;
+    }
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+      gap: 0;
+
+      .hub-card-image {
+        flex-basis: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--hub-border);
+        border-radius: var(--hub-radius) var(--hub-radius) 0 0;
+      }
+
+      .hub-card-body {
+        padding: 1rem 1.1rem 1.1rem;
+      }
+    }
+  }
+}
+
+/* Panels: a highlighted note (request a workshop, related site, warnings), shared by the
+   hub-style pages. */
+.software-hub-page {
+  .hub-panel {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.75rem;
+    padding: 1.1rem 1.25rem;
+    border: 1px solid var(--hub-border);
+    border-left: 4px solid var(--hub-primary);
+    border-radius: var(--hub-radius);
+    background: var(--hub-surface-alt);
+
+    > i {
+      color: var(--hub-primary);
+      font-size: 1.35rem;
+      line-height: 1.3;
+    }
+
+    h2 {
+      margin: 0 0 .25rem;
+      padding: 0;
+      border: 0;
+      font-size: 1.0625rem;
+      font-weight: 700;
+      color: var(--hub-ink);
+    }
+
+    p {
+      margin: 0;
+      color: var(--hub-ink);
+    }
+  }
+
+  .hub-panel h2 .anchorjs-link {
+    display: none;
+  }
+
+  .hub-panel-warning {
+    border-left-color: var(--hub-dev-border);
+    background: var(--hub-dev-bg);
+
+    > i {
+      color: var(--hub-dev);
+    }
+  }
+}
+
+/* Resources page (resources.qmd): a reference document with an "On this page" list in
+   the sidebar column. */
+.resources-hub-page {
+  .resources-nav {
+    padding-top: .25rem;
+
+    ul {
+      display: grid;
+      gap: .1rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    a {
+      display: block;
+      padding: .35rem .6rem;
+      border-left: 2px solid var(--hub-border);
+      color: var(--hub-ink-muted);
+      font-size: .9375rem;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--hub-primary-strong);
+      background: var(--hub-surface-alt);
+    }
+
+    a[aria-current="true"] {
+      border-left-color: var(--hub-primary);
+      color: var(--hub-primary-strong);
+      font-weight: 600;
+    }
+  }
+
+  .resources-nav-title {
+    margin: 0 0 .5rem;
+    font-size: .8125rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--hub-ink);
+  }
+
+  .hub-doc {
+    max-width: 80ch;
+    color: var(--hub-ink);
+
+    > section > h2,
+    > h2 {
+      margin: 2.25rem 0 1rem;
+      padding: 0 0 .6rem;
+      border-bottom: 1px solid var(--hub-border);
+      font-size: var(--hub-section-size);
+      font-weight: 700;
+      color: var(--hub-ink);
+      scroll-margin-top: calc(var(--hub-header-height, 60px) + 1rem);
+    }
+
+    h3 {
+      margin: 1.5rem 0 .5rem;
+      font-size: var(--hub-subsection-size);
+      font-weight: 700;
+    }
+
+    .hub-panel {
+      margin: 0 0 1rem;
+    }
+
+    section .hub-panel {
+      margin: 1.25rem 0;
+    }
+
+    table {
+      width: 100%;
+      margin: 1rem 0 1.25rem;
+      border: 1px solid var(--hub-border);
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: var(--hub-radius);
+      overflow: hidden;
+      font-size: .9375rem;
+    }
+
+    thead th {
+      background: var(--hub-surface-alt);
+      color: var(--hub-ink);
+      font-weight: 700;
+    }
+
+    th,
+    td {
+      padding: .6rem .8rem;
+      border: 0;
+      border-bottom: 1px solid var(--hub-border);
+      vertical-align: top;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    ul {
+      padding-left: 1.25rem;
+    }
+
+    li {
+      margin-bottom: .3rem;
+    }
+
+    div.sourceCode {
+      border: 1px solid var(--hub-border);
+      border-radius: 8px;
+      background: var(--hub-surface-alt);
+    }
+  }
+
+  /* Narrow screens: the section list becomes a row of links above the content. */
+  @media (max-width: 991px) {
+    .resources-nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+    }
+
+    .resources-nav a,
+    .resources-nav a[aria-current="true"] {
+      padding: .2rem .7rem;
+      border: 1px solid var(--hub-border);
+      border-radius: 999px;
+      font-size: .875rem;
+    }
+  }
+}
+
+/* News page (news.qmd): releases as rows in one bordered list, like the Software page's
+   List view. Filtering lives in assets/news-filter.html. */
+.news-hub-page {
+  .news-list {
+    display: block;
+    margin-top: 1rem;
+    overflow: hidden;
+    border: 1px solid var(--hub-border);
+    border-radius: var(--hub-radius);
+    background: var(--hub-surface);
+  }
+
+  .news-item {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: .9rem 1.1rem;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .news-item:hover {
+    background: var(--hub-surface-alt);
+    box-shadow: none;
+  }
+
+  .news-item + .news-item {
+    border-top: 1px solid var(--hub-border);
+  }
+
+  .news-item .hub-card-link::after {
+    border-radius: 0;
+  }
+
+  .news-item .hub-logo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .news-item-body {
+    display: grid;
+    gap: .2rem;
+    min-width: 0;
+  }
+
+  .news-item-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: .5rem;
+  }
+
+  .news-date {
+    color: var(--hub-ink-muted);
+    font-size: .8125rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .news-item h3 {
+    margin: 0;
+    font-size: 1.0625rem;
+    font-weight: 700;
+
+    a {
+      color: var(--hub-ink);
+      font-weight: 700;
+      text-decoration: none;
+    }
+  }
+
+  .news-item .hub-desc {
+    font-size: .9375rem;
+  }
+}
+
+/* Release-note pages (news/*.qmd, generated): the learning-page look (body class
+   learning-material-page, via news/_metadata.yml) plus the package logo beside the title
+   (assets/release-partials/title-block.html) and the closing links as buttons. */
+.release-note-page {
+  .release-head {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .release-logo {
+    flex: none;
+    width: 4rem;
+    height: 4rem;
+    object-fit: contain;
+  }
+
+  .quarto-title-banner .hub-badges {
+    margin: 0 0 .35rem;
+  }
+
+  a.release-package {
+    text-decoration: none;
+  }
+
+  a.release-package:hover {
+    border-color: var(--hub-primary);
+  }
+
+  .quarto-title-banner .quarto-title .title {
+    margin: 0;
+  }
+
+  .quarto-title-banner .description {
+    margin-top: .75rem;
+  }
+
+  /* Headings in the notes ("What's Changed"): the script demotes them to h4. */
+  main.content h4 {
+    margin-top: 1.5rem;
+    color: var(--hub-ink);
+    font-size: var(--hub-subsection-size);
+    font-weight: 700;
+  }
+
+  /* "Release on GitHub · About <tool>", the generated last line: pill buttons, with the
+     separator dot hidden (font-size 0 on the paragraph). */
+  main.content p:has(> a[href*="/releases/tag/"]) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--hub-border);
+    font-size: 0;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.5rem;
+      padding: .45rem 1.1rem;
+      border: 2px solid var(--hub-primary);
+      border-radius: 999px;
+      background: var(--hub-surface);
+      color: var(--hub-primary-strong);
+      font-size: .9375rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    a:first-child {
+      background: var(--hub-primary);
+      color: #fff;
+    }
+
+    a:hover {
+      background: var(--hub-surface-tint);
+      color: var(--hub-primary-strong);
+    }
+
+    a:first-child:hover {
+      border-color: var(--hub-primary-strong);
+      background: var(--hub-primary-strong);
+      color: #fff;
+    }
+
+    a.external::after {
+      display: none;
+    }
+  }
+}
+
+/* Software tool pages (software/*.qmd) and learning pages (learn/*.qmd), via each folder's
+   _metadata.yml: same look as the Software page: light title banner, landing-page buttons,
+   bordered badges and code. */
+.software-tool-page,
+.learning-material-page {
   @include hub-tokens;
 
   .quarto-title-banner {
@@ -2654,3 +3004,102 @@ h2.section-heading {
     }
   }
 }
+
+/* Callouts on tool, learning and workshop pages, drawn like the hub panels (Request a
+   workshop, Protect Private Data): icon in its own column, bold title, body at reading
+   size. Notes are teal, tips green, warnings and important notes amber. Quarto's own rules
+   are specific (.callout.callout-style-default...), so these repeat that chain. */
+.software-tool-page,
+.learning-material-page {
+  div.callout.callout-style-default {
+    --callout-accent: var(--hub-primary);
+    --callout-edge: var(--hub-border);
+    --callout-bg: var(--hub-surface-alt);
+    --callout-icon: "\f431";
+    margin: 1.25rem 0;
+    border: 1px solid var(--callout-edge);
+    border-left: 4px solid var(--callout-accent);
+    border-radius: var(--hub-radius);
+    background: var(--callout-bg);
+    box-shadow: none;
+    color: var(--hub-ink);
+  }
+
+  div.callout.callout-style-default.callout-tip {
+    --callout-accent: var(--hub-online);
+    --callout-edge: var(--hub-online-border);
+    --callout-bg: var(--hub-online-bg);
+    --callout-icon: "\f46b";
+  }
+
+  div.callout.callout-style-default.callout-warning,
+  div.callout.callout-style-default.callout-important,
+  div.callout.callout-style-default.callout-caution {
+    --callout-accent: var(--hub-dev-border);
+    --callout-edge: var(--hub-dev-border);
+    --callout-bg: var(--hub-dev-bg);
+    --callout-icon: "\f33b";
+  }
+
+  div.callout.callout-style-default.callout-important {
+    --callout-icon: "\f333";
+  }
+
+  div.callout.callout-style-default .callout-header {
+    align-items: flex-start;
+    padding: .95rem 1.15rem 0;
+    border: 0;
+    background: transparent;
+    opacity: 1;
+  }
+
+  div.callout.callout-style-default .callout-icon-container {
+    flex: none;
+    width: 1.35rem;
+    margin: 0 .75rem 0 0;
+  }
+
+  div.callout.callout-style-default .callout-icon::before {
+    content: var(--callout-icon);
+    width: auto;
+    height: auto;
+    background-image: none;
+    color: var(--callout-accent);
+    font-family: "bootstrap-icons";
+    font-size: 1.2rem;
+    line-height: 1.1;
+  }
+
+  div.callout.callout-style-default.callout-warning .callout-icon::before,
+  div.callout.callout-style-default.callout-important .callout-icon::before,
+  div.callout.callout-style-default.callout-caution .callout-icon::before {
+    color: var(--hub-dev);
+  }
+
+  div.callout.callout-style-default .callout-title-container {
+    color: var(--hub-ink);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  div.callout.callout-style-default .callout-body {
+    padding: .35rem 1.15rem .95rem 3.25rem;
+    font-size: 1rem;
+  }
+
+  div.callout.callout-style-default .callout-body > :last-child {
+    margin-bottom: 0;
+  }
+
+  /* Collapsible callouts ("Hint", "Answer"): the toggle sits at the right of the title. */
+  div.callout.callout-style-default .callout-btn-toggle {
+    align-self: center;
+    color: var(--hub-ink-muted);
+  }
+
+  div.callout.callout-style-default.callout-titled .callout-header[aria-expanded="false"] {
+    padding-bottom: .95rem;
+  }
+}
+

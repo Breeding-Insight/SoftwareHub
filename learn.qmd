@@ -9,15 +9,21 @@ listing:
   filter-ui: false
   sort-ui: false
   page-size: 1000
+page-layout: full
 toc: false
+body-classes: software-hub-page learn-hub-page
 format:
   html:
     include-after-body: assets/learn-filter.html
 ---
 
-Search the full library, filter by format, topic, software, or level, or jump straight to a goal. For guided training, see the [workshops](workshops.html).
+::: {.hub-head .column-screen}
+::: {.hub-wrap}
+<h1 class="hub-title">{{< meta title >}}</h1>
 
-## Browse learning materials {#all-learning-materials .section-heading}
+<p class="hub-subtitle">{{< meta description >}}</p>
+
+Search the full library, filter by format, topic, software, or level, or jump straight to a goal. For guided training, see the [workshops](workshops.html).
 
 ```{=html}
 <div class="learn-goal-chips" aria-label="Start with a goal">
@@ -30,61 +36,71 @@ Search the full library, filter by format, topic, software, or level, or jump st
   <a class="learn-goal-chip learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Pedigree &amp; Parentage" href="?topic=Pedigree%20%26%20Parentage#all-learning-materials">Validate pedigrees</a>
   <a class="learn-goal-chip learn-filter-trigger no-external" data-set-facet="topic" data-set-value="Genomic Prediction" href="?topic=Genomic%20Prediction#all-learning-materials">Predict performance</a>
 </div>
+```
+:::
+:::
 
-<div class="learn-filter-panel" aria-label="Search and filter learning materials">
-  <div class="learn-filter-search">
-    <label for="learn-material-search">Search learning materials</label>
-    <input id="learn-material-search" type="search" autocomplete="off" placeholder="Try MADC, VCF, dosage, parentage, or missingness">
+::: {#all-learning-materials .hub-body .column-screen}
+::: {.hub-wrap .hub-layout}
+```{=html}
+<div class="hub-sidebar" role="region" aria-label="Search and filter learning materials">
+  <button type="button" class="hub-filter-toggle" id="hub-filter-toggle" aria-expanded="false" aria-controls="hub-filter-panel">
+    <i class="bi bi-funnel" aria-hidden="true"></i>Filters <span class="hub-filter-toggle-count" id="hub-filter-toggle-count"></span>
+  </button>
+  <div class="hub-filter-panel" id="hub-filter-panel">
+    <label class="hub-search" for="learn-material-search">
+      <span class="visually-hidden">Search learning materials</span>
+      <i class="bi bi-search" aria-hidden="true"></i>
+      <input id="learn-material-search" type="search" autocomplete="off" placeholder="Try MADC, VCF, dosage, parentage, or missingness">
+    </label>
+    <details class="hub-facet" data-learn-facet="type" open>
+      <summary>Format <span class="hub-facet-selected"></span></summary>
+      <div class="hub-options" data-filter-options="type"></div>
+      <details class="learn-format-legend">
+        <summary>What do the formats mean?</summary>
+        <dl>
+          <dt>Concept</dt>
+          <dd>Understand what something means, why it matters, and how to interpret it.</dd>
+          <dt>Guide</dt>
+          <dd>Choose an approach, tool, or next step based on your goal.</dd>
+          <dt>Tutorial</dt>
+          <dd>Complete one bounded task through a linear, worked example.</dd>
+          <dt>Workflow</dt>
+          <dd>Carry out an end-to-end analysis with decisions and validation checkpoints.</dd>
+        </dl>
+        <p class="learn-format-legend-note">The labels describe the purpose and scope of each resource, not its difficulty.</p>
+      </details>
+    </details>
+    <details class="hub-facet" data-learn-facet="topic" open>
+      <summary>Topic <span class="hub-facet-selected"></span></summary>
+      <div class="hub-options" data-filter-options="topic"></div>
+    </details>
+    <details class="hub-facet" data-learn-facet="software" open>
+      <summary>Software <span class="hub-facet-selected"></span></summary>
+      <div class="hub-options" data-filter-options="software"></div>
+    </details>
+    <details class="hub-facet" data-learn-facet="level" open>
+      <summary>Level <span class="hub-facet-selected"></span></summary>
+      <div class="hub-options" data-filter-options="level"></div>
+    </details>
   </div>
-
-  <div class="learn-facet-grid">
-    <fieldset class="learn-facet" data-learn-facet="type">
-      <legend>Format</legend>
-      <div class="learn-filter-pills" data-filter-options="type"></div>
-    </fieldset>
-    <fieldset class="learn-facet" data-learn-facet="topic">
-      <legend>Topic</legend>
-      <div class="learn-filter-pills" data-filter-options="topic"></div>
-    </fieldset>
-    <fieldset class="learn-facet" data-learn-facet="software">
-      <legend>Software</legend>
-      <div class="learn-filter-pills" data-filter-options="software"></div>
-    </fieldset>
-    <fieldset class="learn-facet" data-learn-facet="level">
-      <legend>Level</legend>
-      <div class="learn-filter-pills" data-filter-options="level"></div>
-    </fieldset>
-  </div>
-
-  <details class="learn-format-legend">
-    <summary>What do the formats mean?</summary>
-    <dl>
-      <dt>Concept</dt>
-      <dd>Understand what something means, why it matters, and how to interpret it.</dd>
-      <dt>Guide</dt>
-      <dd>Choose an approach, tool, or next step based on your goal.</dd>
-      <dt>Tutorial</dt>
-      <dd>Complete one bounded task through a linear, worked example.</dd>
-      <dt>Workflow</dt>
-      <dd>Carry out an end-to-end analysis with decisions and validation checkpoints.</dd>
-    </dl>
-    <p class="learn-format-legend-note">The labels describe the purpose and scope of each resource, not its difficulty.</p>
-  </details>
 </div>
-
-<div class="learn-results-header">
-  <div class="learn-results-heading">
-    <h3 id="learning-results-title">Learning materials</h3>
-    <p id="learn-result-count" class="learn-result-count" aria-live="polite" aria-atomic="true"></p>
-  </div>
-  <button id="learn-clear-filters" class="learn-clear-filters" type="button">Clear all filters</button>
-</div>
-
-<p id="learn-no-results" class="learn-no-results" hidden>
-  <strong>No learning materials match those filters.</strong>
-  Try removing a filter or using a broader search term.
-</p>
 ```
 
-::: {#learning-materials role="region" aria-labelledby="learning-results-title"}
+::: {.hub-main}
+```{=html}
+<div class="hub-toolbar">
+  <div class="hub-result-line">
+    <span id="learn-result-count" aria-live="polite" aria-atomic="true"></span>
+    <button id="learn-clear-filters" class="hub-clear" type="button">Clear all filters</button>
+  </div>
+</div>
+```
+
+::: {#learning-materials role="region" aria-label="Learning materials"}
+:::
+
+<p id="learn-no-results" class="hub-no-results" hidden><strong>No learning materials match those filters.</strong> Try removing a filter or using a broader search term.</p>
+:::
+:::
 :::

@@ -4,7 +4,7 @@
   <rect width="800" height="425" rx="28" fill="#F4F8F8"/>
   <text x="52" y="72" fill="#2A6576" font-family="Arial" font-size="25" font-weight="700">POLYPLOID SNP FILTERING</text>
   <text x="52" y="110" fill="#434544" font-family="Arial" font-size="18">Filter evidence, dosage confidence, and analysis assumptions</text>
-  <g transform="translate(62 168)">
+  <g transform="translate(52 171) scale(0.94)">
     <rect x="0" y="0" width="146" height="112" rx="18" fill="#fff" stroke="#B5DDE8" stroke-width="3"/>
     <text x="73" y="38" text-anchor="middle" fill="#2A6576" font-family="Arial" font-size="16" font-weight="700">Sequence</text>
     <text x="73" y="66" text-anchor="middle" fill="#707372" font-family="Arial" font-size="14">depth · mapping</text><text x="73" y="87" text-anchor="middle" fill="#707372" font-family="Arial" font-size="14">base quality</text>

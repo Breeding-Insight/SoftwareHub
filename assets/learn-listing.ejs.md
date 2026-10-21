@@ -25,7 +25,7 @@ const learningItems = items
 const asArray = (value) => Array.isArray(value) ? value : (value ? [value] : []);
 const encoded = (value) => encodeURIComponent(JSON.stringify(value));
 %>
-<div class="learn-listing-grid">
+<div class="hub-items learn-listing-grid">
 <% for (const item of learningItems) {
      const software = asArray(item.software);
      const categories = asArray(item.categories);
@@ -40,57 +40,46 @@ const encoded = (value) => encodeURIComponent(JSON.stringify(value));
        .concat(software, categories, keywords)
        .filter(Boolean)
        .join(' ');
+     const shownSoftware = software.slice(0, 3);
 %>
-  <article class="learn-listing-card"
+  <article class="hub-card learn-listing-card"
     data-learn-type="<%- encoded([learningType]) %>"
     data-learn-topic="<%- encoded(categories) %>"
     data-learn-software="<%- encoded(software) %>"
     data-learn-level="<%- encoded(level ? [level] : []) %>"
     data-learn-search="<%- encoded(searchText) %>">
-    <a class="learn-listing-link<%= isExternal ? '' : ' no-external' %>" href="<%- item.path %>"<% if (isExternal) { %> target="_blank" rel="noopener"<% } %>>
 <% if (item.image) { %>
-    <div class="learn-listing-image">
+    <div class="hub-card-image">
       <img src="<%- item.image %>" alt="<%- item['image-alt'] || '' %>" loading="lazy">
     </div>
 <% } %>
-
-    <div class="learn-listing-body">
-      <div class="learn-card-badges" aria-label="Learning material metadata">
-        <span class="learn-badge learn-badge-type"><%- learningType %></span>
+    <div class="hub-badges" aria-label="Learning material metadata">
+      <span class="hub-badge hub-badge-eco"><%- learningType %></span>
 <% if (isExternal) { %>
-        <span class="learn-badge learn-badge-external">External</span>
-<% } %>
-<% const shownSoftware = software.slice(0, 3); %>
-<% for (const tool of shownSoftware) { %>
-        <span class="learn-badge learn-badge-software">Uses <%- tool %></span>
-<% } %>
-<% if (software.length > shownSoftware.length) { %>
-        <span class="learn-badge learn-badge-more">+<%- software.length - shownSoftware.length %></span>
+      <span class="hub-badge">External</span>
 <% } %>
 <% if (level) { %>
-        <span class="learn-badge learn-badge-level"><%- level %></span>
+      <span class="hub-badge"><%- level %></span>
 <% } %>
-      </div>
-
-      <div class="learn-listing-title" role="heading" aria-level="3">
-        <%- item.title %><% if (isExternal) { %><span class="visually-hidden"> (external tutorial)</span><% } %>
-      </div>
-
-<% if (item.description) { %>
-      <p class="learn-listing-description"><%- item.description %></p>
+<% for (const tool of shownSoftware) { %>
+      <span class="hub-badge">Uses <%- tool %></span>
 <% } %>
-
-<% if (categories.length) { %>
-      <div class="learn-card-topics" aria-label="Topics">
-<% for (const category of categories) { %>
-        <span class="learn-topic-tag"><%- category %></span>
+<% if (software.length > shownSoftware.length) { %>
+      <span class="hub-badge">+<%- software.length - shownSoftware.length %></span>
 <% } %>
-      </div>
-<% } %>
-
-      <span class="learn-card-open" aria-hidden="true">Open <%- learningType.toLowerCase() %> <%= isExternal ? '↗' : '→' %></span>
     </div>
-    </a>
+    <h3><a class="hub-card-link<%= isExternal ? '' : ' no-external' %>" href="<%- item.path %>"<% if (isExternal) { %> target="_blank" rel="noopener"<% } %>><%- item.title %><% if (isExternal) { %><span class="visually-hidden"> (external tutorial)</span><% } %></a></h3>
+<% if (item.description) { %>
+    <p class="hub-desc"><%- item.description %></p>
+<% } %>
+<% if (categories.length) { %>
+    <div class="hub-tags" aria-label="Topics">
+<% for (const category of categories) { %>
+      <button type="button" class="hub-tag" data-facet="topic" data-value="<%= category %>" aria-pressed="false"><%- category %></button>
+<% } %>
+    </div>
+<% } %>
+    <span class="hub-card-open" aria-hidden="true">Open <%- learningType.toLowerCase() %> <%= isExternal ? '↗' : '→' %></span>
   </article>
 <% } %>
 </div>
