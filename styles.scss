@@ -583,7 +583,7 @@ h2.section-heading {
   max-width: 48rem;
   margin-right: auto;
   margin-left: auto;
-  color: $bi-gray;
+  color: var(--hub-ink-muted);
   text-align: center;
 }
 
@@ -814,13 +814,9 @@ h2.section-heading {
   }
 }
 
-/* Concept pages */
 .concept-definition {
   margin: 1.2rem 0 1.8rem;
   padding: 1.15rem 1.25rem;
-  border: 1px solid rgba(42, 101, 118, .16);
-  border-left: 5px solid $bi-teal;
-  border-radius: .375rem;
   background: var(--bi-panel);
   font-size: 1rem;
 }

@@ -1,18 +1,49 @@
 ---
 title: "Resources"
 description: "Standards, support links, reproducibility guidance, citations, and example data for breeding and genomic analysis."
-toc: true
+page-layout: full
+toc: false
+body-classes: software-hub-page resources-hub-page
 ---
 
-Use this page when you need a primary specification, a support route, or a checklist to make an analysis easier to reproduce. For explanations and worked examples, use the [Learn library](learn.qmd). For installation and package documentation, start with [Software](software.qmd).
+::: {.hub-head .column-screen}
+::: {.hub-wrap}
+<h1 class="hub-title">{{< meta title >}}</h1>
 
-::: {.callout-note}
-## Breeding Insight Learning Hub
+<p class="hub-subtitle">{{< meta description >}}</p>
+
+Use this page when you need a primary specification, a support route, or a checklist to make an analysis easier to reproduce. For explanations and worked examples, use the [Learn library](learn.qmd). For installation and package documentation, start with [Software](software.qmd).
+:::
+:::
+
+::: {.hub-body .column-screen}
+::: {.hub-wrap .hub-layout}
+```{=html}
+<nav class="hub-sidebar resources-nav" aria-label="On this page">
+  <p class="resources-nav-title">On this page</p>
+  <ul>
+    <li><a href="#get-help">Get Help</a></li>
+    <li><a href="#standards-and-specifications">Standards and Specifications</a></li>
+    <li><a href="#reproducibility-checklist">Reproducibility Checklist</a></li>
+    <li><a href="#citations-and-licenses">Citations and Licenses</a></li>
+    <li><a href="#example-data-and-downloads">Example Data and Downloads</a></li>
+    <li><a href="#for-contributors">For Contributors</a></li>
+  </ul>
+</nav>
+```
+
+::: {.hub-main .hub-doc}
+::: {.hub-panel}
+<i class="bi bi-journal-bookmark" aria-hidden="true"></i>
+
+::: {}
+<h2>Breeding Insight Learning Hub</h2>
 
 The [Breeding Insight Learning Hub](https://breedinginsight.org/learning-hub/) brings together additional manuals, training materials, videos, and resources for Breeding Insight tools and services.
 :::
+:::
 
-## Get Help
+## Get Help {#get-help}
 
 Report software problems in the repository that owns the code. Search existing issues first, then include the software version, operating system, the step that failed, and the complete error message.
 
@@ -25,15 +56,19 @@ Report software problems in the repository that owns the code. Search existing i
 | Familia | [Breeding-Insight/Familia issues](https://github.com/Breeding-Insight/Familia/issues) |
 | Qploidy2 | [Breeding-Insight/Qploidy2 issues](https://github.com/Breeding-Insight/Qploidy2/issues) |
 
-::: {.callout-warning}
-## Protect Private Data
+::: {.hub-panel .hub-panel-warning}
+<i class="bi bi-shield-exclamation" aria-hidden="true"></i>
+
+::: {}
+<h2>Protect Private Data</h2>
 
 Do not attach private genotype files, phenotypes, pedigrees, sample identifiers, or breeding-program records to a public issue. Create a small simulated or de-identified example when the error cannot be reproduced with package example data.
+:::
 :::
 
 For workshop questions, return to the relevant [workshop setup or module](workshops.qmd). Each maintained workshop lists its expected inputs, checkpoints, and software support route.
 
-## Standards and Specifications
+## Standards and Specifications {#standards-and-specifications}
 
 These are the canonical references for formats and data exchange used across breeding and genomic workflows.
 
@@ -46,7 +81,7 @@ These are the canonical references for formats and data exchange used across bre
 
 Use the version of a standard that matches the tool and project requirements. Record that version with the analysis rather than writing only "VCF" or "BrAPI" in the methods.
 
-## Reproducibility Checklist
+## Reproducibility Checklist {#reproducibility-checklist}
 
 ### Before the Analysis
 
@@ -85,7 +120,7 @@ sessionInfo()
 packageVersion("BIGr")
 ```
 
-## Citations and Licenses
+## Citations and Licenses {#citations-and-licenses}
 
 Use the citation supplied by the software repository or installed R package. In R, check whether a package provides a citation with:
 
@@ -97,7 +132,7 @@ Also record the exact software version and repository URL. A paper citation iden
 
 When reusing a figure, dataset, or other third-party asset, retain its creator, source link, and license. Confirm that the license permits the intended reuse and note whether the material was modified.
 
-## Example Data and Downloads
+## Example Data and Downloads {#example-data-and-downloads}
 
 The [BIGapp workshop dataset guide](workshops/bigapp/dataset-guide.qmd) provides a fully simulated diversity panel with file definitions, direct downloads, checksums, expected record counts, and verified filtering results. It is suitable for learning and software checks, not for biological inference.
 
@@ -107,6 +142,29 @@ The [BIGapp workshop dataset guide](workshops/bigapp/dataset-guide.qmd) provides
 
 For package-specific example data, use the examples distributed with that package or linked from its [software page](software.qmd). This keeps example files synchronized with the code that reads them.
 
-## For Contributors
+## For Contributors {#for-contributors}
 
 Documentation authors and maintainers should use the repository's [contributor guide](https://github.com/Breeding-Insight/software/blob/main/CONTRIBUTING.md) for content types, learning metadata, writing expectations, and listing behavior. Contributor standards remain separate from this public reference page.
+:::
+:::
+:::
+
+```{=html}
+<script>
+// Mark the section being read in the "On this page" list.
+(() => {
+  const links = new Map([...document.querySelectorAll(".resources-nav a")].map((a) => [a.hash.slice(1), a]));
+  const observer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      links.forEach((a) => a.removeAttribute("aria-current"));
+      links.get(entry.target.id)?.setAttribute("aria-current", "true");
+    }
+  }, { rootMargin: "-80px 0px -70% 0px" });
+  links.forEach((_a, id) => {
+    const target = document.getElementById(id);
+    if (target) observer.observe(target);
+  });
+})();
+</script>
+```
