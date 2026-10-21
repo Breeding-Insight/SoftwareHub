@@ -563,75 +563,7 @@ h2.section-heading {
   background: rgba(163, 217, 172, .16);
 }
 
-/* Workshop discovery and lesson pages */
-.workshop-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.15rem;
-  margin: 1.25rem 0 2.5rem;
-}
-
-.workshop-card {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  overflow: hidden;
-  border: 1px solid rgba(42, 101, 118, .18);
-  border-radius: .375rem;
-  background: #fff;
-  color: $bi-charcoal !important;
-  text-decoration: none !important;
-  transition: background-color .16s ease, border-color .16s ease;
-}
-
-.workshop-card:hover,
-.workshop-card:focus-visible {
-  border-color: rgba(42, 101, 118, .45);
-  background: var(--bi-surface-hover);
-}
-
-.workshop-card:focus-visible {
-  outline: 3px solid rgba(72, 169, 197, .32);
-  outline-offset: 2px;
-}
-
-.workshop-card-image {
-  display: grid;
-  min-height: 12rem;
-  place-items: center;
-  padding: 1.25rem;
-  background: $bi-mist;
-}
-
-.workshop-card-image img {
-  width: 100%;
-  height: 9.5rem;
-  object-fit: contain;
-}
-
-.workshop-card-body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 1.1rem;
-}
-
-.workshop-card-body h3 {
-  margin: 0 0 .5rem;
-  font-size: 1.2rem;
-}
-
-.workshop-card-body p {
-  margin-bottom: .65rem;
-  color: $bi-gray;
-}
-
-.workshop-card-link {
-  margin-top: auto;
-  color: $bi-teal-dark;
-  font-weight: 750;
-}
-
+/* Workshop lesson pages */
 .workshop-page figure {
   margin-right: auto;
   margin-left: auto;
@@ -771,10 +703,6 @@ h2.section-heading {
 }
 
 @media (max-width: 760px) {
-  .workshop-grid {
-    grid-template-columns: 1fr;
-  }
-
   body.learning-material-page .quarto-title-meta {
     grid-template-columns: minmax(0, 1fr) !important;
   }
@@ -2982,6 +2910,15 @@ h2.section-heading {
     background: transparent;
   }
 
+  /* Plain output blocks (``` with no language, e.g. "[1] TRUE"): framed like code. */
+  main.content pre:not(.sourceCode) {
+    padding: .6rem .8rem;
+    border: 1px solid var(--hub-border);
+    border-radius: var(--hub-radius);
+    background: var(--hub-surface);
+    color: var(--hub-ink-muted);
+  }
+
   /* Phones: logo first and smaller, so it doesn't sit alone between the intro and Start here. */
   @media (max-width: 900px) {
     .software-header {
@@ -3100,6 +3037,150 @@ h2.section-heading {
 
   div.callout.callout-style-default.callout-titled .callout-header[aria-expanded="false"] {
     padding-bottom: .95rem;
+  }
+}
+
+/* Learning pages (learn/*.qmd): additions to the shared tool-page look above. The badge row
+   and topic tags in the title strip come from assets/learn-badges.lua. */
+.learning-material-page {
+  /* Title strip: badges, then topic tags right under them, then the title. */
+  .quarto-title-banner {
+    .hub-badges {
+      margin: 0;
+    }
+
+    .tool-tags {
+      margin: .5rem 0 0 !important;
+    }
+
+    .quarto-title .title {
+      margin-top: .9rem;
+    }
+  }
+
+  /* Author and dates on one line under the title strip. Quarto's own rule names the
+     header id, so this one does too. */
+  #title-block-header.quarto-title-block.default .quarto-title-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem 1.75rem;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--hub-border);
+
+    > div {
+      display: flex;
+      align-items: baseline;
+      gap: .45rem;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  /* Keywords: one more labelled line under the author and dates; the divider moves
+     below them. */
+  #title-block-header.quarto-title-block.default:has(.keywords) .quarto-title-meta {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  #title-block-header > div:has(> .keywords) {
+    margin-top: .35rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--hub-border);
+  }
+
+  .keywords {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: .45rem;
+
+    .block-title {
+      flex: none;
+      color: var(--hub-ink-muted);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    p {
+      flex: 1 1 16rem;
+      min-width: 0;
+      margin: 0;
+      color: var(--hub-ink);
+      font-size: .9375rem;
+    }
+  }
+
+  .quarto-title-meta-heading {
+    color: var(--hub-ink-muted);
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  .quarto-title-meta-contents {
+    color: var(--hub-ink);
+    font-size: .9375rem;
+  }
+
+  main.content h3 {
+    margin-top: 1.5rem;
+    color: var(--hub-ink);
+    font-size: var(--hub-subsection-size);
+    font-weight: 700;
+  }
+
+  main.content table {
+    border: 1px solid var(--hub-border);
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: var(--hub-radius);
+    overflow: hidden;
+    font-size: .9375rem;
+
+    thead th {
+      background: var(--hub-surface-alt);
+      color: var(--hub-ink);
+      font-weight: 700;
+    }
+
+    th,
+    td {
+      padding: .55rem .75rem;
+      border: 0;
+      border-bottom: 1px solid var(--hub-border);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+  }
+
+  /* "On this page" list, styled like the Resources page section list. */
+  #TOC {
+    h2 {
+      font-size: .8125rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--hub-ink);
+    }
+
+    .nav-link {
+      color: var(--hub-ink-muted);
+    }
+
+    .nav-link.active {
+      border-left-color: var(--hub-primary);
+      color: var(--hub-primary-strong);
+      font-weight: 600;
+    }
   }
 }
 
