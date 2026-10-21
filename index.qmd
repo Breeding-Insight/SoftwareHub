@@ -5,19 +5,27 @@ toc: false
 title-block-banner: false
 body-classes: software-hub-page hub-home-page
 listing:
-  id: featured-software
-  contents:
-    - software/bigr.qmd
-    - software/bigapp.qmd
-    - software/qploidy2.qmd
-  template: assets/featured-software.ejs.md
-  sort: false
-  filter-ui: false
-  sort-ui: false
+  - id: featured-software
+    contents:
+      - software/bigr.qmd
+      - software/bigapp.qmd
+      - software/qploidy2.qmd
+    template: assets/featured-software.ejs.md
+    sort: false
+    filter-ui: false
+    sort-ui: false
+  # Hero: the BI mark with a spoke to each released tool (assets/hub-ring.ejs.md).
+  - id: hub-ring
+    contents: "software/*.qmd"
+    template: assets/hub-ring.ejs.md
+    filter-ui: false
+    sort-ui: false
+    page-size: 1000
 ---
 
-::: {.hub-head .column-screen}
-::: {.hub-wrap}
+::: {.hub-head .hub-hero .column-screen}
+::: {.hub-wrap .hub-hero-grid}
+::: {.hub-hero-text}
 <div class="hub-kicker">Open-source · Plant &amp; animal breeding</div>
 
 <h1 class="hub-title">Software and training for breeding programs</h1>
@@ -27,6 +35,10 @@ listing:
 ::: {.listing-actions}
 [Explore software](software.qmd){.btn-bi-primary}
 [Start learning](learn.qmd){.btn-bi-secondary}
+:::
+:::
+
+::: {#hub-ring .hub-hero-ring}
 :::
 :::
 :::

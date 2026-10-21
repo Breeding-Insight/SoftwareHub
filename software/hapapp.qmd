@@ -16,6 +16,7 @@ links:
   source: https://github.com/Breeding-Insight/HapApp-online
 image: ../assets/software-hapapp.png
 image-alt: "HapApp logo."
+image-shape: square
 ---
 
 ::: {.software-header}

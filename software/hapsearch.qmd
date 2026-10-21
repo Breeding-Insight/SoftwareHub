@@ -15,6 +15,7 @@ links:
 # Logo from the HapSearch landing page (feature-MSA branch, landing/assets/hapsearch-logo.png).
 image: ../assets/software-hapsearch.png
 image-alt: "HapSearch logo."
+image-shape: square
 ---
 
 ::: {.software-header}

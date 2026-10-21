@@ -52,6 +52,7 @@ image-alt: "AlloMate hexagonal logo."
 | `access` | Short note, e.g. "Visit the landing page for more information:" | Shown directly above the "Use online" button on the tool page: add `[{{< meta access >}}]{.access-note}` on the line before the button row. For apps behind ORCID sign-in, start the button text with `<img class="orcid-icon" src="../assets/orcid-icon.svg" alt="">`. |
 | `links.docs`, `website`, `cran`, `source`, `releases` | URLs, any may be omitted | Not shown on cards (each tool page has its own buttons); kept as structured data for later use. |
 | `image-wide` | `true` for wordmark logos | Wider logo slot on cards. |
+| `image-shape` | `square` for logos that are not hexagons | On the home page hub, the logo gets a square tile instead of a place in its domain's honeycomb. Hex logos (the default) tile together, so draw them as full-height pointy-top hexagons on a transparent background. |
 
 The lists of allowed `domain`, `form`, and `tasks` values live at the top of `assets/software-listing.ejs.md`. Rendering fails with a message naming the page if a value is not on those lists or a page lists more than 3 tasks. Add a new task only when it applies to at least two tools or is a task users would look for by name; otherwise use `tags`. Do not use `categories` on software pages.
 
