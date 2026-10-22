@@ -62,7 +62,7 @@ const usedForms = FORMS.filter((form) => sorted.some((item) => item.form === for
       <span class="hub-group-count"><%= group.length %></span>
     </div>
     <div class="hub-items">
-<% for (const item of group) { partial('software-card.ejs.md', { item, compact }); } %>
+<% for (const item of group) { partial('software-card.ejs.md', { item, compact, statuses: STATUSES }); } %>
     </div>
   </section>
 <% } %>
@@ -73,7 +73,7 @@ const usedForms = FORMS.filter((form) => sorted.some((item) => item.form === for
       <span class="hub-group-count"><%= inDevelopment.length %></span>
     </div>
     <div class="hub-items">
-<% for (const item of inDevelopment) { partial('software-card.ejs.md', { item, compact: false }); } %>
+<% for (const item of inDevelopment) { partial('software-card.ejs.md', { item, compact: false, statuses: STATUSES }); } %>
     </div>
   </section>
 <% } %>

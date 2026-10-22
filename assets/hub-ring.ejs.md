@@ -32,7 +32,10 @@ function honeycomb(count) {
   while (cells.length < count) {
     const inRow = Math.min(row % 2 === 0 ? 2 : 1, count - cells.length);
     for (let col = 0; col < inRow; col++) {
-      const x = inRow === 2 ? (col === 0 ? -(HEX_W + GAP) / 2 : (HEX_W + GAP) / 2) : 0;
+      // Two-wide rows keep their offsets even when only one hex is left (count 4 gives 2,1,1),
+      // so it sits diagonally below the single hex above instead of on top of it.
+      const twoWide = count > 1 && row % 2 === 0;
+      const x = twoWide ? (col === 0 ? -(HEX_W + GAP) / 2 : (HEX_W + GAP) / 2) : 0;
       cells.push({ x, y: row * (HEX * 0.75 + GAP * 0.866) });
     }
     row += 1;
@@ -71,7 +74,7 @@ const spots = groups.map((group, index) => {
     <div class="hub-comb" style="width: <%= comb.width %>em; height: <%= comb.height %>em;">
 <% spot.hexes.forEach((tool, index) => { %>
       <a class="hub-hex" href="<%- tool.path %>" title="<%= tool.title %><%= tool.status === 'in-development' ? ' (in development)' : '' %>" style="left: <%= comb.cells[index].left %>em; top: <%= comb.cells[index].top %>em; width: <%= HEX_W %>em; height: <%= HEX %>em;">
-        <span class="hub-hex-shape"><span class="hub-hex-face"><img src="<%- tool.image %>" alt="<%= tool.title %>"></span></span>
+        <span class="hub-hex-shape"><span class="hub-hex-face"><img src="<%- tool.image %>" alt="<%= tool.title %><%= tool.status === 'in-development' ? ' (in development)' : '' %>"></span></span>
       </a>
 <% }); %>
     </div>
@@ -137,6 +140,9 @@ const spots = groups.map((group, index) => {
     const near = (c) => Math.abs(c[0] - edge[0]) + Math.abs(c[1] - edge[1]) + Math.abs(c[2] - edge[2]) < 60;
     let border = 2;
     while (border < boxW * 0.12 && near(px(left + border))) border += 1;
+    // No colour change within 12%: the fill runs to the edge with no outline, so keep the
+    // whole artwork rather than cropping a made-up border off it.
+    if (border >= boxW * 0.12) border = 0;
 
     // The inside of the logo's outline (its box inset by the border, kept in proportion)
     // fills the inner hex, which is the cell inset by the same fraction on every side.
@@ -156,10 +162,18 @@ const spots = groups.map((group, index) => {
       transform: "none"
     });
   }
-  document.querySelectorAll(".hub-hex img").forEach((img) => {
-    if (img.complete && img.naturalWidth) fit(img);
-    else img.addEventListener("load", () => fit(img), { once: true });
-  });
+  // Only measure logos that are on screen: on phones the clusters are hidden, so the scan
+  // waits until the layout shows them (e.g. after rotating or resizing), and runs once.
+  function fitVisible() {
+    document.querySelectorAll(".hub-hex img:not([data-fitted])").forEach((img) => {
+      if (!img.getClientRects().length) return;
+      img.dataset.fitted = "";
+      if (img.complete && img.naturalWidth) fit(img);
+      else img.addEventListener("load", () => fit(img), { once: true });
+    });
+  }
+  fitVisible();
+  window.matchMedia("(min-width: 768px)").addEventListener("change", fitVisible);
 })();
 </script>
 ```

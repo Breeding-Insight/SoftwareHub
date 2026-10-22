@@ -4,11 +4,7 @@
       <div class="release-head">
         $if(image)$<img class="release-logo" src="$image$" alt="">$endif$
         <div>
-          $if(categories)$
-          <div class="hub-badges" aria-label="Package">
-            $for(categories)$<a class="hub-badge hub-badge-eco release-package" href="../news.html?package=$categories$">$categories$</a>$endfor$
-          </div>
-          $endif$
+          $if(release-packages)$$release-packages$$endif$
           $if(title)$<h1 class="title">$title$</h1>$endif$
         </div>
       </div>

@@ -13,4 +13,4 @@ class NoCacheHandler(http.server.SimpleHTTPRequestHandler):
 
 
 handler = functools.partial(NoCacheHandler, directory=str(SITE))
-http.server.ThreadingHTTPServer(("", 8097), handler).serve_forever()
+http.server.ThreadingHTTPServer(("127.0.0.1", 8097), handler).serve_forever()

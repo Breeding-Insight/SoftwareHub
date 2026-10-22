@@ -75,7 +75,7 @@
     items = Array.from(document.querySelectorAll(".news-item")).map((element) => ({
       element,
       packages: decode(element.dataset.package),
-      text: normalize(decodeURIComponent(element.dataset.search || ""))
+      text: normalize(String(decode(element.dataset.search)))
     }));
     if (!items.length) return;
 

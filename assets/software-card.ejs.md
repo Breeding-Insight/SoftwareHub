@@ -3,7 +3,9 @@
 // featured tools on the home page (assets/featured-software.ejs.md).
 //   compact: no logo (Utilities rows)
 //   tagHref: tags become links to the catalog filtered by that tag, for pages without filters
-const STATUS_LABELS = { 'released': 'Released', 'in-development': 'In development' };
+//   statuses: the catalog's STATUSES map (status -> filter label); pages without the Status
+//             filter (home featured software) don't pass it and get the raw status
+const statusLabels = typeof statuses !== 'undefined' ? statuses : {};
 const asArray = (value) => Array.isArray(value) ? value : (value ? [value] : []);
 const encoded = (value) => encodeURIComponent(JSON.stringify(value));
 const initials = (name) => (String(name).match(/[A-Z]/g) || [String(name).slice(0, 2)]).join('').slice(0, 2);
@@ -19,7 +21,7 @@ const searchText = [item.title, item.description, item.domain, item.form, item.v
   .join(' ');
 %>
       <article class="hub-card<%= item.status === 'in-development' ? ' is-dev' : '' %>"
-        data-status="<%= STATUS_LABELS[item.status] %>"
+        data-status="<%= statusLabels[item.status] || item.status %>"
         data-domain="<%= item.domain %>"
         data-form="<%= item.form %>"
         data-online="<%= links.online ? 'true' : 'false' %>"

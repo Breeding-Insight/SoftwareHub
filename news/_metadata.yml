@@ -6,3 +6,5 @@ format:
     title-block-banner: true
     template-partials:
       - ../assets/release-partials/title-block.html
+filters:
+  - ../assets/release-badges.lua
