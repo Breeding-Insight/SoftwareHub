@@ -12,6 +12,7 @@ form: Web app
 tasks: []
 tags: [Breeding records, Database, BrAPI]
 links:
+  online: https://sandbox.breedinginsight.net/
   website: https://breedinginsight.org/learning-hub/deltabreed/
   docs: https://breedinginsight.atlassian.net/wiki/x/I4AlZ
   source: https://github.com/Breeding-Insight/DeltaBreed

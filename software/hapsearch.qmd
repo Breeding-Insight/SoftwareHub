@@ -11,6 +11,7 @@ form: Web app
 tasks: [Microhaplotypes]
 tags: [Sequence alignment, Variant annotation]
 links:
+  online: https://breeding-insight.github.io/HapSearch/
   source: https://github.com/Breeding-Insight/HapSearch
 # Logo from the HapSearch landing page (feature-MSA branch, landing/assets/hapsearch-logo.png).
 image: ../assets/software-hapsearch.png
