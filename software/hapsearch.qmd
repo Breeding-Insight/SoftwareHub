@@ -10,6 +10,7 @@ version: "0.3.0"
 form: Web app
 tasks: [Microhaplotypes]
 tags: [Sequence alignment, Variant annotation]
+access: "Visit the landing page for more information:"
 links:
   online: https://breeding-insight.github.io/HapSearch/
   source: https://github.com/Breeding-Insight/HapSearch
@@ -30,7 +31,15 @@ HapSearch provides overview dashboards for species, marker, haplotype, sample, a
 
 ## Start here
 
-[<i class="bi bi-github" aria-hidden="true"></i> Source code](https://github.com/Breeding-Insight/HapSearch){.btn-bi-primary}
+HapSearch runs online, with no software to install. Access is limited to registered users; to request access, email [bi-science-team@ufl.edu](mailto:bi-science-team@ufl.edu?subject=HapSearch%20access%20request).
+
+[{{< meta access >}}]{.access-note}
+
+[<img class="orcid-icon" src="../assets/orcid-icon.svg" alt=""> Use online](https://breeding-insight.github.io/HapSearch/){.btn-bi-primary data-analytics-event="use_online" data-analytics-tool="HapSearch"}
+
+::: {.start-links}
+[<i class="bi bi-github" aria-hidden="true"></i> Source code](https://github.com/Breeding-Insight/HapSearch){.btn-bi-secondary}
+:::
 
 ## Good fit for
 
