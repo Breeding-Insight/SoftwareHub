@@ -986,8 +986,11 @@ h2.section-heading {
   }
 
   /* Title strip: existing page text, compact */
+  /* Title strip, with the same faint dot grid as the home hero. */
   .hub-head {
-    background: var(--hub-surface-alt);
+    background-color: var(--hub-surface-alt);
+    background-image: radial-gradient(circle, rgba(6, 106, 115, .12) 1px, transparent 1.2px);
+    background-size: 22px 22px;
     border-bottom: 1px solid var(--hub-border);
     padding-block: 1.75rem 1.25rem;
 
@@ -1770,9 +1773,6 @@ h2.section-heading {
     position: relative;
     overflow: hidden;
     padding-block: 2.75rem 2.5rem;
-    background-color: var(--hub-surface-alt);
-    background-image: radial-gradient(circle, rgba(6, 106, 115, .12) 1px, transparent 1.2px);
-    background-size: 22px 22px;
   }
 
   .hub-hero-grid {
@@ -2651,7 +2651,9 @@ h2.section-heading {
     margin-bottom: 0;
     padding-block: 1.75rem 1.25rem;
     border-bottom: 1px solid var(--hub-border);
-    background: var(--hub-surface-alt);
+    background-color: var(--hub-surface-alt);
+    background-image: radial-gradient(circle, rgba(6, 106, 115, .12) 1px, transparent 1.2px);
+    background-size: 22px 22px;
     color: var(--hub-ink);
 
     .quarto-title .title {
