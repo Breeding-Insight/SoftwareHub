@@ -1,0 +1,38 @@
+---
+title: "DeltaBreed"
+description: "Open-source breeding data management software for specialty crop and animal breeders."
+domain: Data Management
+status: released
+version: "1.5.0"
+version-date: 2026-10-02
+version-url: https://github.com/Breeding-Insight/bi-web/releases/tag/v1.5.0
+# DeltaBreed is released through its application repositories, not the DeltaBreed repo.
+release-repo: bi-web
+form: Web app
+tasks: []
+tags: [Breeding records, Database, BrAPI]
+links:
+  online: https://sandbox.breedinginsight.net/
+  website: https://breedinginsight.org/learning-hub/deltabreed/
+  docs: https://breedinginsight.atlassian.net/wiki/x/I4AlZ
+  source: https://github.com/Breeding-Insight/DeltaBreed
+image: ../assets/software-deltabreed.svg
+image-alt: "DeltaBreed logo."
+image-wide: true
+---
+
+::: {.software-header}
+::: {}
+DeltaBreed is open-source data management software for specialty crop and animal breeders. A public sandbox is available for trying its features.
+
+{{< tool-tags >}}
+:::
+<img class="software-logo software-logo-wide" src="../assets/software-deltabreed.svg" alt="DeltaBreed logo">
+:::
+
+## Start here
+
+[<i class="bi bi-play-circle" aria-hidden="true"></i> Public sandbox](https://sandbox.breedinginsight.net/){.btn-bi-primary}
+[<i class="bi bi-book" aria-hidden="true"></i> User manual](https://breedinginsight.atlassian.net/wiki/x/I4AlZ){.btn-bi-secondary}
+[<i class="bi bi-github" aria-hidden="true"></i> Source code](https://github.com/Breeding-Insight/DeltaBreed){.btn-bi-secondary}
+[<i class="bi bi-globe" aria-hidden="true"></i> Breeding Insight page](https://breedinginsight.org/learning-hub/deltabreed/){.btn-bi-secondary}

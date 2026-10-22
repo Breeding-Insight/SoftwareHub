@@ -1,0 +1,52 @@
+---
+title: "HapApp"
+description: "Processes DArTag MADC reports against Breeding Insight's public microhaplotype databases and assigns fixed allele IDs ready for downstream analysis."
+domain: Markers & Haplotypes
+status: in-development
+# HapApp has no GitHub release yet, so its version is set by hand. Remove these two
+# lines once a release is published and the weekly sync will take over.
+version-source: manual
+version: "0.2.0"
+form: Web app
+tasks: [Microhaplotypes, MADC processing]
+tags: [DArTag, Allele IDs, BLAST, Microhaplotype database]
+access: "Visit the landing page for more information:"
+links:
+  online: https://breeding-insight.github.io/HapApp-online/
+  source: https://github.com/Breeding-Insight/HapApp-online
+image: ../assets/software-hapapp.png
+image-alt: "HapApp logo."
+image-shape: square
+---
+
+::: {.software-header}
+::: {}
+HapApp checks a raw DArTag Missing Allele Discovery Count (MADC) report, filters rare microhaplotypes, and compares each one with Breeding Insight's microhaplotype database for your species. Known microhaplotypes keep their established IDs and new ones receive new unique IDs.
+
+{{< tool-tags >}}
+:::
+<img class="software-logo" src="../assets/software-hapapp.png" alt="HapApp logo">
+:::
+
+## Start here
+
+HapApp runs online, with no software to install. Access is limited to registered users; to request access, email [bi-science-team@ufl.edu](mailto:bi-science-team@ufl.edu?subject=HapApp%20access%20request).
+
+[{{< meta access >}}]{.access-note}
+
+[<img class="orcid-icon" src="../assets/orcid-icon.svg" alt=""> Use online](https://breeding-insight.github.io/HapApp-online/){.btn-bi-primary data-analytics-event="use_online" data-analytics-tool="HapApp"}
+
+::: {.start-links}
+[<i class="bi bi-github" aria-hidden="true"></i> Source code](https://github.com/Breeding-Insight/HapApp-online){.btn-bi-secondary}
+:::
+
+## Good fit for
+
+- Processing raw DArTag MADC reports with fixed microhaplotype IDs
+- Combining microhaplotype data across years and projects
+- Preparing MADC files for downstream analysis in BIGr and BIGapp
+
+## Related learning
+
+- [What is a MADC file?](../learn/what-is-a-madc-file.qmd)
+- [Process MADC genotype data](../learn/madc-to-vcf.qmd)

@@ -13,8 +13,16 @@ good NEWS.md entry. The release body is the fallback.
 A version with a NEWS.md entry but no release cannot be dated, so it is skipped
 and reported. Cutting a release for it on GitHub is the fix.
 
-Everything in news/ is generated. Do not hand-edit it; edit the release notes or
-NEWS.md upstream and re-run this script.
+Every news/*.qmd is generated. Do not hand-edit them; edit the release notes or
+NEWS.md upstream and re-run this script. news/_metadata.yml (page styling) is
+hand-written and left alone.
+
+The script also syncs each software page's `version`, `version-date`, and
+`version-url` front matter from the latest published release of the repository in
+its `links.source`, or in `release-repo` when the releases are published elsewhere
+(DeltaBreed's are in bi-web). Pages whose repository has no published release get no
+version. A page with `version-source: manual` keeps its hand-set version and is skipped.
+Those three fields are generated too; do not hand-edit them.
 
 Usage:  python3 scripts/fetch-releases.py
 Set GITHUB_TOKEN to lift the unauthenticated API rate limit.
@@ -43,6 +51,8 @@ PACKAGES = {
 
 ROOT = Path(__file__).resolve().parent.parent
 NEWS_DIR = ROOT / "news"
+SOFTWARE_DIR = ROOT / "software"
+VERSION_FIELDS = ("version", "version-date", "version-url")
 
 
 def fetch_releases(repo):
@@ -96,6 +106,76 @@ def fetch_news_sections(repo):
     if version:
         sections[version] = "\n".join(buffer).strip()
     return {k: v for k, v in sections.items() if v}
+
+
+def normalize_version(tag):
+    """Release tag -> version number: "v2.1.0" and "v.2.1.0" both become "2.1.0"."""
+    return re.sub(r"^[vV]\.?", "", tag.strip())
+
+
+def latest_release(releases):
+    published = [r for r in releases if not r.get("draft") and not r.get("prerelease")]
+    if not published:
+        return None
+    return max(published, key=lambda r: r["published_at"])
+
+
+def source_repo(page_text):
+    """The repository whose releases give a software page its version.
+
+    `release-repo: <name>` in the front matter wins; otherwise the Breeding-Insight
+    repository named in links.source.
+    """
+    override = re.search(r"^release-repo:\s*([\w.\-]+)\s*$", page_text, re.M)
+    if override:
+        return override.group(1)
+    match = re.search(
+        rf"^\s+source:\s*https://github\.com/{ORG}/([\w.\-]+?)/?\s*$", page_text, re.M
+    )
+    return match.group(1) if match else None
+
+
+def set_version_fields(page_text, release):
+    """Replace the generated version fields in a page's front matter.
+
+    They sit right after the `status:` line, so the hand-written fields stay as they are.
+    """
+    end = page_text.index("\n---", 3)
+    front, rest = page_text[:end], page_text[end:]
+    front = "\n".join(
+        line for line in front.split("\n")
+        if not any(line.startswith(f"{field}:") for field in VERSION_FIELDS)
+    )
+    if release:
+        fields = "\n".join([
+            f"version: {yaml_quote(normalize_version(release['tag_name']))}",
+            f"version-date: {release['published_at'][:10]}",
+            f"version-url: {release['html_url']}",
+        ])
+        front, count = re.subn(r"^(status: .*)$", lambda m: m.group(1) + "\n" + fields, front, count=1, flags=re.M)
+        if not count:
+            front += "\n" + fields
+    return front + rest
+
+
+def sync_versions(release_cache):
+    """Write the latest release of each software page's repository into its front matter."""
+    for page in sorted(SOFTWARE_DIR.glob("*.qmd")):
+        text = page.read_text(encoding="utf-8")
+        if re.search(r"^version-source:\s*manual\s*$", text, re.M):
+            print(f"  {page.name}: manual")
+            continue
+        repo = source_repo(text)
+        release = None
+        if repo:
+            if repo not in release_cache:
+                release_cache[repo] = fetch_releases(repo)
+            release = latest_release(release_cache[repo])
+        updated = set_version_fields(text, release)
+        if updated != text:
+            page.write_text(updated, encoding="utf-8")
+        label = normalize_version(release["tag_name"]) if release else "no release"
+        print(f"  {page.name}: {label}")
 
 
 def demote_headings(body):
@@ -183,7 +263,7 @@ def yaml_quote(value):
 
 
 def write_entry(repo, slug, logo, release, news_sections):
-    version = release["tag_name"].lstrip("vV")
+    version = normalize_version(release["tag_name"])
     title = f"{repo} {version}"
     published = release["published_at"][:10]
 
@@ -228,9 +308,11 @@ def main():
 
     written = 0
     skipped = []
+    release_cache = {}
     for repo, (slug, logo) in PACKAGES.items():
         try:
             releases = fetch_releases(repo)
+            release_cache[repo] = releases
         except urllib.error.HTTPError as error:
             print(f"  {repo}: HTTP {error.code} — skipped", file=sys.stderr)
             skipped.append(repo)
@@ -249,13 +331,25 @@ def main():
         notes = []
         if not published:
             notes.append("no published releases")
-        undated = sorted(set(news_sections) - {r["tag_name"].lstrip("vV") for r in published})
+        undated = sorted(set(news_sections) - {normalize_version(r["tag_name"]) for r in published})
         if undated:
             notes.append(f"NEWS.md but no release: {', '.join(undated)}")
         suffix = f"  ({'; '.join(notes)})" if notes else ""
         print(f"  {repo}: {len(published)} release(s){suffix}")
 
     print(f"Wrote {written} entries to {NEWS_DIR.relative_to(ROOT)}/")
+
+    if skipped:
+        # Leave the page versions alone rather than clearing them for a failed repository.
+        print("Skipping version sync because some releases could not be fetched.", file=sys.stderr)
+    else:
+        print("Software page versions:")
+        try:
+            sync_versions(release_cache)
+        except urllib.error.URLError as error:
+            print(f"Version sync failed: {error}", file=sys.stderr)
+            return 1
+
     if skipped:
         # Fail loudly: a silent partial run would quietly drop a package's
         # history from the site on the next commit.

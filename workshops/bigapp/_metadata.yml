@@ -7,4 +7,6 @@ toc: true
 toc-depth: 3
 format:
   html:
+    # Learning-page styling (see "Learning pages" and "Workshop lesson pages" in styles.scss).
     body-classes: learning-material-page workshop-page
+    title-block-banner: true

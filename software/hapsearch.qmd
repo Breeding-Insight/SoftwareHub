@@ -1,0 +1,48 @@
+---
+title: "HapSearch"
+description: "A web-based microhaplotype analysis platform for searching, visualizing, and sharing haplotype data across breeding projects and species."
+domain: Markers & Haplotypes
+status: in-development
+# HapSearch has no GitHub release yet, so its version is set by hand. Remove these two
+# lines once a release is published and the weekly sync will take over.
+version-source: manual
+version: "0.3.0"
+form: Web app
+tasks: [Microhaplotypes]
+tags: [Sequence alignment, Variant annotation]
+access: "Visit the landing page for more information:"
+links:
+  online: https://breeding-insight.github.io/HapSearch/
+  source: https://github.com/Breeding-Insight/HapSearch
+# Logo from the HapSearch landing page (feature-MSA branch, landing/assets/hapsearch-logo.png).
+image: ../assets/software-hapsearch.png
+image-alt: "HapSearch logo."
+image-shape: square
+---
+
+::: {.software-header}
+::: {}
+HapSearch provides overview dashboards for species, marker, haplotype, sample, and project coverage, marker exploration with multiple sequence alignment and variant annotation views, and haplotype exploration with sample and project context.
+
+{{< tool-tags >}}
+:::
+<img class="software-logo" src="../assets/software-hapsearch.png" alt="HapSearch logo">
+:::
+
+## Start here
+
+HapSearch runs online, with no software to install. Access is limited to registered users; to request access, email [bi-science-team@ufl.edu](mailto:bi-science-team@ufl.edu?subject=HapSearch%20access%20request).
+
+[{{< meta access >}}]{.access-note}
+
+[<img class="orcid-icon" src="../assets/orcid-icon.svg" alt=""> Use online](https://breeding-insight.github.io/HapSearch/){.btn-bi-primary data-analytics-event="use_online" data-analytics-tool="HapSearch"}
+
+::: {.start-links}
+[<i class="bi bi-github" aria-hidden="true"></i> Source code](https://github.com/Breeding-Insight/HapSearch){.btn-bi-secondary}
+:::
+
+## Good fit for
+
+- Searching microhaplotypes across breeding projects and species
+- Comparing marker sequences with multiple sequence alignment
+- Reviewing which samples and projects carry a haplotype

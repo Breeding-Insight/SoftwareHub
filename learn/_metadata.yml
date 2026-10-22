@@ -1,3 +1,10 @@
+# Learning pages share the hub styling (see "Learning pages" in styles.scss). The title
+# strip shows the same badges and topics as the page's card on the Learn page.
 format:
   html:
     body-classes: learning-material-page
+    title-block-banner: true
+    template-partials:
+      - ../assets/learn-partials/title-block.html
+filters:
+  - ../assets/learn-badges.lua

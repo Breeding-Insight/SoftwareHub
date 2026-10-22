@@ -1,0 +1,23 @@
+<header id="title-block-header" class="quarto-title-block default">
+  <div class="quarto-title-banner">
+    <div class="quarto-title column-body">
+      <div class="release-head">
+        $if(image)$<img class="release-logo" src="$image$" alt="">$endif$
+        <div>
+          $if(release-packages)$$release-packages$$endif$
+          $if(title)$<h1 class="title">$title$</h1>$endif$
+        </div>
+      </div>
+      $if(description)$
+      <div>
+        <div class="description">
+          $description$
+        </div>
+      </div>
+      $endif$
+    </div>
+  </div>
+
+  $title-metadata.html()$
+
+</header>

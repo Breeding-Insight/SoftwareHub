@@ -1,38 +1,62 @@
 ---
 title: "Workshops"
 description: "Hands-on training materials, exercises, and workshop resources."
-toc: true
+page-layout: full
+toc: false
+body-classes: software-hub-page workshops-hub-page
 ---
 
-Use a workshop when you want a guided sequence of explanations and hands-on exercises. The example files are included so every participant can follow the same analysis.
+::: {.hub-head .column-screen}
+::: {.hub-wrap}
+<h1 class="hub-title">{{< meta title >}}</h1>
 
-::: {.callout-note}
-## Request a workshop
+<p class="hub-subtitle">{{< meta description >}}</p>
+
+Use a workshop when you want a guided sequence of explanations and hands-on exercises. The example files are included so every participant can follow the same analysis.
+:::
+:::
+
+::: {.hub-body .column-screen}
+::: {.hub-wrap .hub-home}
+
+::: {.hub-panel}
+<i class="bi bi-envelope" aria-hidden="true"></i>
+
+::: {}
+<h2>Request a workshop</h2>
 
 Interested in a workshop for your program or group? Email us at [bi-science@ufl.edu](mailto:bi-science@ufl.edu) and we can discuss options.
 :::
+:::
 
+::: {.hub-group}
+::: {.hub-group-head}
 ## Available workshops
+:::
 
 ```{=html}
-<div class="workshop-grid">
-  <a class="workshop-card no-external" href="workshops/bigapp/">
-    <div class="workshop-card-image">
+<div class="hub-items">
+  <article class="hub-card hub-card-wide">
+    <div class="hub-card-image">
       <img src="assets/card-bigapp.svg" alt="BIGapp interface represented by a browser window with genomic charts">
     </div>
-    <div class="workshop-card-body">
-      <h3>Introduction to BIGapp for Plant Breeding</h3>
-      <p>Import and filter genotype data, explore population structure, run GWASpoly, and try genomic prediction in a two-hour, point-and-click workshop. Local BIGapp installation is required.</p>
-      <div class="meta-row" aria-label="Workshop details">
-        <span class="pill">Workshop</span>
-        <span class="pill">Beginner</span>
-        <span class="pill">BIGapp</span>
-        <span class="pill">2 hours</span>
-      </div>
-      <span class="workshop-card-link">Open workshop</span>
+    <div class="hub-card-body">
+    <div class="hub-badges" aria-label="Workshop details">
+      <span class="hub-badge hub-badge-eco">Workshop</span>
+      <span class="hub-badge">Beginner</span>
+      <span class="hub-badge">BIGapp</span>
+      <span class="hub-badge">2 hours</span>
     </div>
-  </a>
+    <h3><a class="hub-card-link no-external" href="workshops/bigapp/">Introduction to BIGapp for Plant Breeding</a></h3>
+    <p class="hub-desc">Import and filter genotype data, explore population structure, run GWASpoly, and try genomic prediction in a two-hour, point-and-click workshop. Local BIGapp installation is required.</p>
+    <span class="hub-card-open" aria-hidden="true">Open workshop →</span>
+    </div>
+  </article>
 </div>
 ```
 
 Looking for a shorter resource? Browse the [Learn library](learn.qmd) for focused concepts, guides, tutorials, and workflows.
+:::
+
+:::
+:::

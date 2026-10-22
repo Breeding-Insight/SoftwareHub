@@ -1,0 +1,15 @@
+<!--
+  Navbar brand: the Breeding Insight logo links to breedinginsight.org (navbar.logo-href in
+  _quarto.yml), but Quarto applies logo-href to the "SoftwareHub" title too. Point the title
+  back to this site's home page, using Quarto's offset to the site root.
+-->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const title = document.querySelector("#quarto-header a.navbar-brand:not(.navbar-brand-logo)");
+  const offset = document.querySelector('meta[name="quarto:offset"]');
+  if (!title || !offset) return;
+  title.href = `${offset.content}index.html`;
+  title.removeAttribute("target");
+  title.removeAttribute("rel");
+});
+</script>

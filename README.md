@@ -28,9 +28,9 @@ The site is written to `_site/`.
 ## Add software
 
 1. Copy an existing file in `software/`.
-2. Update `title`, `description`, `categories`, and `image` in YAML.
-3. Add installation and canonical links.
-4. Render. The `software.qmd` listing updates automatically.
+2. Update `title`, `description`, `domain`, `form`, `tasks`, `tags`, `links`, and `image` in YAML (see "Required software metadata" in `CONTRIBUTING.md`).
+3. For an app hosted online, set `links.online` to its GitHub Pages landing page and add a "Use online" button under "Start here".
+4. Render. The `software.qmd` catalog updates automatically.
 
 ## Add learning material
 
@@ -42,6 +42,10 @@ The site is written to `_site/`.
 6. Render. The `learn.qmd` listing and topic discovery system update from page metadata.
 
 The Learn page is task-first. Broad scientific topics drive visible categories; package names, difficulty, content type, and precise search terms remain separate metadata dimensions. Goal cards can pre-filter the Quarto listing through shareable `?filter=` URLs. A custom metadata-driven listing template renders `learning-type`, `software`, and `level` as distinct badges while retaining searchable topic tags.
+
+## Analytics
+
+The site uses Google Analytics 4, UF's standard analytics tool, through Quarto's built-in support. Set `google-analytics` in `_quarto.yml` to the GA4 Measurement ID and uncomment the `cookie-consent` block below it. Links tagged with `data-analytics-event` send a GA4 event when clicked (`assets/analytics-events.html`); the "Use online" buttons on tool pages send `use_online` with a `tool` parameter. GA4's automatic outbound-click tracking does not cover these because the app landing pages share the `breeding-insight.github.io` domain with this site. To report on `tool`, register it as a custom dimension in GA4 (Admin > Custom definitions).
 
 ## Deployment
 
