@@ -18,8 +18,10 @@ website:
   description: "Software, tutorials, workshops, and documentation from Breeding Insight."
   favicon: assets/bi-mark.png
   open-graph: true
-  # Google Analytics 4 (UF's standard). Uncomment and set the Measurement ID from the GA4 data
-  # stream (Admin > Data streams). "Use online" clicks are sent as a use_online event by
+  # Google Analytics 4 (UF's standard). Turn on once the site moves to
+  # softwarehub.breedinginsight.org (update site-url above at the same time): uncomment and set the
+  # Measurement ID of the existing breedinginsight.org web stream (Admin > Data streams), so the
+  # hub and the main site share one property. "Use online" clicks are sent as a use_online event by
   # assets/analytics-events.html. cookie-consent shows Quarto's notice; "implied" keeps
   # tracking on unless the visitor opts out.
   # google-analytics: "G-XXXXXXXXXX"
@@ -92,6 +94,8 @@ website:
         href: https://github.com/Breeding-Insight
       - text: Main website
         href: https://breedinginsight.org/
+      - text: Privacy
+        href: https://policy.ufl.edu/policy/online-internet-privacy-statement/
     right: |
       <div class="footer-copyright">&copy; 2026 Breeding Insight</div>
   repo-url: https://github.com/Breeding-Insight/SoftwareHub
