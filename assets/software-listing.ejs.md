@@ -4,7 +4,7 @@
 // so new domains, types, or tasks are added deliberately (see CONTRIBUTING.md).
 const DOMAINS = [
   'Genomic Analysis',
-  'Data Management',
+  'Breeding Data',
   'Pedigree & Mating',
   'Markers & Haplotypes',
   'Phenomics',
@@ -16,7 +16,8 @@ const FORMS = ['Web app', 'R Shiny app', 'R package', 'Python package', 'Mobile 
 const TASKS = [
   'GWAS', 'Genomic selection', 'Population structure', 'Ploidy', 'CNV',
   'Microhaplotypes', 'MADC processing',
-  'Mate allocation', 'Kinship', 'Pedigree', 'Parentage', 'Ancestry'
+  'Mate allocation', 'Kinship', 'Pedigree', 'Parentage', 'Ancestry',
+  'Data management','Phenotypic analysis','Image processing'
 ];
 const MAX_TASKS = 3;
 // Release status. In-development tools get their own section at the bottom of the page,
