@@ -1,7 +1,7 @@
 ---
 title: "DeltaBreed"
 description: "Open-source breeding data management software for specialty crop and animal breeders."
-domain: Data Management
+domain: Breeding Data
 status: released
 version: "1.5.0"
 version-date: 2026-10-02
@@ -9,7 +9,7 @@ version-url: https://github.com/Breeding-Insight/bi-web/releases/tag/v1.5.0
 # DeltaBreed is released through its application repositories, not the DeltaBreed repo.
 release-repo: bi-web
 form: Web app
-tasks: []
+tasks: [Data management]
 tags: [Breeding records, Database, BrAPI]
 links:
   online: https://sandbox.breedinginsight.net/
