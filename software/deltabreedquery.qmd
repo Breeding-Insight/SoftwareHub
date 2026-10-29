@@ -22,7 +22,7 @@ image-wide: true
 The `deltabreedquery` R package provides tools to retrieve data from [DeltaBreed](https://softwarehub.breedinginsight.org/software/deltabreed), 
 Breeding Insight's breeding data management platform, using the open-source [BrAPI](https://brapi.org/) standard.
 
-With `deltabreedquery`, you can import all of a program's experiments, germplasm, trait definitions, 
+Using `deltabreedquery`, you can import all of a program's experiments, germplasm, trait definitions, 
 and observation (phenotype) data directly into R, without the need to reformat or manually download + read in files. 
 
 Observation data can be filtered on a range of common fields: year, location, trial type, etc.
@@ -34,7 +34,7 @@ Observation data can be filtered on a range of common fields: year, location, tr
 
 ## Start here
 
-To try out the basic functions of `deltabreedquery`, install the package from CRAN on any R environment
+To try out the basic functions, install the package from CRAN on any R environment
 and load an example program:
 
 ```r
@@ -45,7 +45,7 @@ login_deltabreed("example")
 expts <- get_experiments()
 germ <- get_germplasm()
 obs <- get_observations()
-ilt <- filter_observations(location = "Manitoba", year = 2026)
+filt <- filter_observations(location = "Manitoba", year = 2026)
 ```
 
 ## Learn more
