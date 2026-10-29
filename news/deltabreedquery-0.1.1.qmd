@@ -1,0 +1,15 @@
+---
+title: "deltabreedquery 0.1.1"
+date: 2026-02-24
+description: "This patch fixes several critical bugs in get_observations() that were causing data frames to be retrieved incorrectly"
+categories: [deltabreedquery]
+image: ../assets/software-deltabreedquery.png
+image-alt: "deltabreedquery logo"
+toc: false
+---
+
+This patch fixes several critical bugs in `get_observations()` that were causing data frames to be retrieved incorrectly
+
+The README has also been updated with clearer installation instructions
+
+[Release on GitHub](https://github.com/Breeding-Insight/deltabreedquery/releases/tag/v0.1.1) · [About deltabreedquery](../software/deltabreedquery.qmd)

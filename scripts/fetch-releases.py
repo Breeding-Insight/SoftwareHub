@@ -47,6 +47,7 @@ PACKAGES = {
     "Familia": ("familia", "software-familia.png"),
     "AlloMate": ("allomate", "software-allomate.png"),
     "Qploidy2": ("qploidy2", "software-qploidy2.png"),
+    "deltabreedquery": ("deltabreedquery", "software-deltabreedquery.png")
 }
 
 ROOT = Path(__file__).resolve().parent.parent

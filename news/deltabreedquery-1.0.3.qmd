@@ -1,0 +1,17 @@
+---
+title: "deltabreedquery 1.0.3"
+date: 2026-08-25
+description: "First official public release of deltabreedquery."
+categories: [deltabreedquery]
+image: ../assets/software-deltabreedquery.png
+image-alt: "deltabreedquery logo"
+toc: false
+---
+
+First official public release of deltabreedquery. This matches the package [as it was accepted to CRAN](https://cran.r-project.org/web/packages/deltabreedquery/index.html).
+
+All core functions now have runnable examples using prepackaged sample data.
+
+Tested and working with both production-level DeltaBreed instances (anything at app.breedinginsight.net), as well as pre-release instances used internally by Breeding Insight.
+
+[Release on GitHub](https://github.com/Breeding-Insight/deltabreedquery/releases/tag/v1.0.3) · [About deltabreedquery](../software/deltabreedquery.qmd)

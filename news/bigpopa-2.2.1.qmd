@@ -1,0 +1,15 @@
+---
+title: "BIGpopA 2.2.1"
+date: 2026-10-27
+description: "check_ped(): each cycle in dependencies is now reported once, as a closed path in which every id is a recorded parent of the one before it (e.g."
+categories: [BIGpopA]
+image: ../assets/software-bigpopa.png
+image-alt: "BIGpopA logo"
+toc: false
+---
+
+- `check_ped()`: each cycle in `dependencies` is now reported once, as a closed path in which every id is a recorded parent of the one before it (e.g. `A -> B -> A`), instead of once per individual in the cycle. Interlocked loops are reported together, with one loop as an example. Cycle detection now runs in linear time without recursion, so large pedigrees with many shared ancestors no longer stall, and an individual recorded as its own parent is reported only by its own message.
+- `check_ped()`: `dependencies` always has a character `dependency` column; with no dependencies it was a data frame without columns.
+- `find_parentage()`: the error of tied best pairs (`mendelian_error_pct_2`, ...) is rounded to 2 decimals, like the best pair; it was printed with full precision.
+
+[Release on GitHub](https://github.com/Breeding-Insight/BIGpopA/releases/tag/v2.2.1) · [About BIGpopA](../software/bigpopa.qmd)

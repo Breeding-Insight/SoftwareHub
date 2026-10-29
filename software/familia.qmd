@@ -3,9 +3,9 @@ title: "Familia"
 description: "Pedigree validation, parentage assignment, and ancestry assessment for plant and animal populations."
 domain: Pedigree & Mating
 status: released
-version: "2.0.0"
-version-date: 2026-08-24
-version-url: https://github.com/Breeding-Insight/familia/releases/tag/v2.0.0
+version: "2.1.0"
+version-date: 2026-10-28
+version-url: https://github.com/Breeding-Insight/familia/releases/tag/v2.1.0
 form: R Shiny app
 tasks: [Pedigree, Parentage, Ancestry]
 tags: [Population structure]
