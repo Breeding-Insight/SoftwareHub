@@ -8,9 +8,8 @@ form: Web app
 tasks: [Data management, Image processing]
 tags: []
 links:
-  cran: https://cran.r-project.org/package=deltabreedquery
+  online: https://grin-image-renamer-516395572783.us-central1.run.app
   source: https://github.com/tyrwh/GRIN_image_renamer
-
 image: ../assets/software-qr.png
 image-alt: "QR code leading to the Breeding Insight website."
 image-wide: true
