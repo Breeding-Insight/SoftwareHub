@@ -22,7 +22,7 @@ of image files by reading text from a QR code present in each image, rather than
 
 Access an online version of the app here:
 
-[Launch web app <i class="bi bi-arrow-up-right" aria-hidden="true"></i>](https://grin-image-renamer-516395572783.us-central1.run.app){.btn-bi-launcher target="_blank" rel="noopener"}
+[Launch web app <i class="bi bi-arrow-up-right" aria-hidden="true"></i>](https://grin-image-renamer-516395572783.us-central1.run.app){.btn-bi-launcher target="_blank" rel="noopener" data-analytics-event="use_online" data-analytics-tool="HapApp"}
 
 To save on hosting costs, the web version of the app goes dormant when not in use.
 **You may have to wait up to a minute while it starts up again.**
