@@ -6,7 +6,7 @@
 // HapApp) get tiles. In-development tools are included; their titles say so. Built from
 // software/*.qmd (listing "hub-ring" in index.qmd), so a new tool with an `image` joins its
 // domain on the next render. Domain order follows DOMAINS in assets/software-listing.ejs.md.
-const DOMAINS = ['Genomic Analysis', 'Data Management', 'Pedigree & Mating', 'Markers & Haplotypes', 'Phenomics', 'Utilities'];
+const DOMAINS = ['Genomic Analysis', 'Breeding Data', 'Pedigree & Mating', 'Markers & Haplotypes', 'Phenomics', 'Utilities'];
 const tools = items
   .filter((item) => item.image)
   .sort((a, b) => String(a.title).localeCompare(String(b.title)));
