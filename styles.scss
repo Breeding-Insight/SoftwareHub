@@ -417,27 +417,6 @@ main.content h3 {
   color: #fff !important;
 }
 
-/* Launch button (e.g. "Launch web app"): the primary button with larger text. */
-.btn-bi-launcher {
-  display: inline-flex;
-  align-items: center;
-  gap: .4rem;
-  min-height: 2.65rem;
-  padding: .62rem .9rem;
-  border-radius: .3rem;
-  background: $bi-teal-dark;
-  color: #fff !important;
-  font-size: 1.1rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: background-color .15s ease, border-color .15s ease;
-}
-
-.btn-bi-launcher:hover {
-  background-color: #204f5d;
-  color: #fff !important;
-}
-
 .section-heading {
   margin-top: 2.75rem;
   font-size: inherit;
@@ -1860,6 +1839,13 @@ h2.section-heading {
     justify-items: center;
     gap: .45em;
     transform: translate(-50%, -50%);
+  }
+
+  /* A domain's logos in one row: the honeycomb and the tiles side by side when it has both. */
+  .hub-ring-tools {
+    display: flex;
+    align-items: center;
+    gap: .35em;
   }
 
   /* The cluster casts one shadow, so touching hexes read as a single honeycomb. */

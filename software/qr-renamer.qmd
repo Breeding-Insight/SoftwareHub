@@ -22,7 +22,7 @@ of image files by reading text from a QR code present in each image, rather than
 
 Access an online version of the app here:
 
-[Launch web app <i class="bi bi-arrow-up-right" aria-hidden="true"></i>](https://grin-image-renamer-516395572783.us-central1.run.app){.btn-bi-launcher target="_blank" rel="noopener" data-analytics-event="use_online" data-analytics-tool="QR Image Renamer"}
+[Launch web app <i class="bi bi-arrow-up-right" aria-hidden="true"></i>](https://grin-image-renamer-516395572783.us-central1.run.app){.btn-bi-primary target="_blank" rel="noopener" data-analytics-event="use_online" data-analytics-tool="QR Image Renamer"}
 
 To save on hosting costs, the web version of the app goes dormant when not in use.
 **You may have to wait up to a minute while it starts up again.**
@@ -39,14 +39,14 @@ The app works by detecting and reading QR codes in each image, then using this t
 An image must contain exactly one visible, legible QR code (or the similar [Aztec code](https://en.wikipedia.org/wiki/Aztec_Code))
 in order for the image to be automatically renamed. In the example below, the QR code encodes the text "PI 245011 97GI SD":
 
-<img class="center" style="display: block; margin: 0 auto;" width=700 src="../assets/renamer-workflow-1.png" alt="Diagram of the first steps of the QR renamer tool, code detection and parsing.">
+![](../assets/renamer-workflow-1.png){fig-alt="Diagram of the first steps of the QR renamer tool, code detection and parsing." fig-align="center" width="700"}
 
 If no QR codes are detected, or if more than one is detected, the image can be renamed manually, excluded from the final set
 of renamed images, or included under its original name.
 
 You can then split and rejoin the text using custom characters and make other adjustments as needed:
 
-<img class="center" style="display: block; margin: 0 auto;" width=340 src="../assets/renamer-workflow-2.png" alt="Diagram of the later steps of the QR renamer tool, constructing filenames from the parsed text.">
+![](../assets/renamer-workflow-2.png){fig-alt="Diagram of the later steps of the QR renamer tool, constructing filenames from the parsed text." fig-align="center" width="340"}
 
 All filenames can be manually edited before you download the final set of renamed images.
 
@@ -67,6 +67,6 @@ QR code parsing is handled by the python [pyrxing](https://pypi.org/project/pyrx
 
 To view the source code and learn more, please visit the project's GitHub repository below.
 
-[GitHub](https://github.com/tyrwh/GRIN_image_renamer){.btn-bi-primary}
+[<i class="bi bi-github" aria-hidden="true"></i> Source code](https://github.com/tyrwh/GRIN_image_renamer){.btn-bi-secondary}
 
 

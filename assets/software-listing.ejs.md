@@ -17,7 +17,7 @@ const TASKS = [
   'GWAS', 'Genomic selection', 'Population structure', 'Ploidy', 'CNV',
   'Microhaplotypes', 'MADC processing',
   'Mate allocation', 'Kinship', 'Pedigree', 'Parentage', 'Ancestry',
-  'Data management','Phenotypic analysis','Image processing'
+  'Data management', 'Phenotypic analysis', 'Image processing'
 ];
 const MAX_TASKS = 3;
 // Release status. In-development tools get their own section at the bottom of the page,

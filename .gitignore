@@ -55,3 +55,6 @@ rsconnect/
 
 # Mac filesystem trackers
 .DS_Store
+
+# Claude Code local settings, skills and preview config
+/.claude/

@@ -14,7 +14,6 @@ links:
   source: https://github.com/Breeding-Insight/deltabreedquery
 image: ../assets/software-deltabreedquery.png
 image-alt: "deltabreedquery logo."
-image-wide: true
 ---
 
 ::: {.software-header}
@@ -29,7 +28,7 @@ Observation data can be filtered on a range of common fields: year, location, tr
 
 {{< tool-tags >}}
 :::
-<img class="software-logo software-logo-wide" src="../assets/software-deltabreedquery.png" alt="deltabreedquery logo">
+<img class="software-logo" src="../assets/software-deltabreedquery.png" alt="deltabreedquery logo">
 :::
 
 ## Start here

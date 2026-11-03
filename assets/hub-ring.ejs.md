@@ -5,8 +5,9 @@
 // honeycomb; other logos (`image-wide`, e.g. DeltaBreed, or `image-shape: square`, e.g.
 // HapApp) get tiles. In-development tools are included; their titles say so. Built from
 // software/*.qmd (listing "hub-ring" in index.qmd), so a new tool with an `image` joins its
-// domain on the next render. Domain order follows DOMAINS in assets/software-listing.ejs.md.
-const DOMAINS = ['Genomic Analysis', 'Breeding Data', 'Pedigree & Mating', 'Markers & Haplotypes', 'Phenomics', 'Utilities'];
+// domain on the next render. Domain order follows DOMAINS in assets/software-listing.ejs.md;
+// Utilities tools are left out of the hub and listed on the Software page only.
+const DOMAINS = ['Genomic Analysis', 'Breeding Data', 'Pedigree & Mating', 'Markers & Haplotypes', 'Phenomics'];
 const tools = items
   .filter((item) => item.image)
   .sort((a, b) => String(a.title).localeCompare(String(b.title)));
@@ -53,7 +54,10 @@ const spots = groups.map((group, index) => {
     x: (50 + RADIUS * Math.cos(angle)).toFixed(2),
     y: (50 + RADIUS * Math.sin(angle)).toFixed(2),
     hexes: group.tools.filter((tool) => !isTile(tool)),
-    tiles: group.tools.filter(isTile)
+    tiles: group.tools.filter(isTile),
+    // A domain with both kinds shows them side by side, in title order (DeltaBreed, then
+    // deltabreedquery), rather than stacking the honeycomb above the tiles.
+    tilesFirst: isTile(group.tools[0])
   };
 });
 %>
@@ -70,7 +74,9 @@ const spots = groups.map((group, index) => {
      const comb = honeycomb(spot.hexes.length);
 %>
   <div class="hub-ring-cluster" style="left: <%= spot.x %>%; top: <%= spot.y %>%;" role="group" aria-label="<%= spot.domain %>">
-<% if (spot.hexes.length) { %>
+    <div class="hub-ring-tools">
+<% const parts = spot.tilesFirst ? ['tiles', 'comb'] : ['comb', 'tiles']; for (const part of parts) { %>
+<% if (part === 'comb' && spot.hexes.length) { %>
     <div class="hub-comb" style="width: <%= comb.width %>em; height: <%= comb.height %>em;">
 <% spot.hexes.forEach((tool, index) => { %>
       <a class="hub-hex" href="<%- tool.path %>" title="<%= tool.title %><%= tool.status === 'in-development' ? ' (in development)' : '' %>" style="left: <%= comb.cells[index].left %>em; top: <%= comb.cells[index].top %>em; width: <%= HEX_W %>em; height: <%= HEX %>em;">
@@ -79,7 +85,7 @@ const spots = groups.map((group, index) => {
 <% }); %>
     </div>
 <% } %>
-<% if (spot.tiles.length) { %>
+<% if (part === 'tiles' && spot.tiles.length) { %>
     <div class="hub-tiles">
 <% for (const tool of spot.tiles) { %>
     <a class="hub-tile<%= tool['image-wide'] ? ' is-wide' : '' %>" href="<%- tool.path %>" title="<%= tool.title %><%= tool.status === 'in-development' ? ' (in development)' : '' %>">
@@ -88,6 +94,8 @@ const spots = groups.map((group, index) => {
 <% } %>
     </div>
 <% } %>
+<% } %>
+    </div>
     <span class="hub-ring-domain"><%= spot.domain %></span>
   </div>
 <% } %>
