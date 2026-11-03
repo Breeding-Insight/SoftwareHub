@@ -1,0 +1,19 @@
+---
+title: "deltabreedquery 1.0.4"
+date: 2026-10-12
+description: "Minor bug fixes and"
+categories: [deltabreedquery]
+image: ../assets/software-deltabreedquery.png
+image-alt: "deltabreedquery logo"
+toc: false
+---
+
+Minor bug fixes and 
+
+* Fixed handling of non-case-sensitive matching of categorical variable levels in observation data. If a user has defined the accepted levels of the `fruitColor` trait as `Red` and `Blue` but uploaded observation data with `red` and `blue`, these will be automatically case-corrected to the defined values by default. This behavior can be disabled.
+* Added handling of string NA values (`NA`, `na`, `Na`, `N/A`, and `n/a`) in numerical columns of retrieved observation datasets.
+* Added `message()` to note how many observation variables were present in a retrieved observations dataset.
+* Standardized how arguments are described in function docstrings.
+* Added a logo.
+
+[Release on GitHub](https://github.com/Breeding-Insight/deltabreedquery/releases/tag/v1.0.4) · [About deltabreedquery](../software/deltabreedquery.qmd)

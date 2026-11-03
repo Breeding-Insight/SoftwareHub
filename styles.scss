@@ -1841,6 +1841,13 @@ h2.section-heading {
     transform: translate(-50%, -50%);
   }
 
+  /* A domain's logos in one row: the honeycomb and the tiles side by side when it has both. */
+  .hub-ring-tools {
+    display: flex;
+    align-items: center;
+    gap: .35em;
+  }
+
   /* The cluster casts one shadow, so touching hexes read as a single honeycomb. */
   .hub-comb {
     position: relative;

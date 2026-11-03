@@ -1,0 +1,22 @@
+---
+title: "deltabreedquery 0.1.0"
+date: 2026-02-10
+description: "This initial alpha version should be functional when installed from Github via devtools::install_github(\"tyrwh/deltabreedquery\")"
+categories: [deltabreedquery]
+image: ../assets/software-deltabreedquery.png
+image-alt: "deltabreedquery logo"
+toc: false
+---
+
+This initial alpha version should be functional when installed from Github via `devtools::install_github("tyrwh/deltabreedquery")`
+
+The initial login is handled via `login_deltabreed()`. Once the user is authenticated, three main functions are implemented to request data:
+```
+get_experiments()
+get_observations()
+get_germplasm()
+```
+
+Each of these simply pulls the relevant data type and returns a data frame with roughly the same formatting as how the data appears on DeltaBreed
+
+[Release on GitHub](https://github.com/Breeding-Insight/deltabreedquery/releases/tag/v0.1.0) · [About deltabreedquery](../software/deltabreedquery.qmd)
