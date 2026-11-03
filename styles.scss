@@ -70,6 +70,24 @@ body:has(.hero) #title-block-header {
   display: none;
 }
 
+.learning-material-page .quarto-title-meta {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.learning-material-page .quarto-title-meta > div:first-child {
+  grid-row: 1 / span 2;
+}
+
+@media (max-width: 575px) {
+  .learning-material-page .quarto-title-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .learning-material-page .quarto-title-meta > div:first-child {
+    grid-row: auto;
+  }
+}
+
 .navbar {
   min-height: 3.75rem;
   border-bottom: 1px solid rgba(42, 101, 118, .15);
@@ -560,11 +578,10 @@ h2.section-heading {
 
 .bi-callout {
   margin: 1.5rem 0;
-  padding: 1rem 1.15rem;
-  border: 1px solid var(--hub-online-border, rgba(163, 217, 172, .6));
-  border-left: 4px solid var(--hub-online, $bi-green);
-  border-radius: var(--hub-radius, .4rem);
-  background: var(--hub-online-bg, rgba(163, 217, 172, .16));
+  padding: 1rem 1.1rem;
+  border-left: 4px solid $bi-green;
+  border-radius: .4rem;
+  background: rgba(163, 217, 172, .16);
 }
 
 /* Workshop lesson pages */
@@ -587,7 +604,7 @@ h2.section-heading {
   max-width: 48rem;
   margin-right: auto;
   margin-left: auto;
-  color: var(--hub-ink-muted);
+  color: $bi-gray;
   text-align: center;
 }
 
@@ -608,18 +625,18 @@ h2.section-heading {
 .workshop-progress {
   margin: 0 0 1.75rem;
   padding: 1rem;
-  border: 1px solid var(--hub-border);
-  border-radius: var(--hub-radius);
-  background: var(--hub-surface-alt);
+  border: 1px solid rgba(42, 101, 118, .22);
+  border-radius: .5rem;
+  background: var(--bi-panel);
 }
 
 .workshop-progress-title {
   display: block;
   margin-bottom: .6rem;
-  color: var(--hub-ink);
-  font-size: .75rem;
-  font-weight: 700;
-  letter-spacing: .06em;
+  color: $bi-teal-dark;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .04em;
   text-transform: uppercase;
 }
 
@@ -647,12 +664,12 @@ h2.section-heading {
   align-items: center;
   justify-content: center;
   padding: .45rem .35rem;
-  border: 1px solid var(--hub-border);
-  border-radius: 8px;
-  background: var(--hub-surface);
-  color: var(--hub-primary-strong);
-  font-size: .75rem;
-  font-weight: 600;
+  border: 1px solid rgba(42, 101, 118, .2);
+  border-radius: .35rem;
+  background: #fff;
+  color: $bi-teal-dark;
+  font-size: .77rem;
+  font-weight: 700;
   line-height: 1.2;
   overflow-wrap: anywhere;
   text-align: center;
@@ -660,28 +677,27 @@ h2.section-heading {
 }
 
 .workshop-progress a:hover {
-  border-color: var(--hub-primary);
-  background: var(--hub-surface-tint);
+  border-color: $bi-teal;
+  background: $bi-mist;
 }
 
 .workshop-progress a:focus-visible {
-  outline: 3px solid #1b64dd;
+  outline: 3px solid rgba(72, 169, 197, .4);
   outline-offset: 2px;
 }
 
 .workshop-progress a[aria-current="page"] {
-  border-color: var(--hub-primary);
-  background: var(--hub-primary);
+  border-color: $bi-teal-dark;
+  background: $bi-teal-dark;
   color: #fff;
 }
 
 .lesson-overview {
   margin: 0 0 1.75rem;
   padding: 1rem 1.1rem;
-  border: 1px solid var(--hub-online-border);
-  border-left: 4px solid var(--hub-online);
-  border-radius: var(--hub-radius);
-  background: var(--hub-online-bg);
+  border-left: 4px solid $bi-green;
+  border-radius: .35rem;
+  background: rgba(163, 217, 172, .14);
 }
 
 .lesson-overview > :last-child {
@@ -698,36 +714,9 @@ h2.section-heading {
 .workshop-next {
   margin-top: 2rem;
   padding: 1rem 1.1rem;
-  border: 1px solid var(--hub-border);
-  border-left: 4px solid var(--hub-primary);
-  border-radius: var(--hub-radius);
-  background: var(--hub-surface-alt);
-}
-
-/* Workshop sidebar: the module list styled like the Resources section list. The navbar
-   already carries the logo Quarto would repeat at the top of a docked sidebar. */
-.workshop-page {
-  #quarto-sidebar .sidebar-logo-link {
-    display: none;
-  }
-
-  #quarto-sidebar .sidebar-item .sidebar-link {
-    padding: .3rem .6rem;
-    border-left: 2px solid var(--hub-border);
-    color: var(--hub-ink-muted);
-    font-size: .9375rem;
-  }
-
-  #quarto-sidebar .sidebar-item .sidebar-link:hover {
-    background: var(--hub-surface-alt);
-    color: var(--hub-primary-strong);
-  }
-
-  #quarto-sidebar .sidebar-item .sidebar-link.active {
-    border-left-color: var(--hub-primary);
-    color: var(--hub-primary-strong);
-    font-weight: 600;
-  }
+  border: 1px solid rgba(42, 101, 118, .22);
+  border-radius: .5rem;
+  background: var(--bi-panel);
 }
 
 .workshop-next > :last-child {
@@ -735,6 +724,14 @@ h2.section-heading {
 }
 
 @media (max-width: 760px) {
+  body.learning-material-page .quarto-title-meta {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  body.learning-material-page .quarto-title-meta > div:first-child {
+    grid-row: auto;
+  }
+
   .workshop-progress ol {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -838,20 +835,18 @@ h2.section-heading {
   }
 }
 
-/* Concept pages: hub colours (tokens from the learning-page scope) so definitions and
-   cards sit with the callouts and panels. */
 .concept-definition {
   margin: 1.2rem 0 1.8rem;
   padding: 1.15rem 1.25rem;
-  border: 1px solid var(--hub-border);
-  border-left: 4px solid var(--hub-primary);
-  border-radius: var(--hub-radius);
-  background: var(--hub-surface-alt);
+  border: 1px solid rgba(42, 101, 118, .16);
+  border-left: 5px solid $bi-teal;
+  border-radius: .375rem;
+  background: var(--bi-panel);
   font-size: 1rem;
 }
 
 .concept-definition strong:first-child {
-  color: var(--hub-primary-strong);
+  color: $bi-teal-dark;
 }
 
 .concept-example-grid,
@@ -864,26 +859,24 @@ h2.section-heading {
 
 .concept-example,
 .concept-decision {
-  padding: 1rem 1.1rem;
-  border: 1px solid var(--hub-border);
-  border-radius: var(--hub-radius);
-  background: var(--hub-surface);
-  box-shadow: var(--hub-shadow);
+  padding: 1rem 1.05rem;
+  border: 1px solid rgba(42, 101, 118, .13);
+  border-radius: .375rem;
+  background: #fff;
 }
 
 .concept-example h4,
 .concept-decision h4 {
   margin: 0 0 .35rem;
-  color: var(--hub-ink);
-  font-size: 1.0625rem;
-  font-weight: 700;
+  color: $bi-charcoal;
+  font-size: 1rem;
 }
 
 .concept-example p,
 .concept-decision p {
   margin: 0;
-  color: var(--hub-ink-muted);
-  font-size: .9375rem;
+  color: $bi-gray;
+  font-size: .93rem;
 }
 
 .dosage-scale {
@@ -895,21 +888,21 @@ h2.section-heading {
 
 .dosage-state {
   padding: .7rem .4rem;
-  border: 1px solid var(--hub-border);
-  border-radius: 8px;
-  background: var(--hub-surface-tint);
+  border: 1px solid rgba(42, 101, 118, .14);
+  border-radius: .3rem;
+  background: $bi-mist;
   text-align: center;
 }
 
 .dosage-state strong {
   display: block;
-  color: var(--hub-primary-strong);
+  color: $bi-teal-dark;
   font-size: 1.05rem;
 }
 
 .dosage-state span {
-  color: var(--hub-ink-muted);
-  font-size: .8125rem;
+  color: $bi-gray;
+  font-size: .78rem;
 }
 
 .concept-checklist li {
@@ -925,18 +918,17 @@ h2.section-heading {
   max-width: 38rem;
   margin: .8rem auto 0;
   padding: .65rem .85rem;
-  border: 1px solid var(--hub-border);
-  border-left: 4px solid var(--hub-primary);
-  border-radius: var(--hub-radius);
-  background: var(--hub-surface-alt);
-  color: var(--hub-ink);
-  font-size: .9375rem;
+  border-left: 4px solid $bi-teal;
+  border-radius: .25rem;
+  background: rgba($bi-teal-light, .18);
+  color: $bi-charcoal;
+  font-size: .9rem;
   line-height: 1.45;
 }
 
 .madc-workflow-figure figcaption::before {
   content: "Figure · ";
-  color: var(--hub-primary-strong);
+  color: $bi-teal-dark;
   font-weight: 700;
 }
 
@@ -2569,8 +2561,8 @@ h2.section-heading {
   }
 }
 
-/* Release-note pages (news/*.qmd, generated): the learning-page look (body class
-   learning-material-page, via news/_metadata.yml) plus the package logo beside the title
+/* Release-note pages (news/*.qmd, generated; body class release-note-page via
+   news/_metadata.yml): the tool-page look below plus the package logo beside the title
    (assets/release-partials/title-block.html) and the closing links as buttons. */
 .release-note-page {
   .release-head {
@@ -2661,11 +2653,11 @@ h2.section-heading {
   }
 }
 
-/* Software tool pages (software/*.qmd) and learning pages (learn/*.qmd), via each folder's
-   _metadata.yml: same look as the Software page: light title banner, landing-page buttons,
-   bordered badges and code. */
+/* Software tool pages (software/*.qmd) and release-note pages (news/*.qmd), via each
+   folder's _metadata.yml: same look as the Software page: light title banner, bordered
+   badges and code. Buttons are further down, shared with the learning pages. */
 .software-tool-page,
-.learning-material-page {
+.release-note-page {
   @include hub-tokens;
 
   .quarto-title-banner {
@@ -2902,50 +2894,6 @@ h2.section-heading {
     background: #fff;
   }
 
-  /* Button rows: Pandoc puts consecutive buttons in one <p>. */
-  p:has(> .btn-bi-primary, > .btn-bi-secondary) {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .6rem;
-  }
-
-  .btn-bi-primary,
-  .btn-bi-secondary {
-    gap: .5rem;
-    min-height: 2.5rem;
-    padding: .45rem 1.1rem;
-    border: 2px solid var(--hub-primary);
-    border-radius: 999px;
-    font-size: .9375rem;
-  }
-
-  .btn-bi-primary {
-    background: var(--hub-primary);
-    color: #fff !important;
-  }
-
-  .btn-bi-primary:hover {
-    border-color: var(--hub-primary-strong);
-    background: var(--hub-primary-strong);
-    color: #fff !important;
-  }
-
-  .btn-bi-secondary {
-    background: var(--hub-surface);
-    color: var(--hub-primary-strong) !important;
-  }
-
-  .btn-bi-secondary:hover {
-    background: var(--hub-surface-tint);
-    color: var(--hub-primary-strong) !important;
-  }
-
-  /* Quarto marks external links with its own icon; the button icons already do. */
-  .btn-bi-primary.external::after,
-  .btn-bi-secondary.external::after {
-    display: none;
-  }
-
   div.sourceCode {
     border: 1px solid var(--hub-border);
     border-radius: var(--hub-radius);
@@ -2988,12 +2936,12 @@ h2.section-heading {
   }
 }
 
-/* Callouts on tool, learning and workshop pages, drawn like the hub panels (Request a
+/* Callouts on tool and release-note pages, drawn like the hub panels (Request a
    workshop, Protect Private Data): icon in its own column, bold title, body at reading
    size. Notes are teal, tips green, warnings and important notes amber. Quarto's own rules
    are specific (.callout.callout-style-default...), so these repeat that chain. */
 .software-tool-page,
-.learning-material-page {
+.release-note-page {
   div.callout.callout-style-default {
     --callout-accent: var(--hub-primary);
     --callout-edge: var(--hub-border);
@@ -3086,9 +3034,8 @@ h2.section-heading {
   }
 }
 
-/* Learning pages (learn/*.qmd): additions to the shared tool-page look above. The badge row
-   and topic tags in the title strip come from assets/learn-badges.lua. */
-.learning-material-page {
+/* Release-note pages: additions to the shared tool-page look above. */
+.release-note-page {
   /* Title strip: badges, then topic tags right under them, then the title. */
   .quarto-title-banner {
     .hub-badges {
@@ -3182,6 +3129,86 @@ h2.section-heading {
     font-weight: 700;
   }
 
+  /* "On this page" list, styled like the Resources page section list. */
+  #TOC {
+    h2 {
+      font-size: .8125rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--hub-ink);
+    }
+
+    .nav-link {
+      color: var(--hub-ink-muted);
+    }
+
+    .nav-link.active {
+      border-left-color: var(--hub-primary);
+      color: var(--hub-primary-strong);
+      font-weight: 600;
+    }
+  }
+}
+
+/* Learning and workshop pages (learn/*.qmd, workshops/; body class learning-material-page)
+   keep Quarto's own look. They share only the hub buttons and tables. */
+.learning-material-page {
+  @include hub-tokens;
+}
+
+.software-tool-page,
+.release-note-page,
+.learning-material-page {
+  /* Button rows: Pandoc puts consecutive buttons in one <p>. */
+  p:has(> .btn-bi-primary, > .btn-bi-secondary) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+  }
+
+  .btn-bi-primary,
+  .btn-bi-secondary {
+    gap: .5rem;
+    min-height: 2.5rem;
+    padding: .45rem 1.1rem;
+    border: 2px solid var(--hub-primary);
+    border-radius: 999px;
+    font-size: .9375rem;
+  }
+
+  .btn-bi-primary {
+    background: var(--hub-primary);
+    color: #fff !important;
+  }
+
+  .btn-bi-primary:hover {
+    border-color: var(--hub-primary-strong);
+    background: var(--hub-primary-strong);
+    color: #fff !important;
+  }
+
+  .btn-bi-secondary {
+    background: var(--hub-surface);
+    color: var(--hub-primary-strong) !important;
+  }
+
+  .btn-bi-secondary:hover {
+    background: var(--hub-surface-tint);
+    color: var(--hub-primary-strong) !important;
+  }
+
+  /* Quarto marks external links with its own icon; the button icons already do. */
+  .btn-bi-primary.external::after,
+  .btn-bi-secondary.external::after {
+    display: none;
+  }
+}
+
+.release-note-page,
+.learning-material-page {
+  /* On learning and workshop pages, wide tables scroll inside a .table-responsive wrapper
+     (assets/responsive-tables.lua). */
   main.content table {
     border: 1px solid var(--hub-border);
     border-collapse: separate;
@@ -3208,25 +3235,8 @@ h2.section-heading {
     }
   }
 
-  /* "On this page" list, styled like the Resources page section list. */
-  #TOC {
-    h2 {
-      font-size: .8125rem;
-      font-weight: 700;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--hub-ink);
-    }
-
-    .nav-link {
-      color: var(--hub-ink-muted);
-    }
-
-    .nav-link.active {
-      border-left-color: var(--hub-primary);
-      color: var(--hub-primary-strong);
-      font-weight: 600;
-    }
+  /* Workshop tables are scroll boxes (see .workshop-page table); let them scroll, not clip. */
+  &.workshop-page main.content table {
+    overflow-x: auto;
   }
 }
-

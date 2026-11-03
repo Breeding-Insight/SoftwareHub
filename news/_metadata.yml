@@ -2,7 +2,7 @@
 # file is hand-written; scripts/fetch-releases.py regenerates only news/*.qmd.
 format:
   html:
-    body-classes: learning-material-page release-note-page
+    body-classes: release-note-page
     title-block-banner: true
     template-partials:
       - ../assets/release-partials/title-block.html
