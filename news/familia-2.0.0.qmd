@@ -3,7 +3,7 @@ title: "Familia 2.0.0"
 date: 2026-08-24
 description: "Added a Ploidy selector to the Find Parentage and Validate Pedigree tabs, passed through to 'BIGpopA' so pedigree validation and parentage assignment now support any ploidy."
 categories: [Familia]
-image: ../assets/software-familia.png
+image: ../assets/software/logos/software-familia.png
 image-alt: "Familia logo"
 toc: false
 ---

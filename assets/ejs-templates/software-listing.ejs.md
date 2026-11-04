@@ -21,7 +21,7 @@ const TASKS = [
 ];
 const MAX_TASKS = 3;
 // Release status. In-development tools get their own section at the bottom of the page,
-// an "In development" badge, and a notice on their tool page (assets/tool-status.lua).
+// an "In development" badge, and a notice on their tool page (assets/lua-extensions/tool-status.lua).
 const STATUSES = { 'released': 'Released', 'in-development': 'In development' };
 
 const asArray = (value) => Array.isArray(value) ? value : (value ? [value] : []);
@@ -35,7 +35,7 @@ for (const item of items) {
   const tasks = asArray(item.tasks);
   if (tasks.length > MAX_TASKS) throw new Error(`${where}: list at most ${MAX_TASKS} tasks`);
   for (const task of tasks) {
-    if (!TASKS.includes(task)) throw new Error(`${where}: task "${task}" is not in the task list in assets/software-listing.ejs.md`);
+    if (!TASKS.includes(task)) throw new Error(`${where}: task "${task}" is not in the task list in assets/ejs-templates/software-listing.ejs.md`);
   }
 }
 

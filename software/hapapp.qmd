@@ -14,7 +14,7 @@ access: "Visit the landing page for more information:"
 links:
   online: https://breeding-insight.github.io/HapApp-online/
   source: https://github.com/Breeding-Insight/HapApp-online
-image: ../assets/software-hapapp.png
+image: ../assets/software/logos/software-hapapp.png
 image-alt: "HapApp logo."
 image-shape: square
 ---
@@ -25,7 +25,7 @@ HapApp checks a raw DArTag Missing Allele Discovery Count (MADC) report, filters
 
 {{< tool-tags >}}
 :::
-<img class="software-logo" src="../assets/software-hapapp.png" alt="HapApp logo">
+<img class="software-logo" src="../assets/software/logos/software-hapapp.png" alt="HapApp logo">
 :::
 
 ## Start here
@@ -34,7 +34,7 @@ HapApp runs online, with no software to install. Access is limited to registered
 
 [{{< meta access >}}]{.access-note}
 
-[<img class="orcid-icon" src="../assets/orcid-icon.svg" alt=""> Use online](https://breeding-insight.github.io/HapApp-online/){.btn-bi-primary data-analytics-event="use_online" data-analytics-tool="HapApp"}
+[<img class="orcid-icon" src="../assets/branding/orcid-icon.svg" alt=""> Use online](https://breeding-insight.github.io/HapApp-online/){.btn-bi-primary data-analytics-event="use_online" data-analytics-tool="HapApp"}
 
 ::: {.start-links}
 [<i class="bi bi-github" aria-hidden="true"></i> Source code](https://github.com/Breeding-Insight/HapApp-online){.btn-bi-secondary}

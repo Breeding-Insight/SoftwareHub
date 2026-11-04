@@ -13,7 +13,7 @@ ecosystem: breedverse
 links:
   source: https://github.com/Breeding-Insight/BIGpopA
   releases: https://github.com/Breeding-Insight/BIGpopA/releases
-image: ../assets/software-bigpopa.png
+image: ../assets/software/logos/software-bigpopa.png
 image-alt: "BIGpopA hexagonal logo."
 ---
 
@@ -23,7 +23,7 @@ BIGpopA is an R package for pedigree quality control, parentage assignment from 
 
 {{< tool-tags >}}
 :::
-<img class="software-logo" src="../assets/software-bigpopa.png" alt="BIGpopA logo">
+<img class="software-logo" src="../assets/software/logos/software-bigpopa.png" alt="BIGpopA logo">
 :::
 
 ## Start here

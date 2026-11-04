@@ -9,4 +9,4 @@ format:
   html:
     body-classes: learning-material-page workshop-page
 filters:
-  - ../../assets/responsive-tables.lua
+  - ../../assets/lua-extensions/responsive-tables.lua

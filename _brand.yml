@@ -5,10 +5,10 @@ meta:
 logo:
   images:
     bi-logo:
-      path: assets/breeding-insight.png
+      path: assets/branding/breeding-insight.png
       alt: "Breeding Insight"
     bi-mark:
-      path: assets/bi-mark.png
+      path: assets/branding/bi-mark.png
       alt: "Breeding Insight mark"
   small: bi-mark
   medium: bi-logo

@@ -3,7 +3,7 @@ title: "BIGapp 1.6.0"
 date: 2026-03-13
 description: "Improved user warnings and addressed minor bug fixes"
 categories: [BIGapp]
-image: ../assets/software-bigapp.png
+image: ../assets/software/logos/software-bigapp.png
 image-alt: "BIGapp logo"
 toc: false
 ---

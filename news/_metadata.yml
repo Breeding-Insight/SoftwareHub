@@ -7,4 +7,4 @@ format:
     template-partials:
       - ../assets/release-partials/title-block.html
 filters:
-  - ../assets/release-badges.lua
+  - ../assets/lua-extensions/release-badges.lua

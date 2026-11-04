@@ -1,7 +1,7 @@
 ```{=html}
 <%
 // News page: one row per release, newest first (sorted by the listing in news.qmd).
-// assets/news-filter.html builds the Package filter from data-package.
+// assets/html-scripts/news-filter.html builds the Package filter from data-package.
 const asArray = (value) => Array.isArray(value) ? value : (value ? [value] : []);
 const encoded = (value) => encodeURIComponent(JSON.stringify(value));
 %>

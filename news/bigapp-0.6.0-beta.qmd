@@ -3,7 +3,7 @@ title: "BIGapp 0.6.0-beta"
 date: 2024-09-19
 description: "Bug fixes and feature enhancements:"
 categories: [BIGapp]
-image: ../assets/software-bigapp.png
+image: ../assets/software/logos/software-bigapp.png
 image-alt: "BIGapp logo"
 toc: false
 ---

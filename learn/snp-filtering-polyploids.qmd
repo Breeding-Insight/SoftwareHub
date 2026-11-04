@@ -7,7 +7,7 @@ categories:
   - Genotype Data
   - Data Quality
   - Ploidy & Dosage
-image: ../assets/concept-snp-filtering.svg
+image: ../assets/learn/title-cards/concept-snp-filtering.svg
 image-alt: "Layered filtering pipeline from sequence evidence through dosage and dataset quality to analysis-ready SNPs."
 order: 60
 learning-type: Concept

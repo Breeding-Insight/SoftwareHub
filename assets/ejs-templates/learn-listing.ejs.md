@@ -5,7 +5,7 @@ const externalItems = [
     title: 'Estimate copy number in alfalfa with Qploidy2',
     description: 'Use Qploidy2 with DArTag data to estimate ploidy, aneuploidy, and large-scale copy-number variation.',
     categories: ['Ploidy & Dosage', 'Genotype Data'],
-    image: 'assets/tutorial-qploidy.svg',
+    image: 'assets/learn/title-cards/tutorial-qploidy.svg',
     'image-alt': 'Ploidy and copy-number variation tutorial.',
     order: 30,
     'learning-type': 'Tutorial',

@@ -4,7 +4,7 @@ description: "Release notes for Breeding Insight software."
 listing:
   id: releases
   contents: "news/*.qmd"
-  template: assets/news-listing.ejs.md
+  template: assets/ejs-templates/news-listing.ejs.md
   sort: ["date desc", "title desc"]
   filter-ui: false
   sort-ui: false
@@ -15,7 +15,7 @@ toc: false
 body-classes: software-hub-page news-hub-page
 format:
   html:
-    include-after-body: assets/news-filter.html
+    include-after-body: assets/html-scripts/news-filter.html
 ---
 
 ::: {.hub-head .column-screen}

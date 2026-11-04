@@ -14,7 +14,7 @@ links:
   docs: https://breeding-insight.github.io/BIGr_documentation/
   cran: https://cran.r-project.org/package=BIGr
   source: https://github.com/Breeding-Insight/BIGr
-image: ../assets/software-bigr.png
+image: ../assets/software/logos/software-bigr.png
 image-alt: "BIGr hexagonal logo."
 ---
 
@@ -24,7 +24,7 @@ BIGr provides genomic and pedigree analysis functions designed for diploid and p
 
 {{< tool-tags >}}
 :::
-<img class="software-logo" src="../assets/software-bigr.png" alt="BIGr logo">
+<img class="software-logo" src="../assets/software/logos/software-bigr.png" alt="BIGr logo">
 :::
 
 ## Start here

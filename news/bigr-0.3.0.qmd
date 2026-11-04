@@ -3,7 +3,7 @@ title: "BIGr 0.3.0"
 date: 2024-06-25
 description: "Updated documentation"
 categories: [BIGr]
-image: ../assets/software-bigr.png
+image: ../assets/software/logos/software-bigr.png
 image-alt: "BIGr logo"
 toc: false
 ---

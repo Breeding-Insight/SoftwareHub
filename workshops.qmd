@@ -38,7 +38,7 @@ Interested in a workshop for your program or group? Email us at [bi-science@ufl.
 <div class="hub-items">
   <article class="hub-card hub-card-wide">
     <div class="hub-card-image">
-      <img src="assets/card-bigapp.svg" alt="BIGapp interface represented by a browser window with genomic charts">
+      <img src="assets/learn/title-cards/card-bigapp.svg" alt="BIGapp interface represented by a browser window with genomic charts">
     </div>
     <div class="hub-card-body">
     <div class="hub-badges" aria-label="Workshop details">

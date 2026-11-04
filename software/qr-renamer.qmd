@@ -10,7 +10,7 @@ tags: []
 links:
   online: https://grin-image-renamer-516395572783.us-central1.run.app
   source: https://github.com/tyrwh/GRIN_image_renamer
-image: ../assets/software-qr.png
+image: ../assets/software/logos/software-qr.png
 image-alt: "QR code leading to the Breeding Insight website."
 image-wide: true
 ---
@@ -39,14 +39,14 @@ The app works by detecting and reading QR codes in each image, then using this t
 An image must contain exactly one visible, legible QR code (or the similar [Aztec code](https://en.wikipedia.org/wiki/Aztec_Code))
 in order for the image to be automatically renamed. In the example below, the QR code encodes the text "PI 245011 97GI SD":
 
-![](../assets/renamer-workflow-1.png){fig-alt="Diagram of the first steps of the QR renamer tool, code detection and parsing." fig-align="center" width="700"}
+![](../assets/software/images/renamer-workflow-1.png){fig-alt="Diagram of the first steps of the QR renamer tool, code detection and parsing." fig-align="center" width="700"}
 
 If no QR codes are detected, or if more than one is detected, the image can be renamed manually, excluded from the final set
 of renamed images, or included under its original name.
 
 You can then split and rejoin the text using custom characters and make other adjustments as needed:
 
-![](../assets/renamer-workflow-2.png){fig-alt="Diagram of the later steps of the QR renamer tool, constructing filenames from the parsed text." fig-align="center" width="340"}
+![](../assets/software/images/renamer-workflow-2.png){fig-alt="Diagram of the later steps of the QR renamer tool, constructing filenames from the parsed text." fig-align="center" width="340"}
 
 All filenames can be manually edited before you download the final set of renamed images.
 

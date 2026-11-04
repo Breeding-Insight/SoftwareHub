@@ -10,7 +10,7 @@ description: "Understand how DArT MADC files represent microhaplotype read count
 categories:
   - Genotype Data
   - File Formats
-image: ../assets/concept-madc.svg
+image: ../assets/learn/title-cards/concept-madc.svg
 image-alt: "A MADC table with fixed allele IDs and per-sample read counts."
 order: 19
 learning-type: Concept

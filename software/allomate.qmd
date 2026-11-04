@@ -15,7 +15,7 @@ links:
   online: https://breeding-insight.github.io/AlloMate/
   source: https://github.com/Breeding-Insight/AlloMate
   releases: https://github.com/Breeding-Insight/AlloMate/releases
-image: ../assets/software-allomate.png
+image: ../assets/software/logos/software-allomate.png
 image-alt: "AlloMate hexagonal logo."
 ---
 
@@ -25,7 +25,7 @@ AlloMate is a Shiny application for evaluating kinship, combining estimated bree
 
 {{< tool-tags >}}
 :::
-<img class="software-logo" src="../assets/software-allomate.png" alt="AlloMate logo">
+<img class="software-logo" src="../assets/software/logos/software-allomate.png" alt="AlloMate logo">
 :::
 
 ## Start here
@@ -45,7 +45,7 @@ AlloMate also runs online, with no software to install. Access is limited to reg
 
 [{{< meta access >}}]{.access-note}
 
-[<img class="orcid-icon" src="../assets/orcid-icon.svg" alt=""> Use online](https://breeding-insight.github.io/AlloMate/){.btn-bi-primary data-analytics-event="use_online" data-analytics-tool="AlloMate"}
+[<img class="orcid-icon" src="../assets/branding/orcid-icon.svg" alt=""> Use online](https://breeding-insight.github.io/AlloMate/){.btn-bi-primary data-analytics-event="use_online" data-analytics-tool="AlloMate"}
 
 ::: {.start-links}
 [<i class="bi bi-github" aria-hidden="true"></i> Source code](https://github.com/Breeding-Insight/AlloMate){.btn-bi-secondary}

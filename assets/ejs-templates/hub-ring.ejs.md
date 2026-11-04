@@ -5,7 +5,7 @@
 // honeycomb; other logos (`image-wide`, e.g. DeltaBreed, or `image-shape: square`, e.g.
 // HapApp) get tiles. In-development tools are included; their titles say so. Built from
 // software/*.qmd (listing "hub-ring" in index.qmd), so a new tool with an `image` joins its
-// domain on the next render. Domain order follows DOMAINS in assets/software-listing.ejs.md;
+// domain on the next render. Domain order follows DOMAINS in assets/ejs-templates/software-listing.ejs.md;
 // Utilities tools are left out of the hub and listed on the Software page only.
 const DOMAINS = ['Genomic Analysis', 'Breeding Data', 'Pedigree & Mating', 'Markers & Haplotypes', 'Phenomics'];
 const tools = items
@@ -68,7 +68,7 @@ const spots = groups.map((group, index) => {
 <% } %>
   </svg>
   <div class="hub-ring-center" aria-hidden="true">
-    <img src="assets/bi-mark.png" alt="">
+    <img src="assets/branding/bi-mark.png" alt="">
   </div>
 <% for (const spot of spots) {
      const comb = honeycomb(spot.hexes.length);

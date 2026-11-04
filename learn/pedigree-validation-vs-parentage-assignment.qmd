@@ -7,7 +7,7 @@ description: "Understand the difference between testing recorded parents and sea
 categories:
   - Pedigree & Parentage
   - Genotype Data
-image: ../assets/software-bigpopa.png
+image: ../assets/software/logos/software-bigpopa.png
 image-alt: "BIGpopA hexagonal logo with pedigree symbols and a stacked composition chart."
 order: 80
 learning-type: Concept

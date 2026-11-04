@@ -6,7 +6,7 @@ description: "Choose marker and sample missingness thresholds by diagnosing the 
 categories:
   - Genotype Data
   - Data Quality
-image: ../assets/concept-missing-data.svg
+image: ../assets/learn/title-cards/concept-missing-data.svg
 image-alt: "Genotype matrix with missing cells beside a threshold slider."
 order: 50
 learning-type: Concept

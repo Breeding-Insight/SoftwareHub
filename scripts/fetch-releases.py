@@ -280,7 +280,7 @@ def write_entry(repo, slug, logo, release, news_sections):
         f"date: {published}",
         f"description: {yaml_quote(description)}",
         f"categories: [{repo}]",
-        f"image: ../assets/{logo}",
+        f"image: ../assets/software/logos/{logo}",
         f"image-alt: {yaml_quote(repo + ' logo')}",
         "toc: false",
         "---",

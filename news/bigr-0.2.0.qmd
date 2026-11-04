@@ -3,7 +3,7 @@ title: "BIGr 0.2.0"
 date: 2024-06-13
 description: "Two functions have been added for this release:"
 categories: [BIGr]
-image: ../assets/software-bigr.png
+image: ../assets/software/logos/software-bigr.png
 image-alt: "BIGr logo"
 toc: false
 ---

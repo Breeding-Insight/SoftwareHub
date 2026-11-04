@@ -3,7 +3,7 @@ title: "BIGapp 1.5.1"
 date: 2025-09-23
 description: "This release includes bug fixes and new feature updates:"
 categories: [BIGapp]
-image: ../assets/software-bigapp.png
+image: ../assets/software/logos/software-bigapp.png
 image-alt: "BIGapp logo"
 toc: false
 ---

@@ -3,7 +3,7 @@ title: "BIGpopA 2.2.1"
 date: 2026-10-27
 description: "check_ped(): each cycle in dependencies is now reported once, as a closed path in which every id is a recorded parent of the one before it (e.g."
 categories: [BIGpopA]
-image: ../assets/software-bigpopa.png
+image: ../assets/software/logos/software-bigpopa.png
 image-alt: "BIGpopA logo"
 toc: false
 ---

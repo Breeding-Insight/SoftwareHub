@@ -3,7 +3,7 @@ title: "BIGapp 1.0.0"
 date: 2024-12-22
 description: "This full public release of BIGapp includes:"
 categories: [BIGapp]
-image: ../assets/software-bigapp.png
+image: ../assets/software/logos/software-bigapp.png
 image-alt: "BIGapp logo"
 toc: false
 ---

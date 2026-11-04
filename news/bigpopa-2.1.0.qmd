@@ -3,7 +3,7 @@ title: "BIGpopA 2.1.0"
 date: 2026-10-05
 description: "New vcf_to_dosage() converts a VCF (.vcf / .vcf.gz) or vcfR object into allele-B dosages for any ploidy, as an id + markers table or an individuals x markers matrix."
 categories: [BIGpopA]
-image: ../assets/software-bigpopa.png
+image: ../assets/software/logos/software-bigpopa.png
 image-alt: "BIGpopA logo"
 toc: false
 ---

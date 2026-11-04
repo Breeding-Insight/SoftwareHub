@@ -7,7 +7,7 @@ description: "Use a worked SNP dataset to clean a pedigree, validate recorded pa
 categories:
   - Pedigree & Parentage
   - Genotype Data
-image: ../assets/software-bigpopa.png
+image: ../assets/software/logos/software-bigpopa.png
 image-alt: "BIGpopA hexagonal logo with pedigree symbols and a stacked composition chart."
 order: 81
 learning-type: Tutorial
@@ -196,7 +196,7 @@ ped_validate_report = ped_validate_results$full_results
 ped_validate_report
 ```
 
-![Recorded-trio Mendelian-error results from BIGpopA 1.0.5.](../assets/bigpopa-validation.svg){fig-alt="Histogram of Mendelian-error percentages for the example recorded trios. C1, C2, and C3 have zero percent error, while C_bad has 41.67 percent error and exceeds the five percent software default." fig-align="center"}
+![Recorded-trio Mendelian-error results from BIGpopA 1.0.5.](../assets/learn/images/bigpopa-validation.svg){fig-alt="Histogram of Mendelian-error percentages for the example recorded trios. C1, C2, and C3 have zero percent error, while C_bad has 41.67 percent error and exceeds the five percent software default." fig-align="center"}
 
 The verified result is:
 
@@ -247,7 +247,7 @@ find_parentage_report = find_parentage_results$full_results
 find_parentage_report
 ```
 
-![Best-pair parentage results from BIGpopA 1.0.5.](../assets/bigpopa-parentage.svg){fig-alt="Histogram of Mendelian-error percentages for the best candidate-parent pairs. All five analyzed progeny have zero percent error, and C_low is marked low markers because only four markers were tested." fig-align="center"}
+![Best-pair parentage results from BIGpopA 1.0.5.](../assets/learn/images/bigpopa-parentage.svg){fig-alt="Histogram of Mendelian-error percentages for the best candidate-parent pairs. All five analyzed progeny have zero percent error, and C_low is marked low markers because only four markers were tested." fig-align="center"}
 
 BIGpopA warns that `C_missing` is not in the genotype data and removes it from the parentage search:
 

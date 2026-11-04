@@ -3,7 +3,7 @@ title: "Familia 1.0.2"
 date: 2026-07-09
 description: "Fixed test directory for CRAN submission"
 categories: [Familia]
-image: ../assets/software-familia.png
+image: ../assets/software/logos/software-familia.png
 image-alt: "Familia logo"
 toc: false
 ---
