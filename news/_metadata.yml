@@ -5,6 +5,6 @@ format:
     body-classes: release-note-page
     title-block-banner: true
     template-partials:
-      - ../assets/release-partials/title-block.html
+      - ../assets/partials/release/title-block.html
 filters:
   - ../assets/lua-extensions/release-badges.lua

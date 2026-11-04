@@ -8,6 +8,7 @@ categories:
   - Data Quality
 image: ../assets/learn/title-cards/concept-cross-validation.svg
 image-alt: "Repeated cross-validation folds beside a predicted-versus-observed correlation plot."
+title-card: true
 order: 70
 learning-type: Concept
 software:

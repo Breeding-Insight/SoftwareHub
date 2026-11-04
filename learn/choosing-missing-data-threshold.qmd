@@ -8,6 +8,7 @@ categories:
   - Data Quality
 image: ../assets/learn/title-cards/concept-missing-data.svg
 image-alt: "Genotype matrix with missing cells beside a threshold slider."
+title-card: true
 order: 50
 learning-type: Concept
 software:
