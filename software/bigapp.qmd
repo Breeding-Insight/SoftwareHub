@@ -13,14 +13,10 @@ ecosystem: breedverse
 links:
   website: https://breedinginsight.org/software/bigapp/
   source: https://github.com/Breeding-Insight/BIGapp
-<<<<<<< HEAD
-image: ../assets/software/logos/software-bigapp.png
-=======
 identifiers:
   doi: 10.1002/tpg2.70067
   rrid: SCR_026676
-image: ../assets/software-bigapp.png
->>>>>>> main
+image: ../assets/software/logos/software-bigapp.png
 image-alt: "BIGapp hexagonal logo."
 ---
 

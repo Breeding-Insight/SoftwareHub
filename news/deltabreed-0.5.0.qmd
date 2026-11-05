@@ -3,7 +3,7 @@ title: "DeltaBreed 0.5.0"
 date: 2022-04-08
 description: "[BI-982] - Backend: Ontology BrAPI Mapping for Trait @dmeidlin (#106)"
 categories: [DeltaBreed]
-image: ../assets/software-deltabreed-icon.svg
+image: ../assets/software/logos/software-deltabreed-icon.svg
 image-alt: "DeltaBreed logo"
 toc: false
 ---

@@ -3,7 +3,7 @@ title: "DeltaBreed 0.9.0"
 date: 2024-04-10
 description: "[BI-1963] - Hide Data Mapping Tab @nickpalladino (#344)"
 categories: [DeltaBreed]
-image: ../assets/software-deltabreed-icon.svg
+image: ../assets/software/logos/software-deltabreed-icon.svg
 image-alt: "DeltaBreed logo"
 toc: false
 ---

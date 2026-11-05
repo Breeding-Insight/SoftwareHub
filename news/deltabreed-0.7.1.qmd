@@ -3,7 +3,7 @@ title: "DeltaBreed 0.7.1"
 date: 2023-01-05
 description: "BI-1683 - Missing female parent in biparental cross results in dropped male parent v0.7 @timparsons (#235)"
 categories: [DeltaBreed]
-image: ../assets/software-deltabreed-icon.svg
+image: ../assets/software/logos/software-deltabreed-icon.svg
 image-alt: "DeltaBreed logo"
 toc: false
 ---

@@ -3,7 +3,7 @@ title: "DeltaBreed 0.8.1"
 date: 2023-11-08
 description: "[BI-1900] - Exp error message improvement: unrecognized column header @davedrp (#328)"
 categories: [DeltaBreed]
-image: ../assets/software-deltabreed-icon.svg
+image: ../assets/software/logos/software-deltabreed-icon.svg
 image-alt: "DeltaBreed logo"
 toc: false
 ---

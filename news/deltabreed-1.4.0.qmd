@@ -3,7 +3,7 @@ title: "DeltaBreed 1.4.0"
 date: 2026-09-09
 description: "[BI-3033] - Deprecate Genotypic Data Visualization @HMS17 (#491)"
 categories: [DeltaBreed]
-image: ../assets/software-deltabreed-icon.svg
+image: ../assets/software/logos/software-deltabreed-icon.svg
 image-alt: "DeltaBreed logo"
 toc: false
 ---

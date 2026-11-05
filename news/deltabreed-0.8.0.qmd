@@ -3,7 +3,7 @@ title: "DeltaBreed 0.8.0"
 date: 2023-08-24
 description: "[BI-1764] - DeltaBreed logo @timparsons (#312)"
 categories: [DeltaBreed]
-image: ../assets/software-deltabreed-icon.svg
+image: ../assets/software/logos/software-deltabreed-icon.svg
 image-alt: "DeltaBreed logo"
 toc: false
 ---

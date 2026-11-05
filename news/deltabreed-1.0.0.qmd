@@ -3,7 +3,7 @@ title: "DeltaBreed 1.0.0"
 date: 2024-11-08
 description: "[BI-2304] - Support Duplicate Germplasm in Lists Referencing Existing Germplasm @mlm483 (#399) (#406)"
 categories: [DeltaBreed]
-image: ../assets/software-deltabreed-icon.svg
+image: ../assets/software/logos/software-deltabreed-icon.svg
 image-alt: "DeltaBreed logo"
 toc: false
 ---

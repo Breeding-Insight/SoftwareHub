@@ -3,7 +3,7 @@ title: "DeltaBreed 1.3.0"
 date: 2026-05-20
 description: "[BI-2581] Remove: \"Template version placeholder\""
 categories: [DeltaBreed]
-image: ../assets/software-deltabreed-icon.svg
+image: ../assets/software/logos/software-deltabreed-icon.svg
 image-alt: "DeltaBreed logo"
 toc: false
 ---
