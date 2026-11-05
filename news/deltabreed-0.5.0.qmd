@@ -1,0 +1,135 @@
+---
+title: "DeltaBreed 0.5.0"
+date: 2022-04-08
+description: "[BI-982] - Backend: Ontology BrAPI Mapping for Trait @dmeidlin (#106)"
+categories: [DeltaBreed]
+image: ../assets/software-deltabreed-icon.svg
+image-alt: "DeltaBreed logo"
+toc: false
+---
+
+## Web app
+
+### Features
+
+- [BI-982] - Backend: Ontology BrAPI Mapping for Trait @dmeidlin (#106)
+- [BI-994] - Ontology UI - Review Existing Terms @HMS17 (#124)
+- [BI-995] - Ontology UI - Add New Term @dmeidlin, @nickpalladino (#122, #149)
+- [BI-1044] - 1.0 Germplasm Import Template @HMS17 (#135)
+- [BI-1055] - 3.0 Save Uploaded Germplasm @ctucker3 (#158)
+- [BI-1056] - 5.0 All Germplasm Table @ctucker3 (#165)
+- [BI-1074] - 1.4 Germplasm Import - Validate Breeding Methods @davedrp (#167)
+- [BI-1157] - 1.1 Allow for mapping templates to not be associated to a program @ctucker3 (#138)
+- [BI-1219] - Change DBID to GID in the UI @ctucker3 (#166)
+- [BI-1031] - Create Tabbed Interface for Reviewing Ontology Terms @dmeidlin (#127)
+- [BI-1059] - Name vs Full Name @HMS17 (#130)
+- [BI-1060] - Ontology batch import - error message database duplicate @davedrp (#140)
+- [BI-1061] - Ontology batch import - preview @HMS17 (#125)
+- [BI-1085] - 4.0 Save germplasm list @ctucker3 (#164)
+- [BI-1086] - 4.1 Germplasm lists table @HMS17 (#169)
+- [BI-1088] - 4.3 Germplasm List Export File @HMS17 (#178)
+- [BI-1089] - Import: Left Hand Menu @nickpalladino (#118)
+- [BI-1127] - Ontology UI Form: ordinal & nominal @dmeidlin (#137)
+- [BI-1148] - 2.1 Preview Table  @ctucker3 (#148)
+- [BI-1156] - Beta label - BrAPI Importer @nickpalladino (#143)
+- [BI-1167] - 1.2 Germplasm Import - Validate Required Fields @nickpalladino (#175)
+- [BI-1201] - Add 'Program Key' field to Program Create @HMS17 (#147)
+- [BI-369] - INF-167 - Handle state for "Page does not exist" @HMS17 (#145)
+- [BI-760] - Notification handling improvements @davedrp (#134)
+- [BI-1149] - 2.3 Germplasm Import Preview Dups @ctucker3 (#173)
+- [BI-503] - ONT-85 - Add a loading indicator for Confirm Traits @HMS17 (#144)
+
+### Bugfixes
+
+- [BI-1158] - Reconcile Ontology Import Template @davedrp (#152)
+- [BI-1253] - ISSUE - Ordinal scale class label and value are swapped on UI - details view @HMS17 (#171)
+- [BI-1258] - ISSUE - Ordinal and Nominal scale classes labels and values are not displayed post import on edit form @davedrp (#174)
+- [BI-1036] - Sorting on table using Buefy table only sorts on current page @ctucker3 (#114)
+- [BI-1288] - ISSUE: Trait column on Ontology List page should be concatenation of trait entity + attribute @dmeidlin (#181)
+- [BI-1289] - Improve ontology term snapshot @dmeidlin (#179)
+- [BI-1291] - Import Germplasm Preview Columns Incorrect @nickpalladino (#204)
+- [BI-1356] - ISSUE: New/Edit Term - Switching between scale classes, specifically ordinal and nominal, not working properly @HMS17 (#194)
+- [BI-1397] - Unrecognized Breeding Methods @ctucker3 (#202)
+- [BI-1416] - Clicking "Ontology" under "Import File" navigates you to the Ontology List page @ctucker3 (#199)
+- [BI-1425] - Bad Scaling: Welcome BI Admin @timparsons (#198)
+- [BI-1106] - ISSUE - on observation page, program name changes to "Program Name"  @ctucker3 (#186)
+- [BI-1115] - ISSUE: Program User table - Error while trying to load program users @nickpalladino (#128)
+- [BI-1132] - Keep the Left Nav Menu from overlapping with the header while in public sanbox mode @dmeidlin (#129)
+- [BI-1143] - ISSUE - Method Class column in Ontology Import file allows any value on import @nickpalladino (#131)
+- [BI-1171] - ISSUE - Observation Pagination not working for programs using BB @nickpalladino (#156)
+- [BI-1172] - ISSUE - Season column on Observation page (Program using BB) displayed wrong @HMS17 (#159)
+- [BI-1173] - ISSUE - Selecting Trials to see Studies fails (program using BB) @nickpalladino (#163)
+- [BI-1256] - ISSUE - After confirming Ontology Import, brought to traits/list page @ctucker3 (#180)
+- [BI-1282] - Ontology Import Success Banner Not Displaying @HMS17 (#168)
+- [BI-1290] - All Germplasm Table Parental GIDs @nickpalladino (#177)
+- [BI-1336] - ISSUE: Program Table - Species column not sortable @ctucker3 (#185)
+- [BI-1338] - ISSUE: Germplasm Import Template README still references DBID instead of GID @HMS17 (#190)
+- [BI-1369] - ISSUE: Program Users Table - Role column not sortable @dmeidlin (#196)
+- [BI-1370] - ISSUE: Ontology List Table - Trait column not sortable @ctucker3 (#189)
+- [BI-1372] - ISSUE: Confirm Ontology Term Table - Trait column not sortable @ctucker3 (#193)
+- [BI-1373] - ISSUE: Banners missing when importing Ontology from import/ontology page @ctucker3 (#188)
+- [BI-1386] - BrAPI Phenotypic Importer fails silently @ctucker3 (#191)
+- [BI-640] - ISSUE - A system administrator receives a fail to change role msg along w/a success when no other fields changed @HMS17 (#108)
+- [BI-711] - ISSUE A11Y: (Narrator) No skip navigation option @HMS17 (#121)
+- [BI-1399] - Germplasm Lists table limited to 10 entries when connected to breedbase @ctucker3 (#201)
+- [BI-1411] - Ontology: Switching to Numerical class during edit populates units with “Numerical” @nickpalladino (#209)
+
+[Web app release on GitHub](https://github.com/Breeding-Insight/bi-web/releases/tag/v0.5.0)
+
+## API
+
+### Features
+
+- [BI-982] - Backend: Ontology BrAPI Mapping for Trait @dmeidlin (#99)
+- [BI-995] - Ontology UI - Add New Term @dmeidlin, @nickpalladino (#103)
+- [BI-1055] - 3.0 Save Uploaded Germplasm @ctucker3 (#124)
+- [BI-1056] - 5.0 All Germplasm Table @ctucker3 (#130)
+- [BI-1074] - 1.4 Germplasm Import - Validate Breeding Methods @davedrp (#134)
+- [BI-1157] - 1.1 Allow for mapping templates to not be associated to a program @ctucker3 (#106)
+- [BI-1219] - Change DBID to GID in the UI @ctucker3 (#132)
+- [BI-1059] - Name vs Full Name @HMS17 (#105)
+- [BI-1060] - Ontology batch import - error message database duplicate @davedrp (#109)
+- [BI-1085] - 4.0 Save germplasm list @ctucker3 (#129)
+- [BI-1086] - 4.1 Germplasm lists table @HMS17 (#136)
+- [BI-1088] - 4.3 Germplasm List Export File @HMS17 (#143)
+- [BI-1139] - 1.3 Breeding Methods: Backend @davedrp (#113)
+- [BI-1167] - 1.2 Germplasm Import - Validate Required Fields @nickpalladino (#138)
+- [BI-1190] - Add new species to program species drop down @ctucker3 (#108)
+- [BI-1201] - Add 'Program Key' field to Program Create @HMS17 (#114)
+- [BI-1204] - Create Flyway migration to update existing germplasm in connected Breedbase systems to match BI germplasm definition @ctucker3 (#126)
+- [BI-1205] - Extend user session to 12 hours @nickpalladino (#112)
+- [BI-1227] - Add 'Program Key' to Existing Programs @HMS17 (#125)
+- [BI-1251] - BreedBase Fixes for Germplasm Import @ctucker3 (#128)
+- [BI-1255] - Implement Caching Layer for Germplasm @ctucker3 (#133)
+- [BI-1149] - 2.3 Germplasm Import Preview Dups @ctucker3 (#137)
+
+### Bugfixes
+
+- [BI-1144] - ISSUE - Ordinal scale class label and value are swapped on UI @davedrp (#118)
+- [BI-1158] - Reconcile Ontology Import Template @davedrp (#117)
+- [BI-1387] - Download germplasm list error  @davedrp (#160)
+- [BI-1289] - Improve ontology term snapshot @dmeidlin (#145)
+- [BI-1291] - Import Germplasm Preview Columns Incorrect @nickpalladino (#161)
+- [BI-1357] - ISSUE: Import Ontology Term - Nominal scale class allowing ordinal values and categories @ctucker3 (#156)
+- [BI-1360] - Ontology "undefined" method description @ctucker3 (#200, #211)
+- [BI-1397] - Unrecognized Breeding Methods @ctucker3 (#156)
+- [BI-1408] - ISSUE - All Germplasm Table stuck loading when connected with Breedbase @timparsons (#154)
+- [BI-1115] - ISSUE: Program User table - Error while trying to load program users @nickpalladino (#104)
+- [BI-1270] - ISSUE: trait level showing up as add't'l error message if missing trait entity @ctucker3 (#140)
+- [BI-1271] - ISSUE: Missing Unit error message if Scale Class is missing @ctucker3 (#141)
+- [BI-1280] - ISSUE: Missing nominal scale category results in missing ordinal scale category message @ctucker3 (#147)
+- [BI-1281] - ISSUE: Ontology Import inconsistent messaging @dmeidlin (#150)
+- [BI-1335] - ISSUE:  Tables sort using case-sensitivity @ctucker3 (#148)
+- [BI-1337] - ISSUE: System Users Table - Role and Programs  columns not sortable @dmeidlin (#192)
+- [BI-1370] - ISSUE: Ontology List Table - Trait column not sortable @ctucker3 (#152)
+- [BI-1372] - ISSUE: Confirm Ontology Term Table - Trait column not sortable @ctucker3 (#155)
+- [BI-1386] - BrAPI Phenotypic Importer fails silently @ctucker3 (#153)
+- [BI-1417] - Handle NA pedigree strings from Breedbase @HMS17 (#165)
+- [BI-1315] - Unknown Error germplasm import 0.5+240 @ctucker3 (#139)
+- [BI-1317] - Erroneous error germplasm import @ctucker3 (#142)
+- [BI-1399] - Germplasm Lists table limited to 10 entries when connected to breedbase @ctucker3 (#158)
+- [BI-1412] - ISSUE - Navigating to "Germplasm Lists" shows all germplasm lists that exist in Breedbase @dmeidlin (#179)
+
+[API release on GitHub](https://github.com/Breeding-Insight/bi-api/releases/tag/v0.5.0)
+
+[About DeltaBreed](../software/deltabreed.qmd)

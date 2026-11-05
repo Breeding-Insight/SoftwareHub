@@ -1,0 +1,98 @@
+---
+title: "DeltaBreed 1.3.0"
+date: 2026-05-20
+description: "[BI-2581] Remove: \"Template version placeholder\""
+categories: [DeltaBreed]
+image: ../assets/software-deltabreed-icon.svg
+image-alt: "DeltaBreed logo"
+toc: false
+---
+
+## Web app
+
+### What's Changed
+* [BI-2581] Remove: "Template version placeholder" by @davedrp in https://github.com/Breeding-Insight/bi-web/pull/434
+* BI-2618 - Error with npx sort-package-json by @mlm483 in https://github.com/Breeding-Insight/bi-web/pull/440
+* [BI-2009] - Dynamic Concatenation of Entity + ObsUnitID (Exp UI) by @HMS17 in https://github.com/Breeding-Insight/bi-web/pull/436
+* BI-2218 Optimize sandbox landing page for mobile device by @davedrp in https://github.com/Breeding-Insight/bi-web/pull/442
+* [BI-2218]fixed logic bug. by @davedrp in https://github.com/Breeding-Insight/bi-web/pull/443
+* [BI-2628] Replace Static ObsUnitID column to Dynamic Sub-entity ObsUnitID column in APpend Workflow by @dmeidlin in https://github.com/Breeding-Insight/bi-web/pull/445
+* [BI-2630] - Improve Create Sub-Entity Pop-Up by @HMS17 in https://github.com/Breeding-Insight/bi-web/pull/447
+* [BI-2628-2] Replace Static ObsUnitID column to Dynamic Sub-entity ObsUnitID column in APpend Workflow by @dmeidlin in https://github.com/Breeding-Insight/bi-web/pull/448
+* BI-2539 - Add GitHub as Alternative OAuth Provider by @mlm483 in https://github.com/Breeding-Insight/bi-web/pull/429
+* merge release/1.1.1 into develop by @mlm483 in https://github.com/Breeding-Insight/bi-web/pull/451
+* [BI-2193] - Improve/Correct Sub-Entity Tabular View by @HMS17 in https://github.com/Breeding-Insight/bi-web/pull/450
+* [BI-2755] - improve default sub-unit sort by @HMS17 in https://github.com/Breeding-Insight/bi-web/pull/452
+* BI-2531 / BI-2753 / BI-2733 by @nickpalladino in https://github.com/Breeding-Insight/bi-web/pull/453
+* BI-2715 - Delete exp warning observation count is wrong by @nickpalladino in https://github.com/Breeding-Insight/bi-web/pull/455
+* [BI-2716] Exp preview observation variable count is wrong by @davedrp in https://github.com/Breeding-Insight/bi-web/pull/456
+* [BI-2758] - Autocomplete by @HMS17 in https://github.com/Breeding-Insight/bi-web/pull/454
+* BI- 2615 Incorrect sorting Exp Rep #, Exp Block #, Row and Col  by @davedrp in https://github.com/Breeding-Insight/bi-web/pull/457
+* [BI-2744] DeltaBreed:Create exp, create obs level by @HMS17 in https://github.com/Breeding-Insight/bi-web/pull/458
+* [BI-2778] Deprecate additionalinfo usage for level and use obs unit lvl by @HMS17 in https://github.com/Breeding-Insight/bi-web/pull/459
+* [BI-2778] Deprecate additionalinfo usage for level and use obs unit level by @HMS17 in https://github.com/Breeding-Insight/bi-web/pull/460
+* [BI-2760] Update Affiliations in UI Footers by @HMS17 in https://github.com/Breeding-Insight/bi-web/pull/462
+* [BI-2803] Fix broken preview table on Sub Entity Appends and Observation Variable Stat by @jloux-brapi in https://github.com/Breeding-Insight/bi-web/pull/461
+* BI-2805 - Fix autocomplete to work with new BrAPI levelNames by @nickpalladino in https://github.com/Breeding-Insight/bi-web/pull/463
+* BI-2836 - Unable to retrieve program dataset names error message by @nickpalladino in https://github.com/Breeding-Insight/bi-web/pull/464
+* BI-2860 - Experimental Collaborators able to create sub entity datasets by @humsika in https://github.com/Breeding-Insight/bi-web/pull/469
+* v1.3 Release by @nickpalladino in https://github.com/Breeding-Insight/bi-web/pull/470
+
+### New Contributors
+* @jloux-brapi made their first contribution in https://github.com/Breeding-Insight/bi-web/pull/461
+* @humsika made their first contribution in https://github.com/Breeding-Insight/bi-web/pull/469
+
+**Full Changelog**: https://github.com/Breeding-Insight/bi-web/compare/v1.2.0...v1.3.0
+
+[Web app release on GitHub](https://github.com/Breeding-Insight/bi-web/releases/tag/v1.3.0)
+
+## API
+
+### What's Changed
+* BI-2185 - Germplasm name validation "/" by @nickpalladino in https://github.com/Breeding-Insight/bi-api/pull/459
+* [BI-2009] - Dynamic Concatenation of Entity + ObsUnitID (Exp UI) by @HMS17 in https://github.com/Breeding-Insight/bi-api/pull/458
+* Update species migration to work with new uuids by @nickpalladino in https://github.com/Breeding-Insight/bi-api/pull/462
+* BI-2212 - Update Postgres Version by @mlm483 in https://github.com/Breeding-Insight/bi-api/pull/454
+* BI-2654 - Tests Failing with Opaque SQL Syntax Error by @mlm483 in https://github.com/Breeding-Insight/bi-api/pull/468
+* BI-2650 - Re-enable disabled tests for brapi server uuid update by @nickpalladino in https://github.com/Breeding-Insight/bi-api/pull/464
+* [BI-2632] Germplasm download from single list no longer working by @davedrp in https://github.com/Breeding-Insight/bi-api/pull/463
+* BI-2664 - Add missing Honey Bee entry to species migration by @nickpalladino in https://github.com/Breeding-Insight/bi-api/pull/470
+* [BI-2628] Replace Static ObsUnitID column to Dynamic Sub-entity ObsUnitID column in APpend Workflow by @dmeidlin in https://github.com/Breeding-Insight/bi-api/pull/469
+* BI-2680 - BrAPI Prod PR bi-api test ci minimal starting point by @nickpalladino in https://github.com/Breeding-Insight/bi-api/pull/477
+* BI-2623 - BI-API processing of observation dependencies taking too long by @nickpalladino in https://github.com/Breeding-Insight/bi-api/pull/476
+* BI-2694 - Field Book pulling sub-entity observation units by @nickpalladino in https://github.com/Breeding-Insight/bi-api/pull/480
+* BI-2540 - Update bi_user Table for Alternate OAuth Provider(s) by @mlm483 in https://github.com/Breeding-Insight/bi-api/pull/473
+* merge release/1.1.1 into develop by @mlm483 in https://github.com/Breeding-Insight/bi-api/pull/488
+* BI-2269 - Two experiments with the same title loaded to rel-test: Concurency by @nickpalladino in https://github.com/Breeding-Insight/bi-api/pull/478
+* [BI-2110] New Append Exp Validations  by @dmeidlin in https://github.com/Breeding-Insight/bi-api/pull/483
+* [BI-2193] Improve/Correct Sub-Entity Tabular View by @HMS17 in https://github.com/Breeding-Insight/bi-api/pull/487
+* [BI-2234] - Improve exp dataset export file by @HMS17 in https://github.com/Breeding-Insight/bi-api/pull/490
+* [BI-2755] - improve default sub-unit sort by @HMS17 in https://github.com/Breeding-Insight/bi-api/pull/491
+* [BI-2641] WIP by @davedrp in https://github.com/Breeding-Insight/bi-api/pull/493
+* BI-2743 - Create Sub Entity Dataset, create obs level by @nickpalladino in https://github.com/Breeding-Insight/bi-api/pull/489
+* [BI-2786] Remove code to add treatments to additional info by @jloux-brapi in https://github.com/Breeding-Insight/bi-api/pull/495
+* [BI-2751] - Germplasm entry number weirdness by @HMS17 in https://github.com/Breeding-Insight/bi-api/pull/494
+* BI-2796 - Autocompletions for dataset names in the program including other experiments displayed but unable to select by @nickpalladino in https://github.com/Breeding-Insight/bi-api/pull/497
+* [BI-2791] Exp File Name Improvement by @HMS17 in https://github.com/Breeding-Insight/bi-api/pull/499
+* [BI-2744] DeltaBreed:Create exp, create obs level CI by @HMS17 in https://github.com/Breeding-Insight/bi-api/pull/498
+* [BI-2757] Fix observations not saving on sub entity dataset append by @jloux-brapi in https://github.com/Breeding-Insight/bi-api/pull/501
+* [BI-2778] Deprecate additionalinfo usage for level and use obs unit lvl by @HMS17 in https://github.com/Breeding-Insight/bi-api/pull/500
+* [BI-2803] Create new obsVarCount stat for both Experiment creation and appends use case by @jloux-brapi in https://github.com/Breeding-Insight/bi-api/pull/502
+* [BI-2816] Unknown error when creating new exp with more than one exp title by @HMS17 in https://github.com/Breeding-Insight/bi-api/pull/503
+* [BI-2814] Create Sub Entity Dataset: Update OUs to supply levelNameDbIds by @jloux-brapi in https://github.com/Breeding-Insight/bi-api/pull/506
+* [BI-2813] Set levelNameDbIds in OUs in experiment creation use case by @jloux-brapi in https://github.com/Breeding-Insight/bi-api/pull/507
+* BI-2783 - Logic In Germplasm Import Dependent on Name Lookup by @davedrp in https://github.com/Breeding-Insight/bi-api/pull/508
+* [BI-2823] Remove sub entity level name from level relationships in sub entity dataset creation by @davedrp in https://github.com/Breeding-Insight/bi-api/pull/509
+* BI-2805 - Fix autocomplete to work with new BrAPI levelNames by @nickpalladino in https://github.com/Breeding-Insight/bi-api/pull/505
+* BI-2836 - Unable to retrieve program dataset names error message by @nickpalladino in https://github.com/Breeding-Insight/bi-api/pull/511
+* BI-2825 - Add Sunflower to list of species by @davedrp in https://github.com/Breeding-Insight/bi-api/pull/512
+* BI-2801 - Connection Pool Error while trying to download sub-entity file by @nickpalladino in https://github.com/Breeding-Insight/bi-api/pull/510
+* BI-2860: Made changes to the end point to limit the access. by @humsika in https://github.com/Breeding-Insight/bi-api/pull/518
+* Release/1.3 by @nickpalladino in https://github.com/Breeding-Insight/bi-api/pull/519
+
+
+**Full Changelog**: https://github.com/Breeding-Insight/bi-api/compare/v1.2.0...v1.3.0
+
+[API release on GitHub](https://github.com/Breeding-Insight/bi-api/releases/tag/v1.3.0)
+
+[About DeltaBreed](../software/deltabreed.qmd)

@@ -3,8 +3,8 @@
 // Controlled vocabulary for software pages. Rendering fails on any value not listed here,
 // so new domains, types, or tasks are added deliberately (see CONTRIBUTING.md).
 const DOMAINS = [
+  'Data Management',
   'Genomic Analysis',
-  'Breeding Data',
   'Pedigree & Mating',
   'Markers & Haplotypes',
   'Phenomics',

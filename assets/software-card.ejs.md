@@ -15,7 +15,9 @@ const tasks = asArray(item.tasks);
 const tags = asArray(item.tags).filter((tag) => !tasks.includes(tag));
 const allTags = tasks.concat(tags);
 const links = item.links || {};
-const searchText = [item.title, item.description, item.domain, item.form, item.version ? 'v' + item.version : '']
+const idents = item.identifiers || {};
+const searchText = [item.title, item.description, item.domain, item.form, item.version ? 'v' + item.version : '',
+    idents.doi || '', idents.rrid ? 'RRID:' + String(idents.rrid).replace(/^RRID:/, '') : '']
   .concat(allTags)
   .filter(Boolean)
   .join(' ');

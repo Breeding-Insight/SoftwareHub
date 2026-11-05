@@ -3,7 +3,8 @@
 -- `form`, "Breedverse" when `ecosystem: breedverse`,
 -- "Runs online" when `links.online` is set, then the latest release version from `version`,
 -- linking to `version-url`), then `tasks` and `tags`, each tag linking
--- to the Software page filtered by that tag.
+-- to the Software page filtered by that tag. Citation identifiers (DOI, RRID) go at the end of
+-- the page instead, added by assets/tool-identifiers.lua.
 
 local function as_list(value)
   if value == nil then return {} end

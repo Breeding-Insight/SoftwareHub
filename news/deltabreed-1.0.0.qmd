@@ -1,0 +1,94 @@
+---
+title: "DeltaBreed 1.0.0"
+date: 2024-11-08
+description: "[BI-2304] - Support Duplicate Germplasm in Lists Referencing Existing Germplasm @mlm483 (#399) (#406)"
+categories: [DeltaBreed]
+image: ../assets/software-deltabreed-icon.svg
+image-alt: "DeltaBreed logo"
+toc: false
+---
+
+## Web app
+
+#### Features
+
+- [BI-2304] - Support Duplicate Germplasm in Lists Referencing Existing Germplasm @mlm483 (#399) (#406)
+- [BI-2295] - Allow Experimental Collaborators To View Collaborators @HMS17 (#397)
+- [BI-2259] - Disable  Sub-entity Dataset option in Manage experiments menu @davedrp (#390)
+- [BI-2255] - Experimental Collaborator Micronaut Changes @davedrp (#402)
+- [BI-2226] -  Experiment and Observations Template: Remove 2 sub-obs columns @dmeidlin (#395)
+- [BI-2154] - Adjust Read Only permissions @davedrp (#392)
+- [BI-2152] - Experimental Collaborator Front-end Permissions @davedrp (#396)
+- [BI-2121] - Workflows UI Select Box @nickpalladino (#378)
+- [BI-2106] -  Accessibility: Web Version @davedrp (#385)
+- [BI-2105] - Accessibility: Header and Navigation @davedrp (#380)
+- [BI-2103] - Accessibility: Links on Index and Not Authorized Pages @davedrp (#381)
+- [BI-2102] - Accessibility: Make Color Contrast Meet AA Standard @davedrp (#384)
+- [BI-2044] - Can't archive an observation variable that is in use @nickpalladino (#391)
+- [BI-2005] - Expand Exp Template @nickpalladino (#355)
+- [BI-1693] - Add Collaborator To And Remove From Experiment (UI) @dmeidlin (#393)
+- [BI-1692] - Change role names @HMS17 (#388)
+
+#### Bugfixes
+
+- [BI-2355] - Non-informative error message: regression @HMS17 (#412)
+- [BI-2334] - Wonky Colors - Exp preview @dmeidlin (#407)
+- [BI-2328] - Experimental observation file import removes periods from column headers @davedrp (#411)
+- [BI-2302] - Fix wonky colors @HMS17 (#398)
+- [BI-2167] - Lat and long values are getting swapped in the exp download file @nickpalladino (#386)
+- [BI-2126] - Env year missing from dataset view @davedrp (#389)
+- [BI-2123] - Jobs table sizing is wonky & hiding the "details" option @dmeidlin (#405)
+- [BI-1975] - "Unknown" Breeding Method not recognized @nickpalladino (#387)
+- [BI-1933] - Erroneous message: No germplasm are currently defined for this program  @mlm483 (#404) (#408)
+
+[Web app release on GitHub](https://github.com/Breeding-Insight/bi-web/releases/tag/v1.0.0)
+
+## API
+
+#### Features
+
+- [BI-2304] - Support Duplicate Germplasm in Lists Referencing Existing Germplasm @mlm483 (#401) (#409)
+- [BI-2295] - Allow Experimental Collaborators To View Collaborators @HMS17 (#396)
+- [BI-2258] - Experimental Collaborator DAO and Services for Experiments and Observations @mlm483 (#385)
+- [BI-2257] - Experimental Collaborator DAO and Services for experimental_program_user_role @mlm483 (#383) (#387)
+- [BI-2256] - Experimental Collaborator BI-API Changes @nickpalladino (#390)
+- [BI-2255] - Experimental Collaborator Micronaut Changes @davedrp (#388)
+- [BI-2254] - Experimental Collaborator DB Changes @mlm483 (#382)
+- [BI-2227] - Modify Upload Experiment and Observations File to accept without sub units @nickpalladino (#394)
+- [BI-2226] -  Experiment and Observations Template: Remove 2 sub-obs columns @nickpalladino (#394)
+- [BI-2163] - Add multiple species to the species list when creating a program @nickpalladino (#373) (#381)
+- [BI-2134] - Append experimental dataset workflow @dmeidlin (#359) (#372) (#384) (#389) (#391) @davedrp (#376)
+- [BI-2132] - Create new experiment workflow @nickpalladino (#366) (#375)
+- [BI-2122] - Workflows Backend Selector @nickpalladino (#355) @dmeidlin (#360) (#379)
+- [BI-2115] - Experiment Import Workflows Refactor @nickpalladino (#352)
+- [BI-2067] - Merge Tim's FieldBook BrAPI program endpoint with Mr.Bean work @HMS17 (#407) (#410)
+- [BI-2038] - Make BrAPI v2 /commoncropnames and /programs only return information relevant to Delta Breed program @nickpalladino (#328)
+- [BI-2005] - Expand Exp Template @nickpalladino (#323)
+- [BI-1692] - Change role names  @HMS17 (#377) (#386)
+
+#### Bugfixes
+
+- [BI-2355] - Non-informative error message: regression @HMS17 (#423)
+- [BI-2354] - Incorrect Case Sensitivity in Exp Import Error Message @mlm483 (#420) (#424)
+- [BI-2344] - Incorrect Germplasm Export in Case of Duplicate Germplasm Names @mlm483 (#419) (#421)
+- [BI-2338] - Germplasm file with problems is loading, but preventing download @nickpalladino (#416) (#425)
+- [BI-2330] - MrBean DeltaBreed Integration /brapi/v2/observations/table endpoint (potential hackathon item) @mlm483 (#413) (#418)
+- [BI-2328] - Experimental observation file import removes periods from column headers @davedrp (#411) (#417)
+- [BI-2317] - System Admin Must Retain Full Read Access To All Programs @dmeidlin (#405)
+- [BI-2310] - Exp import: extraneous error message @HMS17 (#403)
+- [BI-2309] - BrAPI observationsunits response contains incorrect germplasmDbIds @nickpalladino (#402) (#406)
+- [BI-2308] - Field Book BrAPI Integration - Importing Fields @nickpalladino (#402) (#406)
+- [BI-2306] - Helium BrAPI integration filter by accessionNumber (potential hackathon item) @nickpalladino (#412)
+- [BI-2283] - Modify the experiment_program_user_role.program_user_role_id FK to use ON DELETE CASCADE @mlm483 (#393)
+- [BI-2274] - BrAPI germplasm search response incorrect @nickpalladino (#397) (#404)
+- [BI-2267] - Trim trailing white space on breeding method file uploads @davedrp (#392) (#399)
+- [BI-2266] -  Correct entry numbers on all germplasm export list @mlm483 (#395)
+- [BI-2203] - Insert sanbox email into bi_user table @davedrp (#408)
+- [BI-2167] - Lat and long values are getting swapped in the exp download file @nickpalladino (#368)
+- [BI-2126] - Env year missing from dataset view @davedrp (#380)
+- [BI-2093] - (Performance) Observation Cache Refreshing After Every PUT During Overwrite @davedrp (#376)
+- [BI-1975] - "Unknown" Breeding Method not recognized @nickpalladino (#369)
+
+[API release on GitHub](https://github.com/Breeding-Insight/bi-api/releases/tag/v1.0.0)
+
+[About DeltaBreed](../software/deltabreed.qmd)

@@ -1,0 +1,73 @@
+---
+title: "DeltaBreed 0.3.0"
+date: 2021-06-02
+description: "Fix/BI-794 ISSUE: New/Edit Trait - ordinal scale name for new traits persists in db after changing scale name to nominal @dmeidlin (#86)"
+categories: [DeltaBreed]
+image: ../assets/software-deltabreed-icon.svg
+image-alt: "DeltaBreed logo"
+toc: false
+---
+
+## Web app
+
+### Changes
+
+- Fix/BI-794 ISSUE: New/Edit Trait - ordinal scale name for new traits persists in db after changing scale name to nominal @dmeidlin (#86)
+- [BI-769] assign nominal and ordinal data types when setting new trait scale @dmeidlin (#84)
+- [BI-774] fix placeholder text for new trait form method description @dmeidlin (#82)
+- Bump axios from 0.18.1 to 0.21.1 @dependabot (#65)
+- BI-658 Remodel index/front page @eawoods (#57)
+- Adding release workflow to generate a new docker image for the latest tag
+
+
+### Features
+
+- [BI-563, BI-567] Archive Individual Trait @dmeidlin (#70)
+- BI-674 - Program Definable BrAPI Service URL @nickpalladino (#75)
+- [BI-677] - Connect PUT traits to back end @ctucker3 (#72)
+- [BI-86] - Edit trait form @ctucker3 (#66)
+- [BI-685] - Map backend trait validation errors to front end @ctucker3 (#63)
+- [BI-684, BI-682] - Calendar scale and Computation method class @ctucker3 (#62)
+- [BI-683, BI-678, BI-670] - Numerical, Text, Duration scale forms @ctucker3 (#61)
+- [BI-671,BI-679] - Create new trait - Scale class 'ordinal scale' and Scale class 'nominal class' @ctucker3 (#60)
+- [BI-85,BI-646] - Create new trait UI @ctucker3 (#58)
+- [BI-686] update file template @ctucker3 (#59)
+
+### Bugfixes
+
+- [BI-935, BI-796, BI-797] New/Edit Trait - selecting Nominal scale class, cannot switch to ordinal @dmeidlin (#90)
+- [BI-863] fix uneditable program @ctucker3 (#88)
+- [BI-770, BI-771, BI-727, BI-726] - Fix deactivate link program and user mgmt. Fix Trait numeric validations and min max validation.  @ctucker3 (#83)
+- [BI-698, BI-776] Import Traits not available until refreshing page after adding self to program @dmeidlin (#76)
+- [BI-699] Messages background fix @ctucker3 (#68)
+- [BI-701] match even/odd striped row backgrounds when selected for edit @dmeidlin (#73)
+- [BI-697] Orcid Icon missing @dmeidlin (#71)
+- [BI-695]  ISSUE: Multiple clicks on Save results in equally multiple entities created for Programs and Locations @timparsons (#69)
+- [BI-680] Fixing invalid versionInfo URL for bi-web @timparsons (#67)
+- [BI-626] Handle login error and logout user before starting login process @ctucker3 (#50)
+
+[Web app release on GitHub](https://github.com/Breeding-Insight/bi-web/releases/tag/v0.3.0)
+
+## API
+
+### Changes
+
+- Adding release workflow to generate a new docker image for the latest tag @timparsons (#91)
+
+### Features
+
+- [BI-641] - Validate lower and upper limits for correctness @ctucker3 (#73)
+- BI-674 - Program Definable BrAPI Service URL @nickpalladino (#70)
+- [BI-703] - Move hardcoded brapi page size from breedbase to bi-api @ctucker3 (#74)
+- [BI-732,BI-729] - Archive traits @ctucker3 (#71)
+- [BI-677] - PUT traits @ctucker3 (#68)
+
+### Bugfixes
+
+- BI-731 - Fix Issue #42 in BrAPI Test Server and Fix PUT traits unit/integration tests in bi-api @nickpalladino (#77)
+- [BI-714] .env variables in default file are out of date @dmeidlin (#67)
+- [BI-645] - Make trait import case insensitive @ctucker3 (#72)
+
+[API release on GitHub](https://github.com/Breeding-Insight/bi-api/releases/tag/v0.3.0)
+
+[About DeltaBreed](../software/deltabreed.qmd)
