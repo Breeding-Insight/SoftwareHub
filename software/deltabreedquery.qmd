@@ -12,6 +12,8 @@ tags: [Breeding records, BrAPI]
 links:
   cran: https://cran.r-project.org/package=deltabreedquery
   source: https://github.com/Breeding-Insight/deltabreedquery
+identifiers:
+  rrid: SCR_028884
 image: ../assets/software-deltabreedquery.png
 image-alt: "deltabreedquery logo."
 ---
