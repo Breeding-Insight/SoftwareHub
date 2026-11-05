@@ -1,7 +1,7 @@
 ---
 title: "deltabreedquery"
 description: "Import data from the DeltaBreed data management platform into R."
-domain: Breeding Data
+domain: Data Management
 status: released
 version: "1.0.4"
 version-date: 2026-10-12

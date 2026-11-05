@@ -1,0 +1,93 @@
+---
+title: "DeltaBreed 0.9.0"
+date: 2024-04-10
+description: "[BI-1963] - Hide Data Mapping Tab @nickpalladino (#344)"
+categories: [DeltaBreed]
+image: ../assets/software-deltabreed-icon.svg
+image-alt: "DeltaBreed logo"
+toc: false
+---
+
+## Web app
+
+#### Features
+
+- [BI-1963] - Hide Data Mapping Tab @nickpalladino (#344)
+- [BI-1958] - Hide images and attributes from germplasm details  @nickpalladino (#345)
+- [BI-1922] - Add ability to download all germplasm in a program @davedrp (#350)
+- [BI-1921] - Support Field Book Study Import from DeltaBreed @timparsons (#346)
+- [BI-1915] - Export Ontology File @davedrp (#349)
+- [BI-1914] - Improve exp dataset sort @davedrp (#339)
+- [BI-1910] - Allow Breeder to Upload a Genotype Sample File @timparsons (#343)
+- [BI-1867] - Ontology: Increase name length to 16 characters @HMS17 (#354)
+- [BI-1847] - Experiment import template formatting improvements @mlm483 (#333)
+- [BI-1265] - 4 Overwrite entity dataset @nickpalladino (#351)
+- [BI-2017] - Change Germplasm Upload to unify with sample submission  @davedrp (#372)
+- [BI-1680] - Somaclone Breeding Method @mlm483 (#373)
+
+#### Bugfixes
+
+- [BI-2060] - Conditionally render the genotypic data import tab when running in production @dmeidlin (#362)
+- [BI-2059] - Field Book not displaying nominal categories from DeltaBreed (BrAPI pull) @nickpalladino (#371)
+- [BI-2054] - Show proceed dialog on overwrite regardless of reason text presence @nickpalladino (#363)
+- [BI-2042] - Jobs loading banner and loading wheel on button not displayed when overwriting experiment data @nickpalladino (#363)
+- [BI-2029] - Experiment Preview and Visual Progress Indicators Broken in v0.9 @davedrp (#357)
+- [BI-1935] - Error remains displayed @nickpalladino (#347)
+- [BI-1926] - Environment count incorrect @davedrp (#337)
+- [BI-1912] - Wonky spacing on exp dataset summary @nickpalladino (#353)
+- [BI-1852] - Duplicate breeding method can be created @davedrp (#334)
+- [BI-1761] - Error message with the backend code.  @dmeidlin (#352)
+
+#### Hotfixes
+
+- [BI-2036] Update guest accounts listed in Sandbox left sidebar nav menu @dmeidlin (#356)
+- [BI-2053-fix] - Fixed Trait Form Scale Units Handling @mlm483 (#369)
+
+[Web app release on GitHub](https://github.com/Breeding-Insight/bi-web/releases/tag/v0.9.0)
+
+## API
+
+#### Features
+
+- [BI-2027] - Add More Detailed Logging Around Redis Cache @mlm483 (#322)
+- [BI-1965] - Upgrade to Gigwa v2.6.2 @timparsons (#301)
+- [BI-1965] - Upgrade to Gigwa v2.6.2 @mlm483 (#321)
+- [BI-1956] - Add sorghum and hemp species migration @nickpalladino (#307)
+- [BI-1945] - Store AdditionalInfo as JSONB in BrAPI Java TestServer @mlm483 (#312, #314)
+- [BI-1922] - Add ability to download all germplasm in a program @davedrp (#311)
+- [BI-1921] - Support Field Book Study Import from DeltaBreed @timparsons (#308)
+- [BI-1915] - Export Ontology File @davedrp (#310)
+- [BI-1914] - Improve exp dataset sort @davedrp (#303)
+- [BI-1910] - Allow Breeder to Upload a Genotype Sample File @timparsons (#306)
+- [BI-1890] - Experimental Test/Check Improvement @davedrp (#299)
+- [BI-1867] - Ontology: Increase name length to 16 characters @HMS17 (#317)
+- [BI-1847] - Experiment import template formatting improvements @mlm483 (#292)
+- [BI-1265] - 4 Overwrite entity dataset @dmeidlin (#305, #327)
+- [BI-2017] - Change Germplasm Upload to unify with sample submission @davedrp (#345)
+- [BI-1680] - Somaclone Breeding Method @mlm483 (#346)
+
+#### Bugfixes
+
+- [BI-2064] - Invalid message if required data is missing  @davedrp (#334)
+- [BI-2053] - Remove 'Scale class' notation showing under 'Units' @mlm483 (#331)
+- [BI-2046] - Overwrite observations happening without reference to ObsUnitID @dmeidlin (#332)
+- [BI-2045] - Failure to report error when uploading duplicated experiment name @davedrp (#333)
+- [BI-2043] - Overwrite performance is very slow @mlm483 (#329)
+- [BI-2028] - Duplicated accession names getting assigned duplicated GIDs after Exp&Obs upload @dmeidlin (#320)
+- [BI-2019] - Pedigree Viewer Not Rendering @mlm483 (#324)
+- [BI-2014] - Phenotypes and Observations not rendering, unable to download experiment @davedrp (#325)
+- [BI-1960] - Exp import proceeds with multiple exp names & error message improvement @dmeidlin (#316)
+- [BI-1930] - trait names are case sensitive @davedrp (#300)
+- [BI-1852] - Duplicate breeding method can be created @davedrp (#294)
+- [BI-1761] - Error message with the backend code.  @dmeidlin (#319)
+- [BI-1340] - Unable to edit a trait - Error getting editable status @mlm483 (#293)
+
+
+#### Hotfixes
+
+- [BI-1945-hotfix] - updated bind mount paths @mlm483 (#314)
+- [BI-2053-fix] - Handled Trait Form Submission Code Path @mlm483 (#343)
+
+[API release on GitHub](https://github.com/Breeding-Insight/bi-api/releases/tag/v0.9.0)
+
+[About DeltaBreed](../software/deltabreed.qmd)

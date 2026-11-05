@@ -1,0 +1,67 @@
+---
+title: "DeltaBreed 0.2.0"
+date: 2021-02-03
+description: "BI-658 Remodel index/front page @eawoods (#57)"
+categories: [DeltaBreed]
+image: ../assets/software-deltabreed-icon.svg
+image-alt: "DeltaBreed logo"
+toc: false
+---
+
+## Web app
+
+### Changes
+
+- BI-658 Remodel index/front page @eawoods (#57)
+- BI-534 - Create prod services in bi-docker-stack @nickpalladino (#44)
+- [BI-611] make daos work with pagination in backend @ctucker3 (#45)
+- Get develop in sync with master @timparsons (#48)
+- BI-57 - Set up sandbox sites @nickpalladino (#43)
+- [INF-206],[BI-63] change allowable npm audit levels @ctucker3 (#36)
+- [INF-208],[BI-59] move bulma packages from prod to dev dependency list @dmeidlin (#38)
+
+### Features
+
+- [BI-625] Configure TLS (HTTPS) for sandbox/qa environments @dmeidlin (#64)
+- [BI-601] - Implement role permissions on front end @ctucker3 (#55)
+- [BI-669] Updated link to v2 template @nickpalladino (#56)
+- BI-659 - BrAPI v1.3 GET /variables endpoint @nickpalladino (#54)
+- BI-647 - Authorize for Field Book BrAPI endpoints @nickpalladino (#51)
+- [BI-379] Display web and API build version on UI @timparsons (#52)
+- [BI-652] - New account signup @ctucker3 (#53)
+
+### Bugfixes
+
+- [BI-626] Handle login error and logout user before starting login process @ctucker3 (#50)
+- [BI-637] orcid last character X fix plus test @ctucker3 (#49)
+
+[Web app release on GitHub](https://github.com/Breeding-Insight/bi-web/releases/tag/v0.2.0)
+
+## API
+
+### Changes
+
+- [BI-280] - Add brapi program create and update on program create and update @ctucker3 (#50)
+- Changing startup/shutdown action to prevent wiping of database @timparsons (#52)
+- [BI-617] - Sort/paginate/filter for trait upload @ctucker3 (#49)
+- [BI-613, BI-614, BI-615, BI-616] - Sort/Pagination/Filter for traits, users, program users @ctucker3 (#46)
+- [BI-611] - Sort/Pagination/Filter @ctucker3 (#44)
+
+### Features
+
+- [BI-625] Configure TLS (HTTPS) for sandbox/qa environments @dmeidlin (#66)
+- BI-608 - Create location in BrAPI systems @nickpalladino (#57)
+- [BI-601] - Program security @ctucker3 (#58)
+- BI-659 - BrAPI v1.3 GET /variables endpoint @nickpalladino (#56)
+- BI-647 - Authorize for Field Book BrAPI endpoints @nickpalladino (#53)
+- [BI-379] Display web and API build version on UI @timparsons (#54)
+- [BI-652] - New account signup @ctucker3 (#55)
+
+### Bugfixes
+
+- [BI-626] - Handle login timeout error @ctucker3 (#51)
+- [ISSUE-9] Make traits duplicate check within the program @ctucker3 (#40)
+
+[API release on GitHub](https://github.com/Breeding-Insight/bi-api/releases/tag/v0.2.0)
+
+[About DeltaBreed](../software/deltabreed.qmd)

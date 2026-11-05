@@ -1923,6 +1923,19 @@ h2.section-heading {
     padding: .5em .8em;
   }
 
+  /* `image-shape: app-icon`: the logo is already a rounded-square icon, so no frame. */
+  .hub-tile.is-icon {
+    padding: 0;
+    border: 0;
+    background: none;
+    box-shadow: none;
+
+    img {
+      border-radius: 22%;
+      box-shadow: var(--hub-shadow);
+    }
+  }
+
   .hub-hex:hover,
   .hub-hex:focus-visible {
     z-index: 1;
@@ -2804,6 +2817,51 @@ h2.section-heading {
     border-color: var(--hub-primary);
     background: var(--hub-surface-tint);
     color: var(--hub-primary-strong);
+  }
+
+  // Citation identifiers (DOI, RRID) above a tool page's intro text, from `identifiers:` front
+  // matter (assets/tool-identifiers.lua). Kept apart from the badges and tags under the intro.
+  .tool-ids {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .375rem;
+    margin-bottom: 1rem;
+  }
+
+  .tool-id {
+    display: inline-flex;
+    align-items: stretch;
+    max-width: 100%;
+    overflow: hidden;
+    border: 1px solid var(--hub-border);
+    border-radius: 6px;
+    background: var(--hub-surface);
+    color: var(--hub-primary-strong);
+    font-size: .8125rem;
+    font-variant-numeric: tabular-nums;
+    text-decoration: none;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+    padding-right: .55rem;
+  }
+
+  .tool-id-label {
+    flex: none;
+    margin-right: .5rem;
+    padding: 0 .45rem;
+    border-right: 1px solid var(--hub-border);
+    background: var(--hub-surface-alt);
+    color: var(--hub-ink-muted);
+    font-size: .6875rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .tool-id:hover {
+    border-color: var(--hub-primary);
+    background: var(--hub-surface-tint);
   }
 
   main.content h2 {

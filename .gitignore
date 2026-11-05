@@ -58,3 +58,6 @@ rsconnect/
 
 # Claude Code local settings, skills and preview config
 /.claude/
+
+/softwarehub-design/
+/softwarehub-design.zip
