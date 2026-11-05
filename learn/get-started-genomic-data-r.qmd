@@ -8,7 +8,6 @@ categories:
   - Genotype Data
 image: ../assets/learn/title-cards/tutorial-genomic-data.svg
 image-alt: "A VCF table beside a read-depth chart labeled VCF basics."
-title-card: true
 order: 15
 learning-type: Tutorial
 software:

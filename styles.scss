@@ -2549,7 +2549,7 @@ h2.section-heading {
 
 /* Release-note pages (news/*.qmd, generated; body class release-note-page via
    news/_metadata.yml): the tool-page look below plus the package logo beside the title
-   (assets/partials/release/title-block.html) and the closing links as buttons. */
+   (assets/release-partials/title-block.html) and the closing links as buttons. */
 .release-note-page {
   .release-head {
     display: flex;
@@ -3224,19 +3224,5 @@ h2.section-heading {
   /* Workshop tables are scroll boxes (see .workshop-page table); let them scroll, not clip. */
   &.workshop-page main.content table {
     overflow-x: auto;
-  }
-}
-
-/* Learn pages: optional title card in the page header (set `title-card: true` in the page's
-   front matter; markup comes from assets/partials/learn/title-block.html). */
-.learning-material-page .learn-title-card {
-  margin: 1rem 0 1.25rem;
-
-  img {
-    display: block;
-    width: 100%;
-    max-width: 700px;
-    height: auto;
-    border-radius: 0.75rem;
   }
 }

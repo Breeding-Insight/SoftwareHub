@@ -12,7 +12,6 @@ categories:
   - File Formats
 image: ../assets/learn/title-cards/concept-madc.svg
 image-alt: "A MADC table with fixed allele IDs and per-sample read counts."
-title-card: true
 order: 19
 learning-type: Concept
 software:

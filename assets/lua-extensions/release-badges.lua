@@ -1,7 +1,7 @@
 -- Release-note pages (news/*.qmd): builds the package badge for the title strip, linking to
 -- the News page filtered by that package. Done here rather than in the title template
 -- because Pandoc templates can't URL-encode, so a name with a space, & or + would break the
--- link. assets/partials/release/title-block.html places it as $release-packages$.
+-- link. assets/release-partials/title-block.html places it as $release-packages$.
 
 local function as_list(value)
   if value == nil then return {} end

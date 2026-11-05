@@ -1,9 +1,5 @@
 format:
   html:
     body-classes: learning-material-page
-    # Quarto matches partials by filename, so this must stay named title-block.html. Copy of Quarto's default title block plus an optional title card between the description
-    # and the author block. Set `title-card: true` in a page's front matter to show its `image`.
-    template-partials:
-      - ../assets/partials/learn/title-block.html
 filters:
   - ../assets/lua-extensions/responsive-tables.lua

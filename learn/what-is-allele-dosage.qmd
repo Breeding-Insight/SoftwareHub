@@ -8,7 +8,6 @@ categories:
   - Ploidy & Dosage
 image: ../assets/learn/title-cards/concept-allele-dosage.svg
 image-alt: "Five allele dosage states from zero to four copies at a tetraploid locus."
-title-card: true
 order: 40
 learning-type: Concept
 software:
