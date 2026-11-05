@@ -14,6 +14,8 @@ access: "Visit the landing page for more information:"
 links:
   online: https://breeding-insight.github.io/HapApp-online/
   source: https://github.com/Breeding-Insight/HapApp-online
+identifiers:
+  doi: 10.1007/s00122-026-05340-4
 image: ../assets/software-hapapp.png
 image-alt: "HapApp logo."
 image-shape: square

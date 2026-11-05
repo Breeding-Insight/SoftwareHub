@@ -15,6 +15,8 @@ links:
   online: https://breeding-insight.github.io/AlloMate/
   source: https://github.com/Breeding-Insight/AlloMate
   releases: https://github.com/Breeding-Insight/AlloMate/releases
+identifiers:
+  rrid: SCR_027115
 image: ../assets/software-allomate.png
 image-alt: "AlloMate hexagonal logo."
 ---

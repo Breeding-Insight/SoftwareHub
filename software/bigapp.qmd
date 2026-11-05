@@ -13,6 +13,9 @@ ecosystem: breedverse
 links:
   website: https://breedinginsight.org/software/bigapp/
   source: https://github.com/Breeding-Insight/BIGapp
+identifiers:
+  doi: 10.1002/tpg2.70067
+  rrid: SCR_026676
 image: ../assets/software-bigapp.png
 image-alt: "BIGapp hexagonal logo."
 ---

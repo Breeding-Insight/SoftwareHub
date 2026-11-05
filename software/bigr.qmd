@@ -14,6 +14,9 @@ links:
   docs: https://breeding-insight.github.io/BIGr_documentation/
   cran: https://cran.r-project.org/package=BIGr
   source: https://github.com/Breeding-Insight/BIGr
+identifiers:
+  doi: 10.1002/tpg2.70067
+  rrid: SCR_026677
 image: ../assets/software-bigr.png
 image-alt: "BIGr hexagonal logo."
 ---
