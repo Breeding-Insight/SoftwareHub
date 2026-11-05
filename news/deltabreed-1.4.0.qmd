@@ -1,0 +1,65 @@
+---
+title: "DeltaBreed 1.4.0"
+date: 2026-09-09
+description: "[BI-3033] - Deprecate Genotypic Data Visualization @HMS17 (#491)"
+categories: [DeltaBreed]
+image: ../assets/software-deltabreed-icon.svg
+image-alt: "DeltaBreed logo"
+toc: false
+---
+
+## Web app
+
+### Changes
+
+- [BI-3033] - Deprecate Genotypic Data Visualization @HMS17 (#491)
+
+### Features
+
+- [BI-1968] - Change default experimental download to "All Environments" @HMS17 (#484)
+- [BI-2981] - Improve message: duplicate germplasm detected @HMS17 (#483)
+- BI-2980: Update sample submission template @humsika (#485)
+- BI-2967: Wire frontend VCF genotype upload limit through environment config @humsika (#482)
+- BI-2959: Use External UID Source for Germplasm External UID References @humsika (#480)
+- BI-2936 - Prevent deleting sample submissions that have genotype imports associated with them @nickpalladino (#479)
+- [BI-2850] - Add download options to new genotyping page - QA fix @HMS17 (#477)
+- BI-2958: Update Germplasm Import Template Source Description. @humsika (#478)
+- BI-2869 - Show completion notification and reset after genotype data import finishes @nickpalladino (#476)
+- BI-2941 - Genotype Data Import erroring out when the file size is too Large @humsika (#475)
+- [BI-2850] - Add download options to new genotyping page @HMS17 (#474)
+- BI-2679 - New Genotype Page @nickpalladino (#471)
+- [BI-2878] Germplasm External UID missing from UI @davedrp (#472)
+
+### Bugfixes
+
+- [BI-3018] - Erroneous message during .vcf upload @HMS17 (#486)
+
+[Web app release on GitHub](https://github.com/Breeding-Insight/bi-web/releases/tag/v1.4.0)
+
+## API
+
+### Changes
+
+- [BI-3033] - Deprecate Genotypic Data Visualization @HMS17 (#552)
+
+### Features
+
+- BI-2973: Prevent Duplicate Variants Error from Blocking Subsequent Genotype Data Imports @humsika (#540)
+- [BI-2949] - Update docker-compose to ensure localstack bucket persists @HMS17 (#539)
+- BI-2959: Use External UID Source for Germplasm External UID References @humsika (#534)
+- BI-2936 - Prevent deleting sample submissions that have genotype imports associated with them @nickpalladino (#535)
+- BI-2941 - Genotype Data Import erroring out when the file size is too Large @humsika (#529)
+- BI-2901: Add backend VCF download endpoint for genotyping imports @humsika (#528)
+- [BI-2883] - Add pedigree column to germplasm download files @HMS17 (#525)
+- BI-2848 - New Genotyping Page Backend: linkage to sample submission @humsika (#523)
+- Update settings to fetch mvn central snapshots @jloux-brapi (#526)
+- [BI-2878] Germplasm External UID missing from UI @davedrp (#524)
+- BI-2841 - Retrieve Germplasm Genotype Data Through DeltaBreed Samples @davedrp (#522)
+
+### Bugfixes
+
+- BI-2887: Germplasm download error with blank source or breeding method @humsika (#520)
+
+[API release on GitHub](https://github.com/Breeding-Insight/bi-api/releases/tag/v1.4.0)
+
+[About DeltaBreed](../software/deltabreed.qmd)

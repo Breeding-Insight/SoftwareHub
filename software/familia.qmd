@@ -13,6 +13,8 @@ ecosystem: breedverse
 links:
   source: https://github.com/Breeding-Insight/Familia
   releases: https://github.com/Breeding-Insight/Familia/releases
+identifiers:
+  rrid: SCR_027197
 image: ../assets/software/logos/software-familia.png
 image-alt: "Familia hexagonal logo."
 ---

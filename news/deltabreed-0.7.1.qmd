@@ -1,0 +1,19 @@
+---
+title: "DeltaBreed 0.7.1"
+date: 2023-01-05
+description: "BI-1683 - Missing female parent in biparental cross results in dropped male parent v0.7 @timparsons (#235)"
+categories: [DeltaBreed]
+image: ../assets/software-deltabreed-icon.svg
+image-alt: "DeltaBreed logo"
+toc: false
+---
+
+## API
+
+### Hotfixes
+
+- BI-1683 - Missing female parent in biparental cross results in dropped male parent v0.7 @timparsons (#235)
+
+[API release on GitHub](https://github.com/Breeding-Insight/bi-api/releases/tag/v0.7.1)
+
+[About DeltaBreed](../software/deltabreed.qmd)

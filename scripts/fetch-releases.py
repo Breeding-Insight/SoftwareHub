@@ -10,6 +10,9 @@ changelog entry reads far better than GitHub's auto-generated "What's Changed"
 dump of pull request titles — and several releases here have an empty body but a
 good NEWS.md entry. The release body is the fallback.
 
+A tool released from several repositories at once (DeltaBreed: bi-web and bi-api)
+is listed in COMBINED: each version becomes one entry with a section per repository.
+
 A version with a NEWS.md entry but no release cannot be dated, so it is skipped
 and reported. Cutting a release for it on GitHub is the fix.
 
@@ -48,6 +51,13 @@ PACKAGES = {
     "AlloMate": ("allomate", "software-allomate.png"),
     "Qploidy2": ("qploidy2", "software-qploidy2.png"),
     "deltabreedquery": ("deltabreedquery", "software-deltabreedquery.png"),
+}
+
+# Tools released from several repositories in step: name -> (software page slug,
+# logo asset, [(repo, section label)]). Each version gets one entry with a section
+# per repository; the first repository's release gives the date and summary.
+COMBINED = {
+    "DeltaBreed": ("deltabreed", "software-deltabreed-icon.svg", [("bi-web", "Web app"), ("bi-api", "API")]),
 }
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -179,8 +189,9 @@ def sync_versions(release_cache):
         print(f"  {page.name}: {label}")
 
 
-def demote_headings(body):
-    """Shift ATX headings down two levels so they sit under the page title.
+def demote_headings(body, levels=2):
+    """Shift ATX headings down `levels` levels so they sit under the page title
+    (or one level less under a section heading in a combined entry).
 
     Fenced code blocks are skipped so a shell comment is not mistaken for a
     heading.
@@ -201,7 +212,7 @@ def demote_headings(body):
         if fence is None:
             heading = re.match(r"^(#{1,4})(\s+)(.*)$", line)
             if heading:
-                line = "#" * min(len(heading.group(1)) + 2, 6) + heading.group(2) + heading.group(3)
+                line = "#" * min(len(heading.group(1)) + levels, 6) + heading.group(2) + heading.group(3)
         lines.append(line)
     return "\n".join(lines)
 
@@ -263,42 +274,59 @@ def yaml_quote(value):
     return '"' + value.replace("\\", "\\\\").replace('"', '\\"') + '"'
 
 
-def write_entry(repo, slug, logo, release, news_sections):
-    version = normalize_version(release["tag_name"])
-    title = f"{repo} {version}"
-    published = release["published_at"][:10]
-
-    # Prefer the hand-written changelog entry; fall back to the release body.
-    body = news_sections.get(version, "").strip()
+def release_notes(release, news_sections):
+    """The notes for a release: its NEWS.md section if there is one, else the release body."""
+    body = news_sections.get(normalize_version(release["tag_name"]), "").strip()
     if not body:
         body = (release.get("body") or "").replace("\r\n", "\n").strip()
+    return body
 
-    description = summarize(body, f"Release notes for {title}.")
+
+def write_entry(name, slug, logo, version, sections):
+    """Write one news entry. `sections` is a list of (label, release, notes); a single
+    unlabelled section is a plain release, labelled ones get a heading each."""
+    title = f"{name} {version}"
+    published = sections[0][1]["published_at"][:10]
+
+    description = summarize(sections[0][2], f"Release notes for {title}.")
     front = [
         "---",
         f"title: {yaml_quote(title)}",
         f"date: {published}",
         f"description: {yaml_quote(description)}",
-        f"categories: [{repo}]",
+        f"categories: [{name}]",
         f"image: ../assets/software/logos/{logo}",
-        f"image-alt: {yaml_quote(repo + ' logo')}",
+        f"image-alt: {yaml_quote(name + ' logo')}",
         "toc: false",
         "---",
         "",
     ]
 
     parts = ["\n".join(front)]
-    parts.append(demote_headings(body) if body else "_No release notes were provided._")
-    parts.append("")
-    parts.append(
-        f"[Release on GitHub]({release['html_url']}) · "
-        f"[About {repo}](../software/{slug}.qmd)"
-    )
+    for label, release, body in sections:
+        if label:
+            parts.append(f"## {label}\n")
+        parts.append(demote_headings(body, 1 if label else 2) if body else "_No release notes were provided._")
+        parts.append("")
+        if label:
+            parts.append(f"[{label} release on GitHub]({release['html_url']})")
+            parts.append("")
+    if not sections[0][0]:
+        parts.append(
+            f"[Release on GitHub]({sections[0][1]['html_url']}) · "
+            f"[About {name}](../software/{slug}.qmd)"
+        )
+    else:
+        parts.append(f"[About {name}](../software/{slug}.qmd)")
     parts.append("")
 
     path = NEWS_DIR / f"{slug}-{version}.qmd"
     path.write_text("\n".join(parts), encoding="utf-8")
     return path
+
+
+def published_releases(releases):
+    return [r for r in releases if not r.get("draft") and not r.get("prerelease")]
 
 
 def main():
@@ -324,9 +352,10 @@ def main():
             continue
 
         news_sections = fetch_news_sections(repo)
-        published = [r for r in releases if not r.get("draft") and not r.get("prerelease")]
+        published = published_releases(releases)
         for release in published:
-            write_entry(repo, slug, logo, release, news_sections)
+            version = normalize_version(release["tag_name"])
+            write_entry(repo, slug, logo, version, [(None, release, release_notes(release, news_sections))])
         written += len(published)
 
         notes = []
@@ -337,6 +366,27 @@ def main():
             notes.append(f"NEWS.md but no release: {', '.join(undated)}")
         suffix = f"  ({'; '.join(notes)})" if notes else ""
         print(f"  {repo}: {len(published)} release(s){suffix}")
+
+    for name, (slug, logo, repos) in COMBINED.items():
+        by_version = {}
+        try:
+            for repo, label in repos:
+                releases = fetch_releases(repo)
+                release_cache[repo] = releases
+                news_sections = fetch_news_sections(repo)
+                for release in published_releases(releases):
+                    by_version.setdefault(normalize_version(release["tag_name"]), []).append(
+                        (label, release, release_notes(release, news_sections))
+                    )
+        except urllib.error.URLError as error:
+            print(f"  {name}: {getattr(error, 'code', error.reason)} — skipped", file=sys.stderr)
+            skipped.append(name)
+            continue
+        for version, sections in by_version.items():
+            write_entry(name, slug, logo, version, sections)
+        written += len(by_version)
+        repo_names = " + ".join(repo for repo, _ in repos)
+        print(f"  {name} ({repo_names}): {len(by_version)} release(s)")
 
     print(f"Wrote {written} entries to {NEWS_DIR.relative_to(ROOT)}/")
 

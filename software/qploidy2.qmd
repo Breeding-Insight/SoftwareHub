@@ -14,6 +14,8 @@ ecosystem: breedverse
 links:
   docs: https://breeding-insight.github.io/Qploidy2/Qploidy_alfalfa_tutorial.html
   source: https://github.com/Breeding-Insight/Qploidy2
+identifiers:
+  rrid: SCR_028622
 image: ../assets/software/logos/software-qploidy2.png
 image-alt: "Qploidy2 hexagonal logo."
 ---

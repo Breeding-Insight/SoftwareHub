@@ -1,0 +1,89 @@
+---
+title: "DeltaBreed 0.6.0"
+date: 2022-07-06
+description: "Hyperlinks to germplasm details from across user interface"
+categories: [DeltaBreed]
+image: ../assets/software-deltabreed-icon.svg
+image-alt: "DeltaBreed logo"
+toc: false
+---
+
+## Web app
+
+## About the release
+v0.6 is the latest release in preparation for the Breeding Insight v1.0 public release. This release continues the development of genealogy management and ontologies, and introduces the new jobs module. This release reflects a smaller work effort than the previous release. Moving forward Breeding Insight plans to continue smaller more frequent software releases. 
+
+### New features
+#### Germplasm Details
+- Hyperlinks to germplasm details from across user interface
+- Summary of germplasm details
+- Pedigree view:  explore pedigree relationships with an interactive interface.
+
+#### Ontology
+- Ability to share an ontology across programs
+
+#### Jobs
+- Monitor data upload status asynchronously via the new jobs module.
+
+### Detailed Release Information
+#### Features
+
+- [BI-1459] - Create job status page to view running and completed background jobs @timparsons (#232)
+- [BI-1427] - Remove unused Traits Vue Components @HMS17 (#226)
+- [BI-1420] - Allow Germplasm to Have Synonyms @ctucker3 (#220)
+- [BI-1375] - Make GIDs clickable links @HMS17 (#218)
+- [BI-1366] - Subscribe a program to a shared ontology @ctucker3 (#216)
+- [BI-1364] - View a shared ontology that a program is subscribed to @dmeidlin (#219)
+- [BI-1363] - Share a program's ontology with other programs @ctucker3 (#214)
+- [BI-1347] - Germplasm pedigree view @timparsons (#238)
+- [BI-1339] - Germplasm Details Page @HMS17 (#217)
+
+#### Bugfixes
+
+- [BI-1445] - Trait Column value not the same as entered in the the Term creation @HMS17 (#240)
+- [BI-1442] - Previous Import Error Banner Does Not Vanish on New Germplasm Import @HMS17 (#228)
+- [BI-1441] - Loading Icon Remains on Save Button For Edit Forms @HMS17 (#233)
+- [BI-1438] - User redirect after login with redirect user to non-existent page @ctucker3 (#236)
+- [BI-1433] - Ontology Import Template Ordinal Example Incorrect Delimeter @ctucker3 (#223)
+- [BI-1404] - No loading wheel ontology page @nickpalladino (#206)
+
+[Web app release on GitHub](https://github.com/Breeding-Insight/bi-web/releases/tag/v0.6.0)
+
+## API
+
+## About the release
+v0.6 is the latest release in preparation for the Breeding Insight v1.0 public release. This release continues the development of genealogy management and ontologies, and introduces the new jobs module. This release reflects a smaller work effort than the previous release. Moving forward Breeding Insight plans to continue smaller more frequent software releases. 
+
+### New features
+#### Germplasm Details
+- Hyperlinks to germplasm details from across user interface
+- Summary of germplasm details
+- Pedigree view:  explore pedigree relationships with an interactive interface.
+
+#### Ontology
+- Ability to share an ontology across programs
+
+#### Jobs
+- Monitor data upload status asynchronously via the new jobs module.
+
+### Detailed Release Information
+#### Features
+
+- [BI-1459] - Create job status page to view running and completed background jobs @timparsons (#185)
+- [BI-1420] - Allow Germplasm to Have Synonyms @ctucker3 (#180)
+- [BI-1375] - Make GIDs clickable links @HMS17 (#177)
+- [BI-1366] - Subscribe a program to a shared ontology @ctucker3 (#175)
+- [BI-1365] - Scope ontology terms to be within a program when saved over BrAPI @nickpalladino (#172)
+- [BI-1364] - View a shared ontology that a program is subscribed to @dmeidlin (#179)
+- [BI-1363] - Share a program's ontology with other programs @ctucker3 (#166)
+- [BI-1339] - Germplasm Details Page @HMS17 (#176)
+
+#### Bugfixes
+
+- [BI-1487] - The method name is a concatenation of the method description and the method class on the Ontology Term page. @ctucker3 (#191)
+- [BI-1446] - Missing error messages below the required fields on Term create page @ctucker3 (#190)
+- [BI-1445] - Trait Column value not the same as entered in the the Term creation @HMS17 (#189)
+
+[API release on GitHub](https://github.com/Breeding-Insight/bi-api/releases/tag/v0.6.0)
+
+[About DeltaBreed](../software/deltabreed.qmd)

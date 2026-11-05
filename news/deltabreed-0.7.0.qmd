@@ -1,0 +1,83 @@
+---
+title: "DeltaBreed 0.7.0"
+date: 2022-12-13
+description: "[BI-1528] - New Breeding Method - Creation of tetraploids by applied pressure shock @HMS17 (#250)"
+categories: [DeltaBreed]
+image: ../assets/software-deltabreed-icon.svg
+image-alt: "DeltaBreed logo"
+toc: false
+---
+
+## Web app
+
+### Detailed Release Information
+#### Features
+- [BI-1528] - New Breeding Method - Creation of tetraploids by applied pressure shock @HMS17 (#250)
+- [BI-1527] - New Breeding Method - Creation of triploids by applied pressure or temperature shock @HMS17 (#250)
+- [BI-1499] - Improve Presentation of Buttons @HMS17 (#245)
+- [BI-1494] - Improve pedigree view display @HMS17 (#256)
+- [BI-1494] - Improve pedigree view display @ctucker3 (#248)
+- [BI-1494] - Improve pedigree view display @timparsons (#238)
+- [BI-1491] - New Breeding Method - Polyembryonic seed selection @HMS17 (#250)
+- [BI-1478] - Add Pedigree to All Germplasm Table @HMS17 (#271)
+- [BI-1414] - Improve table loading message @HMS17 (#205)
+- [BI-1283] - Improve Left Hand Menu @HMS17 (#207)
+- [BI-1230] - Truly unknown germplasm @HMS17 (#260)
+- [BI-1224] - 4.1.1 Show list creator in Germplasm lists table @HMS17 (#244)
+- [BI-1202] - 5.2 Sort Germplasm in All Germplasm table @ctucker3 (#197)
+- [BI-1199] - 4.2 Choose file format for germplasm export @HMS17 (#243)
+- [BI-1191] - 5.3 Filter Germplasm on All Germplasm Table @ctucker3 (#242)
+- [BI-1189] - 4.0 Exp Preview & Commit: Create Exp Independent Variables @davedrp (#255)
+- [BI-1189] - 4.0 Exp Preview & Commit: Create Exp Independent Variables @davedrp (#252)
+- [BI-1146] - 3.0 Upload & Validate Independent Variables for New Experiment @davedrp (#249)
+- [BI-1146] - 3.0 Upload & Validate Independent Variables for New Experiment @davedrp (#224)
+- [BI-1145] - 1.0 Experimental File Template @ctucker3 (#172)
+​
+#### Bugfixes
+- [BI-1634] - Germplasm filtering and sorting fails for pages beyond the first @davedrp (#277)
+- [BI-1589] - All Germplasm table pagination doesn't work with page-1 or show-all @HMS17 (#270)
+- [BI-1585] - TAF - Set proper id for "Choose ontology to subscribe to:" drop-down @timparsons (#263)
+- [BI-1579] - Breedbase progeny endpoint not BrAPI-compliant @HMS17 (#260)
+- [BI-1557] - Sorting Failures in Germplasm Table @dmeidlin (#264)
+- [BI-1553] - Pedigree View on Firefox @timparsons (#262)
+- [BI-1506] - "Created Date" field in the All Germplasm table has the wrong date format. @HMS17 (#261)
+- [BI-1506] - "Created Date" field in the All Germplasm table has the wrong date format. @HMS17 (#257)
+- [BI-1402] - Ontology show more: categories section is indented @HMS17 (#231)
+- [BI-1401] - “Show All” for programs pagination doesn’t work if user is on the last page of pagination @HMS17 (#234)
+- [BI-1398] - Ontology preview: Checking trait editability status @HMS17 (#229)
+
+[Web app release on GitHub](https://github.com/Breeding-Insight/bi-web/releases/tag/v0.7.0)
+
+## API
+
+### Detailed Release Information
+#### Features
+- [BI-1638] - Cache germplasm data immediately after saving to BrAPI @timparsons (#218)
+- [BI-1590] - Disallow Adding New Observation Unit to Existing Environment @HMS17 (#212)
+- [BI-1528] - New Breeding Method - Creation of tetraploids by applied pressure shock @HMS17 (#198)
+- [BI-1527] - New Breeding Method - Creation of triploids by applied pressure or temperature shock @HMS17 (#198)
+- [BI-1494] - Improve pedigree view display @HMS17 (#198)
+- [BI-1491] - New Breeding Method - Polyembryonic seed selection @HMS17 (#198)
+- [BI-1478] - Add Pedigree to All Germplasm Table @HMS17 (#213)
+- [BI-1443] - Refactor BRAPIDAOUtil @dmeidlin (#204)
+- [BI-1230] - Truly unknown germplasm @HMS17 (#205)
+- [BI-1224] - 4.1.1 Show list creator in Germplasm lists table @HMS17 (#194)
+- [BI-1202] - 5.2 Sort Germplasm in All Germplasm table @ctucker3 (#157)
+- [BI-1199] - 4.2 Choose file format for germplasm export @HMS17 (#193)
+- [BI-1191] - 5.3 Filter Germplasm on All Germplasm Table @ctucker3 (#192)
+- [BI-1189] - 4.0 Exp Preview & Commit: Create Exp Independent Variables @davedrp (#203)
+- [BI-1189] - 4.0 Exp Preview & Commit: Create Exp Independent Variables @davedrp (#187)
+- [BI-1146] - 3.0 Upload & Validate Independent Variables for New Experiment @davedrp (#187)
+- [BI-1146] - 3.0 Upload & Validate Independent Variables for New Experiment @davedrp (#197)
+- [BI-1146] - 3.0 Upload & Validate Independent Variables for New Experiment @davedrp (#182)
+- [BI-693] - Upgrade Micronaut to 2.x @ctucker3 (#146)
+​
+#### Bugfixes
+- [BI-1594] - Store Unique ‘Exp Unit IDs’ @davedrp (#216)
+- [BI-1580] - BrAPIDAOUtils pagination only fetching first page of results @dmeidlin (#215)
+- [BI-1579] - Breedbase progeny endpoint not BrAPI-compliant @HMS17 (#205)
+- [BI-1574] - Exp Block # not displayed @dmeidlin (#207)
+
+[API release on GitHub](https://github.com/Breeding-Insight/bi-api/releases/tag/v0.7.0)
+
+[About DeltaBreed](../software/deltabreed.qmd)

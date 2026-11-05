@@ -13,7 +13,14 @@ ecosystem: breedverse
 links:
   website: https://breedinginsight.org/software/bigapp/
   source: https://github.com/Breeding-Insight/BIGapp
+<<<<<<< HEAD
 image: ../assets/software/logos/software-bigapp.png
+=======
+identifiers:
+  doi: 10.1002/tpg2.70067
+  rrid: SCR_026676
+image: ../assets/software-bigapp.png
+>>>>>>> main
 image-alt: "BIGapp hexagonal logo."
 ---
 
@@ -27,6 +34,22 @@ BIGapp provides a graphical interface for common genomic analyses, including wor
 :::
 
 ## Start here
+
+To run BIGapp on your own computer, install [R](https://cran.r-project.org/) (version 4.4.0 or later), then install BIGapp and its dependencies from an R console:
+
+```r
+if (!require("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+install.packages("remotes")
+
+BiocManager::install("Breeding-Insight/BIGapp", dependencies = TRUE)
+```
+
+Start the app; it opens in your default web browser:
+
+```r
+BIGapp::run_app()
+```
 
 [<i class="bi bi-github" aria-hidden="true"></i> Source code](https://github.com/Breeding-Insight/BIGapp){.btn-bi-primary}
 [<i class="bi bi-globe" aria-hidden="true"></i> Breeding Insight software page](https://breedinginsight.org/software/bigapp/){.btn-bi-secondary}

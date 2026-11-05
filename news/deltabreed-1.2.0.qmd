@@ -1,0 +1,47 @@
+---
+title: "DeltaBreed 1.2.0"
+date: 2025-08-18
+description: "merging bug/BI-2618 into develop"
+categories: [DeltaBreed]
+image: ../assets/software-deltabreed-icon.svg
+image-alt: "DeltaBreed logo"
+toc: false
+---
+
+## Web app
+
+### What's Changed
+* merging bug/BI-2618 into develop by @mlm483 in https://github.com/Breeding-Insight/bi-web/pull/439
+* BI-2597 Sorting Exp Unit ID incorrectly by @davedrp in https://github.com/Breeding-Insight/bi-web/pull/441
+* BI-2639 - Improve duplicate message accuracy by @nickpalladino in https://github.com/Breeding-Insight/bi-web/pull/444
+* BI-2691 - Cannot add Xuemei to Alfalfa Prosser program  by @nickpalladino in https://github.com/Breeding-Insight/bi-web/pull/446
+* Merge release/1.1.1 into main by @mlm483 in https://github.com/Breeding-Insight/bi-web/pull/449
+
+
+**Full Changelog**: https://github.com/Breeding-Insight/bi-web/compare/v1.1.0...v1.2.0
+
+[Web app release on GitHub](https://github.com/Breeding-Insight/bi-web/releases/tag/v1.2.0)
+
+## API
+
+### What's Changed
+* [BI-2578][BI-2489] - Optimize BrAPI Germplasm Search  by @jloux-brapi in https://github.com/Breeding-Insight/bi-api/pull/447
+* [BI-2579] Refresh cache after import completes by @jloux-brapi in https://github.com/Breeding-Insight/bi-api/pull/448
+* merge release/1.1 into develop by @mlm483 in https://github.com/Breeding-Insight/bi-api/pull/461
+* BI-2654 - Tests Failing with Opaque SQL Syntax Error by @mlm483 in https://github.com/Breeding-Insight/bi-api/pull/465
+* BI-2616 - Increased signup token expiration from 1hr to 24hr by @nickpalladino in https://github.com/Breeding-Insight/bi-api/pull/467
+* Bug/bi 2632 by @davedrp in https://github.com/Breeding-Insight/bi-api/pull/471
+* BI-2639 - List referencing existing germplasm - very slow and impacting jobs timer by @nickpalladino in https://github.com/Breeding-Insight/bi-api/pull/472
+* BI-2656 - Append Workflow Requires Timestamps  by @mlm483 in https://github.com/Breeding-Insight/bi-api/pull/475
+* BI-2656 - Additional Logging by @mlm483 in https://github.com/Breeding-Insight/bi-api/pull/484
+* BI-2656 - Append with Prior Observations Blank Edge Case by @mlm483 in https://github.com/Breeding-Insight/bi-api/pull/485
+* Merge release/1.1.1 into main by @mlm483 in https://github.com/Breeding-Insight/bi-api/pull/486
+
+### New Contributors
+* @jloux-brapi made their first contribution in https://github.com/Breeding-Insight/bi-api/pull/447
+
+**Full Changelog**: https://github.com/Breeding-Insight/bi-api/compare/v1.1.0...v1.2.0
+
+[API release on GitHub](https://github.com/Breeding-Insight/bi-api/releases/tag/v1.2.0)
+
+[About DeltaBreed](../software/deltabreed.qmd)

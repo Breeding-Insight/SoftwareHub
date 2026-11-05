@@ -1,7 +1,7 @@
 ---
 title: "DeltaBreed"
 description: "Open-source breeding data management software for specialty crop and animal breeders."
-domain: Breeding Data
+domain: Data Management
 status: released
 version: "1.5.0"
 version-date: 2026-10-02
@@ -9,30 +9,39 @@ version-url: https://github.com/Breeding-Insight/bi-web/releases/tag/v1.5.0
 # DeltaBreed is released through its application repositories, not the DeltaBreed repo.
 release-repo: bi-web
 form: Web app
-tasks: [Data management]
-tags: [Breeding records, Database, BrAPI]
+tasks: []
+tags: [Program management, Database, Breeding records, Pedigrees, Ontology, Experiments, Samples, Genotypes, BrAPI]
 links:
   online: https://sandbox.breedinginsight.net/
   website: https://breedinginsight.org/learning-hub/deltabreed/
-  docs: https://breedinginsight.atlassian.net/wiki/x/I4AlZ
+  docs: https://breedinginsight.org/docs/
   source: https://github.com/Breeding-Insight/DeltaBreed
-image: ../assets/software/logos/software-deltabreed.svg
-image-alt: "DeltaBreed logo."
-image-wide: true
+access: "DeltaBreed is built for breeding programs that work with Breeding Insight, so access is limited to onboarded programs. A public sandbox is available for trying its features."
+identifiers:
+  doi: 10.1371/journal.pone.0324104
+  rrid: SCR_026678
+image: ../assets/software/logos/software-deltabreed-icon.svg
+image-alt: "DeltaBreed app icon."
+image-shape: app-icon
 ---
 
 ::: {.software-header}
 ::: {}
-DeltaBreed is open-source data management software for specialty crop and animal breeders. A public sandbox is available for trying its features.
+DeltaBreed is Breeding Insight’s customizable data management system for breeders. Suitable for any species or ploidy level, DeltaBreed maintains and validates the data relationships needed for breeding analytics. Manage pedigrees, experiments, phenotypic data, samples, and genotypic results in one location. BrAPI ensures that the system is readily extensible. BrApps, like Field Book, can be connected to DeltaBreed to assist with data collection and other activities.
 
 {{< tool-tags >}}
 :::
-<img class="software-logo software-logo-wide" src="../assets/software/logos/software-deltabreed.svg" alt="DeltaBreed logo">
+<img class="software-logo" src="../assets/software/logos/software-deltabreed-icon.svg" alt="DeltaBreed app icon">
 :::
 
 ## Start here
 
-[<i class="bi bi-play-circle" aria-hidden="true"></i> Public sandbox](https://sandbox.breedinginsight.net/){.btn-bi-primary}
-[<i class="bi bi-book" aria-hidden="true"></i> User manual](https://breedinginsight.atlassian.net/wiki/x/I4AlZ){.btn-bi-secondary}
+[{{< meta access >}}]{.access-note}
+
+[<i class="bi bi-play-circle" aria-hidden="true"></i> Public sandbox](https://sandbox.breedinginsight.net/){.btn-bi-primary data-analytics-event="use_online" data-analytics-tool="DeltaBreed"}
+
+::: {.start-links}
+[<i class="bi bi-book" aria-hidden="true"></i> Documentation](https://breedinginsight.org/docs/){.btn-bi-secondary}
 [<i class="bi bi-github" aria-hidden="true"></i> Source code](https://github.com/Breeding-Insight/DeltaBreed){.btn-bi-secondary}
 [<i class="bi bi-globe" aria-hidden="true"></i> Breeding Insight page](https://breedinginsight.org/learning-hub/deltabreed/){.btn-bi-secondary}
+:::

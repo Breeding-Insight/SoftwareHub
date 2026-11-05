@@ -1,7 +1,7 @@
 ---
 title: "deltabreedquery"
 description: "Import data from the DeltaBreed data management platform into R."
-domain: Breeding Data
+domain: Data Management
 status: released
 version: "1.0.4"
 version-date: 2026-10-12
@@ -12,6 +12,8 @@ tags: [Breeding records, BrAPI]
 links:
   cran: https://cran.r-project.org/package=deltabreedquery
   source: https://github.com/Breeding-Insight/deltabreedquery
+identifiers:
+  rrid: SCR_028884
 image: ../assets/software/logos/software-deltabreedquery.png
 image-alt: "deltabreedquery logo."
 ---

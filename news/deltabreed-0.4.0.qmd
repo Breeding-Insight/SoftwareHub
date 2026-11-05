@@ -1,0 +1,77 @@
+---
+title: "DeltaBreed 0.4.0"
+date: 2021-12-13
+description: "[BI-768] - Prototype for brapi importer @ctucker3 (#85)"
+categories: [DeltaBreed]
+image: ../assets/software-deltabreed-icon.svg
+image-alt: "DeltaBreed logo"
+toc: false
+---
+
+## Web app
+
+### Features
+
+- [BI-768] - Prototype for brapi importer @ctucker3 (#85)
+- BI-690 - Edit existing trait which has observation data @nickpalladino (#79)
+- [BI-741] - Adding BrAPI Info Page @timparsons (#87)
+- [BI-748] - Make import process asynchronous @ctucker3 (#89)
+- [BI-846] - Hiding create/edit buttons for traits for member role @timparsons (#92)
+- [BI-972] - Testing Automation Framework (TAF) Button ID selectors @HMS17 (#97)
+- BI-750 Create an interface to list all studies that exist for a program @dmeidlin (#94)
+- BI-751 Create an interface to view an individual study and any observation data that’s been collected @dmeidlin (#96)
+- [BI-1025] - Id added for imported file name @HMS17 (#102)
+- [BI-895] - Convert the program user's table to use Buefy data tables @timparsons (#100)
+- [BI-1014] - Banner Class Modifications @HMS17 (#101)
+- [BI-998] - Add tags to traits @ctucker3 (#99)
+- [BI-1030] - Added classes for modal text and headers @HMS17 (#103)
+- [BI-1073] - Add better nominal examples @ctucker3 (#115)
+- [BI-1047] - Convert expandable datatables to Buefy @HMS17 (#112)
+- [BI-380] Update sidebar layout to stay in place and be independently scrollable from page scroll @nickpalladino (#111)
+
+### Bugfixes
+
+- [BI-986] - Change scale valid value min/max text @ctucker3 (#98)
+- [BI-1039] Switch label and value in scale categories @ctucker3 (#104)
+- [BI-1087] "Show All" link on tables not focusable via tabbing @HMS17 (#105)
+- [BI-1079] Parse 400 errors for trait import errors @ctucker3 (#107)
+- [BI-640] - Disable modification of user role for self @HMS17 (#108)
+- [BI-975] - Prevent creating programs with same name @HMS17 (#109)
+- [BI-1092] Refresh trait tags after an update @ctucker3 (#113)
+- [BI-1036] Add backend sorting to program users table @ctucker3 (#114)
+- [BI-1249] Tags - Saving after <Cancel> @davedrp (#155)
+- [BI-1254] git trait tags and synonyms default values @davedrp (#160)
+
+[Web app release on GitHub](https://github.com/Breeding-Insight/bi-web/releases/tag/v0.4.0)
+
+## API
+
+### Features
+
+- [BI-768] - Pedigree Importer @ctucker3 (#80)
+- BI-741 - Create BrAPI v2 Proxy @timparsons (#82)
+- [BI-748] - Make import process asynchronous @ctucker3 (#87)
+- [BI-967] - Automatically build docker images @timparsons (#89)
+- BI-965 - Discrete Analyzer Import @nickpalladino (#88)
+- BI-969 - Blueberry Penetrometer Import @nickpalladino (#93)
+- [BI-763] Updates to brapi v2 proxy to support Field Book @ctucker3 (#96)
+- [BI-998] - Add tags to traits @ctucker3 (#95)
+- Use brapi client 2.0.2 @nickpalladino (#98)
+
+### Bugfixes
+
+- [BI-873] Remove crosses from the germplasm importer @ctucker3 (#86)
+- [BI-986] - Add more description to scale min/max requirements in importer error @ctucker3 (#94)
+- Fix json serialization issue in import mapping due to change in brapi client @nickpalladino (#97)
+- Importer add studyType to Study @nickpalladino (#100)
+- [BI-975] - Prevent creating programs with same name @HMS17 (#101)
+- [BI-1169] Fix pedigree connections in germplasm import] @ctucker3 (#107)
+- [BI-1203] - Fix study importer "null" germplasm relationship bug @ctucker3 (#110)
+- [BI-1223] Add null check for tags field @ctucker3 (#115)
+- [BI-1203] - Fix for study importer. Germplasm created, but not mapped to OU @ctucker3 (#121)
+- [BI-1252] phenotypic importer: require germplasm for observation unit @ctucker3 (#122)
+- [BI-1144] correct parsing of scale value and scale label @davedrp
+
+[API release on GitHub](https://github.com/Breeding-Insight/bi-api/releases/tag/v0.4.0)
+
+[About DeltaBreed](../software/deltabreed.qmd)

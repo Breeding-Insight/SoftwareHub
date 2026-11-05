@@ -1,0 +1,42 @@
+---
+title: "DeltaBreed 1.5.0"
+date: 2026-10-02
+description: "[BI-2968] - Improve clarity for program user deactivation"
+categories: [DeltaBreed]
+image: ../assets/software-deltabreed-icon.svg
+image-alt: "DeltaBreed logo"
+toc: false
+---
+
+## Web app
+
+### What's Changed
+* [BI-2968] - Improve clarity for program user deactivation by @HMS17 in https://github.com/Breeding-Insight/bi-web/pull/487
+* [BI-2821] - Improve Mobile View of Authorization by @HMS17 in https://github.com/Breeding-Insight/bi-web/pull/488
+* [BI-2968] - Improve clarity for program user deactivation by @HMS17 in https://github.com/Breeding-Insight/bi-web/pull/492
+
+**Full Changelog**: https://github.com/Breeding-Insight/bi-web/compare/v1.4.0...v1.5.0
+
+[Web app release on GitHub](https://github.com/Breeding-Insight/bi-web/releases/tag/v1.5.0)
+
+## API
+
+### Changes
+
+- v1.5 Release @nickpalladino (#563)
+
+### Features
+
+- Fix /search/germplasm 500 error @nickpalladino (#559)
+
+### What's Changed
+* BI-2833 - Fix security gap, only system admins to pull data across programs by @nickpalladino in https://github.com/Breeding-Insight/bi-api/pull/548
+* Fix /search/germplasm 500 error by @nickpalladino in https://github.com/Breeding-Insight/bi-api/pull/559
+* v1.5 Release by @nickpalladino in https://github.com/Breeding-Insight/bi-api/pull/563
+
+
+**Full Changelog**: https://github.com/Breeding-Insight/bi-api/compare/v1.4.0...v1.5.0
+
+[API release on GitHub](https://github.com/Breeding-Insight/bi-api/releases/tag/v1.5.0)
+
+[About DeltaBreed](../software/deltabreed.qmd)

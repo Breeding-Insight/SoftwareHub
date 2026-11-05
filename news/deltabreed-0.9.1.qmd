@@ -1,0 +1,42 @@
+---
+title: "DeltaBreed 0.9.1"
+date: 2024-06-05
+description: "[BI-2108] - Accessibility: Import Data - Empty Heading @davedrp (#377)"
+categories: [DeltaBreed]
+image: ../assets/software-deltabreed-icon.svg
+image-alt: "DeltaBreed logo"
+toc: false
+---
+
+## Web app
+
+#### Features
+
+- [BI-2108] - Accessibility: Import Data - Empty Heading @davedrp (#377)
+- [BI-2008] - Preview summary stats refinement @dmeidlin (#359)
+- [BI-1969] - Geologic sort: Germplasm, Experiments, and Sample Submission @davedrp (#374)
+- [BI-1868] - Ontology: Display full name in table and details pane @HMS17 (#358)
+
+[Web app release on GitHub](https://github.com/Breeding-Insight/bi-web/releases/tag/v0.9.1)
+
+## API
+
+#### Features
+
+- [BI-2101] - Configure Transactional Email for Production DeltaBreed @mlm483 (#351)
+- [BI-2100] - BrAPI Hackathon Integration of Helium with DeltaBreed @nickpalladino (#337)
+- [BI-2058] - Add Observations and ObservationUnits to Redis Cache @mlm483 (#339)
+- [BI-1993] - Accept NA observations @HMS17 (#330)
+- [BI-1868] - Ontology: Display full name in table and details pane @HMS17 (#326)
+
+#### Bugfixes
+
+- [BI-2155] - Cannot create a new list referencing existing GIDs @dmeidlin (#363)
+- [BI-2128] - Blank cells overwriting existing observations @mlm483 (#357)
+- [BI-2127] - Position Information missing from exp download file @davedrp (#356)
+- [BI-2104] - Can't create experiment with timestamped observations  v0.9 @davedrp (#354)
+- [BI-2065] - Experiment overwrite does not do all data validations on phenotype data @HMS17 (#340)
+
+[API release on GitHub](https://github.com/Breeding-Insight/bi-api/releases/tag/v0.9.1)
+
+[About DeltaBreed](../software/deltabreed.qmd)

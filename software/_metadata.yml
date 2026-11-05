@@ -5,3 +5,4 @@ shortcodes:
   - ../assets/lua-extensions/tool-tags.lua
 filters:
   - ../assets/lua-extensions/tool-status.lua
+  - ../assets/lua-extensions/tool-identifiers.lua

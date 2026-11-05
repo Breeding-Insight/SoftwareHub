@@ -1,0 +1,66 @@
+---
+title: "DeltaBreed 1.1.0"
+date: 2025-04-30
+description: "[BI-2449] - Correct Exp Summary Stats @HMS17 (#426)"
+categories: [DeltaBreed]
+image: ../assets/software-deltabreed-icon.svg
+image-alt: "DeltaBreed logo"
+toc: false
+---
+
+## Web app
+
+#### Features
+
+- [BI-2449] - Correct Exp Summary Stats @HMS17 (#426)
+- [BI-2431] - Sample submission delete BrAPI server changes @nickpalladino (#425)
+- [BI-2380] - Add Delete Option to Samples View @nickpalladino (#425)
+- [BI-2379] - Create Delete Endpoint for Deltabreed Sample Controller @nickpalladino (#425)
+- [BI-2377] - Add Delete Option to Experiments View @davedrp (#423)
+- [BI-2374] - Create Endpoints on BJTS for Processing Batch Delete Operations @dmeidlin (#420)
+- [BI-2373] - Add Delete Option to Germplasm Lists View @dmeidlin (#420)
+- [BI-2372] - Create Deltabreed List Controller @dmeidlin (#420)
+- [BI-2224] - Improve reporting of summary statistics for append-overwrite experiment workflow @davedrp (#403)
+- [BI-2140] - Accessibility: Home Page @davedrp (#430)
+- [BI-2129] - Accessibility: Germplasm Table Fixes @HMS17 (#401)
+- [BI-2124] - Geological sort - germplasm lists @davedrp (#435, #419)
+
+#### Bugfixes
+
+- [BI-2589] - Germplasm List and Germplasm List Detail Pages resubmitting Default page & page size. @davedrp (#433)
+- [BI-2555] - Fix Germplasm By List Default Sorting @mlm483 (#431)
+- [BI-2496] - When Deleting an Experiment: "Success" message appears even if delete fails. @davedrp (#427)
+- [BI-2343] - GID and List Entry Number filtering not informative @HMS17 (#418)
+- [BI-2342] - Experimental filtering is case specific @davedrp (#415)
+
+[Web app release on GitHub](https://github.com/Breeding-Insight/bi-web/releases/tag/v1.1.0)
+
+## API
+
+#### Features
+
+- [BI-2573] - Germplasm file import assigns pedigree incorrectly @nickpalladino (#451)
+- [BI-2431] - Sample submission delete BrAPI server changes @nickpalladino (#440)
+- [BI-2380] - Add Delete Option to Samples View @nickpalladino (#440)
+- [BI-2379] - Create Delete Endpoint for Deltabreed Sample Controller @nickpalladino (#440)
+- [BI-2376] - Create Delete Endpoint for Deltabreed Experiment Controller @mlm483 (#437)
+- [BI-2374] - Create Endpoints on BJTS for Processing Batch Delete Operations @dmeidlin (#434)
+- [BI-2373] - Add Delete Option to Germplasm Lists View @dmeidlin (#434)
+- [BI-2372] - Create Deltabreed List Controller @dmeidlin (#434)
+- [BI-2047] - Pull Existing Observation Values For An Experiment Into Field-Book @mlm483 (#443)
+
+#### Bugfixes
+
+- [BI-2595] - Regression: Transactional Email IOException @mlm483 (#457, #455)
+- [BI-2594] - Germplasm list table wrong when duplicate names are included @nickpalladino (#453)
+- [BI-2593] - Circular Dependency False Positive Pecan Data @nickpalladino (#452)
+- [BI-2585] - BJTS migration fail due to DB field name change @davedrp (#449)
+- [BI-2543] - Germplasm circular dependency @nickpalladino (#451)
+- [BI-2424] - Refactor getObservationUnitsByDbId for clarity @mlm483 (#439)
+- [BI-2343] - GID and List Entry Number filtering not informative @HMS17 (#435)
+- [BI-2187] - Non-sequential GIDs After Circular Dependency Error @davedrp (#445)
+- [BI-2156] - Upgrade Apache Tika to 2.3.0+ @mlm483 (#457, #442, #432)
+
+[API release on GitHub](https://github.com/Breeding-Insight/bi-api/releases/tag/v1.1.0)
+
+[About DeltaBreed](../software/deltabreed.qmd)

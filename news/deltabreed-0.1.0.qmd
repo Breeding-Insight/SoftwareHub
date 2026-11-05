@@ -1,0 +1,117 @@
+---
+title: "DeltaBreed 0.1.0"
+date: 2020-10-09
+description: "Bring unit test changes to release for PRO-80 fix @nickpalladino (#39)"
+categories: [DeltaBreed]
+image: ../assets/software-deltabreed-icon.svg
+image-alt: "DeltaBreed logo"
+toc: false
+---
+
+## Web app
+
+### Changes
+
+- Bring unit test changes to release for PRO-80 fix @nickpalladino (#39)
+- INF-164 - Validate package dependencies to make sure we don't have any GPL dependencies @fossabot (#19)
+- Create LICENSE.md @timparsons (#11)
+
+### Features
+
+- INF-173 - Configure GitHub Actions to automatically build bi-web @ctucker3 (#29)
+- ONT-77 - Confirm saving traits for trait uploads on front end @dmeidlin (#27)
+- ONT-37 - View individual trait & ONT-43 - View uploaded trait before finalizing import @nickpalladino (#26)
+- ONT-42 - Trait Import Failed @ctucker3 (#25)
+- [PRO-78] manual entry of orcids @ctucker3 (#24)
+- [INF-75] add ability to add existing user to program @ctucker3 (#23)
+- ONT-36 - View list of traits @dmeidlin (#22)
+- ONT-21 - Import via Excel workbook or CSV @nickpalladino (#21)
+- INF-81 - DataTable pagination @ctucker3 (#18)
+- [PRO-53] show programs for users @ctucker3 (#17)
+- PRO-33 - Reauth User @ctucker3 (#16)
+- INF-161 - Add Apache 2.0 header to source code files @nickpalladino (#15)
+- [INF-56] update removal modals and notifications to be archive text @ctucker3 (#14)
+- INF-99 - Integrate Program Location Management UI with Backend @nickpalladino (#13)
+- [INF-158] changes to login flow @ctucker3 (#12)
+- INF-94 - Admin management Improvements; INF-139 - Persist active program in Vuex state @ctucker3 (#10)
+- INF-98 - Integrate Program User Management UI with Backend @nickpalladino (#9)
+- INF-100 - User Login Landing Program Selection @nickpalladino (#8)
+- INF-76 - Show navigation link active when corresponding tab is active @ctucker3 (#6)
+- INF-87 - DataTable Reuse @ctucker3 (#5)
+- PRO-44 - UI - Create program creation interface @nickpalladino (#4)
+- PRO-43 Program Management UI @nickpalladino (#3)
+- INF-39 - Add logging library @ctucker3 (#2)
+- [DES-28] DES-28 add custom error variables to Bulma overrides @eawoods (#1)
+
+### Bugfixes
+
+- [BI-72] - Error adding new user with already existing orcid, form stays open @ctucker3 (#42)
+- [ISSUE-8],[BI-540] Fix orcid overwrite when adding new program user for existing system user @ctucker3 (#41)
+- [PRO-80],[BI-61] - Fix Program Management Users role validation error @nickpalladino (#40)
+- [ISSUE-6] fix wave errors @ctucker3 (#32)
+- [ISSUE-4] update multiple calls error handling to better report partial success @ctucker3 (#31)
+- [ISSUE-5] add delete user not allowed message @ctucker3 (#30)
+- [INF-138] Remove workaround for data not existing in response @ctucker3 (#20)
+- [INF-74] tabbable tables. Trap focus modals. @ctucker3 (#7)
+
+### Releases
+
+- [BI-635] Release v0.1 @timparsons (#46)
+
+[Web app release on GitHub](https://github.com/Breeding-Insight/bi-web/releases/tag/v0.1.0)
+
+## API
+
+### Changes
+
+- Create LICENSE.md @timparsons (#15)
+
+### Features
+
+- INF-202 - Development release notes and release drafter investigation @nickpalladino (#38)
+- INF-200 - Make the orcid id column for the bi_user table unique @ctucker3 (#34)
+- INF-172 - Configure GitHub Actions to automatically build bi-api @ctucker3 (#33)
+- PRO-78 - Manual entry of ORCID iD @ctucker3 (#32)
+- ONT-68 - Validate entire trait file @ctucker3 (#30)
+- ONT-44 - Finalize trait import @ctucker3 (#29)
+- INF-164 - Validate package dependencies to make sure we don't have any GPL dependencies @nickpalladino (#27)
+- ONT-32 - API - Create endpoint to accept file upload @nickpalladino (#25)
+- PRO-53 - UI - System User management - Show list of programs actively associated with a given user @ctucker3 (#24)
+- PRO-33 - Reauth User @ctucker3 (#23)
+- INF-161 - Add Apache 2.0 header to source code files @nickpalladino (#22)
+- ONT-48 - API - Fetch trait details from BrAPI Pheno service @ctucker3 (#21)
+- INF-84 - Program Locations Additional Endpoints @dmeidlin (#20)
+- INF-59 - Set appropriate logging configuration @nickpalladino (#19)
+- INF-55 - Update POM file to add default profile @ctucker3 (#18)
+- INF-158 - Add user object to JWT in bi-api @ctucker3 (#17)
+- INF-82 - Create program location endpoints @nickpalladino (#14)
+- INF-143 - Admin User Management system role support143 @ctucker3 (#12)
+- INF-95 - UserService#fetchByOrcid return Optional<User> @ctucker3 (#11)
+- INF-141 - Create GET roles endpoints @nickpalladino (#9)
+- INF-68 - Create custom web exception @ctucker3 (#8)
+- INF-64 - Remove embedded micronaut-security dependency @ctucker3 (#7)
+- INF-78 - Update application-prod.yml to use environment variables @ctucker3 (#6)
+- PRO-42 Create Program Endpoints @nickpalladino (#3)
+- PRO-41 - Database - Create program table @ctucker3 (#2)
+- INF-55 - Update POM file to add default profile @timparsons (#1)
+
+### Bugfixes
+
+- BI-638 - Fix JNI error causing biapi build to fail in docker stack @nickpalladino (#43)
+- [BI-603] - Traits: Unable to import a valid csv traits file @ctucker3 (#41)
+- INF-205 - Change brapi-server to support text instead of varchar(255) @ctucker3 (#39)
+- ISSUE-5 - A system administrator is able to deactivate themselves @ctucker3 (#35)
+- PRO-77 - BUG - POST locations controller inserts 'null' into sql column when there is no data @ctucker3 (#31)
+- INF-138 - Include data in response even if not populated @ctucker3 (#28)
+- INF-94 - Admin management Improvements; INF-139 - Persist active program in Vuex state @ctucker3 (#13)
+- INF-144 - GET /programs/id/users combining roles into one program user instead of each @nickpalladino (#10)
+- INF-72 - Update tests to be self contained @ctucker3 (#5)
+- INF-89 - Fix committed OAuth credentials for test config @ctucker3 (#4)
+
+### Releases
+
+- [BI-635] Release v0.1 @timparsons (#47)
+
+[API release on GitHub](https://github.com/Breeding-Insight/bi-api/releases/tag/v0.1.0)
+
+[About DeltaBreed](../software/deltabreed.qmd)

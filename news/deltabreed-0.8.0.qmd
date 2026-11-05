@@ -1,0 +1,106 @@
+---
+title: "DeltaBreed 0.8.0"
+date: 2023-08-24
+description: "[BI-1764] - DeltaBreed logo @timparsons (#312)"
+categories: [DeltaBreed]
+image: ../assets/software-deltabreed-icon.svg
+image-alt: "DeltaBreed logo"
+toc: false
+---
+
+## Web app
+
+### Detailed Release Information
+#### Features
+
+- [BI-1764] - DeltaBreed logo @timparsons (#312)
+- [BI-1717] - [bi-web] - BI-1644 - View experiment: Details, Summary Stats, Actions @davedrp (#316)
+- [BI-1707] - Update "Ontology Sharing" tab to "Configuration" @mlm483 (#308)
+- [BI-1690] - Collapse Left Hand Menu @timparsons (#312)
+- [BI-1653] - Update Experiment Preview to show observations @nickpalladino (#279)
+- [BI-1651] - Allow programs to choose/create breeding methods @timparsons (#292)
+- [BI-1650] - Store and fetch genotype data @timparsons (#282)
+- [BI-1644] - View experiment: Details, Summary Stats, Actions @davedrp (#316)
+- [BI-1629] - Add filtering to OntologyTable @dmeidlin (#304)
+- [BI-1617] - Refactor Ontology table to use Buefy @dmeidlin (#304, #314)
+- [BI-1616] - Add Filtering to Germplasm Lists Table @nickpalladino (#293)
+- [BI-1615] - Add termType to Trait DB Table @HMS17 (#285)
+- [BI-1614] - Add Term Type to Ontology Term display and form creation/modification @HMS17 (#284)
+- [BI-1613] - Add Term Type to Ontology Term Import @HMS17 (#287)
+- [BI-1606] - Allow germplasm records to be in multiple lists @dmeidlin (#298)
+- [BI-1583] - Error Message 1: Missing Data Worksheet @davedrp (#307)
+- [BI-1570] - Improve error reporting - Text to Table @HMS17 (#275)
+- [BI-1569] - Update within program left hand menu @nickpalladino (#295)
+- [BI-1548] - Experiments: User and Creation Date Refinement @nickpalladino (#296)
+- [BI-1498] - Add Subscribed Program name to subscribe ontology success message @nickpalladino (#297)
+- [BI-1477] - Improve All Experiments Table @HMS17 (#283, #299)
+- [BI-1473] - Allow user to append existing germplasm with optional details @HMS17 (#265)
+- [BI-1465] - 6.1 Observation Dataset Export File @dmeidlin (#318)
+- [BI-1238] - 6.0 Download Experimental Data UI  @mlm483 (#309, #315)
+- [BI-1198] - 5.0 All Experiments Table @HMS17 (#254)
+- [BI-1195] - 4.3 Exp Preview: Append Experiment with Observations @timparsons (#302)
+- [BI-1194] - 4.2 Upload with timestamps @HMS17 (#281)
+- [BI-1183] - 3.1 Import Validations: Ontology-specific observation criteria @nickpalladino (#272)
+- [BI-1147] - 2.0 Experimental Data Preview Universal Elements @dmeidlin (#273)
+- [BI-1129] - View Germplasm List @dmeidlin (#276, #294)
+
+#### Bugfixes
+
+- [BI-1779] - Import germplasm with unspecified breeding method @timparsons (#313)
+- [BI-1741] - Genotype Import @timparsons (#305)
+- [BI-1721] - Show All - Breeding Methods table @timparsons (#303)
+- [BI-1620] - Program Selection page doesn't show all programs if more than 50 exist @davedrp (#301)
+
+[Web app release on GitHub](https://github.com/Breeding-Insight/bi-web/releases/tag/v0.8.0)
+
+## API
+
+### Detailed Release Information
+#### Features
+
+- [BI-1716] - [bi-api] - BI-1644 - View experiment: Details, Summary Stats, Actions @davedrp (#254)
+- [BI-1665] - Store observations when importing new environments @davedrp (#234)
+- [BI-1651] - Allow programs to choose/create breeding methods @timparsons (#236)
+- [BI-1650] - Store and fetch genotype data @timparsons (#228)
+- [BI-1629] - Add filtering to OntologyTable @dmeidlin (#243)
+- [BI-1616] - Add Filtering to Germplasm Lists Table @nickpalladino (#237)
+- [BI-1615] - Add termType to Trait DB Table @HMS17 (#231)
+- [BI-1613] - Add Term Type to Ontology Term Import @HMS17 (#233)
+- [BI-1612] - Experiment Import Phenotype Data Persistence @nickpalladino (#220)
+- [BI-1606] - Allow germplasm records to be in multiple lists @dmeidlin (#224)
+- [BI-1583] - Error Message 1: Missing Data Worksheet @davedrp (#246)
+- [BI-1555] - Cache program ontology terms @timparsons (#206)
+- [BI-1548] - Experiments: User and Creation Date Refinement @nickpalladino (#238)
+- [BI-1477] - Improve All Experiments Table @HMS17 (#230)
+- [BI-1473] - Allow user to append existing germplasm with optional details @HMS17 (#211)
+- [BI-1465] - 6.1 Observation Dataset Export File @dmeidlin (#259)
+- [BI-1198] - 5.0 All Experiments Table @HMS17 (#201)
+- [BI-1195] - 4.3 Exp Preview: Append Experiment with Observations @timparsons (#241)
+- [BI-1194] - 4.2 Upload with timestamps @HMS17 (#225)
+- [BI-1193] - 4.1 Associate phenotypes with experiment observation dataset @dmeidlin (#247, #256, #258)
+- [BI-1183] - 3.1 Import Validations: Ontology-specific observation criteria @nickpalladino (#210)
+- [BI-1147] - 2.0 Experimental Data Preview Universal Elements @dmeidlin (#219, #221)
+- [BI-1129] - View Germplasm List @dmeidlin (#222, #240)
+
+#### Bugfixes
+
+- [BI-1864] - Experiment Export doesn't consistently work @timparsons (#276)
+- [BI-1855] - Create germplasm list not working @nickpalladino (#281)
+- [BI-1842] - Append existing exp with observations isn't working @timparsons (#273)
+- [BI-1832] - Treatment factors not being stored in BreedBase @nickpalladino (#272)
+- [BI-1825] - Need to support legacy Trait names in BreedBase (without Program namespacing) @timparsons (#270)
+- [BI-1803] - Excel formatting preventing ontology file import @mlm483 (#257)
+- [BI-1798] - Unknowns missing from germplasm downloads @nickpalladino (#255)
+- [BI-1779] - Import germplasm with unspecified breeding method @timparsons (#251)
+- [BI-1778] - Environments locations and years @timparsons (#250)
+- [BI-1760] - Error saving experiment import @mlm483 (#249)
+- [BI-1741] - Genotype Import @timparsons (#244)
+- [BI-1721] - Show All - Breeding Methods table @timparsons (#242)
+- [BI-1689] - Jobs Count: Import germplasm incorrect count @mlm483 (#252)
+- [BI-1632] - Unknown Pedigree not displaying for BrAPI-server programs @HMS17 (#217)
+- [BI-1630] - De-activated programs still visible on Shared Ontology @HMS17 (#223)
+- [BI-1440] - ISSUE: ERROR message in banner calls out "scale data type" when field is "scale class" @nickpalladino (#239)
+
+[API release on GitHub](https://github.com/Breeding-Insight/bi-api/releases/tag/v0.8.0)
+
+[About DeltaBreed](../software/deltabreed.qmd)

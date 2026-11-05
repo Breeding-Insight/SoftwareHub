@@ -2,12 +2,14 @@
 <%
 // Home hero: the Breeding Insight mark as the hub, with a spoke to each software domain.
 // Each domain's tools sit together at the end of its spoke: hex logos tile into a small
-// honeycomb; other logos (`image-wide`, e.g. DeltaBreed, or `image-shape: square`, e.g.
-// HapApp) get tiles. In-development tools are included; their titles say so. Built from
+// honeycomb; other logos (`image-wide` wordmarks, or `image-shape: square`, e.g.
+// HapApp) get tiles; `image-shape: app-icon` logos, e.g. DeltaBreed, are
+// already a finished rounded icon and show without the tile's frame. In-development tools are included; their titles say so. Built from
 // software/*.qmd (listing "hub-ring" in index.qmd), so a new tool with an `image` joins its
-// domain on the next render. Domain order follows DOMAINS in assets/ejs-templates/software-listing.ejs.md;
+// domain on the next render. Domain order is set here, separately from the Software page's
+// DOMAINS in assets/ejs-templates/software-listing.ejs.md, so the ring's layout stays put when that changes;
 // Utilities tools are left out of the hub and listed on the Software page only.
-const DOMAINS = ['Genomic Analysis', 'Breeding Data', 'Pedigree & Mating', 'Markers & Haplotypes', 'Phenomics'];
+const DOMAINS = ['Genomic Analysis', 'Data Management', 'Pedigree & Mating', 'Markers & Haplotypes', 'Phenomics'];
 const tools = items
   .filter((item) => item.image)
   .sort((a, b) => String(a.title).localeCompare(String(b.title)));
@@ -46,7 +48,7 @@ function honeycomb(count) {
   return { cells: cells.map((cell) => ({ left: +(cell.x + width / 2 - HEX_W / 2).toFixed(3), top: +cell.y.toFixed(3) })), width: +width.toFixed(3), height: +height.toFixed(3) };
 }
 
-const isTile = (tool) => tool['image-wide'] || tool['image-shape'] === 'square';
+const isTile = (tool) => tool['image-wide'] || ['square', 'app-icon'].includes(tool['image-shape']);
 const spots = groups.map((group, index) => {
   const angle = (START + (360 * index) / groups.length) * Math.PI / 180;
   return {
@@ -88,7 +90,7 @@ const spots = groups.map((group, index) => {
 <% if (part === 'tiles' && spot.tiles.length) { %>
     <div class="hub-tiles">
 <% for (const tool of spot.tiles) { %>
-    <a class="hub-tile<%= tool['image-wide'] ? ' is-wide' : '' %>" href="<%- tool.path %>" title="<%= tool.title %><%= tool.status === 'in-development' ? ' (in development)' : '' %>">
+    <a class="hub-tile<%= tool['image-wide'] ? ' is-wide' : '' %><%= tool['image-shape'] === 'app-icon' ? ' is-icon' : '' %>" href="<%- tool.path %>" title="<%= tool.title %><%= tool.status === 'in-development' ? ' (in development)' : '' %>">
       <img src="<%- tool.image %>" alt="<%= tool.title %><%= tool.status === 'in-development' ? ' (in development)' : '' %>">
     </a>
 <% } %>

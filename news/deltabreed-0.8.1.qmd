@@ -1,0 +1,67 @@
+---
+title: "DeltaBreed 0.8.1"
+date: 2023-11-08
+description: "[BI-1900] - Exp error message improvement: unrecognized column header @davedrp (#328)"
+categories: [DeltaBreed]
+image: ../assets/software-deltabreed-icon.svg
+image-alt: "DeltaBreed logo"
+toc: false
+---
+
+## Web app
+
+### Detailed Release Information
+#### Features
+
+- [BI-1900] - Exp error message improvement: unrecognized column header @davedrp (#328)
+- [BI-1872] - Generate Access Token for using BrAPI with DeltaBreed @timparsons (#327)
+- [BI-1845] - Update any calls to fetch gemplasm lists via GET /lists to explicitly pass the list type as germplasm @mlm483 (#324)
+- [BI-1817] - [bi-web] - BI-1645 - View exp: Obs dataset tab, details, and summary stats @davedrp (#321)
+- [BI-1805] - Confusing message in breeding methods @mlm483 (#317, #336)
+- [BI-1720] - Export Multiple Environment Datasets as Zip @mlm483 (#320)
+- [BI-1647] - View Experiments: Observation Dataset Table @davedrp (#322)
+- [BI-1618] - Import File Selection Behavior @davedrp (#319)
+
+#### Bugfixes
+
+- [BI-1927] - entry numbers are not rendering 0.8.1 @mlm483 (#338, #342)
+- [BI-1923] - Treatment factor missing from experimental ui @davedrp (#332)
+- [BI-1918] - Experiment: No datasets exist @davedrp (#330)
+- [BI-1911] - Environment Year Missing from Exp table @dmeidlin (#331) @davedrp (#341)
+- [BI-1876] - Generic Error on Successful Upload of Large Germplasm File @nickpalladino (#329)
+- [BI-1821] - Experiment import/download buttons wrong color @nickpalladino (#325)
+- [BI-1799] - Show all button is not working when extensive amount of data needs to populate the table. @mlm483 (#323, #335)
+
+[Web app release on GitHub](https://github.com/Breeding-Insight/bi-web/releases/tag/v0.8.1)
+
+## API
+
+### Detailed Release Information
+#### Features
+
+- [BI-1900] - Exp error message improvement: unrecognized column header @mlm483 (#296, #302)
+- [BI-1872] - Generate Access Token for using BrAPI with DeltaBreed @timparsons (#289)
+- [BI-1845] - Update any calls to fetch gemplasm lists via GET /lists to explicitly pass the list type as germplasm @mlm483 (#284)
+- [BI-1831] - Add DatasetID to ObservationUnits @dmeidlin (#286)
+- [BI-1818] - [bi-api] - BI-1645 - View exp: Obs dataset tab, details, and summary stats @dmeidlin (#268)
+- [BI-1720] - Export Multiple Environment Datasets as Zip @mlm483 (#263, #274, #275)
+- [BI-1647] - View Experiments: Observation Dataset Table @davedrp (#280)
+- [BI-1618] - Import File Selection Behavior @davedrp (#262)
+- [BI-1456] - Ontology Share - Improvement @dmeidlin (#261)
+- [BI-1294] - Implement Caching Layer for Experiments @dmeidlin (#264)
+
+#### Bugfixes
+
+- [BI-1932] - GIDs missing from Observation dataset table @timparsons (#295)
+- [BI-1911] - Environment Year Missing from Exp table @davedrp (#304)
+- [BI-1909] - Unable to open observation dataset.  @timparsons (#291)
+- [BI-1881] - Remove Need to Provide Parents to processGermplasmForDisplay @mlm483 (#290)
+- [BI-1880] - Error saving experiment import / partial upload in Breedbase @mlm483 (#287)
+- [BI-1844] - Experiments & Observations file import didn't recognize the word TEST or CHECK @davedrp (#282)
+- [BI-1819] - Experimental download file: phenotypes are out of order @dmeidlin (#266)
+- [BI-1781] - Pedigree viewer not functional in programs connected to BrAPI test server  @nickpalladino (#253)
+- [BI-1771] - All germplasm and list tables not loading when DeltaBreed is connected to the BrAPI test server @mlm483 (#260, #283)
+
+[API release on GitHub](https://github.com/Breeding-Insight/bi-api/releases/tag/v0.8.1)
+
+[About DeltaBreed](../software/deltabreed.qmd)
