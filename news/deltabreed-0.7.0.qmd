@@ -3,7 +3,7 @@ title: "DeltaBreed 0.7.0"
 date: 2022-12-13
 description: "[BI-1528] - New Breeding Method - Creation of tetraploids by applied pressure shock @HMS17 (#250)"
 categories: [DeltaBreed]
-image: ../assets/software-deltabreed-icon.svg
+image: ../assets/software/logos/software-deltabreed-icon.svg
 image-alt: "DeltaBreed logo"
 toc: false
 ---

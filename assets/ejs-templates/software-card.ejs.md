@@ -1,6 +1,6 @@
 <%
-// One software card, shared by the Software catalog (assets/software-listing.ejs.md) and the
-// featured tools on the home page (assets/featured-software.ejs.md).
+// One software card, shared by the Software catalog (assets/ejs-templates/software-listing.ejs.md) and the
+// featured tools on the home page (assets/ejs-templates/featured-software.ejs.md).
 //   compact: no logo (Utilities rows)
 //   tagHref: tags become links to the catalog filtered by that tag, for pages without filters
 //   statuses: the catalog's STATUSES map (status -> filter label); pages without the Status

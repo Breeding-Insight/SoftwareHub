@@ -3,7 +3,7 @@ title: "BIGr 0.3.4"
 date: 2024-12-28
 description: "Bug fixes"
 categories: [BIGr]
-image: ../assets/software-bigr.png
+image: ../assets/software/logos/software-bigr.png
 image-alt: "BIGr logo"
 toc: false
 ---

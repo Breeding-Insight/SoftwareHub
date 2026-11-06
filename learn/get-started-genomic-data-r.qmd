@@ -6,7 +6,7 @@ description: "Set up R, then load, inspect, filter, and visualize a VCF with dip
 categories:
   - Getting Started
   - Genotype Data
-image: ../assets/tutorial-genomic-data.svg
+image: ../assets/learn/title-cards/tutorial-genomic-data.svg
 image-alt: "A VCF table beside a read-depth chart labeled VCF basics."
 order: 15
 learning-type: Tutorial
@@ -365,7 +365,7 @@ depth_plot <- ggplot2::ggplot(
 depth_plot
 ```
 
-![Histogram of read depth per genotype call. Most calls fall below 1,200 reads, with the highest concentration in the lower hundreds.](../assets/tutorial-vcf-depth.png){fig-alt="Histogram of read depth per genotype call in the BIGr Iris VCF."}
+![Histogram of read depth per genotype call. Most calls fall below 1,200 reads, with the highest concentration in the lower hundreds.](../assets/learn/images/tutorial-vcf-depth.png){fig-alt="Histogram of read depth per genotype call in the BIGr Iris VCF."}
 
 The display is limited to 0 through 1,200 so the main distribution is readable; the summary above confirms that some values extend to 3,796.
 

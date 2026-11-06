@@ -4,7 +4,7 @@ description: "Concepts, guides, tutorials, and workflows for breeding data and g
 listing:
   id: learning-materials
   contents: "learn/*.qmd"
-  template: assets/learn-listing.ejs.md
+  template: assets/ejs-templates/learn-listing.ejs.md
   sort: "order asc"
   filter-ui: false
   sort-ui: false
@@ -14,7 +14,7 @@ toc: false
 body-classes: software-hub-page learn-hub-page
 format:
   html:
-    include-after-body: assets/learn-filter.html
+    include-after-body: assets/html-scripts/learn-filter.html
 ---
 
 ::: {.hub-head .column-screen}

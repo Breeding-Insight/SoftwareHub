@@ -3,7 +3,7 @@ title: "BIGpopA 2.2.0"
 date: 2026-10-12
 description: "validate_pedigree() and find_parentage(): founders_file now also accepts a character vector of ids or a data.frame (first column), in addition to a file path."
 categories: [BIGpopA]
-image: ../assets/software-bigpopa.png
+image: ../assets/software/logos/software-bigpopa.png
 image-alt: "BIGpopA logo"
 toc: false
 ---

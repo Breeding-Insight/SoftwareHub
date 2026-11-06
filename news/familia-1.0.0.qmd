@@ -3,7 +3,7 @@ title: "Familia 1.0.0"
 date: 2026-06-02
 description: "Josue adds"
 categories: [Familia]
-image: ../assets/software-familia.png
+image: ../assets/software/logos/software-familia.png
 image-alt: "Familia logo"
 toc: false
 ---

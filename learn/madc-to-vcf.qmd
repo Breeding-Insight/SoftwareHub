@@ -8,7 +8,7 @@ categories:
   - Genotype Data
   - Data Quality
   - Ploidy & Dosage
-image: ../assets/tutorial-madc.svg
+image: ../assets/learn/title-cards/tutorial-madc.svg
 image-alt: "MADC data converted to VCF."
 order: 20
 learning-type: Workflow

@@ -3,7 +3,7 @@ title: "BIGapp 1.2.0"
 date: 2025-03-27
 description: "Feature updates and bug fixes:"
 categories: [BIGapp]
-image: ../assets/software-bigapp.png
+image: ../assets/software/logos/software-bigapp.png
 image-alt: "BIGapp logo"
 toc: false
 ---

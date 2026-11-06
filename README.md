@@ -45,7 +45,7 @@ The Learn page is task-first. Broad scientific topics drive visible categories; 
 
 ## Analytics
 
-The site uses Google Analytics 4, UF's standard analytics tool, through Quarto's built-in support. Set `google-analytics` in `_quarto.yml` to the GA4 Measurement ID and uncomment the `cookie-consent` block below it. Links tagged with `data-analytics-event` send a GA4 event when clicked (`assets/analytics-events.html`); the "Use online" buttons on tool pages send `use_online` with a `tool` parameter. GA4's automatic outbound-click tracking does not cover these because the app landing pages share the `breeding-insight.github.io` domain with this site. To report on `tool`, register it as a custom dimension in GA4 (Admin > Custom definitions).
+The site uses Google Analytics 4, UF's standard analytics tool, through Quarto's built-in support. Set `google-analytics` in `_quarto.yml` to the GA4 Measurement ID and uncomment the `cookie-consent` block below it. Links tagged with `data-analytics-event` send a GA4 event when clicked (`assets/html-scripts/analytics-events.html`); the "Use online" buttons on tool pages send `use_online` with a `tool` parameter. GA4's automatic outbound-click tracking does not cover these because the app landing pages share the `breeding-insight.github.io` domain with this site. To report on `tool`, register it as a custom dimension in GA4 (Admin > Custom definitions).
 
 ## Deployment
 

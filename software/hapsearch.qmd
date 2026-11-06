@@ -17,7 +17,7 @@ links:
 identifiers:
   rrid: SCR_029251
 # Logo from the HapSearch landing page (feature-MSA branch, landing/assets/hapsearch-logo.png).
-image: ../assets/software-hapsearch.png
+image: ../assets/software/logos/software-hapsearch.png
 image-alt: "HapSearch logo."
 image-shape: square
 ---
@@ -28,7 +28,7 @@ HapSearch provides overview dashboards for species, marker, haplotype, sample, a
 
 {{< tool-tags >}}
 :::
-<img class="software-logo" src="../assets/software-hapsearch.png" alt="HapSearch logo">
+<img class="software-logo" src="../assets/software/logos/software-hapsearch.png" alt="HapSearch logo">
 :::
 
 ## Start here
@@ -37,7 +37,7 @@ HapSearch runs online, with no software to install. Access is limited to registe
 
 [{{< meta access >}}]{.access-note}
 
-[<img class="orcid-icon" src="../assets/orcid-icon.svg" alt=""> Use online](https://breeding-insight.github.io/HapSearch/){.btn-bi-primary data-analytics-event="use_online" data-analytics-tool="HapSearch"}
+[<img class="orcid-icon" src="../assets/branding/orcid-icon.svg" alt=""> Use online](https://breeding-insight.github.io/HapSearch/){.btn-bi-primary data-analytics-event="use_online" data-analytics-tool="HapSearch"}
 
 ::: {.start-links}
 [<i class="bi bi-github" aria-hidden="true"></i> Source code](https://github.com/Breeding-Insight/HapSearch){.btn-bi-secondary}

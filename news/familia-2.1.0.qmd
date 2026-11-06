@@ -3,7 +3,7 @@ title: "Familia 2.1.0"
 date: 2026-10-28
 description: "Find Parentage, Validate Pedigree and PolyBreedTools now accept genotypes as text files (.txt/.csv), VCF files (.vcf/.vcf.gz), or 'PLINK' .ped files, in addition to the previous..."
 categories: [Familia]
-image: ../assets/software-familia.png
+image: ../assets/software/logos/software-familia.png
 image-alt: "Familia logo"
 toc: false
 ---

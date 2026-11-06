@@ -2,7 +2,7 @@
 body-classes: software-tool-page
 title-block-banner: true
 shortcodes:
-  - ../assets/tool-tags.lua
+  - ../assets/lua-extensions/tool-tags.lua
 filters:
-  - ../assets/tool-status.lua
-  - ../assets/tool-identifiers.lua
+  - ../assets/lua-extensions/tool-status.lua
+  - ../assets/lua-extensions/tool-identifiers.lua

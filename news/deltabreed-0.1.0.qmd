@@ -3,7 +3,7 @@ title: "DeltaBreed 0.1.0"
 date: 2020-10-09
 description: "Bring unit test changes to release for PRO-80 fix @nickpalladino (#39)"
 categories: [DeltaBreed]
-image: ../assets/software-deltabreed-icon.svg
+image: ../assets/software/logos/software-deltabreed-icon.svg
 image-alt: "DeltaBreed logo"
 toc: false
 ---

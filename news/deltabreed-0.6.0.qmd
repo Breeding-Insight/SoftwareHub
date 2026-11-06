@@ -3,7 +3,7 @@ title: "DeltaBreed 0.6.0"
 date: 2022-07-06
 description: "Hyperlinks to germplasm details from across user interface"
 categories: [DeltaBreed]
-image: ../assets/software-deltabreed-icon.svg
+image: ../assets/software/logos/software-deltabreed-icon.svg
 image-alt: "DeltaBreed logo"
 toc: false
 ---

@@ -16,7 +16,7 @@ links:
   releases: https://github.com/Breeding-Insight/BIGpopA/releases
 identifiers:
   doi: 10.32614/CRAN.package.BIGpopA
-image: ../assets/software-bigpopa.png
+image: ../assets/software/logos/software-bigpopa.png
 image-alt: "BIGpopA hexagonal logo."
 ---
 
@@ -26,7 +26,7 @@ BIGpopA is an R package for pedigree quality control, parentage assignment from 
 
 {{< tool-tags >}}
 :::
-<img class="software-logo" src="../assets/software-bigpopa.png" alt="BIGpopA logo">
+<img class="software-logo" src="../assets/software/logos/software-bigpopa.png" alt="BIGpopA logo">
 :::
 
 ## Start here

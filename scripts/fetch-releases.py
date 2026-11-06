@@ -295,7 +295,7 @@ def write_entry(name, slug, logo, version, sections):
         f"date: {published}",
         f"description: {yaml_quote(description)}",
         f"categories: [{name}]",
-        f"image: ../assets/{logo}",
+        f"image: ../assets/software/logos/{logo}",
         f"image-alt: {yaml_quote(name + ' logo')}",
         "toc: false",
         "---",

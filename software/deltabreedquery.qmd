@@ -15,7 +15,7 @@ links:
 identifiers:
   doi: 10.32614/CRAN.package.deltabreedquery
   rrid: SCR_028884
-image: ../assets/software-deltabreedquery.png
+image: ../assets/software/logos/software-deltabreedquery.png
 image-alt: "deltabreedquery logo."
 ---
 
@@ -31,7 +31,7 @@ Observation data can be filtered on a range of common fields: year, location, tr
 
 {{< tool-tags >}}
 :::
-<img class="software-logo" src="../assets/software-deltabreedquery.png" alt="deltabreedquery logo">
+<img class="software-logo" src="../assets/software/logos/software-deltabreedquery.png" alt="deltabreedquery logo">
 :::
 
 ## Start here

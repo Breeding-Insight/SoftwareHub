@@ -3,7 +3,7 @@ title: "DeltaBreed 1.5.0"
 date: 2026-10-02
 description: "[BI-2968] - Improve clarity for program user deactivation"
 categories: [DeltaBreed]
-image: ../assets/software-deltabreed-icon.svg
+image: ../assets/software/logos/software-deltabreed-icon.svg
 image-alt: "DeltaBreed logo"
 toc: false
 ---

@@ -3,7 +3,7 @@ title: "DeltaBreed 0.3.0"
 date: 2021-06-02
 description: "Fix/BI-794 ISSUE: New/Edit Trait - ordinal scale name for new traits persists in db after changing scale name to nominal @dmeidlin (#86)"
 categories: [DeltaBreed]
-image: ../assets/software-deltabreed-icon.svg
+image: ../assets/software/logos/software-deltabreed-icon.svg
 image-alt: "DeltaBreed logo"
 toc: false
 ---

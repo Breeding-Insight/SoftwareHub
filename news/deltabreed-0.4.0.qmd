@@ -3,7 +3,7 @@ title: "DeltaBreed 0.4.0"
 date: 2021-12-13
 description: "[BI-768] - Prototype for brapi importer @ctucker3 (#85)"
 categories: [DeltaBreed]
-image: ../assets/software-deltabreed-icon.svg
+image: ../assets/software/logos/software-deltabreed-icon.svg
 image-alt: "DeltaBreed logo"
 toc: false
 ---

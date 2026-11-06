@@ -3,7 +3,7 @@ title: "DeltaBreed 0.9.1"
 date: 2024-06-05
 description: "[BI-2108] - Accessibility: Import Data - Empty Heading @davedrp (#377)"
 categories: [DeltaBreed]
-image: ../assets/software-deltabreed-icon.svg
+image: ../assets/software/logos/software-deltabreed-icon.svg
 image-alt: "DeltaBreed logo"
 toc: false
 ---

@@ -3,7 +3,7 @@ title: "DeltaBreed 0.2.0"
 date: 2021-02-03
 description: "BI-658 Remodel index/front page @eawoods (#57)"
 categories: [DeltaBreed]
-image: ../assets/software-deltabreed-icon.svg
+image: ../assets/software/logos/software-deltabreed-icon.svg
 image-alt: "DeltaBreed logo"
 toc: false
 ---

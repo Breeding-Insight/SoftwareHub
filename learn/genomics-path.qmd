@@ -6,7 +6,7 @@ date-modified: 2026-07-14
 description: "Start with your breeding question and choose a path through genotype preparation, genomic analysis, pedigree or ancestry assessment, and mating decisions."
 categories:
   - Getting Started
-image: ../assets/tutorial-path.svg
+image: ../assets/learn/title-cards/tutorial-path.svg
 image-alt: "A sign reading Choose a path at the start of a genomic workflow."
 order: 10
 learning-type: Guide

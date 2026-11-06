@@ -3,7 +3,7 @@ title: "BIGapp 0.5.0-beta"
 date: 2024-08-09
 description: "Original code was updated into the R Golem format"
 categories: [BIGapp]
-image: ../assets/software-bigapp.png
+image: ../assets/software/logos/software-bigapp.png
 image-alt: "BIGapp logo"
 toc: false
 ---

@@ -6,7 +6,7 @@ description: "Understand what allele dosage represents in diploids and polyploid
 categories:
   - Genotype Data
   - Ploidy & Dosage
-image: ../assets/concept-allele-dosage.svg
+image: ../assets/learn/title-cards/concept-allele-dosage.svg
 image-alt: "Five allele dosage states from zero to four copies at a tetraploid locus."
 order: 40
 learning-type: Concept

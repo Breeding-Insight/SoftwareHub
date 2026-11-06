@@ -3,7 +3,7 @@ title: "BIGr 0.4.0"
 date: 2025-02-20
 description: "New functions and bug fixes:"
 categories: [BIGr]
-image: ../assets/software-bigr.png
+image: ../assets/software/logos/software-bigr.png
 image-alt: "BIGr logo"
 toc: false
 ---

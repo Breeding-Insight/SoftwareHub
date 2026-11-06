@@ -4,7 +4,7 @@ description: "Open-source packages and applications developed and supported by B
 listing:
   id: software-catalog
   contents: "software/*.qmd"
-  template: assets/software-listing.ejs.md
+  template: assets/ejs-templates/software-listing.ejs.md
   sort: "title asc"
   filter-ui: false
   sort-ui: false
@@ -14,7 +14,7 @@ toc: false
 body-classes: software-hub-page
 format:
   html:
-    include-after-body: assets/software-filter.html
+    include-after-body: assets/html-scripts/software-filter.html
 ---
 
 ::: {.hub-head .column-screen}

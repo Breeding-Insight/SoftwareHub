@@ -3,7 +3,7 @@ title: "deltabreedquery 0.1.0"
 date: 2026-02-10
 description: "This initial alpha version should be functional when installed from Github via devtools::install_github(\"tyrwh/deltabreedquery\")"
 categories: [deltabreedquery]
-image: ../assets/software-deltabreedquery.png
+image: ../assets/software/logos/software-deltabreedquery.png
 image-alt: "deltabreedquery logo"
 toc: false
 ---

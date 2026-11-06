@@ -20,7 +20,7 @@ access: "DeltaBreed is built for breeding programs that work with Breeding Insig
 identifiers:
   doi: 10.1371/journal.pone.0324104
   rrid: SCR_026678
-image: ../assets/software-deltabreed-icon.svg
+image: ../assets/software/logos/software-deltabreed-icon.svg
 image-alt: "DeltaBreed app icon."
 image-shape: app-icon
 ---
@@ -31,7 +31,7 @@ DeltaBreed is Breeding Insight’s customizable data management system for breed
 
 {{< tool-tags >}}
 :::
-<img class="software-logo" src="../assets/software-deltabreed-icon.svg" alt="DeltaBreed app icon">
+<img class="software-logo" src="../assets/software/logos/software-deltabreed-icon.svg" alt="DeltaBreed app icon">
 :::
 
 ## Start here

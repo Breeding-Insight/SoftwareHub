@@ -3,7 +3,7 @@ title: "BIGpopA 2.0.0"
 date: 2026-08-20
 description: "find_parentage() and validate_pedigree() now support any ploidy through a new ploidy argument (default 2)."
 categories: [BIGpopA]
-image: ../assets/software-bigpopa.png
+image: ../assets/software/logos/software-bigpopa.png
 image-alt: "BIGpopA logo"
 toc: false
 ---

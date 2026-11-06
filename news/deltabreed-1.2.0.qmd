@@ -3,7 +3,7 @@ title: "DeltaBreed 1.2.0"
 date: 2025-08-18
 description: "merging bug/BI-2618 into develop"
 categories: [DeltaBreed]
-image: ../assets/software-deltabreed-icon.svg
+image: ../assets/software/logos/software-deltabreed-icon.svg
 image-alt: "DeltaBreed logo"
 toc: false
 ---

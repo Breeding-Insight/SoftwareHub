@@ -17,7 +17,7 @@ links:
 identifiers:
   doi: 10.1002/tpg2.70067
   rrid: SCR_026677
-image: ../assets/software-bigr.png
+image: ../assets/software/logos/software-bigr.png
 image-alt: "BIGr hexagonal logo."
 ---
 
@@ -27,7 +27,7 @@ BIGr provides genomic and pedigree analysis functions designed for diploid and p
 
 {{< tool-tags >}}
 :::
-<img class="software-logo" src="../assets/software-bigr.png" alt="BIGr logo">
+<img class="software-logo" src="../assets/software/logos/software-bigr.png" alt="BIGr logo">
 :::
 
 ## Start here

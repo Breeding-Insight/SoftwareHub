@@ -6,7 +6,7 @@ description: "Interpret cross-validation results in genomic prediction without c
 categories:
   - Genomic Prediction
   - Data Quality
-image: ../assets/concept-cross-validation.svg
+image: ../assets/learn/title-cards/concept-cross-validation.svg
 image-alt: "Repeated cross-validation folds beside a predicted-versus-observed correlation plot."
 order: 70
 learning-type: Concept

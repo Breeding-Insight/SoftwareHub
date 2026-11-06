@@ -3,7 +3,7 @@ title: "BIGr 0.7.2"
 date: 2026-05-18
 description: "Fixed manual text errors"
 categories: [BIGr]
-image: ../assets/software-bigr.png
+image: ../assets/software/logos/software-bigr.png
 image-alt: "BIGr logo"
 toc: false
 ---

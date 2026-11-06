@@ -17,7 +17,7 @@ links:
 identifiers:
   doi: 10.32614/CRAN.package.Familia
   rrid: SCR_027197
-image: ../assets/software-familia.png
+image: ../assets/software/logos/software-familia.png
 image-alt: "Familia hexagonal logo."
 ---
 
@@ -27,7 +27,7 @@ Familia is a Shiny application for validating pedigrees, assigning parentage, an
 
 {{< tool-tags >}}
 :::
-<img class="software-logo" src="../assets/software-familia.png" alt="Familia logo">
+<img class="software-logo" src="../assets/software/logos/software-familia.png" alt="Familia logo">
 :::
 
 ## Start here

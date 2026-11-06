@@ -3,7 +3,7 @@ title: "deltabreedquery 1.0.3"
 date: 2026-08-25
 description: "First official public release of deltabreedquery."
 categories: [deltabreedquery]
-image: ../assets/software-deltabreedquery.png
+image: ../assets/software/logos/software-deltabreedquery.png
 image-alt: "deltabreedquery logo"
 toc: false
 ---
