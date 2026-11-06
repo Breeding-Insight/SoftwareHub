@@ -11,9 +11,11 @@ tasks: [Pedigree, Parentage, Ancestry]
 tags: [Population structure]
 ecosystem: breedverse
 links:
+  cran: https://cran.r-project.org/package=Familia
   source: https://github.com/Breeding-Insight/Familia
   releases: https://github.com/Breeding-Insight/Familia/releases
 identifiers:
+  doi: 10.32614/CRAN.package.Familia
   rrid: SCR_027197
 image: ../assets/software-familia.png
 image-alt: "Familia hexagonal logo."
@@ -31,11 +33,12 @@ Familia is a Shiny application for validating pedigrees, assigning parentage, an
 ## Start here
 
 ```r
-remotes::install_github("Breeding-Insight/Familia")
+install.packages("Familia")
 Familia::run_app()
 ```
 
 [<i class="bi bi-github" aria-hidden="true"></i> Source code](https://github.com/Breeding-Insight/Familia){.btn-bi-primary}
+[<i class="bi bi-box-seam" aria-hidden="true"></i> CRAN](https://cran.r-project.org/package=Familia){.btn-bi-secondary}
 [<i class="bi bi-tag" aria-hidden="true"></i> Releases](https://github.com/Breeding-Insight/Familia/releases){.btn-bi-secondary}
 
 ## Good fit for
