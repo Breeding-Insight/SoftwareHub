@@ -11,8 +11,11 @@ tasks: [Pedigree, Parentage]
 tags: [Population structure, Polyploid]
 ecosystem: breedverse
 links:
+  cran: https://cran.r-project.org/package=BIGpopA
   source: https://github.com/Breeding-Insight/BIGpopA
   releases: https://github.com/Breeding-Insight/BIGpopA/releases
+identifiers:
+  doi: 10.32614/CRAN.package.BIGpopA
 image: ../assets/software/logos/software-bigpopa.png
 image-alt: "BIGpopA hexagonal logo."
 ---
@@ -29,11 +32,12 @@ BIGpopA is an R package for pedigree quality control, parentage assignment from 
 ## Start here
 
 ```r
-remotes::install_github("Breeding-Insight/BIGpopA", dependencies = TRUE)
+install.packages("BIGpopA")
 library(BIGpopA)
 ```
 
 [<i class="bi bi-github" aria-hidden="true"></i> Source code](https://github.com/Breeding-Insight/BIGpopA){.btn-bi-primary}
+[<i class="bi bi-box-seam" aria-hidden="true"></i> CRAN](https://cran.r-project.org/package=BIGpopA){.btn-bi-secondary}
 [<i class="bi bi-tag" aria-hidden="true"></i> Releases](https://github.com/Breeding-Insight/BIGpopA/releases){.btn-bi-secondary}
 
 ## Good fit for

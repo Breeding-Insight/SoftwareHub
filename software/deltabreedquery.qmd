@@ -13,6 +13,7 @@ links:
   cran: https://cran.r-project.org/package=deltabreedquery
   source: https://github.com/Breeding-Insight/deltabreedquery
 identifiers:
+  doi: 10.32614/CRAN.package.deltabreedquery
   rrid: SCR_028884
 image: ../assets/software/logos/software-deltabreedquery.png
 image-alt: "deltabreedquery logo."

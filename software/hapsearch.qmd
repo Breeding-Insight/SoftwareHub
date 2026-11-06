@@ -14,6 +14,8 @@ access: "Visit the landing page for more information:"
 links:
   online: https://breeding-insight.github.io/HapSearch/
   source: https://github.com/Breeding-Insight/HapSearch
+identifiers:
+  rrid: SCR_029251
 # Logo from the HapSearch landing page (feature-MSA branch, landing/assets/hapsearch-logo.png).
 image: ../assets/software/logos/software-hapsearch.png
 image-alt: "HapSearch logo."

@@ -16,6 +16,7 @@ links:
   source: https://github.com/Breeding-Insight/HapApp-online
 identifiers:
   doi: 10.1007/s00122-026-05340-4
+  rrid: SCR_028621
 image: ../assets/software/logos/software-hapapp.png
 image-alt: "HapApp logo."
 image-shape: square
