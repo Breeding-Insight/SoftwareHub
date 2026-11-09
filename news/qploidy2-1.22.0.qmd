@@ -1,0 +1,21 @@
+---
+title: "Qploidy2 1.22.0"
+date: 2026-11-05
+description: "Added hmm_estimate_CN_nQuack(), a self-contained analogue of hmm_estimate_CN() that uses the nQuack package for both whole-sample ploidy estimation and per-window BAF likelihood..."
+categories: [Qploidy2]
+image: ../assets/software/logos/software-qploidy2.png
+image-alt: "Qploidy2 logo"
+toc: false
+---
+
+* Added `hmm_estimate_CN_nQuack()`, a self-contained analogue of `hmm_estimate_CN()` that uses the `nQuack` package for both whole-sample ploidy estimation and per-window BAF likelihoods/dosage calling. Requires `nQuack >= 1.0.5` (install with `remotes::install_github("mgaynor1/nQuack@updateGL")`). `cn_grid` must be a subset of `2:6` (nQuack's supported range); use `hmm_estimate_CN()` for CN=0/1/LOH detection.
+
+*  `.nquack_estimate_ploidy()`'s model selection restricts to `type == "fixed"` (mixing proportions only; means/variance fixed at theoretical dosage positions) before comparing BIC across distributions and mixtures. The now-discarded `free/fixed_2`/`fixed_3` fits can still emit benign "NaNs produced" warnings from nQuack's internal EM steps for the degenerate solutions; these are suppressed since they don't affect the selected result.
+
+* Added `from_standardized_baf` parameter (default `TRUE`) to `convert2nQuack()`, deriving allele counts from the standardization-corrected `baf` column instead of raw `X`/`Y` counts.
+
+* Added the `Qploidy2_nQuack_tutorial.Rmd` vignette, covering the nQuack EM-based BAF model selection route and exporting standardized BAF data via `convert2nQuack()`.
+
+* Fixed `em_hmm_cn()` (used by both `hmm_estimate_CN()` and `hmm_estimate_CN_nQuack()`): chromosomes that collapse to a single window no longer crash with `subscript out of bounds`.
+
+[Release on GitHub](https://github.com/Breeding-Insight/Qploidy2/releases/tag/v1.22.0) · [About Qploidy2](../software/qploidy2.qmd)
