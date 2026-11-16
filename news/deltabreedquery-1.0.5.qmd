@@ -1,0 +1,18 @@
+---
+title: "deltabreedquery 1.0.5"
+date: 2026-11-13
+description: "GET queries no longer store all JSON responses before converting each response to the much smaller data frame format"
+categories: [deltabreedquery]
+image: ../assets/software/logos/software-deltabreedquery.png
+image-alt: "deltabreedquery logo"
+toc: false
+---
+
+- GET queries no longer store all JSON responses before converting each response to the much smaller data frame format
+- Increased default page size on get_observations() and filter_observations()
+- Reworked GET queries so that the initial page request is not repeated a second time by httr2::req_perform_sequential()
+- Observation data frames with no phenotype columns will now have Block/Rep/GID/etc converted to integers
+- Row/Column columns that can be converted into integer format will be converted to integers. If Row/Column contain non-integer values (allowed by DeltaBreed), they will be left as strings
+- Typo and style fixes throughout
+
+[Release on GitHub](https://github.com/Breeding-Insight/deltabreedquery/releases/tag/v1.0.5) · [About deltabreedquery](../software/deltabreedquery.qmd)

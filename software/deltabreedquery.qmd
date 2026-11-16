@@ -3,9 +3,9 @@ title: "deltabreedquery"
 description: "Import data from the DeltaBreed data management platform into R."
 domain: Data Management
 status: released
-version: "1.0.4"
-version-date: 2026-10-12
-version-url: https://github.com/Breeding-Insight/deltabreedquery/releases/tag/v1.0.4
+version: "1.0.5"
+version-date: 2026-11-13
+version-url: https://github.com/Breeding-Insight/deltabreedquery/releases/tag/v1.0.5
 form: R package
 tasks: [Data management, Phenotypic analysis]
 tags: [Breeding records, BrAPI]
