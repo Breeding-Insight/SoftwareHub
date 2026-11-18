@@ -21,6 +21,11 @@ $navbar-fg: $bi-charcoal;
 $navbar-hl: $bi-teal-dark;
 $font-size-base: 1rem;
 $border-radius: .375rem;
+// Margin TOC: one text size for the section links and the "Edit this page" / "Report an issue"
+// links (Quarto defaults .875rem and .8rem).
+// Added to get text over 24px high to meet AA accessibility flag for size of selectable elements
+$toc-font-size: .875rem * 1.05;
+$toc-tools-font-size: $toc-font-size;
 
 // Quarto footer colors: the dark teal footer from the BI landing pages.
 $footer-bg: #0c3237;
@@ -217,6 +222,21 @@ footer.footer {
 
 .nav-footer .toc-actions ul {
   justify-content: flex-end;
+}
+
+// Narrow-screen copy of the repo action links in the footer (Quarto default .825em). Its
+// spacing is in em, so it scales with this size.
+.nav-footer .toc-actions {
+  font-size: .9rem * 1.05;
+}
+
+// Margin TOC: section links and repo action links share one spacing (font size is set by
+// $toc-font-size above). 5% above Quarto's defaults of line-height 1.1rem, padding .2rem.
+.sidebar nav[role="doc-toc"] > ul li a,
+.sidebar .toc-actions ul li a {
+  line-height: 1.1rem * 1.05;
+  padding-top: .2rem * 1.05;
+  padding-bottom: .2rem * 1.05;
 }
 
 .footer-copyright {
