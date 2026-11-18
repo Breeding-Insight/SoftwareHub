@@ -14,21 +14,19 @@ project:
 
 website:
   title: "Breeding Insight Software"
-  site-url: "https://breeding-insight.github.io/SoftwareHub/"
+  site-url: "https://softwarehub.breedinginsight.org/"
   description: "Software, tutorials, workshops, and documentation from Breeding Insight."
   favicon: assets/branding/bi-mark.png
   open-graph: true
-  # Google Analytics 4 (UF's standard). Turn on once the site moves to
-  # softwarehub.breedinginsight.org (update site-url above at the same time): uncomment and set the
-  # Measurement ID of the existing breedinginsight.org web stream (Admin > Data streams), so the
-  # hub and the main site share one property. "Use online" clicks are sent as a use_online event by
-  # assets/html-scripts/analytics-events.html. cookie-consent shows Quarto's notice; "implied" keeps
-  # tracking on unless the visitor opts out.
-  # google-analytics: "G-XXXXXXXXXX"
-  # cookie-consent:
-  #   type: implied
-  #   style: simple
-  #   palette: light
+  # Google Analytics 4 (UF's standard). Uses the Measurement ID of the existing breedinginsight.org
+  # web stream, so the hub and the main site share one property. "Use online" clicks are sent as a
+  # use_online event by assets/html-scripts/analytics-events.html. cookie-consent shows Quarto's
+  # notice; "implied" keeps tracking on unless the visitor opts out.
+  google-analytics: "G-869868R2C9"
+  cookie-consent:
+    type: implied
+    style: simple
+    palette: light
   page-navigation: true
   back-to-top-navigation: true
   search:
