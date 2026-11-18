@@ -20,13 +20,9 @@ website:
   open-graph: true
   # Google Analytics 4 (UF's standard). Uses the Measurement ID of the existing breedinginsight.org
   # web stream, so the hub and the main site share one property. "Use online" clicks are sent as a
-  # use_online event by assets/html-scripts/analytics-events.html. cookie-consent shows Quarto's
-  # notice; "implied" keeps tracking on unless the visitor opts out.
+  # use_online event by assets/html-scripts/analytics-events.html. No cookie notice, to match
+  # breedinginsight.org.
   google-analytics: "G-869868R2C9"
-  cookie-consent:
-    type: implied
-    style: simple
-    palette: light
   page-navigation: true
   back-to-top-navigation: true
   search:
