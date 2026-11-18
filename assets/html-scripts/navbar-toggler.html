@@ -1,0 +1,12 @@
+<!--
+  Navbar toggler: Quarto's template puts role="menu" on the hamburger button shown at narrow
+  widths. That overrides the native button role, so screen readers announce a menu rather than a
+  button that expands the navigation. Remove it; aria-expanded and aria-controls stay in place.
+-->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document
+    .querySelectorAll("#quarto-header .navbar-toggler[role='menu']")
+    .forEach((button) => button.removeAttribute("role"));
+});
+</script>

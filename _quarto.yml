@@ -107,6 +107,7 @@ format:
     include-in-header:
       - assets/html-scripts/analytics-events.html
       - assets/html-scripts/navbar-brand.html
+      - assets/html-scripts/navbar-toggler.html
     toc: true
     toc-depth: 3
     code-copy: true
