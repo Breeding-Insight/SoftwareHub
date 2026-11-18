@@ -13,7 +13,7 @@ project:
     - "workshops/bigapp/images/**"
 
 website:
-  title: "Breeding Insight Software"
+  title: "Breeding Insight SoftwareHub"
   site-url: "https://softwarehub.breedinginsight.org/"
   description: "Software, tutorials, workshops, and documentation from Breeding Insight."
   favicon: assets/branding/bi-mark.png
