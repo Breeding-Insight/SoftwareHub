@@ -1,5 +1,5 @@
 ---
-title: "Breeding Insight Software"
+title: "Breeding Insight SoftwareHub"
 page-layout: full
 toc: false
 title-block-banner: false
