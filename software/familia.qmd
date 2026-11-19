@@ -38,6 +38,7 @@ Familia::run_app()
 ```
 
 [<i class="bi bi-github" aria-hidden="true"></i> Source code](https://github.com/Breeding-Insight/Familia){.btn-bi-primary}
+[<i class="bi bi-journal-text" aria-hidden="true"></i> Tutorial](https://breeding-insight.github.io/familia/Familia_user_guide.html){.btn-bi-secondary}
 [<i class="bi bi-box-seam" aria-hidden="true"></i> CRAN](https://cran.r-project.org/package=Familia){.btn-bi-secondary}
 [<i class="bi bi-tag" aria-hidden="true"></i> Releases](https://github.com/Breeding-Insight/Familia/releases){.btn-bi-secondary}
 

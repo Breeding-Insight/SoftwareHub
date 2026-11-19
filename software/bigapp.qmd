@@ -48,7 +48,14 @@ BIGapp::run_app()
 ```
 
 [<i class="bi bi-github" aria-hidden="true"></i> Source code](https://github.com/Breeding-Insight/BIGapp){.btn-bi-primary}
-[<i class="bi bi-globe" aria-hidden="true"></i> Breeding Insight software page](https://breedinginsight.org/software/bigapp/){.btn-bi-secondary}
+[<i class="bi bi-journal-text" aria-hidden="true"></i> Tutorials](https://scribehow.com/o/s3XiD180SPiAYCOQwB8QDw/page/BIGapp_Tutorials__FdLsY9ZxQsi6kgT9p-U2Zg){.btn-bi-secondary}
+[<i class="bi bi-youtube" aria-hidden="true"></i> Video tutorial](https://www.youtube.com/watch?v=tZFHd8Z_OPg){.btn-bi-secondary}
+
+## BIGapp web demo
+
+This web demo allows users to move through all the included features of BIGapp to learn more before they download the code. The demo version works best with either the included demo files or less than 500 marker test datasets.
+
+[<i class="bi bi-play-circle" aria-hidden="true"></i> BIGapp web demo](https://big-demo.shinyapps.io/bigapp-main/){.btn-bi-secondary}
 
 ## Good fit for
 
